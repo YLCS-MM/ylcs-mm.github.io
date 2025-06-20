@@ -36,6 +36,7 @@
     margin: 5px
 }
 
+/*
 .site-header {
   /* 修正链接 + 强制覆盖 */
   background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') 
@@ -53,6 +54,7 @@
   color: white;  /* 文字白色 */
   text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* 文字阴影 */
 }
+*/
 
 
 /* 汉堡菜单按钮变白 */
