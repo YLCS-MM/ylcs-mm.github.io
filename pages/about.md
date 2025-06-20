@@ -2,6 +2,7 @@
 layout: page       # 保持主题布局（确保页面框架正确）
 title: 关于        
 permalink: /about/ 
+comments: false    # 新增这行，告诉主题“不渲染评论区”
 ---
 
 <!-- 用纯HTML+内联CSS写内容，彻底避免Markdown解析错误 -->
