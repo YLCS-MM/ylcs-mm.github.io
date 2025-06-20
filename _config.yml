@@ -164,3 +164,6 @@ google:
         content_header: false
         content_footer: false
         compress_html:
+        markdown: kramdown
+kramdown:
+  input: GFM  # 支持GitHub风格Markdown（含HTML解析）
