@@ -773,3 +773,11 @@ img + em {
 @media (max-width: 400px) { .content-header-ad { display: none; } }
 @media (min-width:500px) { .content-header-ad { width: 468px; height: 60px; } }
 @media (min-width:800px) { .content-header-ad { width: 728px; height: 90px; } }
+
+.site-header-avatar {
+  width: 36px;    /* 头像宽度，和标题文字适配 */
+  height: 36px;   /* 头像高度，保持正方形 */
+  border-radius: 50%; /* 圆形头像效果 */
+  margin-right: 8px;  /* 和网站标题保持间距 */
+  vertical-align: middle; /* 垂直居中对齐标题文字 */
+}
