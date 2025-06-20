@@ -37,11 +37,11 @@
 }
 
 .site-header {
-  background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') center/cover no-repeat !important;
+  background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') 
+              center/cover no-repeat !important;
   background-color: transparent !important;
-  min-height: 300px; /* 原来可能是200px，改大！ */
-  padding-top: 60px; /* 原来可能是20px，改大！ */
-  padding-bottom: 60px;
+  min-height: 400px; /* 高度至少和图片主要内容区一致，比如设为400px */
+  padding: 60px 0; /* 增加内边距，撑开容器上下空间 */
 }
 
 
