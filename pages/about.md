@@ -15,12 +15,11 @@ permalink: /about/
 
   <!-- 头像+昵称区域 -->
   <div style="text-align: center; margin-bottom: 30px;">
-    <div style="text-align: center; margin-bottom: 30px;">
-  <!-- 替换为GitHub头像 -->
+  <!-- GitHub头像（语法严格版） -->
   <img 
-    src="https://avatars.githubusercontent.com/u/193340716?v=4"  <!-- 粘贴你复制的头像URL -->
+    src="https://avatars.githubusercontent.com/u/193340716?v=4"  <!-- 你的GitHub头像URL -->
     alt="成霜喵喵的GitHub头像" 
-    style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 15px; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);"
+    style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 15px; border: 4px solid white; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);"
   />
   <h1 style="font-size: 2rem; color: #ff69b4; margin: 10px 0;">成霜喵喵</h1>
   <p style="font-size: 1.2rem; color: #ff1493;">高考奋斗中の成霜喵喵🐾</p>
