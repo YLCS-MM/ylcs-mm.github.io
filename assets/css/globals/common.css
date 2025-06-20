@@ -36,11 +36,12 @@
     margin: 5px
 }
 
-
-
-
-/* 汉堡菜单按钮变白 */
-
+.site-header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee
+}
 
 .site-header .account-switcher {
     display: inline-block;
