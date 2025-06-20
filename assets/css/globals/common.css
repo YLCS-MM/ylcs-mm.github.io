@@ -40,7 +40,10 @@
     padding-top: 20px;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #eee
+    border-bottom: 1px solid #eee;
+    /* 👇 新增背景图片配置 */
+    background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') center/cover no-repeat !important;
+    background-color: transparent !important; /* 清除原蓝色背景 */
 }
 
 .site-header .account-switcher {
