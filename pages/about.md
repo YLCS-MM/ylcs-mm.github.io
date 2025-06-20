@@ -1,13 +1,13 @@
 ---
-layout: page       # 必须！继承主题的“页面”布局（主题里要有page.html）
-title: 关于        # 浏览器标签栏显示的标题
-permalink: /about/ # 页面路径，和导航栏“关于”的href完全一致
+layout: page       # 继承主题的page布局（需确保主题支持Markdown渲染）
+title: 关于        # 浏览器标签栏标题
+permalink: /about/ # 页面路径，和导航栏“关于”的href一致
 ---
 
-# 🐾关于我  
+# 🐾关于😺  
 
 ## 👋 关于成霜喵喵  
-😸是成霜喵喵，在为高考而奋斗喵～  
+🐱是成霜喵喵，在为高考而奋斗喵～  
 也许眼前充满苟且，但学习是为了 **诗和远方** 🐾。  
 
 本站于 **2025年6月19日** 正式上线，记录技术思考与生活点滴~  
@@ -29,26 +29,25 @@ permalink: /about/ # 页面路径，和导航栏“关于”的href完全一致
 - **邮箱**：[15873505918@163.com](mailto:15873505918@163.com)  
 
 
-<!-- 保留“漂浮猫爪”动画（极简版，不干扰排版） -->
+<!-- 轻量“漂浮猫爪”动画（不干扰排版，主题兼容） -->
 <style>
-/* 页面级动画：不影响Markdown内容 */
-body { position: relative; }
-.float-paw {
-  position: absolute;
-  font-size: 24px;
-  color: #ff69b4;
-  animation: float 3s infinite ease-in-out;
-}
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0); }
-}
-/* 分散猫爪位置 */
-.paw1 { top: 20%; left: 15%; }
-.paw2 { top: 30%; right: 20%; animation-delay: 1s; }
-.paw3 { bottom: 25%; left: 25%; animation-delay: 2s; }
+  /* 分散在页面的猫爪装饰 */
+  .float-paw {
+    position: absolute;
+    font-size: 24px;
+    color: #ff69b4;
+    animation: float 3s infinite ease-in-out;
+    pointer-events: none; /* 不影响点击 */
+  }
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+  }
+  .paw-1 { top: 20%; left: 15%; }
+  .paw-2 { top: 35%; right: 25%; animation-delay: 1s; }
+  .paw-3 { bottom: 30%; left: 30%; animation-delay: 2s; }
 </style>
-<span class="float-paw paw1">🐾</span>
-<span class="float-paw paw2">🐾</span>
-<span class="float-paw paw3">🐾</span>
+<span class="float-paw paw-1">🐾</span>
+<span class="float-paw paw-2">🐾</span>
+<span class="float-paw paw-3">🐾</span>
