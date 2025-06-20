@@ -225,67 +225,7 @@ $(document).ready(function(){
                 insertAfter(viewerTipNode2, viewerTipNode1);
             });
         });
-    </script>
-<script>
-// 1. 从_config.yml读取站点起始日期（busuanzi.start_date）
-const startDateStr = "{{ site.busuanzi.start_date }}"; // 输出如 "2025-06-19"
-const start = new Date(startDateStr); // 转换为Date对象
-
-// 2. 定义“更新运行时间”函数（核心逻辑）
-function updateRuntime() {
-  const now = new Date();          // 当前时间
-  let diff = now - start;         // 时间差（毫秒）
-  
-  // 转换为 天、时、分、秒
-  const totalSeconds = Math.floor(diff / 1000);  // 总秒数
-  const days = Math.floor(totalSeconds / (3600 * 24)); // 天数
-  const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600); // 小时
-  const minutes = Math.floor((totalSeconds % 3600) / 60); // 分钟
-  const seconds = totalSeconds % 60; // 秒数
-
-  // 3. 格式化输出（补零优化：如5秒→05秒）
-  const format = (num) => num.toString().padStart(2, '0'); 
-  document.getElementById('runtime').textContent = 
-    `${days}天 ${format(hours)}:${format(minutes)}:${format(seconds)}`;
-}
-
-// 4. 页面加载时立即执行 + 每秒更新（让时间“跳动”）
-updateRuntime();          // 首次加载时执行
-setInterval(updateRuntime, 1000); // 每1秒更新一次
-</script>
-
-function updateRuntimeAdvanced() {
-  const now = new Date();
-  let yearDiff = now.getFullYear() - start.getFullYear(); // 年差
-  let monthDiff = now.getMonth() - start.getMonth();     // 月差（0~11）
-  let dayDiff = now.getDate() - start.getDate();         // 日差
-
-  // 处理“月份为负”的情况（如当前月 < 起始月）
-  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-    yearDiff--;         // 借1年
-    monthDiff += 12;    // 转为12个月
-  }
-
-  // 处理“日期为负”的情况（如当前日 < 起始日）
-  if (dayDiff < 0) {
-    // 借1个月，计算“上月最后一天”的日期
-    const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 0);
-    dayDiff += lastMonth.getDate(); // 补上上月的天数
-    monthDiff--; // 月差减1
-  }
-
-  // 再计算时分秒（复用之前的totalSeconds逻辑）
-  const diffMs = now - start;
-  const totalSeconds = Math.floor(diffMs / 1000);
-  const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  // 格式化输出
-  document.getElementById('runtime').textContent = 
-    `${yearDiff}年${monthDiff}月${dayDiff}天 ${hours}:${minutes}:${seconds}`;
-}
-      
+    </script>      
 {% endif %}
 </body>
 </html>
