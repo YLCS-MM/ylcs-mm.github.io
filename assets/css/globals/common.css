@@ -54,13 +54,6 @@
   text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* 文字阴影 */
 }
 
-/* 必须添加！导航栏透明化 */
-.site-header-nav, 
-.site-header-nav-item {
-  background: transparent !important;
-  border: none !important;
-  color: inherit !important; /* 继承文字白色 */
-}
 
 /* 汉堡菜单按钮变白 */
 .site-header button.collapsed span.icon-bar {
