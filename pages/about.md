@@ -1,3 +1,11 @@
+---
+layout: page       # 继承主题的page布局（必须！否则Jekyll不认）
+title: 关于        # 页面标题，会显示在浏览器标签栏
+permalink: /about/ # 强制指定页面路径为/about/（和导航栏href匹配）
+---
+
+# 🐾关于我  
+这里写你的自我介绍内容...（就是你提供的带猫耳装饰的HTML代码）
 <div style="position:relative;padding-top:60px;background:linear-gradient(135deg,#fff0f5,#e6e6fa);padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(255,105,180,0.2);overflow:hidden;">
 
   <!-- 猫耳装饰 -->
