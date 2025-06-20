@@ -21,7 +21,7 @@ permalink: /about/ # 强制指定页面路径为/about/（和导航栏href匹配
     <p style="font-size:1.2rem;color:#ff1493;">高考奋斗中の成霜喵喵🐾</p>
   </div>
 
-  ###  🐾关于我🐾
+ ###  🐾关于我🐾
   😸是成霜喵喵，在为高考而奋斗喵～  
   也许眼前充满苟且，但学习是为了 **诗和远方** 🐾。  
 
@@ -31,15 +31,16 @@ permalink: /about/ # 强制指定页面路径为/about/（和导航栏href匹配
   > —— 成霜喵喵的学习信条  
 
 
-  ### 🌸 个人特质  
-  <span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">学习型猫猫</span>  
-  <span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">技术爱好者</span>  
-  <span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">软萌爱好者</span>  
-  <span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">猫耳收藏家</span>  
-  <span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">2305班信息委员</span>  
+### 🌸 个人特质  
+<span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">🐱学习型猫猫</span>  
+<span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">💻技术爱好者</span>  
+<span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">🎀软萌爱好者</span>  
+<span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">👂猫耳收藏家</span>  
+<span style="background:rgba(255,182,193,0.2);padding:5px 10px;border-radius:10px;margin:3px;display:inline-block;">📋2305班信息委员</span>
+  
 
 
-  ### 📮 联系成霜喵喵  
+### 📮 联系成霜喵喵  
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; padding: 0 10px;">
   <!-- GitHub 卡片（猫爪互动版） -->
