@@ -36,36 +36,10 @@
     margin: 5px
 }
 
-/*
-.site-header {
-  /* 修正链接 + 强制覆盖 */
-  background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') 
-              center/cover no-repeat !important;
-  
-  /* 彻底清除蓝色残留 */
-  background-color: transparent !important;
-  border-bottom: none !important;  /* 移除底部灰线 */
-  
-  /* 高度优化 */
-  min-height: 400px;  /* 建议增大高度 */
-  padding: 60px 0;    /* 增加内边距 */
-  
-  /* 文字优化 */
-  color: white;  /* 文字白色 */
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* 文字阴影 */
-}
-*/
+
 
 
 /* 汉堡菜单按钮变白 */
-.site-header button.collapsed span.icon-bar {
-  background-color: white !important;
-}
-
-.profile-header {
-  background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') center/cover no-repeat !important;
-  background-color: transparent !important;
-}
 
 
 .site-header .account-switcher {
