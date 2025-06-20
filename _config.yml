@@ -141,6 +141,19 @@ simple_jekyll_search:
     limit: 10
 
 # ---------------- #
+#     导航栏配置    #
+# ---------------- #
+navs:
+  - label: 首页       # 导航栏显示的文字
+    href: /          # 点击跳转的链接（对应网站根目录）
+  - label: 分类
+    href: /categories/  # 分类页链接（Jekyll自动生成）
+  - label: 标签
+    href: /tags/        # 标签页链接（Jekyll自动生成）
+  - label: 关于
+    href: /about/       # 关于页链接（需自己建/about.md文件）
+
+# ---------------- #
 #      Google      #
 # ---------------- #
 google:
