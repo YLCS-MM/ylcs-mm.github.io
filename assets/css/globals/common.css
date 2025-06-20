@@ -37,19 +37,14 @@
 }
 
 .site-header {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    /* 👇 新增背景图片配置 */
-    background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') center/cover no-repeat !important;
-    background-color: transparent !important; /* 清除原蓝色背景 */
+  background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') center/cover no-repeat !important;
+  background-color: transparent !important;
+  min-height: 300px; /* 原来可能是200px，改大！ */
+  padding-top: 60px; /* 原来可能是20px，改大！ */
+  padding-bottom: 60px;
 }
 
-.site-header {
-  background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') top/cover no-repeat !important;
-  background-color: transparent !important;
-}
+
 
 .site-header .account-switcher {
     display: inline-block;
