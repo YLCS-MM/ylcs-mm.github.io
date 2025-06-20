@@ -774,10 +774,17 @@ img + em {
 @media (min-width:500px) { .content-header-ad { width: 468px; height: 60px; } }
 @media (min-width:800px) { .content-header-ad { width: 728px; height: 90px; } }
 
+.site-header-avatar:hover {
+  filter: hue-rotate(30deg) brightness(1.1); /* 色调旋转+变亮，更粉 */
+  transform: scale(1.1); /* 轻微放大，有互动感 */
+  transition: all 0.3s ease; /* 动画过渡自然 */
+}
 .site-header-avatar {
-  width: 36px;    /* 头像宽度，和标题文字适配 */
-  height: 36px;   /* 头像高度，保持正方形 */
-  border-radius: 50%; /* 圆形头像效果 */
-  margin-right: 8px;  /* 和网站标题保持间距 */
-  vertical-align: middle; /* 垂直居中对齐标题文字 */
+  width: 48px;          /* 头像尺寸（调大更显眼） */
+  height: 48px;        
+  border-radius: 50%;   /* 圆形更柔和，像猫爪肉垫~ */
+  margin-right: 12px;   /* 和标题保持呼吸感 */
+  vertical-align: middle; /* 对齐标题文字 */
+  box-shadow: 0 0 8px rgba(255,255,255,0.8); /* 白边发光，模拟猫耳反光 */
+  position: relative;   /* 为后续“猫耳伪元素”做定位准备 */
 }
