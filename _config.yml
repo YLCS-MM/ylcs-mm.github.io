@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: blog.ylcsmm.dpdns.org
+url: https://ylcs-mm.github.io
 date_format: "ordinal"
 title: 成霜喵喵
 subtitle: "成霜喵喵的小窝"
