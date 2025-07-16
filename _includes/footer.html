@@ -228,8 +228,28 @@ $(document).ready(function(){
     </script>      
 {% endif %}
 
-<!-- 萌系 Live2D 看板娘（live2d-widgets@1.0.0-rc.6） -->
-<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
+<!-- 配置 Live2D 看板娘模型（必须放在 autoload.js 之前） -->
+<script>
+window.live2d_widgets = {
+  // 模型路径（根据仓库结构调整，假设“来源”对应“models”目录）
+  modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/来源/neko/", // 替换为仓库中实际的模型目录
+  // 显示配置（调整位置和大小，适配你的博客）
+  display: {
+    position: "right",      // 固定在右侧
+    width: 150,             // 看板娘宽度（建议150-200）
+    height: 300,            // 看板娘高度（建议300-400）
+    offsetY: -30,           // 垂直偏移（向上移动30px，避免遮挡底部导航）
+    zIndex: 9999            // 提升层级（避免被右侧内容遮挡）
+  },
+  // 移动端适配（确保手机显示正常）
+  mobile: {
+    show: true,             // 强制显示移动端
+    scale: 0.8              // 缩小至80%，适配手机屏幕
+  }
+};
+</script>
 
+<!-- 加载看板娘核心脚本（保持不变） -->
+<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
 </body>
 </html>
