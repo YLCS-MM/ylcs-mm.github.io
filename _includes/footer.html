@@ -228,42 +228,34 @@ $(document).ready(function(){
     </script>      
 {% endif %}
 
-<!-- 猫娘看板娘（Live2D Widget） - 适配你的萌系博客 -->
-<script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.0.4/lib/L2Dwidget.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.1.0/lib/L2Dwidget.min.js"></script>
 <script>
 L2Dwidget.init({
-  // 1. 模型配置（替换成你选的模型）
   model: {
-    jsonPath: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-neko@1.0.5/assets/neko.model.json', // 猫咪娘模型（推荐）
-    // jsonPath: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json', // 二次元少女模型（可选）
+    jsonPath: 'https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/model/neko/neko.model.json', // 稳定模型源
   },
-  // 2. 显示位置与大小（适配你的博客布局）
   display: {
-    position: 'right',       // 固定在页面右侧（符合你博客的右侧分类栏风格）
-    width: 160,              // 看板娘宽度（根据页面调整，建议150-180）
-    height: 320,             // 看板娘高度（建议300-360）
-    offsetX: 10,             // 水平偏移（向右移动10px，避免遮挡右侧分类栏）
-    offsetY: -20,            // 垂直偏移（向上移动20px，避免遮挡底部导航）
+    position: 'right',
+    width: 140,
+    height: 280,
+    offsetX: 30,
+    offsetY: -40,
   },
-  // 3. 手机端适配（你的博客有移动端显示，必须开启）
   mobile: {
-    show: true,              // 手机端显示看板娘
-    scale: 0.8,              // 手机端缩放比例（0.8=80%，避免占满屏幕）
+    show: true,
+    scale: 0.7,
   },
-  // 4. 交互效果（让看板娘更萌）
   react: {
-    opacity: 0.9,            // 看板娘透明度（0.9=90%，更自然）
-    scale: 1.05,             // 鼠标 hover 时放大比例（1.05=105%，有互动感）
-    distance: 300,           // 鼠标跟随距离（300px内会跟随视线）
+    opacity: 0.9,
+    scale: 1.05,
+    distance: 200,
   },
-  // 5. 自动对话（可选，让看板娘说话）
   dialog: {
-    enable: true,            // 开启对话
-    autoDisplay: true,       // 页面加载后自动显示
+    enable: true,
+    autoDisplay: true,
     messages: [
-      { text: '欢迎来到成霜喵喵的小窝～ 😸', delay: 1000 }, // 1秒后显示
-      { text: '要不要rua一下我的尾巴？～ 🐾', delay: 3000 }, // 3秒后显示
-      { text: '今天也要认真学习哦！✨', delay: 5000 },      // 5秒后显示
+      { text: '欢迎来到成霜喵喵的小窝～ 😸', delay: 1000 },
+      { text: '今天的学习任务完成了吗？～ 📚', delay: 3000 },
     ],
   },
 });
