@@ -167,3 +167,20 @@ google:
         markdown: kramdown
 kramdown:
   input: GFM  # 支持GitHub风格Markdown（含HTML解析）
+# ------------------------------
+# 🔔 更新公告配置（可自定义）
+# ------------------------------
+announcement:
+  enabled: true                # 是否显示公告（true=显示，false=隐藏）
+  title: "✨ Neko的夏日更新！✨"    # 公告标题（支持Emoji和HTML）
+  content: |                   # 公告内容（用|保留换行和HTML标签）
+    本次博客更新了3个超实用功能：<br>
+    1. 新增「夜间模式」（点击顶部月亮图标切换）；<br>
+    2. 优化了图片加载速度（采用WebP格式）；<br>
+    3. 添加了「评论区表情」（支持发送猫咪表情包~）。<br>
+    <small>（2025-07-01 发布 | 本次公告1天内有效）</small>
+  style:                       # 公告样式（可选，自定义弹窗风格）
+    background: "#f0f8ff"      # 弹窗背景色（浅蓝，符合你的博客风格）
+    color: "#333"              # 文字颜色（深灰，清晰易读）
+    button_bg: "#2196f3"       # 按钮背景色（蓝色，博客主色）
+    button_color: "#fff"       # 按钮文字颜色（白色）
