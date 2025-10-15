@@ -275,19 +275,22 @@ window.live2d_widgets = {
     <button id="close-popup" class="popup-btn">确认并关闭</button>
   </div>
 </div>
-<!-- 更新公告弹窗（动态调用_config.yml中的内容） -->
-{% if site.announcement.enabled %} <!-- 如果enabled为true，显示弹窗 -->
-<div id="announcement-popup" class="announcement-popup hidden" 
+<!-- 更新公告弹窗（动态读取_config.yml中的配置） -->
+{% if site.announcement.enabled %} <!-- ✅ 条件判断：仅当enabled为true时显示 -->
+<div id="announcement-popup" class="announcement-popup hidden"
      style="background: {{ site.announcement.style.background }}; color: {{ site.announcement.style.color }};">
   <div class="popup-content">
+    <!-- ✅ 动态标题：读取_config.yml中的title -->
     <h3 class="popup-title">{{ site.announcement.title }}</h3>
-    <p class="popup-text">{{ site.announcement.content | markdownify }}</p> <!-- markdownify解析Markdown -->
-    <button id="close-popup" class="popup-btn" 
+    <!-- ✅ 动态内容：读取_config.yml中的content（markdownify解析Markdown） -->
+    <p class="popup-text">{{ site.announcement.content | markdownify }}</p>
+    <!-- ✅ 动态按钮样式：读取_config.yml中的style -->
+    <button id="close-popup" class="popup-btn"
             style="background: {{ site.announcement.style.button_bg }}; color: {{ site.announcement.style.button_color }};">
       确认并关闭
     </button>
   </div>
 </div>
-{% endif %} <!-- 结束条件判断 -->
+{% endif %} <!-- ✅ 闭合条件判断 -->
 </body>
 </html>
