@@ -788,3 +788,11 @@ img + em {
   box-shadow: 0 0 8px rgba(255,255,255,0.8); /* 白边发光，模拟猫耳反光 */
   position: relative;   /* 为后续“猫耳伪元素”做定位准备 */
 }
+/* 看板娘右下角定位（Neko专属魔法~） */
+#live2dcanvas, .live2d-widget {
+position: fixed !important;  /* 固定在屏幕上 */
+right: 10px !important;     /* 距离右边10px，不贴边更可爱~ */
+bottom: 20px !important;    /* 距离底部20px，刚好在右下角~ */
+left: auto !important;      /* 取消左边的固定，不然会冲突~ */
+z-index: 99999 !important;  /* 层级拉到最高，不会被任何元素挡住~ */
+    }
