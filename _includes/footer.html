@@ -261,5 +261,19 @@ window.live2d_widgets = {
 
 <!-- 加载看板娘核心脚本（保持不变） -->
 <script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
+<!-- 更新公告弹窗（放在footer.html末尾） -->
+<div id="announcement-popup" class="announcement-popup hidden">
+  <div class="popup-content">
+    <h3 class="popup-title">✨ Neko的更新公告！✨</h3>
+    <p class="popup-text">
+      本次博客更新内容：<br>
+      1. 优化了文字排版（肉垫键盘粉色火花特效）；<br>
+      2. 新增图片嵌入功能（支持GIF动图）；<br>
+      3. 修复了链接跳转bug（再也不会迷路啦~）。<br>
+      <small>（2025-06-20 发布）</small>
+    </p>
+    <button id="close-popup" class="popup-btn">确认并关闭</button>
+  </div>
+</div>
 </body>
 </html>
