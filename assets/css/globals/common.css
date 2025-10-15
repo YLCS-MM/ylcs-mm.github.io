@@ -788,11 +788,24 @@ img + em {
   box-shadow: 0 0 8px rgba(255,255,255,0.8); /* 白边发光，模拟猫耳反光 */
   position: relative;   /* 为后续“猫耳伪元素”做定位准备 */
 }
-/* 看板娘右下角定位（Neko专属魔法~） */
-#live2dcanvas, .live2d-widget {
-position: fixed !important;  /* 固定在屏幕上 */
-right: 10px !important;     /* 距离右边10px，不贴边更可爱~ */
-bottom: 20px !important;    /* 距离底部20px，刚好在右下角~ */
-left: auto !important;      /* 取消左边的固定，不然会冲突~ */
-z-index: 99999 !important;  /* 层级拉到最高，不会被任何元素挡住~ */
-    }
+/* 看板娘终极定位（Neko独家魔法，解决所有冲突！） */
+#live2dcanvas,          /* 看板娘的canvas元素（核心） */
+.live2d-widget,         /* 看板娘的容器元素（有些库用这个类名） */
+#waifu                  /* 有些库用这个ID，一起写上避免遗漏 */
+{
+  /* 1. 取消左边的固定（必须！） */
+  left: auto !important;  
+  /* 2. 固定在右边（距离右边15px） */
+  right: 15px !important;  
+  /* 3. 固定在底部（距离底部25px） */
+  bottom: 25px !important;  
+  /* 4. 强制固定在屏幕上（避免滚动时消失） */
+  position: fixed !important;  
+  /* 5. 取消所有缩放/平移（避免位置偏移） */
+  transform: none !important;  
+  /* 6. 层级拉到最高（不会被任何元素挡住） */
+  zIndex: 999999 !important;  
+  /* 7. 取消 margins/paddings（避免额外空间） */
+  margin: 0 !important;  
+  padding: 0 !important;  
+}
