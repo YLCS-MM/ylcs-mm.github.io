@@ -232,21 +232,30 @@ $(document).ready(function(){
 <script>
 window.live2d_widgets = {
   // 模型路径（根据仓库结构调整，假设“来源”对应“models”目录）
-  modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/来源/neko/", // 替换为仓库中实际的模型目录
+  modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/", 
+// 解释：  
+// - "https://fastly.jsdelivr.net/"：JSDelivr CDN，加速模型加载；  
+// - "npm/live2d-widgets@1.0.0-rc.6"：指定库的版本（避免更新导致问题）；  
+// - "models/neko/"：模型文件的实际目录（neko是猫娘模型，没错！）。
   // 显示配置（调整位置和大小，适配你的博客）
   display: {
-  position: "fixed",      // 固定在屏幕上（关键！之前可能漏了这个）
-  right: 10,              // 距离右边10px（避免贴边）
-  bottom: 20,             // 距离底部20px（刚好在右下角）
-  width: 150,             // 保持可爱大小~
-  height: 300,            // 高度也不变~
-  zIndex: 99999           // 层级拉到最高，不会被任何元素挡住！
+  position: "fixed",      // ① 固定在屏幕视口（关键！只有固定才能用right/bottom）；  
+  right: 15,              // ② 距离右边15px（不贴边，更可爱）；  
+  bottom: 25,             // ③ 距离底部25px（刚好在右下角，不挡导航）；  
+  left: "auto",           // ④ 取消左边的固定（避免和right冲突，必须写！）；  
+  width: 160,             // ⑤ 看板娘宽度（160px刚好，不占太多空间）；  
+  height: 320,            // ⑥ 看板娘高度（320px，比例协调）；  
+  zIndex: 999999,         // ⑦ 层级拉到最高（999999），不会被任何元素（比如导航、卡片）挡住；  
+  transform: "none",      // ⑧ 取消默认的缩放/平移（避免位置偏移）；  
 },
   // 移动端适配（确保手机显示正常）
   mobile: {
-    show: true,             // 强制显示移动端
-    scale: 0.8              // 缩小至80%，适配手机屏幕
-  }
+  show: true,             // ① 强制在手机端显示（默认可能隐藏，必须开！）；  
+  scale: 0.75,            // ② 缩小到75%（160px×0.75=120px，刚好适合手机屏幕）；  
+  position: "fixed",      // ③ 手机端也固定在右下角；  
+  right: 10,              // ④ 手机端距离右边10px；  
+  bottom: 15,             // ⑤ 手机端距离底部15px；  
+},
 };
 </script>
 
