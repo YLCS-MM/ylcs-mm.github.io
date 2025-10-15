@@ -172,7 +172,7 @@ kramdown:
 # ------------------------------
 announcement:
   enabled: true                # 是否显示公告（true=显示，false=隐藏）
-  title: "✨ Neko的夏日更新！✨"    # 公告标题（支持Emoji和HTML）
+  title: "✨ Ne ✨"    # 公告标题（支持Emoji和HTML）
   content: |                   # 公告内容（用|保留换行和HTML标签）
     本次博客更新了3个超实用功能：<br>
     1. 新增「夜间模式」（点击顶部月亮图标切换）；<br>
