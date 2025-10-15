@@ -235,12 +235,12 @@ window.live2d_widgets = {
   modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/来源/neko/", // 替换为仓库中实际的模型目录
   // 显示配置（调整位置和大小，适配你的博客）
   display: {
-    position: "right",      // 固定在右侧
-    width: 150,             // 看板娘宽度（建议150-200）
-    height: 300,            // 看板娘高度（建议300-400）
-    offsetY: -30,           // 垂直偏移（向上移动30px，避免遮挡底部导航）
-    zIndex: 9999            // 提升层级（避免被右侧内容遮挡）
-  },
+  position: "right",      // 保持右侧固定
+  width: 150,             // 可以根据需要调整大小
+  height: 300,            // 高度也可以微调
+  offsetY: 20,            // 关键！改成正数，比如20，就是从底部往上20px（数值越大越靠下）
+  zIndex: 9999            // 保持层级，不被遮挡
+},
   // 移动端适配（确保手机显示正常）
   mobile: {
     show: true,             // 强制显示移动端
