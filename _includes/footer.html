@@ -367,6 +367,72 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const overlay = document.getElementById('neko-popup-overlay');
+  const container = document.getElementById('neko-popup-container');
+  const closeBtn = document.getElementById('neko-close-popup');
+  
+  function showPopup() {
+    // 防止背景滚动
+    document.body.style.overflow = 'hidden';
+    
+    // 显示遮罩层
+    overlay.style.display = 'block';
+    setTimeout(() => {
+      overlay.style.opacity = '1';
+    }, 10);
+    
+    // 显示弹窗
+    container.style.display = 'block';
+    setTimeout(() => {
+      container.style.opacity = '1';
+      container.style.transform = 'translate(-50%, -50%) scale(1)';
+    }, 50);
+  }
+  
+  function hidePopup() {
+    // 隐藏动画
+    container.style.opacity = '0';
+    container.style.transform = 'translate(-50%, -50%) scale(0.8)';
+    overlay.style.opacity = '0';
+    
+    setTimeout(() => {
+      container.style.display = 'none';
+      overlay.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }, 300);
+    
+    localStorage.setItem('neko-announcement-closed', 'true');
+  }
+  
+  // 显示弹窗
+  if (!localStorage.getItem('neko-announcement-closed')) {
+    setTimeout(showPopup, 1000);
+  }
+  
+  // 关闭事件
+  if (closeBtn) {
+    closeBtn.addEventListener('click', hidePopup);
+  }
+  
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) hidePopup();
+    });
+  }
+  
+  // ESC键关闭
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.style.display === 'block') {
+      hidePopup();
+    }
+  });
+});
+</script>
+
+
 {% endif %}
 
 
