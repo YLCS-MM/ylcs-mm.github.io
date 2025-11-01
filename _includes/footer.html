@@ -186,96 +186,288 @@ window.live2d_widgets = {
 
 {% if site.data.announcement.popup_enabled %}
 {% assign announcement = site.data.announcement.announcements[0] %}
-<div id="announcement-popup" class="announcement-popup"
-     style="background: {{ announcement.background | default: '#fff9e6' }}; 
-             color: {{ announcement.color | default: '#5a4a42' }};
-             border: 2px solid {{ announcement.border_color | default: '#4CAF50' }};">
-  <div class="popup-content">
-    <h3 class="popup-title">{{ announcement.title | default: '🚧 博客施工中喵～' }}</h3>
-    <div class="popup-text">
-      {{ announcement.content | markdownify }}
+
+<!-- 全局遮罩层 -->
+<div class="neko-popup-overlay" id="neko-popup-overlay"></div>
+
+<!-- 主弹窗内容 -->
+<div class="neko-popup-container" id="neko-popup-container">
+  <!-- 猫咪耳朵装饰 -->
+  <div class="neko-cat-ears">
+    <div class="neko-ear left-ear"></div>
+    <div class="neko-ear right-ear"></div>
+  </div>
+  
+  <!-- 弹窗内容 -->
+  <div class="neko-popup-content"
+       style="background: {{ announcement.background | default: 'linear-gradient(135deg, #ffe4e6 0%, #f0f8ff 100%)' }};
+              border: 3px dashed {{ announcement.border_color | default: '#ffb6c1' }};">
+    
+    <!-- 标题栏 with 猫咪图标 -->
+    <div class="neko-popup-header">
+      <span class="neko-cat-icon">🐾</span>
+      <h3 class="neko-popup-title" style="color: {{ announcement.title_color | default: '#ff69b4' }};">
+        {{ announcement.title | default: '博客施工中喵～' }}
+      </h3>
+      <span class="neko-cat-icon">🐾</span>
     </div>
-    <button id="close-popup" class="popup-btn"
-            style="background: {{ announcement.button_bg | default: '#4CAF50' }}; 
-                   color: {{ announcement.button_color | default: 'white' }};">
-      {{ announcement.button_text | default: '确认并关闭' }}
-    </button>
+    
+    <!-- 内容区域 -->
+    <div class="neko-popup-body">
+      <div class="neko-popup-text">
+        {{ announcement.content | markdownify }}
+      </div>
+      
+      <!-- 肉垫按钮 -->
+      <button class="neko-paw-button" id="neko-close-popup"
+              style="background: {{ announcement.button_bg | default: 'linear-gradient(135deg, #ff6b6b, #ffa726)' }};
+                     color: {{ announcement.button_color | default: 'white' }};">
+        <span class="paw-print">🐾</span>
+        {{ announcement.button_text | default: '明白啦～继续探索' }}
+        <span class="paw-print">🐾</span>
+      </button>
+    </div>
+    
+    <!-- 猫咪尾巴装饰 -->
+    <div class="neko-cat-tail"></div>
   </div>
 </div>
 
 <style>
-.announcement-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 0;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  z-index: 99999;
-  max-width: 90%;
-  width: 400px;
-  display: none;
-  background: white;
-}
-
-.announcement-popup::before {
-  content: '';
+/* 全局遮罩 - 梦幻毛玻璃效果 */
+.neko-popup-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.5);
-  z-index: -1;
+  background: rgba(255, 182, 193, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 99998;
+  display: none;
 }
 
-.popup-content {
-  padding: 20px;
+/* 主弹窗容器 */
+.neko-popup-container {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  z-index: 99999;
+  min-width: 300px;
+  max-width: 90%;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.popup-title {
-  margin-bottom: 15px;
-  text-align: center;
-  font-size: 1.2em;
-  color: {{ announcement.title_color | default: '#4CAF50' }};
+/* 猫咪耳朵 */
+.neko-cat-ears {
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
 }
 
-.popup-text {
-  line-height: 1.6;
+.neko-ear {
+  width: 30px; height: 40px;
+  background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+  border-radius: 50% 50% 0 0;
+  position: relative;
+}
+
+.left-ear { transform: rotate(-30deg); }
+.right-ear { transform: rotate(30deg); }
+
+/* 弹窗内容 */
+.neko-popup-content {
+  background: linear-gradient(135deg, #ffe4e6, #f0f8ff);
+  border-radius: 25px;
+  border: 3px dashed #ffb6c1;
+  padding: 30px 25px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+}
+
+/* 标题栏 */
+.neko-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
   margin-bottom: 20px;
 }
 
-.popup-btn {
-  width: 100%;
-  padding: 10px;
+.neko-cat-icon {
+  font-size: 1.5em;
+  animation: bounce 2s infinite;
+}
+
+.neko-popup-title {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
+}
+
+/* 内容区域 */
+.neko-popup-body {
+  text-align: center;
+}
+
+.neko-popup-text {
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 25px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 15px;
+  border-left: 4px solid #ffa726;
+}
+
+.neko-popup-text p {
+  margin: 0 0 10px 0;
+}
+
+.neko-popup-text strong {
+  color: #ff69b4;
+}
+
+.neko-popup-text em {
+  font-style: italic;
+  color: #888;
+}
+
+/* 肉垫按钮 */
+.neko-paw-button {
+  padding: 12px 30px;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
+  font-size: 1.1em;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.neko-paw-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.paw-print {
+  font-size: 1.2em;
+  animation: pulse 1.5s infinite;
+}
+
+/* 猫咪尾巴 */
+.neko-cat-tail {
+  position: absolute;
+  right: -15px;
+  bottom: 30px;
+  width: 40px; height: 80px;
+  background: linear-gradient(45deg, #ffb6c1, #ff69b4);
+  border-radius: 50% 0 0 50%;
+  transform: rotate(45deg);
+}
+
+/* 动画效果 */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* 弹窗显示时的状态 */
+.neko-popup-container.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.neko-popup-overlay.show {
+  display: block;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .neko-popup-content {
+    padding: 20px 15px;
+    margin: 10px;
+  }
+  
+  .neko-popup-title {
+    font-size: 1.2em;
+  }
+  
+  .neko-cat-ears {
+    padding: 0 20px;
+  }
+  
+  .neko-ear {
+    width: 25px; height: 35px;
+  }
+  
+  .neko-popup-text {
+    padding: 15px;
+  }
 }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const popup = document.getElementById('announcement-popup');
-  const closeBtn = document.getElementById('close-popup');
+  const overlay = document.getElementById('neko-popup-overlay');
+  const container = document.getElementById('neko-popup-container');
+  const closeBtn = document.getElementById('neko-close-popup');
   
-  if (popup && !localStorage.getItem('announcement-closed')) {
-    popup.style.display = 'block';
+  // 检查是否已经关闭过
+  if (!localStorage.getItem('neko-announcement-closed')) {
+    // 显示弹窗
     setTimeout(() => {
-      popup.style.opacity = '1';
-      popup.style.transform = 'translate(-50%, -50%) scale(1)';
-    }, 100);
+      overlay.classList.add('show');
+      container.classList.add('show');
+    }, 1000);
   }
   
+  // 关闭按钮事件
   if (closeBtn) {
     closeBtn.addEventListener('click', function() {
-      popup.style.display = 'none';
-      localStorage.setItem('announcement-closed', 'true');
+      overlay.classList.remove('show');
+      container.classList.remove('show');
+      localStorage.setItem('neko-announcement-closed', 'true');
     });
   }
+  
+  // 点击遮罩层也可以关闭
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) {
+        overlay.classList.remove('show');
+        container.classList.remove('show');
+        localStorage.setItem('neko-announcement-closed', 'true');
+      }
+    });
+  }
+  
+  // ESC键关闭
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('show')) {
+      overlay.classList.remove('show');
+      container.classList.remove('show');
+      localStorage.setItem('neko-announcement-closed', 'true');
+    }
+  });
 });
 </script>
 {% endif %}
+
 
 <!-- 配置 Live2D 看板娘模型 -->
 <script>
