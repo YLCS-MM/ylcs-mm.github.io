@@ -317,25 +317,8 @@ window.live2d_widgets = {
   cursor: pointer;
   font-size: 16px;
 }
-</style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const popup = document.getElementById('announcement-popup');
-  const closeBtn = document.getElementById('close-popup');
-  
-  // 检查是否已经关闭过
-  if (!localStorage.getItem('announcement-closed')) {
-    popup.style.display = 'block';
-  }
-  
-  closeBtn.addEventListener('click', function() {
-    popup.style.display = 'none';
-    localStorage.setItem('announcement-closed', 'true');
-  });
-});
-
-    <style>
+<style>
 .announcement-popup {
   position: fixed;
   top: 50%;
@@ -376,11 +359,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-</script>
-{% endif %}
-
-
-</script>
 
 <!-- 加载看板娘核心脚本（保持不变） -->
 <script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
