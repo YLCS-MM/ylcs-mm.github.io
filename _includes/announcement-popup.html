@@ -1,0 +1,27 @@
+<div id="announcement-modal" style="display:none;">
+  <div class="modal-overlay"></div>
+  <div class="modal-container" 
+       style="background: {{ site.data.announcement.announcements[0].background }};
+              border: 2px solid {{ site.data.announcement.announcements[0].border_color }};">
+    <div class="modal-header">
+      <span class="modal-title" style="color: {{ site.data.announcement.announcements[0].title_color }};">
+        {{ site.data.announcement.announcements[0].title }}
+      </span>
+    </div>
+    <div class="modal-content">
+      {{ site.data.announcement.announcements[0].content | markdownify }}
+    </div>
+    <button class="modal-button" 
+            style="background: {{ site.data.announcement.announcements[0].button_bg }};">
+      {{ site.data.announcement.announcements[0].button_text }}
+    </button>
+  </div>
+</div>
+
+<script>
+// 让小弹窗自动跳出来的魔法代码喵~
+document.addEventListener('DOMContentLoaded', function() {
+  var modal = document.getElementById('announcement-modal');
+  if (modal) modal.style.display = 'block';
+});
+</script>
