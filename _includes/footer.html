@@ -274,6 +274,21 @@ window.live2d_widgets = {
 </div>
 {% endif %}
 
+<!-- 自动弹出的最新公告弹窗 -->
+{% if site.data.announcement.popup_enabled %}
+<div id="announcement-popup" class="announcement-popup hidden"
+     style="background: {{ site.data.announcement.announcements[0].background }}; color: {{ site.data.announcement.announcements[0].color }};">
+  <div class="popup-content">
+    <h3 class="popup-title">{{ site.data.announcement.announcements[0].title }}</h3>
+    <div class="popup-text">{{ site.data.announcement.announcements[0].content | markdownify }}</div>
+    <button id="close-popup" class="popup-btn"
+            style="background: {{ site.data.announcement.announcements[0].button_bg }}; color: {{ site.data.announcement.announcements[0].button_color }};">
+      确认并关闭
+    </button>
+  </div>
+</div>
+{% endif %}
+
 <!-- 历史公告弹窗 -->
 <div id="announcement-history-modal" class="announcement-history-modal hidden">
   <div class="history-modal-content">
@@ -324,7 +339,9 @@ window.live2d_widgets = {
   </div>
 </div>
 
+
 <script>
+
 // 页面加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
   // 自动弹出公告逻辑
@@ -363,16 +380,25 @@ document.addEventListener('DOMContentLoaded', function() {
   const tabButtons = document.querySelectorAll('.tab-button');
   const tabPanes = document.querySelectorAll('.tab-pane');
   
+  // 确保元素存在后再绑定事件
   if (toggleBtn && historyModal) {
+    console.log('找到公告历史按钮和弹窗，开始绑定事件');
+    
     // 打开历史公告弹窗
-    toggleBtn.addEventListener('click', function() {
+    toggleBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('点击公告历史按钮');
       historyModal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     });
     
     // 关闭历史公告弹窗
     if (closeHistoryBtn) {
-      closeHistoryBtn.addEventListener('click', function() {
+      closeHistoryBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('关闭公告历史弹窗');
         historyModal.classList.add('hidden');
         document.body.style.overflow = 'auto';
       });
@@ -381,6 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 点击背景关闭
     historyModal.addEventListener('click', function(e) {
       if (e.target === historyModal) {
+        console.log('点击背景关闭弹窗');
         historyModal.classList.add('hidden');
         document.body.style.overflow = 'auto';
       }
@@ -389,6 +416,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ESC键关闭
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && !historyModal.classList.contains('hidden')) {
+        console.log('ESC键关闭弹窗');
         historyModal.classList.add('hidden');
         document.body.style.overflow = 'auto';
       }
@@ -398,6 +426,7 @@ document.addEventListener('DOMContentLoaded', function() {
     tabButtons.forEach(button => {
       button.addEventListener('click', function() {
         const tabName = this.getAttribute('data-tab');
+        console.log('切换到标签页:', tabName);
         
         // 更新按钮状态
         tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -405,8 +434,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 更新内容显示
         tabPanes.forEach(pane => pane.classList.remove('active'));
-        document.getElementById(tabName + '-tab').classList.add('active');
+        const targetPane = document.getElementById(tabName + '-tab');
+        if (targetPane) {
+          targetPane.classList.add('active');
+        }
       });
+    });
+  } else {
+    console.warn('公告历史按钮或弹窗元素未找到:', {
+      toggleBtn: !!toggleBtn,
+      historyModal: !!historyModal
     });
   }
   
@@ -438,6 +475,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+     
+
+
 </script>
 
 <!-- 加载看板娘核心脚本（保持不变） -->
