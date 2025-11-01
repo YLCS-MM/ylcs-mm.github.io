@@ -261,15 +261,15 @@ window.live2d_widgets = {
 
 <!-- 加载看板娘核心脚本（保持不变） -->
 <script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
-<!-- 更新公告弹窗（动态读取配置） -->
-{% if site.announcement.enabled %}
+
+{% if site.data.announcement.enabled %}
 <div id="announcement-popup" class="announcement-popup hidden"
-     style="background: {{ site.announcement.style.background }}; color: {{ site.announcement.style.color }};">
+     style="background: {{ site.data.announcement.background }}; color: {{ site.data.announcement.color }};">
   <div class="popup-content">
-    <h3 class="popup-title">{{ site.announcement.title }}</h3>
-    <div class="popup-text">{{ site.announcement.content | markdownify }}</div>
+    <h3 class="popup-title">{{ site.data.announcement.title }}</h3>
+    <div class="popup-text">{{ site.data.announcement.content | markdownify }}</div>
     <button id="close-popup" class="popup-btn"
-            style="background: {{ site.announcement.style.button_bg }}; color: {{ site.announcement.style.button_color }};">
+            style="background: {{ site.data.announcement.button_bg }}; color: {{ site.data.announcement.button_color }};">
       确认并关闭
     </button>
   </div>
