@@ -1,20 +1,43 @@
-enabled: true
-title: "🚧 博客施工中喵～ 🚧"
-content: |
-  **【2025年11月1日更新】**
-  施工中喵～请耐心等待...
-  
-  喵喵～主人正在对博客进行一些魔法改造喵！
-  
-  🛠️ **当前施工项目：**
-  - 优化页面加载速度
-  - 调整看板娘交互效果
-  - 美化公告弹窗样式
-  
-  ⏰ **预计完成时间：** soon...
-  
-  *施工期间可能会有页面闪烁，请多见谅喵～ฅ(^•ω•^)ฅ*
-background: "rgba(255, 248, 225, 0.95)"  # 浅黄色背景，像小猫咪的毛色
-color: "#5a4a42"  # 棕色文字，像爪印
-button_bg: "#ffa07a"  # 浅橙色按钮，像三文鱼肉垫
-button_color: "#fff"
+# _data/announcement.yml
+# 公告系统配置
+
+# 控制按钮显示
+button_enabled: true
+
+# 公告列表（按时间倒序，最新的在前面）
+announcements:
+  - date: "2025-11-01"
+    title: "🚧 博客施工中喵～"
+    content: |
+      **【2025年11月1日更新】**
+      
+      喵喵～主人正在对博客进行一些魔法改造喵！
+      
+      **当前施工项目：**
+      - 优化页面加载速度
+      - 调整看板娘交互效果  
+      - 美化公告弹窗样式
+      
+      **预计完成时间：** soon...
+      
+      *施工期间可能会有页面闪烁，请多见谅喵～ฅ(^•ω•^)ฅ*
+    background: "rgba(255, 248, 225, 0.95)"
+    color: "#5a4a42"
+    button_bg: "#ffa07a" 
+    button_color: "#fff"
+
+  - date: "2025-10-31"
+    title: "🎃 万圣节特别更新"
+    content: |
+      万圣节主题上线啦！
+      - 新增南瓜色系主题
+      - 看板娘换上万圣节服装
+      - 特效小幽灵动画
+    background: "rgba(255, 165, 0, 0.1)"
+    color: "#8B4513"
+    button_bg: "#FF8C00"
+    button_color: "#fff"
+
+# 弹窗显示控制（可选）
+popup_enabled: true
+popup_show_latest_only: true
