@@ -114,6 +114,26 @@
                 <a href="{{ site.url }}{{ nav.href }}" class="{% if nav.mobile-hidden %}mobile-hidden {% endif %}{% if page.menu == nav.label %}selected {% endif %}site-header-nav-item" target="{{ nav.target | default: _self }}" title="{{ nav.label }}">{{ nav.label }}</a>
                 {% endfor %}
                 <a class="mobile-hidden" href="{{ site.url }}{{ site.subscribe_rss }}"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+           
+                      <nav class="site-header-nav" role="navigation">
+                {% for nav in site.navs %}
+                <a href="{{ site.url }}{{ nav.href }}" class="{% if nav.mobile-hidden %}mobile-hidden {% endif %}{% if page.menu == nav.label %}selected {% endif %}site-header-nav-item" target="{{ nav.target | default: _self }}" title="{{ nav.label }}">{{ nav.label }}</a>
+                {% endfor %}
+                
+                <!-- 公告按钮（添加在这里喵） -->
+                {% if site.data.announcement.button_enabled %}
+                <div class="announcement-button-container">
+                  <button id="announcement-toggle" class="announcement-btn" title="查看公告">
+                    📢 公告
+                    {% if site.data.announcement.announcements.size > 0 %}
+                    <span class="announcement-badge">{{ site.data.announcement.announcements.size }}</span>
+                    {% endif %}
+                  </button>
+                </div>
+                {% endif %}
+                
+                <a class="mobile-hidden" href="{{ site.url }}{{ site.subscribe_rss }}"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            
             </nav>
         </div>
     </header>
