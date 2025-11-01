@@ -368,23 +368,76 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<style>
+/* 修复毛玻璃遮罩层 - 覆盖整个页面 */
+.neko-popup-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(255, 182, 193, 0.3) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important; /* Safari支持 */
+  z-index: 99998 !important;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 修复弹窗容器定位 */
+.neko-popup-container {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) scale(0.8) !important;
+  z-index: 99999 !important;
+  min-width: 320px;
+  max-width: 90%;
+  opacity: 0;
+  display: none;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 显示状态 */
+.neko-popup-overlay.show {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.neko-popup-container.show {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+/* 防止背景滚动 */
+body.neko-popup-open {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+</style>
+
 <script>
+// 修复的显示逻辑
 document.addEventListener('DOMContentLoaded', function() {
   const overlay = document.getElementById('neko-popup-overlay');
   const container = document.getElementById('neko-popup-container');
   const closeBtn = document.getElementById('neko-close-popup');
   
   function showPopup() {
-    // 防止背景滚动
-    document.body.style.overflow = 'hidden';
+    console.log('显示弹窗喵～');
     
-    // 显示遮罩层
+    // 锁定背景滚动
+    document.body.classList.add('neko-popup-open');
+    
+    // 显示遮罩层（全屏覆盖）
     overlay.style.display = 'block';
     setTimeout(() => {
       overlay.style.opacity = '1';
     }, 10);
     
-    // 显示弹窗
+    // 显示弹窗（居中）
     container.style.display = 'block';
     setTimeout(() => {
       container.style.opacity = '1';
@@ -393,6 +446,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function hidePopup() {
+    console.log('隐藏弹窗喵～');
+    
     // 隐藏动画
     container.style.opacity = '0';
     container.style.transform = 'translate(-50%, -50%) scale(0.8)';
@@ -401,16 +456,21 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       container.style.display = 'none';
       overlay.style.display = 'none';
-      document.body.style.overflow = 'auto';
+      document.body.classList.remove('neko-popup-open');
     }, 300);
     
     localStorage.setItem('neko-announcement-closed', 'true');
   }
   
-  // 显示弹窗
-  if (!localStorage.getItem('neko-announcement-closed')) {
-    setTimeout(showPopup, 1000);
-  }
+  // 调试信息
+  console.log('弹窗元素状态:', {
+    overlay: overlay ? '找到' : '未找到',
+    container: container ? '找到' : '未找到',
+    closeBtn: closeBtn ? '找到' : '未找到'
+  });
+  
+  // 显示弹窗（不检查条件，强制测试）
+  setTimeout(showPopup, 1000);
   
   // 关闭事件
   if (closeBtn) {
