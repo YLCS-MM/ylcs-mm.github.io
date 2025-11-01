@@ -300,6 +300,55 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<!-- 公告历史弹窗 -->
+<div id="announcement-history-modal" class="announcement-history-modal hidden">
+  <div class="history-modal-content">
+    <div class="modal-header">
+      <h3>📋 公告历史</h3>
+      <span class="close-history-modal">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="announcement-tabs">
+        <button class="tab-button active" data-tab="today">今日公告</button>
+        <button class="tab-button" data-tab="history">历史公告</button>
+      </div>
+      
+      <div class="tab-content">
+        <!-- 今日公告 -->
+        <div id="today-tab" class="tab-pane active">
+          {% assign today_announcement = site.data.announcement.announcements | first %}
+          {% if today_announcement %}
+          <div class="announcement-item today">
+            <h4>{{ today_announcement.title }}</h4>
+            <span class="announcement-date">{{ today_announcement.date }}</span>
+            <div class="announcement-content">
+              {{ today_announcement.content | markdownify }}
+            </div>
+          </div>
+          {% else %}
+          <p class="no-announcement">今天还没有公告喵～ฅ(^•ω•^)ฅ</p>
+          {% endif %}
+        </div>
+        
+        <!-- 历史公告 -->
+        <div id="history-tab" class="tab-pane">
+          <div class="announcement-list">
+            {% for announcement in site.data.announcement.announcements %}
+            <div class="announcement-item {% if forloop.first %}latest{% endif %}">
+              <h4>{{ announcement.title }}</h4>
+              <span class="announcement-date">{{ announcement.date }}</span>
+              <div class="announcement-content">
+                {{ announcement.content | markdownify }}
+              </div>
+            </div>
+            {% if forloop.last == false %}<hr>{% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 </body>
