@@ -211,12 +211,22 @@ window.live2d_widgets = {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 0;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  z-index: 10000;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 99999;
   max-width: 90%;
   width: 400px;
   display: none;
+  background: white;
+}
+
+.announcement-popup::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: -1;
 }
 
 .popup-content {
@@ -243,47 +253,30 @@ window.live2d_widgets = {
   cursor: pointer;
   font-size: 16px;
 }
-
-<style>
-.announcement-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* 这才是居中关键喵！ */
-  z-index: 99999; /* 确保在最顶层 */
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  width: 90%;
-  max-width: 500px;
-  display: none; /* 默认隐藏 */
-}
-
-/* 确保背景遮罩效果 */
-.announcement-popup::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.5);
-  z-index: -1;
-}
 </style>
 
 <script>
-// 修复显示逻辑
 document.addEventListener('DOMContentLoaded', function() {
   const popup = document.getElementById('announcement-popup');
+  const closeBtn = document.getElementById('close-popup');
+  
   if (popup && !localStorage.getItem('announcement-closed')) {
-    // 添加淡入动画
     popup.style.display = 'block';
     setTimeout(() => {
       popup.style.opacity = '1';
       popup.style.transform = 'translate(-50%, -50%) scale(1)';
     }, 100);
   }
+  
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      popup.style.display = 'none';
+      localStorage.setItem('announcement-closed', 'true');
+    });
+  }
 });
 </script>
+{% endif %}
 
 <!-- 配置 Live2D 看板娘模型 -->
 <script>
@@ -310,8 +303,8 @@ window.live2d_widgets = {
 </script>
 
 <!-- 加载看板娘核心脚本 -->
+<!-- 记得把"链接1"换成真实的URL哦喵～ -->
 <script src="https://cdn.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
-
 
 </body>
 </html>
