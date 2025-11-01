@@ -183,58 +183,50 @@ window.live2d_widgets = {
 },
 };
 </script>
-
+<!-- 施工公告弹窗（必须保留！） -->
 {% if site.data.announcement.popup_enabled %}
 {% assign announcement = site.data.announcement.announcements[0] %}
 
 <!-- 全局遮罩层 -->
 <div class="neko-popup-overlay" id="neko-popup-overlay"></div>
 
-<!-- 主弹窗内容 -->
+<!-- 主弹窗 -->
 <div class="neko-popup-container" id="neko-popup-container">
-  <!-- 猫咪耳朵装饰 -->
-  <div class="neko-cat-ears">
-    <div class="neko-ear left-ear"></div>
-    <div class="neko-ear right-ear"></div>
-  </div>
-  
-  <!-- 弹窗内容 -->
   <div class="neko-popup-content"
        style="background: {{ announcement.background | default: 'linear-gradient(135deg, #ffe4e6 0%, #f0f8ff 100%)' }};
-              border: 3px dashed {{ announcement.border_color | default: '#ffb6c1' }};">
+              border: 2px dashed {{ announcement.border_color | default: '#ffb6c1' }};">
     
-    <!-- 标题栏 with 猫咪图标 -->
+    <!-- 猫咪耳朵 -->
+    <div class="neko-ears">
+      <div class="neko-ear left"></div>
+      <div class="neko-ear right"></div>
+    </div>
+    
+    <!-- 标题栏 -->
     <div class="neko-popup-header">
-      <span class="neko-cat-icon">🐾</span>
-      <h3 class="neko-popup-title" style="color: {{ announcement.title_color | default: '#ff69b4' }};">
-        {{ announcement.title | default: '博客施工中喵～' }}
-      </h3>
-      <span class="neko-cat-icon">🐾</span>
+      <span class="neko-icon">🐾</span>
+      <h3>{{ announcement.title | default: '博客施工中喵～' }}</h3>
+      <span class="neko-icon">🐾</span>
     </div>
     
-    <!-- 内容区域 -->
+    <!-- 内容区 -->
     <div class="neko-popup-body">
-      <div class="neko-popup-text">
-        {{ announcement.content | markdownify }}
-      </div>
-      
-      <!-- 肉垫按钮 -->
-      <button class="neko-paw-button" id="neko-close-popup"
-              style="background: {{ announcement.button_bg | default: 'linear-gradient(135deg, #ff6b6b, #ffa726)' }};
-                     color: {{ announcement.button_color | default: 'white' }};">
-        <span class="paw-print">🐾</span>
-        {{ announcement.button_text | default: '明白啦～继续探索' }}
-        <span class="paw-print">🐾</span>
-      </button>
+      {{ announcement.content | markdownify }}
     </div>
     
-    <!-- 猫咪尾巴装饰 -->
-    <div class="neko-cat-tail"></div>
+    <!-- 肉垫按钮 -->
+    <button class="neko-paw-btn" id="neko-close-popup"
+            style="background: {{ announcement.button_bg | default: 'linear-gradient(135deg, #ff6b6b, #ffa726)' }};
+                   color: {{ announcement.button_color | default: 'white' }};">
+      🐾 {{ announcement.button_text | default: '明白啦～' }} 🐾
+    </button>
+    
+    <!-- 猫咪尾巴 -->
+    <div class="neko-tail"></div>
   </div>
 </div>
 
 <style>
-/* 全局遮罩 - 梦幻毛玻璃效果 */
 .neko-popup-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -245,7 +237,6 @@ window.live2d_widgets = {
   display: none;
 }
 
-/* 主弹窗容器 */
 .neko-popup-container {
   position: fixed;
   top: 50%; left: 50%;
@@ -254,170 +245,93 @@ window.live2d_widgets = {
   min-width: 300px;
   max-width: 90%;
   opacity: 0;
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.5s ease;
 }
 
-/* 猫咪耳朵 */
-.neko-cat-ears {
-  position: absolute;
-  top: -20px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 30px;
-}
-
-.neko-ear {
-  width: 30px; height: 40px;
-  background: linear-gradient(135deg, #ffb6c1, #ff69b4);
-  border-radius: 50% 50% 0 0;
-  position: relative;
-}
-
-.left-ear { transform: rotate(-30deg); }
-.right-ear { transform: rotate(30deg); }
-
-/* 弹窗内容 */
 .neko-popup-content {
-  background: linear-gradient(135deg, #ffe4e6, #f0f8ff);
-  border-radius: 25px;
-  border: 3px dashed #ffb6c1;
-  padding: 30px 25px;
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
   position: relative;
   box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
 }
 
-/* 标题栏 */
+.neko-ears {
+  position: absolute;
+  top: -15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.neko-ear {
+  width: 25px; height: 30px;
+  background: #ffb6c1;
+  border-radius: 50% 50% 0 0;
+}
+
+.neko-ear.left { transform: rotate(-30deg); }
+.neko-ear.right { transform: rotate(30deg); }
+
 .neko-popup-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.neko-cat-icon {
-  font-size: 1.5em;
+.neko-popup-header h3 {
+  color: #ff69b4;
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.neko-icon {
   animation: bounce 2s infinite;
 }
 
-.neko-popup-title {
-  font-size: 1.4em;
-  font-weight: bold;
-  text-align: center;
-  margin: 0;
-  text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
-}
-
-/* 内容区域 */
 .neko-popup-body {
-  text-align: center;
-}
-
-.neko-popup-text {
   line-height: 1.6;
+  margin-bottom: 20px;
   color: #666;
-  margin-bottom: 25px;
-  text-align: left;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 20px;
-  border-radius: 15px;
-  border-left: 4px solid #ffa726;
 }
 
-.neko-popup-text p {
-  margin: 0 0 10px 0;
-}
-
-.neko-popup-text strong {
-  color: #ff69b4;
-}
-
-.neko-popup-text em {
-  font-style: italic;
-  color: #888;
-}
-
-/* 肉垫按钮 */
-.neko-paw-button {
-  padding: 12px 30px;
+.neko-paw-btn {
+  width: 100%;
+  padding: 12px;
   border: none;
-  border-radius: 50px;
+  border-radius: 25px;
   font-size: 1.1em;
-  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 auto;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
-.neko-paw-button:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+.neko-paw-btn:hover {
+  transform: translateY(-2px);
 }
 
-.paw-print {
-  font-size: 1.2em;
-  animation: pulse 1.5s infinite;
-}
-
-/* 猫咪尾巴 */
-.neko-cat-tail {
+.neko-tail {
   position: absolute;
-  right: -15px;
+  right: -10px;
   bottom: 30px;
-  width: 40px; height: 80px;
-  background: linear-gradient(45deg, #ffb6c1, #ff69b4);
+  width: 30px; height: 60px;
+  background: #ffb6c1;
   border-radius: 50% 0 0 50%;
   transform: rotate(45deg);
 }
 
-/* 动画效果 */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-3px); }
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-/* 弹窗显示时的状态 */
+.neko-popup-overlay.show,
 .neko-popup-container.show {
+  display: block;
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
-}
-
-.neko-popup-overlay.show {
-  display: block;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .neko-popup-content {
-    padding: 20px 15px;
-    margin: 10px;
-  }
-  
-  .neko-popup-title {
-    font-size: 1.2em;
-  }
-  
-  .neko-cat-ears {
-    padding: 0 20px;
-  }
-  
-  .neko-ear {
-    width: 25px; height: 35px;
-  }
-  
-  .neko-popup-text {
-    padding: 15px;
-  }
 }
 </style>
 
@@ -427,16 +341,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const container = document.getElementById('neko-popup-container');
   const closeBtn = document.getElementById('neko-close-popup');
   
-  // 检查是否已经关闭过
   if (!localStorage.getItem('neko-announcement-closed')) {
-    // 显示弹窗
     setTimeout(() => {
       overlay.classList.add('show');
       container.classList.add('show');
     }, 1000);
   }
   
-  // 关闭按钮事件
   if (closeBtn) {
     closeBtn.addEventListener('click', function() {
       overlay.classList.remove('show');
@@ -445,7 +356,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // 点击遮罩层也可以关闭
   if (overlay) {
     overlay.addEventListener('click', function(e) {
       if (e.target === overlay) {
@@ -455,15 +365,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
-  // ESC键关闭
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && overlay.classList.contains('show')) {
-      overlay.classList.remove('show');
-      container.classList.remove('show');
-      localStorage.setItem('neko-announcement-closed', 'true');
-    }
-  });
 });
 </script>
 {% endif %}
