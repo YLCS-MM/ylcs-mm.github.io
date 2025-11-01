@@ -1,13 +1,15 @@
 # _data/announcement.yml
+
 enabled: true
-title: "🍂 Neko的秋季版本迭代通知！🍂"
+title: "🍂 Nekoの秋季版本迭代通知！🍂"
 content: |
   【2025-09-01 秋季更新】
-  - 📁 新增「文章归档」页面
-  - 🚀 优化了图片加载速度
+  - 📁 新添「文章归档」页面
+  - 🚀 优化了图片加载速度  
   - 😺 评论区新增「猫咪表情包」
-  *提示：点击「阅读全文」查看详细日志~*
-background: "#ffe4e1"
+  *提示: 点击「阅读全文」查看详细日志~*
+background: "rgba(255, 228, 225, 0.9)"  # 粉色+90%透明度喵！
 color: "#333"
 button_bg: "#9370db"
 button_color: "#fff"
+opacity: 0.9  # 整体透明度控制
