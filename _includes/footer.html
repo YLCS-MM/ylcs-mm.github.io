@@ -259,6 +259,83 @@ window.live2d_widgets = {
 };
 </script>
 
+{% if site.data.announcement.popup_enabled %}
+{% assign announcement = site.data.announcement.announcements[0] %}
+<div id="announcement-popup" class="announcement-popup"
+     style="background: {{ announcement.background | default: '#fff9e6' }}; 
+             color: {{ announcement.color | default: '#5a4a42' }};
+             border: 2px solid {{ announcement.border_color | default: '#4CAF50' }};">
+  <div class="popup-content">
+    <h3 class="popup-title">{{ announcement.title | default: '🚧 博客施工中喵～' }}</h3>
+    <div class="popup-text">
+      {{ announcement.content | markdownify }}
+    </div>
+    <button id="close-popup" class="popup-btn"
+            style="background: {{ announcement.button_bg | default: '#4CAF50' }}; 
+                   color: {{ announcement.button_color | default: 'white' }};">
+      {{ announcement.button_text | default: '确认并关闭' }}
+    </button>
+  </div>
+</div>
+
+<style>
+.announcement-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 10000;
+  max-width: 90%;
+  width: 400px;
+  display: none;
+}
+
+.popup-content {
+  padding: 20px;
+}
+
+.popup-title {
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.2em;
+  color: {{ announcement.title_color | default: '#4CAF50' }};
+}
+
+.popup-text {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.popup-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const popup = document.getElementById('announcement-popup');
+  const closeBtn = document.getElementById('close-popup');
+  
+  // 检查是否已经关闭过
+  if (!localStorage.getItem('announcement-closed')) {
+    popup.style.display = 'block';
+  }
+  
+  closeBtn.addEventListener('click', function() {
+    popup.style.display = 'none';
+    localStorage.setItem('announcement-closed', 'true');
+  });
+});
+</script>
+{% endif %}
 
 
 </script>
