@@ -259,9 +259,6 @@ window.live2d_widgets = {
 };
 </script>
 
-<!-- 加载看板娘核心脚本（保持不变） -->
-<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
-
 <!-- 自动弹出的最新公告弹窗 -->
 {% if site.data.announcement.popup_enabled %}
 <div id="announcement-popup" class="announcement-popup hidden"
@@ -280,32 +277,9 @@ window.live2d_widgets = {
 <!-- 历史公告弹窗 -->
 <div id="announcement-history-modal" class="announcement-history-modal hidden">
   <div class="history-modal-content">
-    <!-- 弹窗内容（之前提供的代码） -->
-  </div>
-</div>
-
-<script>
-// 公告按钮交互代码
-document.addEventListener('DOMContentLoaded', function() {
-  const toggleBtn = document.getElementById('announcement-toggle');
-  const historyModal = document.getElementById('announcement-history-modal');
-  
-  if (toggleBtn && historyModal) {
-    toggleBtn.addEventListener('click', function() {
-      historyModal.classList.remove('hidden');
-    });
-    
-    // 其他交互逻辑...
-  }
-});
-</script>
-
-<!-- 公告历史弹窗 -->
-<div id="announcement-history-modal" class="announcement-history-modal hidden">
-  <div class="history-modal-content">
     <div class="modal-header">
       <h3>📋 公告历史</h3>
-      <span class="close-history-modal">&times;</span>
+      <button class="close-history-modal">&times;</button>
     </div>
     <div class="modal-body">
       <div class="announcement-tabs">
@@ -350,6 +324,124 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
+<script>
+// 页面加载完成后执行
+document.addEventListener('DOMContentLoaded', function() {
+  // 自动弹出公告逻辑
+  const popup = document.getElementById('announcement-popup');
+  const closePopupBtn = document.getElementById('close-popup');
+  
+  if (popup && closePopupBtn) {
+    // 检查cookie，如果已经关闭过则不显示
+    const announcementClosed = getCookie('announcement_closed');
+    if (!announcementClosed) {
+      setTimeout(() => {
+        popup.classList.remove('hidden');
+      }, 1000); // 1秒后显示
+    }
+    
+    // 关闭公告弹窗
+    closePopupBtn.addEventListener('click', function() {
+      popup.classList.add('hidden');
+      // 设置cookie，1天内不再显示
+      setCookie('announcement_closed', 'true', 1);
+    });
+    
+    // 点击背景关闭
+    popup.addEventListener('click', function(e) {
+      if (e.target === popup) {
+        popup.classList.add('hidden');
+        setCookie('announcement_closed', 'true', 1);
+      }
+    });
+  }
+  
+  // 历史公告弹窗逻辑
+  const toggleBtn = document.getElementById('announcement-toggle');
+  const historyModal = document.getElementById('announcement-history-modal');
+  const closeHistoryBtn = document.querySelector('.close-history-modal');
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+  
+  if (toggleBtn && historyModal) {
+    // 打开历史公告弹窗
+    toggleBtn.addEventListener('click', function() {
+      historyModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    // 关闭历史公告弹窗
+    if (closeHistoryBtn) {
+      closeHistoryBtn.addEventListener('click', function() {
+        historyModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      });
+    }
+    
+    // 点击背景关闭
+    historyModal.addEventListener('click', function(e) {
+      if (e.target === historyModal) {
+        historyModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // ESC键关闭
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !historyModal.classList.contains('hidden')) {
+        historyModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // 标签页切换
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const tabName = this.getAttribute('data-tab');
+        
+        // 更新按钮状态
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        // 更新内容显示
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+        document.getElementById(tabName + '-tab').classList.add('active');
+      });
+    });
+  }
+  
+  // Cookie操作函数
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+  }
+  
+  function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+  
+  // 日期替换逻辑（如果公告内容中有Liquid模板）
+  const announcementTexts = document.querySelectorAll('.announcement-content');
+  if (announcementTexts) {
+    const today = new Date().toISOString().split('T')[0];
+    announcementTexts.forEach(text => {
+      text.innerHTML = text.innerHTML.replace(/{{ site\.time \| date: "%Y-%m-%d" }}/g, today);
+    });
+  }
+});
+</script>
+
+<!-- 加载看板娘核心脚本（保持不变） -->
+<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
 
 </body>
 </html>
