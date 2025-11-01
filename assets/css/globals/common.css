@@ -793,94 +793,74 @@ img + em {
 .live2d-widget,         /* 看板娘的容器元素（有些库用这个类名） */
 #waifu                  /* 有些库用这个ID，一起写上避免遗漏 */
 {
-  /* 1. 取消左边的固定（必须！） */
-  left: auto !important;  
-  /* 2. 固定在右边（距离右边15px） */
-  right: 15px !important;  
-  /* 3. 固定在底部（距离底部25px） */
-  bottom: 25px !important;  
-  /* 4. 强制固定在屏幕上（避免滚动时消失） */
-  position: fixed !important;  
-  /* 5. 取消所有缩放/平移（避免位置偏移） */
-  transform: none !important;  
-  /* 6. 层级拉到最高（不会被任何元素挡住） */
-  zIndex: 999999 !important;  
-  /* 7. 取消 margins/paddings（避免额外空间） */
-  margin: 0 !important;  
-  padding: 0 !important;  
-}
-/* 弹窗背景（半透明黑） */
+/* 弹窗背景（梦幻粉蓝渐变） */
 .announcement-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* 半透明黑，突出弹窗 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999; /* 层级最高，不被其他元素遮挡 */
-  animation: fadeIn 0.3s ease; /* 淡入动画 */
+  background: linear-gradient(135deg, rgba(255,182,193,0.85) 0%, rgba(173,216,230,0.9) 100%) !important;
+  backdrop-filter: blur(8px); /* 毛玻璃效果 */
 }
 
-/* 弹窗内容容器（白色背景+蓝色边框） */
+/* 内容容器（云朵般柔软） */
 .popup-content {
-  background: #fff;
-  padding: 30px 20px;
-  border-radius: 12px; /* 圆角，可爱风 */
-  border: 2px solid #4CAF50; /* 绿色边框（可换成你博客的蓝色：#2196F3） */
-  max-width: 85%; /* 适配手机屏幕 */
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 轻微阴影，更立体 */
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px; /* 更大圆角 */
+  border: 3px dashed #FFB6C1; /* 粉色虚线边框 */
+  box-shadow: 0 8px 32px rgba(255, 182, 193, 0.3); /* 粉色调阴影 */
 }
 
-/* 弹窗标题（蓝色，符合你博客的主色调） */
+/* 标题（nachoneko标志粉） */
 .popup-title {
-  font-size: 1.2rem;
-  color: #2196F3; /* 博客主色（蓝色） */
-  margin-bottom: 15px;
-  font-weight: bold;
+  color: #FF69B4 !important; /* 热情粉红 */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 柔和文字阴影 */
+  font-family: 'Comic Sans MS', cursive; /* 可爱字体 */
 }
 
-/* 弹窗文字（灰色，清晰易读） */
+/* 文字内容（深灰+猫爪元素） */
 .popup-text {
-  font-size: 0.95rem;
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  color: #555;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="%23FFB6C1" d="M12 2C8 2 4 6 4 10c0 4 3 8 8 8 5 0 8-4 8-8 0-4-4-8-8-8zm0 14c-3 0-6-3-6-6s3-6 6-6 6 3 6 6-3 6-6 6z"/></svg>') left center no-repeat;
+  padding-left: 28px !important; /* 猫爪图标留白 */
 }
 
-/* 确认按钮（绿色，可爱风） */
+/* 按钮（肉垫造型） */
 .popup-btn {
-  padding: 8px 25px;
-  background: #4CAF50; /* 绿色按钮（可换成蓝色：#2196F3） */
-  color: #fff;
-  border: none;
-  border-radius: 20px; /* 圆角按钮，可爱风 */
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.3s ease;
+  background: #FF69B4 !important; 
+  border-radius: 50px !important; /* 椭圆肉垫 */
+  box-shadow: 0 4px 8px rgba(255,105,180,0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-/* 按钮 hover 效果（加深颜色） */
+/* 肉垫纹理（超萌细节） */
+.popup-btn:after {
+  content: "♡";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  opacity: 0.3;
+  font-size: 24px;
+}
+
+/* 悬停效果（心跳动画） */
 .popup-btn:hover {
-  background: #388E3C; /* 深绿色（蓝色对应：#1976D2） */
+  animation: heartbeat 0.5s ease;
+  background: #FF1493 !important;
 }
 
-/* 隐藏弹窗的类（初始状态） */
-.hidden {
-  display: none;
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
-/* 淡入动画（可选，增加可爱感） */
+/* 入场动画（猫咪跳入） */
 @keyframes fadeIn {
-  from {
+  from { 
     opacity: 0;
-    transform: scale(0.9);
+    transform: translateY(20px) rotate(-5deg);
   }
-  to {
+  to { 
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0) rotate(0);
   }
 }
