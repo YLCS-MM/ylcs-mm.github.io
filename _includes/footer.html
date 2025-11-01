@@ -276,20 +276,6 @@ window.live2d_widgets = {
 </div>
 {% endif %}
 
-<script>
-// 在页面加载时替换日期
-document.addEventListener('DOMContentLoaded', function() {
-  const today = new Date().toISOString().split('T')[0];
-  const announcementText = document.querySelector('.popup-text');
-  if (announcementText) {
-    announcementText.innerHTML = announcementText.innerHTML.replace(
-      '{{ site.time | date: "%Y-%m-%d" }}', 
-      today
-    );
-  }
-});
-</script>
-
 
 </body>
 </html>
