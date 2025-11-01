@@ -456,16 +456,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  // 点击弹窗外部关闭（可选）
-  document.addEventListener('click', function(e) {
-    if (container.classList.contains('show') && 
-        !container.contains(e.target) && 
-        e.target !== container) {
-      container.classList.remove('show');
-      localStorage.setItem('neko-announcement-closed', 'true');
-    }
-  });
-});
 </script>
 {% endif %}
 
