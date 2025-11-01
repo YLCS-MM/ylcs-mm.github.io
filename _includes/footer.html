@@ -277,14 +277,29 @@ window.live2d_widgets = {
 </div>
 {% endif %}
 
-<!-- 历史公告模态框 -->
+<!-- 历史公告弹窗 -->
 <div id="announcement-history-modal" class="announcement-history-modal hidden">
-  <!-- 历史公告内容 -->
+  <div class="history-modal-content">
+    <!-- 弹窗内容（之前提供的代码） -->
+  </div>
 </div>
 
 <script>
-// 日期替换和弹窗控制代码
+// 公告按钮交互代码
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleBtn = document.getElementById('announcement-toggle');
+  const historyModal = document.getElementById('announcement-history-modal');
+  
+  if (toggleBtn && historyModal) {
+    toggleBtn.addEventListener('click', function() {
+      historyModal.classList.remove('hidden');
+    });
+    
+    // 其他交互逻辑...
+  }
+});
 </script>
+
 
 
 </body>
