@@ -876,4 +876,58 @@ img + em {
   animation: fadeIn 0.3s ease !important;
 }
 
+/* 公告按钮样式 */
+.announcement-button-container {
+  display: inline-block;
+  margin-left: 15px;
+  vertical-align: middle;
+}
+
+.announcement-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ffa726);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  line-height: 1;
+}
+
+.announcement-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+}
+
+.announcement-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .announcement-button-container {
+    margin-left: 10px;
+  }
+  
+  .announcement-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
   
