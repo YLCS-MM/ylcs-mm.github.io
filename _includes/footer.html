@@ -290,6 +290,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+{% if site.data.announcement.popup_enabled %}
+  {% include announcement-popup.html %}
+{% endif %}
+
 
 </body>
 </html>
