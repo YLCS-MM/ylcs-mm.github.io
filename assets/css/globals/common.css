@@ -848,3 +848,18 @@ body.neko-popup-open {
   position: fixed;
   width: 100%;
 }
+
+/* 移动端安全区域适配 */
+@supports(padding: max(0px)) {
+  .neko-popup-overlay {
+    width: 100vw;
+    height: 100vh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+}
+
+/* 防止移动端视口缩放问题 */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+}
