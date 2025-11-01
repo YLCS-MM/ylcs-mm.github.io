@@ -341,6 +341,17 @@ window.live2d_widgets = {
   border-radius: 50px;
   font-size: 极速响应，正在为您生成内容，请稍候～
 
+   <!-- 测试用强制弹窗 - 先确认基础功能 -->
+<div style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:30px; border-radius:15px; z-index:99999; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+  <h3>🚨 测试弹窗</h3>
+  <p>如果看到这个，说明基本定位正常</p>
+  <button onclick="this.parentElement.style.display='none'">关闭</button>
+</div>
+
+<script>
+console.log('弹窗测试代码已加载');
+</script>
+
  {% endif %}
 
 <!-- 配置 Live2D 看板娘模型 -->
