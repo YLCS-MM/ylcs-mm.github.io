@@ -200,7 +200,7 @@ window.live2d_widgets = {
        style="background: {{ announcement.background | default: 'linear-gradient(135deg, #ffe4e6 0%, #f0f8ff 100%)' }};
               border: 3px dashed {{ announcement.border_color | default: '#ffb6c1' }};">
     
-    <!-- 标题栏 with 猫咪图标 -->
+    <!-- 标题栏 -->
     <div class="neko-popup-header">
       <span class="neko-cat-icon">🐾</span>
       <h3 class="neko-popup-title" style="color: {{ announcement.title_color | default: '#ff69b4' }};">
@@ -270,13 +270,8 @@ window.live2d_widgets = {
   position: relative;
 }
 
-.left-ear {
-  transform: rotate(-30deg);
-}
-
-.right-ear {
-  transform: rotate(30deg);
-}
+.left-ear { transform: rotate(-30deg); }
+.right-ear { transform: rotate(30deg); }
 
 /* 弹窗内容 */
 .neko-popup-content {
@@ -344,121 +339,9 @@ window.live2d_widgets = {
   padding: 12px 30px;
   border: none;
   border-radius: 50px;
-  font-size: 1.1em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 auto;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-}
+  font-size: 极速响应，正在为您生成内容，请稍候～
 
-.neko-paw-button:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-}
-
-.paw-print {
-  font-size: 1.2em;
-  animation: pulse 1.5s infinite;
-}
-
-/* 猫咪尾巴 */
-.neko-cat-tail {
-  position: absolute;
-  right: -15px;
-  bottom: 30px;
-  width: 40px;
-  height: 80px;
-  background: linear-gradient(45deg, #ffb6c1, #ff69b4);
-  border-radius: 50% 0 0 50%;
-  transform: rotate(45deg);
-}
-
-/* 动画效果 */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .neko-popup-content {
-    padding: 20px 15px;
-    margin: 10px;
-  }
-  
-  .neko-popup-title {
-    font-size: 1.2em;
-  }
-  
-  .neko-cat-ears {
-    padding: 0 20px;
-  }
-  
-  .neko-ear {
-    width: 25px;
-    height: 35px;
-  }
-  
-  .neko-popup-text {
-    padding: 15px;
-  }
-  
-  .neko-paw-button {
-    padding: 10px 20px;
-    font-size: 1em;
-  }
-}
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const container = document.getElementById('neko-popup-container');
-  const closeBtn = document.getElementById('neko-close-popup');
-  
-  // 检查是否已经关闭过
-  if (!localStorage.getItem('neko-announcement-closed')) {
-    // 只显示弹窗
-    setTimeout(() => {
-      container.classList.add('show');
-    }, 1000);
-  }
-  
-  // 关闭按钮事件
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
-      container.classList.remove('show');
-      localStorage.setItem('neko-announcement-closed', 'true');
-    });
-  }
-  
-  // ESC键关闭
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && container.classList.contains('show')) {
-      container.classList.remove('show');
-      localStorage.setItem('neko-announcement-closed', 'true');
-    }
-  });
-  
-</script>
-{% endif %}
-
+ {% endif %}
 
 <!-- 配置 Live2D 看板娘模型 -->
 <script>
