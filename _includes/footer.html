@@ -261,36 +261,20 @@ window.live2d_widgets = {
 
 <!-- 加载看板娘核心脚本（保持不变） -->
 <script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
-<!-- 更新公告弹窗（放在footer.html末尾） -->
-<div id="announcement-popup" class="announcement-popup hidden">
-  <div class="popup-content">
-    <h3 class="popup-title">✨ Neko的更新公告！✨</h3>
-    <p class="popup-text">
-      本次博客更新内容：<br>
-      1. 优化了文字排版（肉垫键盘粉色火花特效）；<br>
-      2. 看板娘从左下角移动到右下角；<br>
-      3. 修复了链接跳转bug（再也不会迷路啦~）<br>
-      <small>（2025-10-15 发布）</small>
-    </p>
-    <button id="close-popup" class="popup-btn">确认并关闭</button>
-  </div>
-</div>
-<!-- 更新公告弹窗（动态读取_config.yml中的配置） -->
-{% if site.announcement.enabled %} <!-- ✅ 条件判断：仅当enabled为true时显示 -->
+<!-- 更新公告弹窗（动态读取配置） -->
+{% if site.announcement.enabled %}
 <div id="announcement-popup" class="announcement-popup hidden"
      style="background: {{ site.announcement.style.background }}; color: {{ site.announcement.style.color }};">
   <div class="popup-content">
-    <!-- ✅ 动态标题：读取_config.yml中的title -->
     <h3 class="popup-title">{{ site.announcement.title }}</h3>
-    <!-- ✅ 动态内容：读取_config.yml中的content（markdownify解析Markdown） -->
-    <p class="popup-text">{{ site.announcement.content | markdownify }}</p>
-    <!-- ✅ 动态按钮样式：读取_config.yml中的style -->
+    <div class="popup-text">{{ site.announcement.content | markdownify }}</div>
     <button id="close-popup" class="popup-btn"
             style="background: {{ site.announcement.style.button_bg }}; color: {{ site.announcement.style.button_color }};">
       确认并关闭
     </button>
   </div>
 </div>
-{% endif %} <!-- ✅ 闭合条件判断 -->
+{% endif %}
+
 </body>
 </html>
