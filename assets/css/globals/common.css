@@ -801,6 +801,50 @@ img + em {
   pointer-events: auto;
 }
 
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%); /* 这才是关键！ */
+/* 修复毛玻璃遮罩层定位 */
+.neko-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;    /* 使用视口宽度，不是100% */
+  height: 100vh;   /* 使用视口高度，不是100% */
+  background: rgba(255, 182, 193, 0.3);
+  backdrop-filter: blur(15px);  /* 增强毛玻璃效果 */
+  -webkit-backdrop-filter: blur(15px); /* Safari支持 */
+  z-index: 99998;
+  display: none;
+}
+
+/* 确保弹窗在遮罩层上方 */
+.neko-popup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 99999;  /* 比遮罩层高一级 */
+  min-width: 320px;
+  max-width: 90%;
+  max-height: 80vh;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 修复移动端视口单位 */
+@media (max-width: 768px) {
+  .neko-popup-overlay {
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .neko-popup-container {
+    min-width: 280px;
+    margin: 20px;
+  }
+}
+
+/* 防止滚动穿透 */
+body.neko-popup-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
