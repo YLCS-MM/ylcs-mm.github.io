@@ -788,79 +788,92 @@ img + em {
   box-shadow: 0 0 8px rgba(255,255,255,0.8); /* 白边发光，模拟猫耳反光 */
   position: relative;   /* 为后续“猫耳伪元素”做定位准备 */
 }
-/* 看板娘终极定位（Neko独家魔法，解决所有冲突！） */
-#live2dcanvas,          /* 看板娘的canvas元素（核心） */
-.live2d-widget,         /* 看板娘的容器元素（有些库用这个类名） */
-#waifu                  /* 有些库用这个ID，一起写上避免遗漏 */
-{
-/* 弹窗背景（梦幻粉蓝渐变） */
+/* 看板娘固定右下角（正确写法） */
+#live2dcanvas,
+.live2d-widget,
+#waifu {
+  position: fixed !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 9998; /* 确保在弹窗之下 */
+  pointer-events: auto;
+}
+
+/* 公告弹窗样式（主人喜欢的半透明效果） */
 .announcement-popup {
-  background: linear-gradient(135deg, rgba(255,182,193,0.85) 0%, rgba(173,216,230,0.9) 100%) !important;
-  backdrop-filter: blur(8px); /* 毛玻璃效果 */
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.5) !important; /* 半透明黑色背景 */
+  backdrop-filter: blur(5px) !important; /* 毛玻璃效果 */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 9999 !important; /* 在看板娘之上 */
 }
 
-/* 内容容器（云朵般柔软） */
+.announcement-popup.hidden {
+  display: none !important;
+}
+
 .popup-content {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px; /* 更大圆角 */
-  border: 3px dashed #FFB6C1; /* 粉色虚线边框 */
-  box-shadow: 0 8px 32px rgba(255, 182, 193, 0.3); /* 粉色调阴影 */
+  background: rgba(255, 255, 255, 0.95) !important; /* 内容区域微透明 */
+  padding: 30px 25px !important;
+  border-radius: 15px !important;
+  border: 2px solid #90EE90 !important; /* 绿色边框 */
+  max-width: 85% !important;
+  text-align: center !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
 }
 
-/* 标题（nachoneko标志粉） */
 .popup-title {
-  color: #FF69B4 !important; /* 热情粉红 */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 柔和文字阴影 */
-  font-family: 'Comic Sans MS', cursive; /* 可爱字体 */
+  font-size: 1.2rem !important;
+  color: #2196F3 !important; /* 蓝色标题 */
+  margin-bottom: 15px !important;
+  font-weight: bold !important;
 }
 
-/* 文字内容（深灰+猫爪元素） */
 .popup-text {
-  color: #555;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="%23FFB6C1" d="M12 2C8 2 4 6 4 10c0 4 3 8 8 8 5 0 8-4 8-8 0-4-4-8-8-8zm0 14c-3 0-6-3-6-6s3-6 6-6 6 3 6 6-3 6-6 6z"/></svg>') left center no-repeat;
-  padding-left: 28px !important; /* 猫爪图标留白 */
+  font-size: 0.95rem !important;
+  color: #666 !important;
+  line-height: 1.6 !important;
+  margin-bottom: 20px !important;
+  text-align: left !important;
 }
 
-/* 按钮（肉垫造型） */
 .popup-btn {
-  background: #FF69B4 !important; 
-  border-radius: 50px !important; /* 椭圆肉垫 */
-  box-shadow: 0 4px 8px rgba(255,105,180,0.3);
-  position: relative;
-  overflow: hidden;
+  padding: 8px 25px !important;
+  background: #4CAF50 !important; /* 绿色按钮 */
+  color: #fff !important;
+  border: none !important;
+  border-radius: 20px !important;
+  cursor: pointer !important;
+  font-size: 0.9rem !important;
+  transition: background 0.3s ease !important;
 }
 
-/* 肉垫纹理（超萌细节） */
-.popup-btn:after {
-  content: "♡";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  opacity: 0.3;
-  font-size: 24px;
-}
-
-/* 悬停效果（心跳动画） */
 .popup-btn:hover {
-  animation: heartbeat 0.5s ease;
-  background: #FF1493 !important;
+  background: #388E3C !important; /* 深绿色悬停效果 */
 }
 
-@keyframes heartbeat {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-/* 入场动画（猫咪跳入） */
+/* 淡入动画 */
 @keyframes fadeIn {
-  from { 
+  from {
     opacity: 0;
-    transform: translateY(20px) rotate(-5deg);
+    transform: scale(0.9);
   }
-  to { 
+  to {
     opacity: 1;
-    transform: translateY(0) rotate(0);
+    transform: scale(1);
   }
 }
+
+.announcement-popup {
+  animation: fadeIn 0.3s ease !important;
+}
+
+  
