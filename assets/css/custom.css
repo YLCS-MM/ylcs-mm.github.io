@@ -1,0 +1,200 @@
+/* ========================
+   🐱 甘城猫猫风格目录样式
+   ======================== */
+
+/* 目录侧边栏 */
+.neko-toc-sidebar {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+  z-index: 1000;
+  padding: 20px;
+  transition: right 0.3s ease;
+  box-shadow: -5px 0 15px rgba(255, 182, 193, 0.3);
+  border-left: 3px solid #ff69b4;
+  overflow-y: auto;
+}
+
+.neko-toc-sidebar.active {
+  right: 0;
+}
+
+/* 目录头部 */
+.neko-toc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px dashed #ff69b4;
+}
+
+.neko-toc-icon {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+.neko-toc-title {
+  color: #ff1493;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.neko-toc-close {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: #ff69b4;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.neko-toc-close:hover {
+  background-color: rgba(255, 105, 180, 0.1);
+}
+
+/* 目录内容 */
+.neko-toc-content {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.neko-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.neko-toc-item {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.neko-toc-link {
+  display: flex;
+  align-items: center;
+  color: #666;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.neko-toc-link:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: #ff1493;
+  transform: translateX(5px);
+}
+
+.neko-toc-link.active {
+  background: rgba(255, 255, 255, 0.95);
+  color: #ff1493;
+  font-weight: bold;
+  border-left: 3px solid #ff1493;
+}
+
+.neko-toc-bullet {
+  margin-right: 8px;
+  color: #ff69b4;
+  font-size: 0.9em;
+}
+
+/* 子目录 */
+.neko-toc-sublist {
+  list-style: none;
+  padding-left: 20px;
+  margin: 5px 0;
+}
+
+.neko-toc-level-3 .neko-toc-link {
+  padding-left: 30px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.neko-toc-level-4 .neko-toc-link {
+  padding-left: 45px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* 汉堡菜单按钮 */
+.neko-toc-toggle {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+  background: #ff69b4;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+  transition: all 0.3s ease;
+}
+
+.neko-toc-toggle:hover {
+  transform: scale(1.1);
+  background: #ff1493;
+}
+
+.neko-toc-toggle-icon {
+  color: white;
+  font-size: 1.5em;
+}
+
+/* 遮罩层 */
+.neko-toc-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.neko-toc-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .neko-toc-sidebar {
+    width: 85%;
+    right: -100%;
+  }
+  
+  .neko-toc-toggle {
+    right: 15px;
+    top: 15px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (min-width: 769px) {
+  .neko-toc-toggle {
+    display: none;
+  }
+  
+  .neko-toc-sidebar {
+    right: 0;
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+}
