@@ -1,8 +1,3 @@
-{% comment %} 从公告历史数据中获取当前公告喵~ {% endcomment %}
-{% assign current_index = site.data.announcement.current_announcement %}
-{% assign current_announcement = site.data.announcement-history[current_index] %}
-
-{% if current_announcement and site.data.announcement.popup_enabled %}
 <style>
 .modal-overlay {
   position: fixed;
@@ -21,8 +16,8 @@
   position: relative;
   width: 85%;
   max-width: 450px;
-  background: {{ site.data.announcement.style.background }};
-  border: 2px dashed {{ site.data.announcement.style.border_color }};
+  background: {{ site.data.announcement.announcements[0].background }};
+  border: 2px dashed {{ site.data.announcement.announcements[0].border_color }};
   border-radius: 15px;
   padding: 25px 20px 20px;
   box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
@@ -34,7 +29,7 @@
   content: '❤';
   position: absolute;
   top: -10px;
-  color: {{ site.data.announcement.style.border_color }};
+  color: {{ site.data.announcement.announcements[0].border_color }};
   font-size: 18px;
   z-index: 1001;
 }
@@ -42,15 +37,12 @@
 .modal-container::before { left: 20%; }
 .modal-container::after { right: 20%; }
 
-.modal-header { 
-  text-align: center; 
-  margin-bottom: 15px; 
-}
+.modal-header { text-align: center; margin-bottom: 15px; }
 
 .modal-title {
   font-size: 1.4em;
   font-weight: bold;
-  color: {{ site.data.announcement.style.title_color }};
+  color: {{ site.data.announcement.announcements[0].title_color }};
   display: inline-block;
   padding: 5px 15px;
   background: rgba(255, 182, 193, 0.1);
@@ -60,7 +52,7 @@
 .update-date {
   text-align: center;
   font-size: 0.9em;
-  color: {{ site.data.announcement.style.title_color }};
+  color: {{ site.data.announcement.announcements[0].title_color }};
   margin: 8px 0 15px;
   font-weight: bold;
 }
@@ -72,14 +64,8 @@
   margin-bottom: 20px;
 }
 
-.modal-content ul { 
-  margin: 10px 0; 
-  padding-left: 20px; 
-}
-
-.modal-content li { 
-  margin: 5px 0; 
-}
+.modal-content ul { margin: 10px 0; padding-left: 20px; }
+.modal-content li { margin: 5px 0; }
 
 .footer-note {
   font-size: 0.85em;
@@ -95,7 +81,7 @@
   padding: 10px 30px;
   border: none;
   border-radius: 25px;
-  background: {{ site.data.announcement.style.button_bg }};
+  background: {{ site.data.announcement.announcements[0].button_bg }};
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -111,22 +97,10 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 0.9em;
-  opacity: 0;
-  transition: opacity 0.3s;
 }
 
-.modal-button::before { 
-  left: -25px; 
-}
-
-.modal-button::after { 
-  right: -25px; 
-}
-
-.modal-button:hover::before,
-.modal-button:hover::after {
-  opacity: 1;
-}
+.modal-button::before { left: -25px; }
+.modal-button::after { right: -25px; }
 
 .modal-button:hover {
   filter: brightness(1.1);
@@ -134,39 +108,16 @@
 }
 
 @keyframes nekoSlideIn {
-  0% { 
-    transform: scale(0.8) translateY(-20px); 
-    opacity: 0; 
-  }
-  100% { 
-    transform: scale(1) translateY(0); 
-    opacity: 1; 
-  }
+  0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
-.modal-container { 
-  animation: nekoSlideIn 0.5s ease-out forwards; 
-}
-
-.modal-overlay { 
-  animation: fadeIn 0.3s ease-out forwards; 
-}
+.modal-container { animation: nekoSlideIn 0.5s ease-out forwards; }
+.modal-overlay { animation: fadeIn 0.3s ease-out forwards; }
 
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-/* 响应式调整喵~ */
-@media (max-width: 480px) {
-  .modal-container {
-    width: 95%;
-    padding: 20px 15px 15px;
-  }
-  
-  .modal-title {
-    font-size: 1.2em;
-  }
 }
 </style>
 
@@ -174,25 +125,23 @@
   <div class="modal-overlay">
     <div class="modal-container">
       <div class="modal-header">
-        <div class="modal-title">🐾🚧 {{ current_announcement.title }} 🐾</div>
+        <div class="modal-title">🐾🚧 {{ site.data.announcement.announcements[0].title }} 🐾</div>
       </div>
       
-      {% if current_announcement.date %}
-      <div class="update-date">【{{ current_announcement.date }}】</div>
+      {% if site.data.announcement.announcements[0].update_date %}
+      <div class="update-date">【{{ site.data.announcement.announcements[0].update_date }}】</div>
       {% endif %}
       
       <div class="modal-content">
-        {{ current_announcement.content | markdownify }}
+        {{ site.data.announcement.announcements[0].content | markdownify }}
       </div>
       
-      {% if current_announcement.footer_note %}
-      <div class="footer-note">{{ current_announcement.footer_note }}</div>
-      {% else %}
-      <div class="footer-note">施工期间可能会有页面闪烁，请多见谅喵~ (A·ω·A)</div>
+      {% if site.data.announcement.announcements[0].footer_note %}
+      <div class="footer-note">{{ site.data.announcement.announcements[0].footer_note }}</div>
       {% endif %}
       
       <button class="modal-button" onclick="closeModal()">
-        {{ site.data.announcement.style.button_text }}
+        {{ site.data.announcement.announcements[0].button_text }}
       </button>
     </div>
   </div>
@@ -211,21 +160,10 @@ function closeModal() {
 
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('announcement-modal');
-  if (modal) {
-    // 确保数据存在再显示弹窗喵~
-    {% if current_announcement %}
+  if (modal && {{ site.data.announcement.popup_enabled }}) {
     setTimeout(function() {
       modal.style.display = 'block';
     }, 1000);
-    {% endif %}
   }
-  
-  // 按ESC键也可以关闭弹窗喵~
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
-  });
 });
 </script>
-{% endif %}
