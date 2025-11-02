@@ -1,34 +1,34 @@
 ---
 layout: page
-title: "🐾成霜·喵喵分类库🐾"
+title: "🐱 喵喵分类库"
 permalink: /categories/
 description: "按主题浏览所有喵文～"
 ---
 
-<!-- 🎀 甘城猫猫风格 - 浅蓝为主色调 -->
+<!-- 🎀 甘城猫猫风格 - 浅蓝为主，白色点缀，粉色辅助 -->
 <style>
-/* 页面整体样式 */
+/* 页面整体样式 - 浅蓝渐变背景 */
 .categories-container {
-    background: linear-gradient(135deg, #f0f8ff, #e6f7ff);
+    background: linear-gradient(135deg, #e6f7ff, #f0f8ff);
     min-height: 100vh;
     padding: 20px;
     font-family: "Comic Sans MS", "微软雅黑", sans-serif;
 }
 
-/* 页面头部 */
+/* 页面头部 - 白色卡片点缀 */
 .categories-header {
     text-align: center;
     padding: 40px 0 30px;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
     border-radius: 20px;
     margin: 0 auto 30px;
     max-width: 90%;
-    box-shadow: 0 10px 30px rgba(135, 206, 235, 0.2);
-    border: 2px solid #87ceeb;
+    box-shadow: 0 10px 30px rgba(135, 206, 235, 0.15);
+    border: 2px solid #ffb6c1; /* 粉色边框点缀 */
 }
 
 .categories-title {
-    color: #4682b4;
+    color: #4682b4; /* 深蓝色标题 */
     font-size: 2.5em;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -37,10 +37,9 @@ description: "按主题浏览所有喵文～"
 .categories-subtitle {
     color: #5f9ea0;
     font-size: 1.2em;
-    margin-bottom: 15px;
 }
 
-/* 分类云 - 浅蓝色主题 */
+/* 分类云 - 白色背景，粉色辅助 */
 .category-cloud {
     display: flex;
     flex-wrap: wrap;
@@ -52,48 +51,50 @@ description: "按主题浏览所有喵文～"
 
 .category-tag {
     display: inline-block;
-    background: linear-gradient(45deg, #87ceeb, #4682b4);
-    color: white;
+    background: rgba(255, 255, 255, 0.95); /* 白色背景 */
+    color: #4682b4; /* 蓝色文字 */
     padding: 10px 18px;
     border-radius: 20px;
     text-decoration: none;
     font-weight: bold;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(135, 206, 235, 0.3);
-    position: relative;
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3); /* 粉色阴影 */
+    border: 2px solid #ffb6c1; /* 粉色边框 */
 }
 
 .category-tag:hover {
-    background: linear-gradient(45deg, #ffb6c1, #ff69b4);
+    background: #ffb6c1; /* 粉色背景 */
+    color: white; /* 白色文字 */
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.3);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
 }
 
 .category-count {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 182, 193, 0.2); /* 浅粉色背景 */
+    color: #ff69b4; /* 粉色文字 */
     padding: 3px 8px;
     border-radius: 12px;
     margin-left: 5px;
     font-size: 0.9em;
 }
 
-/* 分类内容区 - 白色卡片 */
-.category-section {
-    background: rgba(255, 255, 255, 0.98);
+/* 分类内容区 - 白色卡片，粉色点缀 */
+.category-content {
+    background: rgba(255, 255, 255, 0.98); /* 纯白背景 */
     border-radius: 15px;
     padding: 25px;
     margin: 25px auto;
     max-width: 90%;
-    box-shadow: 0 5px 20px rgba(135, 206, 235, 0.15);
-    border: 2px solid #b0e0e6;
+    box-shadow: 0 5px 20px rgba(255, 182, 193, 0.2); /* 粉色阴影 */
+    border: 2px solid #ffb6c1; /* 粉色边框 */
 }
 
 .category-name {
-    color: #4682b4;
+    color: #4682b4; /* 蓝色标题 */
     font-size: 1.8em;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #87ceeb;
+    border-bottom: 2px solid #ffb6c1; /* 粉色下划线 */
     display: flex;
     align-items: center;
 }
@@ -102,32 +103,32 @@ description: "按主题浏览所有喵文～"
     content: '📁';
     margin-right: 10px;
     font-size: 1.2em;
+    color: #ff69b4; /* 粉色图标 */
 }
 
-/* 文章列表 */
+/* 文章列表 - 白色卡片，粉色交互 */
 .posts-list {
     list-style: none;
     padding: 0;
 }
 
 .post-item {
-    background: linear-gradient(135deg, #ffffff, #f8fdff);
-    border: 1px solid #b0e0e6;
+    background: rgba(255, 255, 255, 0.95); /* 白色背景 */
+    border: 1px solid #ffd6e0; /* 浅粉色边框 */
     border-radius: 10px;
     padding: 15px;
     margin: 12px 0;
     transition: all 0.3s ease;
-    position: relative;
 }
 
 .post-item:hover {
     transform: translateX(5px);
-    box-shadow: 0 5px 15px rgba(135, 206, 235, 0.2);
-    border-color: #87ceeb;
+    box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
+    border-color: #ff69b4; /* 粉色边框 */
 }
 
 .post-link {
-    color: #4682b4;
+    color: #4682b4; /* 蓝色链接 */
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1em;
@@ -136,7 +137,7 @@ description: "按主题浏览所有喵文～"
 }
 
 .post-link:hover {
-    color: #ff69b4;
+    color: #ff69b4; /* 粉色悬停 */
     text-decoration: underline;
 }
 
@@ -149,9 +150,10 @@ description: "按主题浏览所有喵文～"
 }
 
 .meta-item {
-    background: rgba(135, 206, 235, 0.1);
+    background: rgba(255, 182, 193, 0.1); /* 浅粉色背景 */
     padding: 3px 8px;
     border-radius: 10px;
+    color: #ff69b4; /* 粉色文字 */
 }
 
 /* 空状态样式 */
@@ -164,7 +166,7 @@ description: "按主题浏览所有喵文～"
 .empty-icon {
     font-size: 3em;
     margin-bottom: 15px;
-    color: #87ceeb;
+    color: #ffb6c1; /* 粉色图标 */
 }
 
 /* 移动端适配 */
@@ -191,29 +193,21 @@ description: "按主题浏览所有喵文～"
         font-size: 0.9em;
     }
     
-    .category-section {
+    .category-content {
         padding: 20px;
         margin: 20px auto;
-    }
-    
-    .post-item {
-        padding: 12px;
-    }
-    
-    .post-meta {
-        gap: 10px;
     }
 }
 </style>
 
 <div class="categories-container">
-    <!-- 🎯 页面头部 -->
+    <!-- 🎯 页面头部 - 白色卡片，粉色边框 -->
     <header class="categories-header">
         <h1 class="categories-title">🐱 喵喵分类库</h1>
         <p class="categories-subtitle">按主题浏览所有喵文～</p>
     </header>
 
-    <!-- 🎯 分类云 -->
+    <!-- 🎯 分类云 - 白色背景，粉色边框 -->
     {% if site.categories.size > 0 %}
     <div class="category-cloud">
         {% for category in site.categories %}
@@ -225,11 +219,11 @@ description: "按主题浏览所有喵文～"
     </div>
     {% endif %}
 
-    <!-- 🎯 分类内容 -->
-    <main class="categories-content">
+    <!-- 🎯 分类内容 - 白色卡片，粉色点缀 -->
+    <main class="categories-main">
         {% if site.categories.size > 0 %}
             {% for category in site.categories %}
-            <section class="category-section" id="{{ category[0] | slugify }}">
+            <section class="category-content" id="{{ category[0] | slugify }}">
                 <h2 class="category-name">
                     {{ category[0] }}
                     <span class="category-count">({{ category[1].size }}篇)</span>
@@ -251,11 +245,13 @@ description: "按主题浏览所有喵文～"
             </section>
             {% endfor %}
         {% else %}
-            <!-- 🎯 空状态 -->
+            <!-- 空状态 -->
             <div class="empty-categories">
-                <div class="empty-icon">📭</div>
-                <h3>还没有分类哦</h3>
-                <p>快去写一些喵文并添加分类吧～</p>
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    <div style="font-size: 3em; margin-bottom: 15px; color: #ffb6c1;">📭</div>
+                    <h3>还没有分类哦</h3>
+                    <p>快去写一些喵文并添加分类吧～</p>
+                </div>
             </div>
         {% endif %}
     </main>
@@ -263,21 +259,16 @@ description: "按主题浏览所有喵文～"
 
 <!-- 🎯 平滑滚动效果 -->
 <script>
-// 分类云链接平滑滚动
 document.addEventListener('DOMContentLoaded', function() {
+    // 分类云平滑滚动
     const categoryLinks = document.querySelectorAll('.category-tag[href^="#"]');
-    
     categoryLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
-            
             if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
@@ -287,7 +278,6 @@ document.addEventListener('DOMContentLoaded', function() {
     postItems.forEach((item, index) => {
         item.style.opacity = '0';
         item.style.transform = 'translateX(-20px)';
-        
         setTimeout(() => {
             item.style.transition = 'all 0.5s ease';
             item.style.opacity = '1';
