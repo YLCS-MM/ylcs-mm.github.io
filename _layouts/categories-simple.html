@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
+    
+    <!-- 🎀 甘城猫猫风格CSS -->
+    <style>
+    body {
+        font-family: "Comic Sans MS", "微软雅黑", sans-serif;
+        background: linear-gradient(135deg, #f0f8ff, #fff0f5);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+    
+    .categories-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .categories-header {
+        text-align: center;
+        padding: 40px 0;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        margin-bottom: 30px;
+        border: 2px solid #87ceeb;
+    }
+    
+    .categories-content {
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 15px;
+        padding: 30px;
+        border: 2px solid #ffb6c1;
+    }
+    </style>
+</head>
+<body>
+    <div class="categories-container">
+        <header class="categories-header">
+            <h1 style="color: #4682b4;">{{ page.title }}</h1>
+            {% if page.subtitle %}
+            <p style="color: #87ceeb;">{{ page.subtitle }}</p>
+            {% endif %}
+        </header>
+        
+        <main class="categories-content">
+            {{ content }}
+        </main>
+    </div>
+</body>
+</html>
