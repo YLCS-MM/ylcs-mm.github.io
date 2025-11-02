@@ -77,33 +77,5 @@
             </p>
         </footer>
     </article>
-
-<!-- 在 _layouts/post.html 的 <article> 标签内添加 -->
-<article class="post">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <div class="post-meta">
-      <span class="post-date">📅 {{ page.date | date: "%Y/%m/%d" }}</span>
-      {% if page.categories %}
-        <span class="post-categories">🏷️ {{ page.categories | join: ", " }}</span>
-      {% endif %}
-    </div>
-  </header>
-
-  <!-- 添加猫娘风格目录 -->
-  {% if site.toc.position == "sidebar" %}
-    {% include toc-sidebar.html %}
-  {% else %}
-    <div class="neko-toc-content-top">
-      {% include toc.html html=content sanitize=true class="neko-toc-list" h_min=site.toc.min_level h_max=site.toc.max_level %}
-    </div>
-  {% endif %}
-
-  <div class="post-content">
-    {{ content }}
-  </div>
-</article>
-
-    
 </body>
 </html>
