@@ -34,7 +34,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.3); /* 透明度从0.6调整为0.3 */
         z-index: 0;
         border-radius: 20px;
     }
@@ -144,7 +144,7 @@
     (function() {
         console.log('🚀 开始加载看板娘...');
         
-        const live2d_path = 'https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.7/dist/';
+        const live2d_path = '链接1';
         
         function loadExternalResource(url, type) {
             return new Promise((resolve, reject) => {
@@ -178,7 +178,7 @@
                     initWidget({
                         waifuPath: live2d_path + 'waifu-tips.json',
                         cubism2Path: live2d_path + 'live2d.min.js',
-                        cubism5Path: 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js',
+                        cubism5Path: '链接2',
                         tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
                         logLevel: 'warn',
                         drag: false,
