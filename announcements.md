@@ -5,6 +5,124 @@ permalink: /announcements/
 description: 博客更新公告和历史记录
 ---
 
+<!-- 添加首页顶部样式 -->
+<style>
+/* 🎯 首页顶部背景图片样式 */
+.neko-announcements-top {
+    background-image: url('https://raw.githubusercontent.com/YLCS-MM/ylcs-mm2.gthub.io/refs/heads/miao/84b1ade4028efc77b2dd33f136c7712c.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 20px;
+    padding: 40px 0;
+    margin: 20px auto;
+    max-width: 95%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.neko-announcements-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 0;
+    border-radius: 20px;
+}
+
+.neko-announcements-top > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 首页顶部内容样式 */
+.neko-top-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #ffb6c1;
+    box-shadow: 0 0 25px rgba(255, 182, 193, 0.5);
+    margin: 0 auto 15px;
+}
+
+.neko-top-title {
+    color: #ff69b4;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.neko-top-location {
+    color: #87ceeb;
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.neko-top-nav {
+    display: inline-flex;
+    gap: 25px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 12px 25px;
+    border-radius: 30px;
+    margin-top: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.neko-top-nav a {
+    color: #666;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.neko-top-nav a:hover {
+    color: #ff69b4;
+    background: rgba(255, 182, 193, 0.25);
+    transform: translateY(-2px);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .neko-announcements-top {
+        padding: 25px 0;
+        margin: 15px auto;
+    }
+    .neko-top-title {
+        font-size: 2em;
+    }
+    .neko-top-nav {
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 10px 15px;
+    }
+}
+</style>
+
+<!-- 首页样式顶部区域 -->
+<div class="neko-announcements-top">
+    <img src="https://avatars.githubusercontent.com/u/193340716?v=4" 
+         alt="成霜喵喵" class="neko-top-avatar">
+    
+    <h1 class="neko-top-title">成霜喵喵の小窝</h1>
+    <p class="neko-top-location">湖南,郴州 · ylcs-mm</p>
+    
+    <nav class="neko-top-nav">
+        <a href="/">首页</a>
+        <a href="/categories/">分类</a>
+        <a href="/about/">关于</a>
+        <a href="/announcements/">公告</a>
+    </nav>
+</div>
+
+
 <div class="announcements-page">
   <h2>📢 公告历史</h2>
   
