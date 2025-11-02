@@ -1,8 +1,8 @@
 ---
-layout: home    # 重要修改：从page改为home
-title: 关于        
-permalink: /about/ 
-comments: false    
+layout: home    # 使用现有的home布局
+title: 关于
+permalink: /about/
+comments: false
 ---
 
 <!-- 用纯HTML+内联CSS写内容，彻底避免Markdown解析错误 -->
@@ -66,4 +66,3 @@ comments: false
     }
   </style>
 </div>
-
