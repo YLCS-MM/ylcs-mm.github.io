@@ -1,3 +1,7 @@
+{% comment %} 从公告历史数据获取最新公告喵~ {% endcomment %}
+{% assign latest_announcement = site.data.announcement-history.first %}
+
+{% if latest_announcement and site.data.announcement.popup_enabled %}
 <style>
 .modal-overlay {
   position: fixed;
@@ -16,8 +20,8 @@
   position: relative;
   width: 85%;
   max-width: 450px;
-  background: {{ site.data.announcement.announcements[0].background }};
-  border: 2px dashed {{ site.data.announcement.announcements[0].border_color }};
+  background: #fff9e6;
+  border: 2px dashed #ffb6c1;
   border-radius: 15px;
   padding: 25px 20px 20px;
   box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
@@ -29,7 +33,7 @@
   content: '❤';
   position: absolute;
   top: -10px;
-  color: {{ site.data.announcement.announcements[0].border_color }};
+  color: #ffb6c1;
   font-size: 18px;
   z-index: 1001;
 }
@@ -42,7 +46,7 @@
 .modal-title {
   font-size: 1.4em;
   font-weight: bold;
-  color: {{ site.data.announcement.announcements[0].title_color }};
+  color: #ff69b4;
   display: inline-block;
   padding: 5px 15px;
   background: rgba(255, 182, 193, 0.1);
@@ -52,7 +56,7 @@
 .update-date {
   text-align: center;
   font-size: 0.9em;
-  color: {{ site.data.announcement.announcements[0].title_color }};
+  color: #ff69b4;
   margin: 8px 0 15px;
   font-weight: bold;
 }
@@ -81,7 +85,7 @@
   padding: 10px 30px;
   border: none;
   border-radius: 25px;
-  background: {{ site.data.announcement.announcements[0].button_bg }};
+  background: #ffa500;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -125,23 +129,21 @@
   <div class="modal-overlay">
     <div class="modal-container">
       <div class="modal-header">
-        <div class="modal-title">🐾🚧 {{ site.data.announcement.announcements[0].title }} 🐾</div>
+        <div class="modal-title">🐾🚧 {{ latest_announcement.title }} 🐾</div>
       </div>
       
-      {% if site.data.announcement.announcements[0].update_date %}
-      <div class="update-date">【{{ site.data.announcement.announcements[0].update_date }}】</div>
+      {% if latest_announcement.date %}
+      <div class="update-date">【{{ latest_announcement.date }}】</div>
       {% endif %}
       
       <div class="modal-content">
-        {{ site.data.announcement.announcements[0].content | markdownify }}
+        {{ latest_announcement.content | markdownify }}
       </div>
       
-      {% if site.data.announcement.announcements[0].footer_note %}
-      <div class="footer-note">{{ site.data.announcement.announcements[0].footer_note }}</div>
-      {% endif %}
+      <div class="footer-note">施工期间可能会有页面闪烁，请多见谅喵~ (A·ω·A)</div>
       
       <button class="modal-button" onclick="closeModal()">
-        {{ site.data.announcement.announcements[0].button_text }}
+        明白啦～
       </button>
     </div>
   </div>
@@ -160,10 +162,11 @@ function closeModal() {
 
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('announcement-modal');
-  if (modal && {{ site.data.announcement.popup_enabled }}) {
+  if (modal && {{ site.data.announcement.popup_enabled }} && '{{ latest_announcement.title }}') {
     setTimeout(function() {
       modal.style.display = 'block';
     }, 1000);
   }
 });
 </script>
+{% endif %}
