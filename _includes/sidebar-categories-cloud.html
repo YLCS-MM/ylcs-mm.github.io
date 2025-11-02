@@ -1,17 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {% include head.html %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
+    
+    <!-- 基础样式 -->
+    <style>
+    body {
+        font-family: "Comic Sans MS", "微软雅黑", sans-serif;
+        background: linear-gradient(135deg, #f0f8ff, #e6f7ff);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    header {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px 0;
+        text-align: center;
+        border-bottom: 2px solid #87ceeb;
+    }
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        margin-top: 40px;
+    }
+    </style>
 </head>
 <body>
-    {% include header.html %}
+    <!-- 内联header，避免include -->
+    <header>
+        <h1 style="color: #4682b4; margin: 0;">{{ site.title }}</h1>
+        <nav style="margin-top: 15px;">
+            <a href="/" style="color: #4682b4; text-decoration: none; margin: 0 15px;">首页</a>
+            <a href="/categories/" style="color: #4682b4; text-decoration: none; margin: 0 15px;">分类</a>
+            <a href="/about/" style="color: #4682b4; text-decoration: none; margin: 0 15px;">关于</a>
+        </nav>
+    </header>
     
     <main class="container">
         <div class="content">
-            {{ content }}  <!-- 这里只显示主要内容，没有侧边栏 -->
+            {{ content }}
         </div>
     </main>
     
-    {% include footer.html %}
+    <!-- 内联footer，避免include -->
+    <footer>
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }} · 喵～</p>
+    </footer>
 </body>
 </html>
