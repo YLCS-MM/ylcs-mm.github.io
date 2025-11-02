@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}测试页面</title>
+    
+    <!-- 🎯 最简化的独立布局 -->
+    <style>
+    /* 基础重置，确保完全独立 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: sans-serif;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+    }
+    
+    /* 🚨 确保不会影响其他页面 */
+    .test-layout {
+        all: initial;
+        display: block;
+    }
+    </style>
+</head>
+<body>
+    <!-- 🎯 只渲染内容，不包含任何其他元素 -->
+    <div class="test-layout">
+        {{ content }}
+    </div>
+</body>
+</html>
