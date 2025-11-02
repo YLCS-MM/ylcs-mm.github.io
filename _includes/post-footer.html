@@ -1,0 +1,14 @@
+<footer class="post-footer">
+    {% if page.tags %}
+    <div class="post-tags">
+        {% for tag in page.tags %}
+        <a href="{{ '/tags/#' | append: tag | relative_url }}" class="post-tag">#{{ tag }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <p class="post-thanks">
+        <span class="neko-paw">🐾</span> 
+        感谢阅读！欢迎在评论区留言喵～
+    </p>
+</footer>
