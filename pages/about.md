@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: announcements
 title: 关于
 permalink: /about/
 comments: false
@@ -181,4 +181,5 @@ comments: false
     }
   </style>
 </div>
+
 
