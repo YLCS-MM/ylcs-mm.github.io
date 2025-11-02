@@ -158,6 +158,19 @@ navs:
   icon: 📢
   badge: true
 
+# ------------------------------
+# 🎯 主题配置 - 添加以下内容
+# ------------------------------
+theme: jekyll-theme-cayman  # 或者尝试其他浅色主题
+# 可选主题：jekyll-theme-minimal, jekyll-theme-time-machine等
+
+# 禁用默认的 Primer 主题样式
+override_theme: true
+
+# 添加自定义样式覆盖
+stylesheets:
+  - "/assets/css/custom.css"
+
 
 # ---------------- #
 #      Google      #
