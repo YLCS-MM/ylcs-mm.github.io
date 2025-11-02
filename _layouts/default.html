@@ -1,10 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans">
 <head>
-    <title>{{ page.title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>成霜喵喵の小窝 - 公告</title>
+    
+    <!-- 引入必要的CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primer-css/css/primer.css">
+    <style>
+    /* 全局样式 */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        background-color: #f6f8fa;
+        color: #24292e;
+        margin: 0;
+        padding: 0;
+        line-height: 1.5;
+    }
+    
+    /* 🎯 首页顶部背景图片样式 */
+    .neko-announcements-top {
+        background-image: url('https://raw.githubusercontent.com/YLCS-MM/ylcs-mm2.gthub.io/miao/84b1ade4028efc77b2dd33f136c7712c.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        border-radius: 20px;
+        padding: 40px 0;
+        margin: 20px auto;
+        max-width: 95%;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .neko-announcements-top::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.6);
+        z-index: 0;
+        border-radius: 20px;
+    }
+
+    .neko-announcements-top > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* 首页顶部内容样式 */
+    .neko-top-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid #ffb6c1;
+        box-shadow: 0 0 25px rgba(255, 182, 193, 0.5);
+        margin: 0 auto 15px;
+    }
+
+    .neko-top-title {
+        color: #ff69b4;
+        font-size: 2.5em;
+        font-weight: bold;
+        margin: 10px 0 5px 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .neko-top-location {
+        color: #87ceeb;
+        font-size: 1.2em;
+        margin-bottom: 25px;
+        font-weight: 500;
+    }
+
+    .neko-top-nav {
+        display: inline-flex;
+        gap: 25px;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 12px 25px;
+        border-radius: 30px;
+        margin-top: 15px;
+        backdrop-filter: blur(10px);
+    }
+
+    .neko-top-nav a {
+        color: #666;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .neko-top-nav a:hover {
+        color: #ff69b4;
+        background: rgba(255, 182, 193, 0.25);
+        transform: translateY(-2px);
+    }
+
+    /* 公告内容样式 */
+    .announcement-content {
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        margin: 30px auto;
+        max-width: 900px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+    
+    .announcement-content h2 {
+        color: #ff69b4;
+        border-bottom: 2px solid #ffb6c1;
+        padding-bottom: 10px;
+        margin-top: 0;
+    }
+    
+    /* 公告弹窗样式 */
+    #announcement-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 600px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        position: relative;
+        animation: modalFadeIn 0.3s;
+    }
+    
+    @keyframes modalFadeIn {
+        from {transform: translateY(-50px); opacity: 0;}
+        to {transform: translateY(0); opacity: 1;}
+    }
+    
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #aaa;
+        transition: color 0.3s;
+    }
+    
+    .close-btn:hover {
+        color: #333;
+    }
+    
+    .modal-title {
+        margin-top: 0;
+        color: #ff69b4;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+    
+    .modal-body {
+        margin: 20px 0;
+        line-height: 1.6;
+    }
+    
+    .modal-footer {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .confirm-btn {
+        background-color: #ff69b4;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+    
+    .confirm-btn:hover {
+        background-color: #ff1493;
+    }
+
+    /* 看板娘样式 */
+    #waifu, .live2d-widget {
+        position: fixed !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        z-index: 9999 !important;
+        pointer-events: auto !important;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .neko-announcements-top {
+            padding: 25px 0;
+            margin: 15px auto;
+        }
+        .neko-top-title {
+            font-size: 2em;
+        }
+        .neko-top-nav {
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 10px 15px;
+        }
+        
+        #waifu, .live2d-widget {
+            right: -10px !important;
+            bottom: -10px !important;
+            transform: scale(0.8);
+        }
+        
+        .modal-content {
+            width: 95%;
+            padding: 20px;
+        }
+    }
+    </style>
 </head>
 <body>
-    {{ content }}
 </body>
 </html>
-
