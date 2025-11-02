@@ -1,22 +1,117 @@
+<!-- 改成超可爱的中文标题喵～ -->
+<h3 class="neko-category-title">🐱 喵喵分类云 🐾</h3>
 
-<h3>Blog Categories</h3>
 <div id="blog-categories">
-  <ul class="list-group">
+  <ul class="list-group neko-category-list">
     {% assign sorted_categories = site.categories | sort %}
     {% for category in sorted_categories %}
-    <li class="list-group-item">
-    <a href="#{{ category[0] }}">{{ category | first }}</a>
-    <span class="badge">{{ category[1].size }}</span>
+    <li class="list-group-item neko-category-item">
+      <!-- 添加猫爪图标和可爱样式喵 -->
+      <span class="neko-paw">🐾</span>
+      <a href="#{{ category[0] }}" class="neko-category-link">{{ category | first }}</a>
+      <span class="badge neko-badge">{{ category[1].size }}</span>
     </li>
     {% endfor %}
   </ul>
 </div>
 
 <script type="text/javascript">
-
   $(document).ready(function(){
-    $("#blog-categories li").css('text-transform','capitalize')
+    $("#blog-categories li").css('text-transform','capitalize');
+    
+    // 添加猫猫互动效果喵～
+    $(".neko-category-item").hover(
+      function() {
+        $(this).addClass("neko-hover");
+        $(this).find(".neko-paw").text("❤️"); // 悬停变爱心
+      },
+      function() {
+        $(this).removeClass("neko-hover"); 
+        $(this).find(".neko-paw").text("🐾"); // 离开变爪爪
+      }
+    );
   });
-
 </script>
 
+<style>
+/* 甘城猫猫风格CSS喵～ */
+.neko-category-title {
+  color: #ff69b4;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+  padding: 8px;
+  background: linear-gradient(135deg, #fff0f5, #fff9e6);
+  border-radius: 15px;
+  border: 2px dashed #ffb6c1;
+  position: relative;
+}
+
+.neko-category-title::before,
+.neko-category-title::after {
+  content: '✨';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.neko-category-title::before { left: 10px; }
+.neko-category-title::after { right: 10px; }
+
+.neko-category-list {
+  border: none !important;
+}
+
+.neko-category-item {
+  background: #fff9e6 !important;
+  border: 1px solid #ffd3e0 !important;
+  border-radius: 10px !important;
+  margin-bottom: 8px !important;
+  padding: 10px 15px !important;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.neko-category-item:hover {
+  background: #fff0f5 !important;
+  transform: translateX(5px);
+  box-shadow: 0 3px 10px rgba(255, 182, 193, 0.3);
+}
+
+.neko-paw {
+  margin-right: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.neko-category-link {
+  color: #ff69b4 !important;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.neko-category-link:hover {
+  color: #ff1493 !important;
+  text-decoration: underline !important;
+}
+
+.neko-badge {
+  background: #ffa500 !important;
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 3px 8px !important;
+  font-size: 0.8em !important;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.neko-hover {
+  background: linear-gradient(135deg, #fff0f5, #ffe4e6) !important;
+}
+</style>
