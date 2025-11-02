@@ -187,48 +187,4 @@
 <!-- 引入更新公告弹窗逻辑 -->
 <script src="{{ site.baseurl }}/assets/js/announcement.js" defer></script>
 
-         <style>
-/* 🎯 终极透明横幅解决方案 */
-/* 覆盖所有可能的横幅样式 */
-header,
-.site-header,
-.header,
-.navbar,
-.banner,
-.page-header,
-.main-header,
-[class*="header"],
-[class*="banner"] {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-/* 覆盖内联样式 */
-[style*="background"] {
-    background: transparent !important;
-}
-
-/* 确保内容在透明背景下可见 */
-.site-header h1 a,
-.site-header-nav-item,
-.navbar a {
-    color: #333 !important;
-    text-shadow: 0 1px 3px rgba(255,255,255,0.9);
-}
-
-.site-header h1 a:hover,
-.site-header-nav-item:hover {
-    color: #ff69b4 !important;
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .site-header {
-        background: rgba(255,255,255,0.95) !important;
-        backdrop-filter: blur(10px);
-    }
-}
-</style>
+         
