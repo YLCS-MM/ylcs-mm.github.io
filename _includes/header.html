@@ -181,3 +181,20 @@
 
 <!-- 引入更新公告弹窗逻辑 -->
 <script src="{{ site.baseurl }}/assets/js/announcement.js" defer></script>
+
+
+                    <!-- 首先加载主题CSS -->
+<link rel="stylesheet" href="{{ assets_base_url }}/assets/vendor/primer-css/css/primer.css">
+
+<!-- 然后加载您的自定义CSS -->
+<link rel="stylesheet" href="{{ assets_base_url }}/assets/css/globals/common.css">
+<link rel="stylesheet" href="{{ assets_base_url }}/assets/css/custom.css">
+
+<!-- 最后添加内联样式覆盖 -->
+<style>
+/* 最终覆盖 */
+.site-header {
+    background: transparent !important;
+    all: unset !important;
+}
+</style>
