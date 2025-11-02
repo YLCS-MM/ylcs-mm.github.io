@@ -189,31 +189,44 @@ kramdown:
   input: GFM  # 支持GitHub风格Markdown（含HTML解析）
 
 
-  # 在现有配置基础上添加以下内容：
+  # ========================
+# 🐱 猫娘风格目录配置
+# ========================
 
-# ---------------- #
-#   目录配置       #
-# ---------------- #
+# 目录系统设置
 toc:
   enabled: true
-  # 目录显示的最小标题级别
+  # 目录显示的最小标题级别 (h2开始)
   min_level: 2
-  # 目录显示的最大标题级别
-  max_level: 6
+  # 目录显示的最大标题级别 (到h4)
+  max_level: 4
   # 是否在目录中显示序号
   ordered: false
   # 目录标题
-  title: "📑 文章目录"
+  title: "🐾 文章目录"
+  # 目录位置 (sidebar-侧边栏, content-内容区上方)
+  position: "sidebar"
+  # 是否自动为标题添加ID
+  auto_ids: true
 
-# Markdown 解析器设置（确保 kramdown 正确配置）
+# Markdown 解析器设置
+markdown: kramdown
 kramdown:
   input: GFM
   auto_ids: true
-  toc_levels: 2..6
-  smart_quotes: ["lsquo", "rsquo", "ldquo", "rdquo"]
+  toc_levels: 2..4
+  hard_wrap: false
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     span:
       line_numbers: false
     block:
       line_numbers: true
+
+# 额外的导航配置
+navigation:
+  # 目录滚动效果
+  scroll_smooth: true
+  # 目录高亮当前阅读部分
+  highlight_active: true
+
