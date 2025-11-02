@@ -231,5 +231,137 @@
     </style>
 </head>
 <body>
+    <!-- 🎯 顶部区块 -->
+    <div class="neko-announcements-top">
+        <h1 class="neko-top-title">成霜喵喵の小窝</h1>
+        <p class="neko-top-location">湖南,郴州 · ylcs-mm</p>
+        
+        <nav class="neko-top-nav">
+            <a href="/">首页</a>
+            <a href="/categories/">分类</a>
+            <a href="/about/">关于</a>
+            <a href="/announcements/">公告</a>
+        </nav>
+    </div>
+
+    <!-- 📝 主体内容区域 -->
+    <main class="container" style="max-width: 900px; margin: 30px auto; padding: 0 20px;">
+        <div class="announcement-content">
+            <h2>最新公告</h2>
+            <p>这里是公告内容区域，您可以在这里发布重要通知和更新信息。</p>
+            <p>喵~ 欢迎来到成霜喵喵的小窝！这里会不定期更新各种公告和活动信息，记得常回来看看哦！</p>
+            <p>如果有任何问题或建议，可以通过关于页面中的联系方式找到我~</p>
+        </div>
+    </main>
+
+    <!-- 公告弹窗 -->
+    <div id="announcement-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">重要公告</h2>
+            <div class="modal-body">
+                <p>喵~ 欢迎来到成霜喵喵的小窝！</p>
+                <p>本站点正在持续更新中，可能会有一些功能还在开发中。</p>
+                <p>如果您遇到任何问题，请通过关于页面中的联系方式反馈给我哦~</p>
+            </div>
+            <div class="modal-footer">
+                <button class="confirm-btn">我知道了</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 看板娘容器 -->
+    <div id="waifu">
+        <!-- 看板娘内容将由JavaScript动态加载 -->
+    </div>
+
+    <!-- 看板娘脚本 -->
+    <script>
+    // 看板娘加载代码
+    (function() {
+        console.log('🚀 开始加载看板娘...');
+        
+        const live2d_path = 'https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.7/dist/';
+        
+        function loadExternalResource(url, type) {
+            return new Promise((resolve, reject) => {
+                let tag;
+                if (type === 'css') {
+                    tag = document.createElement('link');
+                    tag.rel = 'stylesheet';
+                    tag.href = url;
+                }
+                else if (type === 'js') {
+                    tag = document.createElement('script');
+                    tag.type = 'module';
+                    tag.src = url;
+                }
+                if (tag) {
+                    tag.onload = () => resolve(url);
+                    tag.onerror = () => reject(url);
+                    document.head.appendChild(tag);
+                }
+            });
+        }
+
+        (async () => {
+            try {
+                await Promise.all([
+                    loadExternalResource(live2d_path + 'waifu.css', 'css'),
+                    loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
+                ]);
+                
+                if (typeof initWidget !== 'undefined') {
+                    initWidget({
+                        waifuPath: live2d_path + 'waifu-tips.json',
+                        cubism2Path: live2d_path + 'live2d.min.js',
+                        cubism5Path: 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js',
+                        tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
+                        logLevel: 'warn',
+                        drag: false,
+                    });
+                    console.log('✅ 看板娘加载成功！');
+                }
+            } catch (e) {
+                console.log('❌ 看板娘加载失败:', e);
+                // 加载失败时显示占位图
+                document.getElementById('waifu').innerHTML = `
+                    <div style="width: 280px; height: 250px; background: rgba(255, 182, 193, 0.2); 
+                                border-radius: 10px; display: flex; align-items: center; justify-content: center;
+                                border: 2px dashed #ffb6c1;">
+                        <p style="color: #ff69b4;">看板娘加载失败<br>请检查网络连接</p>
+                    </div>
+                `;
+            }
+        })();
+    })();
+    
+    // 公告弹窗功能
+    document.addEventListener('DOMContentLoaded', function() {
+        // 显示公告弹窗
+        const modal = document.getElementById('announcement-modal');
+        setTimeout(() => {
+            modal.style.display = 'flex';
+        }, 1000);
+        
+        // 关闭弹窗功能
+        const closeBtn = document.querySelector('.close-btn');
+        const confirmBtn = document.querySelector('.confirm-btn');
+        
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+        
+        closeBtn.addEventListener('click', closeModal);
+        confirmBtn.addEventListener('click', closeModal);
+        
+        // 点击模态框外部关闭
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    });
+    </script>
 </body>
 </html>
