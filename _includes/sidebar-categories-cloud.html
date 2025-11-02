@@ -1,0 +1,36 @@
+<!-- 简单的分类侧边栏 -->
+<div class="sidebar-categories">
+    <h3>📁 分类</h3>
+    <div class="categories-list">
+        {% for category in site.categories %}
+        <a href="/categories/#{{ category[0] | slugify }}" class="category-link">
+            {{ category[0] }} ({{ category[1].size }})
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.sidebar-categories {
+    margin: 15px 0;
+}
+
+.categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-link {
+    color: #333;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-left: 3px solid #87ceeb;
+    transition: all 0.3s ease;
+}
+
+.category-link:hover {
+    color: #ff69b4;
+    background: #f0f8ff;
+}
+</style>
