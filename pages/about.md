@@ -1,69 +1,261 @@
----
-layout: announcements
-title: 关于
-permalink: /about/
-comments: false
----
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>成霜·喵喵の小窝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 主体内容 */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        /* 头像区域 */
+        .avatar-section {
+            margin-bottom: 30px;
+        }
+        
+        .avatar-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 20px;
+            overflow: hidden;
+            background: #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .name {
+            font-size: 2.2rem;
+            color: #ff69b4;
+            margin: 10px 0;
+        }
+        
+        .title {
+            font-size: 1.3rem;
+            color: #ff1493;
+            margin-bottom: 25px;
+        }
+        
+        /* 文本内容 */
+        .content-text {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        blockquote {
+            border-left: 5px solid #ffb6c1;
+            padding: 15px 20px;
+            background: rgba(255, 228, 225, 0.5);
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        
+        /* 个人特质标签 */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        
+        .tag {
+            background: rgba(255,182,193,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* 联系卡片 */
+        .contact-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .contact-card {
+            background: rgba(255,182,193,0.1);
+            border: 2px dashed #ffb6c1;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            min-width: 200px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255,182,193,0.4);
+        }
+        
+        .contact-title {
+            font-weight: bold;
+            color: #ff69b4;
+            margin-bottom: 10px;
+        }
+        
+        .contact-link {
+            color: #ff69b4;
+            text-decoration: none;
+        }
+        
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* 漂浮猫爪动画 */
+        .floating {
+            position: absolute;
+            font-size: 24px;
+            color: #ff69b4;
+            animation: float 3s infinite ease-in-out;
+            z-index: 0;
+        }
+        
+        .paw1 { top: 20%; left: 15%; }
+        .paw2 { top: 30%; right: 20%; animation-delay: 1s; }
+        .paw3 { bottom: 25%; left: 25%; animation-delay: 2s; }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 25px;
+            }
+            
+            .avatar-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .name {
+                font-size: 1.8rem;
+            }
+            
+            .contact-cards {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 主体内容 -->
+    <div class="main-content">
+        <!-- 漂浮爪印 -->
+        <div class="floating paw1">🐾</div>
+        <div class="floating paw2">🐾</div>
+        <div class="floating paw3">🐾</div>
+        
+        <!-- 头像区域 -->
+        <div class="avatar-section">
+            <div class="avatar-container">
+                <img src="https://avatars.githubusercontent.com/u/193340716?v=4" alt="成霜·喵喵的头像" class="avatar">
+            </div>
+            <h2 class="name">成霜·喵喵</h2>
+            <p class="title">高考奋斗中の成霜·喵喵🐾</p>
+        </div>
+        
+        <!-- 文本内容 -->
+        <div class="content-text">
+            <p>窝是成霜·喵喵，在为高考而奋斗喵～ 也许眼前充满苟且，但学习是为了 <strong>诗和远方</strong> 🐾。</p>
+            <p>本站于 <strong>2025年6月19日</strong> 正式上线，记录技术思考与生活点滴~</p>
+        </div>
+        
+        <blockquote>
+            "每一天都要像猫咪追逐阳光一样追逐知识喵！✨" <br>
+            —— 成霜·喵喵的学习信条
+        </blockquote>
 
-<!-- 原有的关于内容保持不变 -->
-<div style="max-width: 800px; margin: 30px auto; padding: 25px; background: linear-gradient(135deg,#fff0f5,#e6e6fa); border-radius: 20px; box-shadow: 0 5px 15px rgba(255,182,193,0.3); position: relative;">
+        <!-- 个人特质标签 -->
+        <div class="tags">
+            <span class="tag">🐱学习型猫猫</span>
+            <span class="tag">💻技术爱好者</span>
+            <span class="tag">🎀软萌爱好者</span>
+            <span class="tag">👂猫耳收藏家</span>
+            <span class="tag">📋2305班信息委员</span>
+        </div>
 
-  <!-- 顶部猫耳装饰 -->
-  <div style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); display: flex; gap: 80px;">
-    <div style="width: 40px; height: 60px; background: #ffb6c1; clip-path: polygon(50% 0%,0% 100%,100% 100%);"></div>
-    <div style="width: 40px; height: 60px; background: #ffb6c1; clip-path: polygon(50% 0%,0% 100%,100% 100%);"></div>
-  </div>
-
-  <!-- 头像+昵称区域 -->
-  <div style="text-align: center; margin-bottom: 30px;">
-    <div style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(45deg,#ffb6c1,#e6e6fa); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 50px; color: white; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">🐱</div>
-    <h1 style="font-size: 2rem; color: #ff69b4; margin: 10px 0;">成霜喵喵</h1>
-    <p style="font-size: 1.2rem; color: #ff1493;">高考奋斗中の成霜喵喵🐾</p>
-  </div>
-
-  <!-- 关于我段落 -->
-  <p style="line-height: 1.8; margin-bottom: 15px;">
-    😸是成霜喵喵，在为高考而奋斗喵～ 也许眼前充满苟且，但学习是为了 <strong>诗和远方</strong> 🐾。<br>
-    本站于 <strong>2025年6月19日</strong> 正式上线，记录技术思考与生活点滴~
-  </p>
-  <blockquote style="border-left: 5px solid #ffb6c1; padding: 10px 15px; background: #ffe4e1; margin: 15px 0;">
-    "每一天都要像猫咪追逐阳光一样追逐知识喵！✨" <br>
-    —— 成霜喵喵的学习信条
-  </blockquote>
-
-  <!-- 个人特质标签 -->
-  <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
-    <span style="background: rgba(255,182,193,0.2); padding: 5px 10px; border-radius: 10px; font-size: 0.9rem;">🐱学习型猫猫</span>
-    <span style="background: rgba(255,182,193,0.2); padding: 5px 10px; border-radius: 10px; font-size: 0.9rem;">💻技术爱好者</span>
-    <span style="background: rgba(255,182,193,0.2); padding: 5px 10px; border-radius: 10px; font-size: 0.9rem;">🎀软萌爱好者</span>
-    <span style="background: rgba(255,182,193,0.2); padding: 5px 10px; border-radius: 10px; font-size: 0.9rem;">👂猫耳收藏家</span>
-    <span style="background: rgba(255,182,193,0.2); padding: 5px 10px; border-radius: 10px; font-size: 0.9rem;">📋2305班信息委员</span>
-  </div>
-
-  <!-- 联系卡片 -->
-  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-    <div style="background: rgba(255,182,193,0.1); border: 2px dashed #ffb6c1; border-radius: 15px; padding: 20px; text-align: center; min-width: 200px; transition: all 0.3s ease; cursor: pointer;">
-      <p style="font-weight: bold; color: #ff69b4; margin-bottom: 8px;">GitHub</p>
-      <a href="https://github.com/YLCS-MM" target="_blank" style="color: #ff69b4; text-decoration: none;">@YLCS-MM</a>
+        <!-- 联系卡片 -->
+        <div class="contact-cards">
+            <div class="contact-card">
+                <p class="contact-title">GitHub</p>
+                <a href="https://github.com/YLCS-MM" class="contact-link" target="_blank">@YLCS-MM</a>
+            </div>
+            <div class="contact-card">
+                <p class="contact-title">邮箱</p>
+                <a href="mailto:15873505918@163.com" class="contact-link">15873505918@163.com</a>
+            </div>
+        </div>
     </div>
-    <div style="background: rgba(255,182,193,0.1); border: 2px dashed #ffb6c1; border-radius: 15px; padding: 20px; text-align: center; min-width: 200px; transition: all 0.3s ease; cursor: pointer;">
-      <p style="font-weight: bold; color: #ff69b4; margin-bottom: 8px;">邮箱</p>
-      <a href="mailto:15873505918@163.com" style="color: #ff69b4; text-decoration: none;">15873505918@163.com</a>
-    </div>
-  </div>
 
-  <!-- 漂浮猫爪动画 -->
-  <span style="position: absolute; top: 20%; left: 15%; font-size: 24px; color: #ff69b4; animation: float 3s infinite ease-in-out;">🐾</span>
-  <span style="position: absolute; top: 30%; right: 20%; font-size: 24px; color: #ff69b4; animation: float 3s infinite ease-in-out; animation-delay: 1s;">🐾</span>
-  <span style="position: absolute; bottom: 25%; left: 25%; font-size: 24px; color: #ff69b4; animation: float 3s infinite ease-in-out; animation-delay: 2s;">🐾</span>
-  <style>
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0); }
-    }
-  </style>
-</div>
-
-
-
+    <script>
+        // 为联系卡片添加点击效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactCards = document.querySelectorAll('.contact-card');
+            contactCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        window.open(link.href, '_blank');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
