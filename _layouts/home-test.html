@@ -18,7 +18,62 @@
     .neko-blue { color: #87ceeb; }
     .neko-white { color: #ffffff; }
     
-    /* 布局基础 */
+    /* 🎯 图二风格头像区块 */
+    .neko-header-section {
+        background: linear-gradient(135deg, rgba(255, 240, 245, 0.95), rgba(240, 248, 255, 0.95));
+        backdrop-filter: blur(10px);
+        padding: 30px 0 20px 0;
+        text-align: center;
+        border-bottom: 2px dashed #ffb6c1;
+        margin-bottom: 30px;
+    }
+    
+    .neko-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid #ffb6c1;
+        box-shadow: 0 0 20px rgba(255, 182, 193, 0.4);
+        margin: 0 auto 15px;
+    }
+    
+    .neko-site-title {
+        color: #ff69b4;
+        font-size: 2.2em;
+        font-weight: bold;
+        margin: 10px 0 5px 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .neko-site-location {
+        color: #87ceeb;
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+    
+    .neko-nav {
+        display: inline-flex;
+        gap: 20px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px 20px;
+        border-radius: 25px;
+        margin-top: 10px;
+    }
+    
+    .neko-nav a {
+        color: #666;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+    }
+    
+    .neko-nav a:hover {
+        color: #ff69b4;
+        background: rgba(255, 182, 193, 0.2);
+    }
+    
+    /* 图一布局基础 */
     .container { 
         max-width: 1020px; 
         margin: 0 auto; 
@@ -77,6 +132,8 @@
         .column { width: 100% !important; }
         .columns { flex-direction: column; }
         .repo-list-item { margin: 15px 10px; padding: 15px; }
+        .neko-nav { flex-wrap: wrap; gap: 10px; }
+        .neko-site-title { font-size: 1.8em; }
     }
     </style>
     
@@ -86,8 +143,23 @@
     <link rel="stylesheet" href="/assets/css/globals/responsive.css">
 </head>
 <body class="home">
-    {% include header.html %}
-    
+    <!-- 🎯 图二风格头像区块 -->
+    <header class="neko-header-section">
+        <img src="https://avatars.githubusercontent.com/u/193340716?v=4" 
+             alt="成霜喵喵" class="neko-avatar">
+        
+        <h1 class="neko-site-title">成霜喵喵の小窝</h1>
+        <p class="neko-site-location">湖南,郴州 · ylcs-mm</p>
+        
+        <nav class="neko-nav">
+            <a href="/">首页</a>
+            <a href="/categories/">分类</a>
+            <a href="/about/">关于</a>
+            <a href="/announcements/">公告</a>
+        </nav>
+    </header>
+
+    <!-- 📝 图一布局：文章列表 + 侧边栏 -->
     <section class="container content">
         <div class="columns">
             <!-- 左侧：最新喵文 -->
@@ -153,6 +225,25 @@
         </div>
     </section>
     
+    <!-- 🐾 保留原有页脚 -->
     {% include footer.html %}
+    
+    <!-- 🎯 确保公告弹窗和看板娘不丢失 -->
+    <!-- 公告弹窗脚本 -->
+    <script src="/assets/js/announcement.js"></script>
+    
+    <!-- 看板娘脚本 -->
+    <script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.7/dist/autoload.js"></script>
+    
+    <!-- 看板娘样式确保 -->
+    <style>
+    #waifu, .live2d-widget {
+        position: fixed !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        z-index: 9999 !important;
+        pointer-events: auto !important;
+    }
+    </style>
 </body>
 </html>
