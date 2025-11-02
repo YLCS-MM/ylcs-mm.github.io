@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>测试页面 - {{ page.title }}</title>
+    <style>
+    /* 极简测试样式 */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: white;
+        color: #333;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .test-article {
+        border: 2px dashed #ff69b4;
+        padding: 30px;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+    
+    .test-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #87ceeb;
+    }
+    
+    .test-title {
+        color: #ff69b4;
+        font-size: 2em;
+        margin: 0;
+    }
+    
+    .test-meta {
+        color: #666;
+        font-size: 0.9em;
+        margin: 10px 0;
+    }
+    
+    .test-content {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+    
+    .test-content h2 {
+        color: #ff1493;
+        border-left: 4px solid #87ceeb;
+        padding-left: 15px;
+    }
+    
+    .test-content code {
+        background: #f8f9fa;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+    
+    .test-footer {
+        margin-top: 40px;
+        text-align: center;
+        color: #999;
+        font-size: 0.9em;
+    }
+    </style>
+</head>
+<body>
+    <!-- 测试页面标识 -->
+    <div style="background: #fff0f5; padding: 10px; border-radius: 5px; margin-bottom: 20px; text-align: center;">
+        <strong>🐾 测试模式</strong> - 此页面仅用于文章显示测试
+    </div>
+    
+    <!-- 文章内容区域 -->
+    <article class="test-article">
+        <header class="test-header">
+            <h1 class="test-title">{{ page.title }}</h1>
+            <div class="test-meta">
+                <time>{{ page.date | date: "%Y年%m月%d日" }}</time>
+                {% if page.categories %}
+                • 分类: {{ page.categories | join: ", " }}
+                {% endif %}
+                {% if page.tags %}
+                • 标签: {{ page.tags | join: ", " }}
+                {% endif %}
+            </div>
+        </header>
+        
+        <div class="test-content">
+            {{ content }}
+        </div>
+    </article>
+    
+    <div class="test-footer">
+        <p>此测试页面不会影响您的正式博客页面</p>
+        <p><a href="/">返回正式博客</a></p>
+    </div>
+</body>
+</html>
