@@ -1,9 +1,0 @@
-<!-- ✅ 保留这部分新代码 -->
-<div class="category-cloud">
-    {% for category in site.categories %}
-    <a href="#{{ category[0] | slugify }}" class="category-tag">
-        {{ category[0] }}
-        <span class="category-count">{{ category[1].size }}</span>
-    </a>
-    {% endfor %}
-</div>
