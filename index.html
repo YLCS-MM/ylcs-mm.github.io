@@ -5,68 +5,325 @@ comments: false
 ---
 
 <style>
-.home .banner,
-.home .site-header,
-.home .banner .collection-head,
-.home .banner .collection-head a,
-.home .site-header h1 a,
-.home .site-header .site-header-nav-item:hover {
-    color: {{ site.index.banner.color | default: '#fff' }};
+/* 🐱 甘城猫猫主题样式 */
+:root {
+  --neko-pink: #ff69b4;
+  --neko-blue: #87ceeb;
+  --neko-orange: #ffa500;
+  --neko-cream: #fff9e6;
+  --neko-light-pink: #ffb6c1;
+  --neko-dark-pink: #ff1493;
 }
 
-.home .site-header .site-header-nav-item {
-    color: {{ site.index.banner.nav-color | default: 'rgba(255, 255, 255, .5)' }};
-}
-
-.home .banner,
+/* 超薄蓝色横幅 */
 .home .site-header {
-    background-color: {{ site.index.banner.background-color | default: '#4183c4'}};
-}
-
-{% if site.index.banner.background-image %}
-.home .banner {
-    background-image: url("{{ site.index.banner.background-image }}");
-    background-repeat: {{ site.index.banner.background-repeat | default: 'no-repeat' }};
-    background-size: {{ site.index.banner.background-size | default: 'cover' }};
-}
-{% endif %}
-
-.home .banner .collection-head {
-    background: 0 0;
-    box-shadow: none;
-    -webkit-box-shadow: none
-}
-
-.home .site-header {
+    background: linear-gradient(135deg, var(--neko-blue), #b0e2ff) !important;
+    padding: 5px 0 !important;
+    min-height: 40px !important;
     border-bottom: none;
-    /* 调整蓝色横幅厚度 */
-    min-height: 40px !important; /* 原值可能更大，减小高度 */
-    padding: 8px 0 !important; /* 原值可能更大，减小内边距 */
 }
 
-/* 调整横幅内部元素的间距以适应更薄的横幅 */
-.home .banner .collection-head .container {
-    padding: 5px 0 !important;
+/* 主横幅区域 - 甘城猫猫风格 */
+.neko-banner {
+    background: linear-gradient(135deg, #fff0f5, #fff9e6) !important;
+    padding: 15px 0 !important;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px dashed var(--neko-light-pink);
 }
 
-.home .collection-title {
-    padding: 5px 0 !important;
+.neko-banner::before,
+.neko-banner::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: 0;
 }
 
-@media (max-width:50em) {
-  .home .collapsed .icon-bar {
-    background-color: white;
-  }
+.neko-banner::before {
+    top: 10px;
+    left: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff69b4' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
+}
 
-  .home .collection-head .collection-header {
-    font-size: 1.25em;
-  }
-  
-  /* 移动端进一步调整横幅厚度 */
-  .home .site-header {
-    min-height: 35px !important;
-    padding: 5px 0 !important;
-  }
+.neko-banner::after {
+    bottom: 10px;
+    right: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2387ceeb' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+}
+
+/* 猫娘角色 */
+.neko-character {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.neko-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--neko-light-pink);
+    box-shadow: 0 0 15px rgba(255, 182, 193, 0.4);
+    background: url("https://avatars.githubusercontent.com/u/193340716?v=4") center/cover;
+}
+
+.neko-bubble {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    color: var(--neko-pink);
+    border: 2px dashed var(--neko-light-pink);
+    max-width: 120px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    animation: float 3s ease-in-out infinite;
+}
+
+/* 标题样式 */
+.collection-title {
+    margin-left: 160px;
+}
+
+.collection-header span {
+    color: var(--neko-pink) !important;
+    font-size: 1.8em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.collection-info {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.meta-info {
+    background: rgba(255, 182, 193, 0.2);
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 0.85em;
+}
+
+.meta-info a {
+    color: var(--neko-pink) !important;
+}
+
+/* 文章列表猫娘化 */
+.neko-posts-container {
+    margin-top: 30px;
+}
+
+.neko-section-title {
+    color: var(--neko-pink);
+    text-align: center;
+    font-size: 1.6em;
+    margin: 25px 0;
+    padding: 10px;
+    background: linear-gradient(135deg, #fff0f5, #fff9e6);
+    border-radius: 15px;
+    border: 2px dashed var(--neko-light-pink);
+    position: relative;
+}
+
+.neko-section-title::before,
+.neko-section-title::after {
+    content: '✨';
+    margin: 0 10px;
+}
+
+.repo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.neko-post-card {
+    background: var(--neko-cream) !important;
+    border: 2px dashed var(--neko-light-pink) !important;
+    border-radius: 15px !important;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.neko-post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neko-pink), var(--neko-blue));
+}
+
+.neko-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+}
+
+.repo-list-name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.neko-paw {
+    margin-right: 10px;
+    font-size: 1.2em;
+    animation: bounce 2s infinite;
+}
+
+.repo-list-name a {
+    color: var(--neko-pink) !important;
+    font-size: 1.3em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    flex-grow: 1;
+}
+
+.repo-list-name a:hover {
+    color: var(--neko-dark-pink) !important;
+    text-decoration: underline;
+}
+
+.top-most-flag {
+    color: var(--neko-orange) !important;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.repo-list-description {
+    color: #666;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.repo-list-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.neko-category-tag {
+    background: var(--neko-light-pink) !important;
+    color: white !important;
+    padding: 4px 10px !important;
+    border-radius: 12px !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+}
+
+.neko-category-tag:hover {
+    background: var(--neko-pink) !important;
+    transform: scale(1.05);
+}
+
+/* 分页样式 */
+.pagination {
+    margin-top: 40px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--neko-light-pink);
+    color: var(--neko-pink);
+}
+
+.btn-outline:hover {
+    background: var(--neko-light-pink);
+    color: white;
+}
+
+.active {
+    background: var(--neko-pink);
+    color: white;
+    border: 2px solid var(--neko-pink);
+}
+
+/* 动画 */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 50em) {
+    .neko-character {
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
+        text-align: center;
+        margin-bottom: 15px;
+        justify-content: center;
+    }
+    
+    .neko-bubble {
+        position: relative;
+        left: 0;
+        top: 0;
+        margin: 10px auto;
+        max-width: 80%;
+    }
+    
+    .neko-avatar {
+        margin: 0 auto;
+    }
+    
+    .collection-title {
+        margin-left: 0;
+        text-align: center;
+    }
+    
+    .collection-info {
+        justify-content: center;
+    }
+    
+    .repo-list-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 </style>
 
@@ -75,13 +332,19 @@ comments: false
 {% assign assets_base_url = "https://fastly.jsdelivr.net/gh/" | append: site.repository | append: '@master' %}
 {% endif %}
 
-<section class="banner">
+<section class="banner neko-banner">
     <div class="collection-head">
       <div class="container">
         <div class="columns">
           <div class="column two-thirds">
+            <!-- 猫娘角色 -->
+            <div class="neko-character">
+              <div class="neko-avatar"></div>
+              <div class="neko-bubble">欢迎来到我的小窝喵～ฅ(^•ω•^)ฅ</div>
+            </div>
+            
             <div class="collection-title">
-              <h1 class="collection-header" id="sub-title"><span>{{ site.subtitle }}</span></h1>
+              <h1 class="collection-header" id="sub-title"><span>🐱 成霜喵喵の小窝</span></h1>
               <div class="collection-info">
                 <span class="meta-info mobile-hidden">
                   <span class="octicon octicon-location"></span>
@@ -114,12 +377,15 @@ comments: false
 <section class="container content">
     <div class="columns">
         <div class="column two-thirds" >
+            <h2 class="neko-section-title">📝 最新喵文</h2>
+            
             <ol class="repo-list">
               {% for post in site.posts %}
               {% if paginator.page == 1 %}
               {% if post.topmost == true %}
-              <li class="repo-list-item">
+              <li class="repo-list-item neko-post-card">
                 <h3 class="repo-list-name">
+                  <span class="neko-paw">🐾</span>
                   <a href="{{ site.url }}{{ post.url }}"><span class="top-most-flag">[置顶]</span>{{ post.title }}</a>
                 </h3>
                 <p class="repo-list-description">
@@ -132,7 +398,7 @@ comments: false
                 {% for cat in post.categories %}
                 <span class="meta-info">
                   <span class="octicon octicon-file-directory"></span>
-                  <a href="{{ site.url }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
+                  <a href="{{ site.url }}/categories/#{{ cat }}" title="{{ cat }}" class="neko-category-tag">{{ cat }}</a>
                 </span>
                 {% endfor %}
                 </p>
@@ -143,8 +409,9 @@ comments: false
 
               {% for post in paginator.posts %}
               {% if post.topmost != true %}
-              <li class="repo-list-item">
+              <li class="repo-list-item neko-post-card">
                 <h3 class="repo-list-name">
+                  <span class="neko-paw">🐾</span>
                   <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
                 </h3>
                 <p class="repo-list-description">
@@ -157,7 +424,7 @@ comments: false
                 {% for cat in post.categories %}
                 <span class="meta-info">
                   <span class="octicon octicon-file-directory"></span>
-                  <a href="{{ site.url }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
+                  <a href="{{ site.url }}/categories/#{{ cat }}" title="{{ cat }}" class="neko-category-tag">{{ cat }}</a>
                 </span>
                 {% endfor %}
                 </p>
@@ -236,3 +503,78 @@ comments: false
     <!-- /pagination -->
 </section>
 <!-- /section.content -->
+
+<script>
+// 猫娘互动特效
+document.addEventListener('DOMContentLoaded', function() {
+  // 文章卡片加载动画
+  const cards = document.querySelectorAll('.neko-post-card');
+  cards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      card.style.transition = 'all 0.5s ease';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, index * 100);
+  });
+
+  // 添加鼠标悬停效果
+  const postCards = document.querySelectorAll('.neko-post-card');
+  postCards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.boxShadow = '0 10px 25px rgba(255, 182, 193, 0.4)';
+    });
+    card.addEventListener('mouseleave', function() {
+      this.style.boxShadow = '0 10px 25px rgba(255, 182, 193, 0.3)';
+    });
+  });
+
+  // 分类标签悬停效果
+  const categoryTags = document.querySelectorAll('.neko-category-tag');
+  categoryTags.forEach(tag => {
+    tag.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.05)';
+      this.style.background = 'var(--neko-pink)';
+    });
+    tag.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+      this.style.background = 'var(--neko-light-pink)';
+    });
+  });
+
+  // 添加点击效果
+  const postLinks = document.querySelectorAll('.repo-list-name a');
+  postLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 150);
+    });
+  });
+});
+
+// 添加CSS动画
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes heartBeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  .neko-paw {
+    animation: bounce 2s infinite;
+  }
+  
+  .neko-bubble {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .neko-post-card {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+`;
+document.head.appendChild(style);
+</script>
