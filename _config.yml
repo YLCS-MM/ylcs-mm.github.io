@@ -144,14 +144,19 @@ simple_jekyll_search:
 #     导航栏配置    #
 # ---------------- #
 navs:
-  - label: 首页
-    href: /
-  - label: 分类  
-    href: /categories/
-  - label: 关于
-    href: /about/
-  - label: 公告
-    href: /announcements/
+- label: 首页
+  href:  /
+  icon: 🏠
+- label: 分类
+  href: /categories/
+  icon: 📁
+- label: 关于
+  href: /about/
+  icon: 👤
+- label: 公告
+  href: /announcements/
+  icon: 📢
+  badge: true
 
 
 # ---------------- #
