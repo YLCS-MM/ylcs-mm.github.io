@@ -286,3 +286,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<style>
+/* 🎯 强制看板娘定位到右下角 */
+#waifu, 
+.live2d-widget,
+[class*="live2d"],
+[class*="waifu"] {
+    position: fixed !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    top: auto !important;
+    z-index: 9999 !important;
+    transform: none !important;
+}
+
+/* 🎯 防止看板娘被其他元素覆盖 */
+body {
+    position: relative;
+}
+
+/* 🎯 移动端看板娘位置调整 */
+@media (max-width: 768px) {
+    #waifu, 
+    .live2d-widget {
+        right: 10px !important;
+        bottom: 10px !important;
+        transform: scale(0.8) !important;
+    }
+}
+</style>
