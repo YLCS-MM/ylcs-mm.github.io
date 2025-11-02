@@ -8,26 +8,43 @@ description: 博客更新公告和历史记录
 <div class="announcements-page">
   <h2>📢 公告历史</h2>
   
-  {% if site.data.announcement.announcements %}
+  {% if site.data.announcement-history %}
+    {% assign sorted_announcements = site.data.announcement-history | sort: "date" | reverse %}
     <div class="announcement-list">
-      {% for announcement in site.data.announcement.announcements %}
-      <article class="announcement-item">
-        <header class="announcement-header">
-          <h3 class="announcement-title">
-            <a href="javascript:void(0)" class="announcement-link" 
-               onclick="showAnnouncementDetail('{{ forloop.index0 }}')">
-              {{ announcement.title }}
-            </a>
-          </h3>
-          <span class="announcement-date">{{ announcement.date }}</span>
-        </header>
-        <div class="announcement-excerpt">
-          {{ announcement.content | markdownify | strip_html | truncatewords: 30 }}
-        </div>
-        <button class="read-more-btn" onclick="showAnnouncementDetail('{{ forloop.index0 }}')">
-          查看详情
-        </button>
-      </article>
+      {% for announcement in sorted_announcements %}
+        {% assign announcement_index = forloop.index0 %}
+        <article class="announcement-item announcement-{{ announcement.type }}">
+          <header class="announcement-header">
+            <div class="announcement-title-section">
+              <h3 class="announcement-title">
+                <span class="announcement-icon">
+                  {% case announcement.type %}
+                    {% when "feature" %}✨
+                    {% when "maintenance" %}🚧
+                    {% when "release" %}🎉
+                    {% else %}📢
+                  {% endcase %}
+                </span>
+                {{ announcement.title }}
+              </h3>
+              {% if site.data.announcement.current_announcement == announcement_index %}
+                <span class="current-badge">当前公告</span>
+              {% endif %}
+            </div>
+            <span class="announcement-date">{{ announcement.date }}</span>
+          </header>
+          
+          <div class="announcement-content">
+            {{ announcement.content | markdownify }}
+          </div>
+          
+          <footer class="announcement-footer">
+            <button class="read-more-btn" onclick="toggleAnnouncement({{ announcement_index }})">
+              <span class="btn-text">展开详情</span>
+              <span class="btn-icon">↓</span>
+            </button>
+          </footer>
+        </article>
       {% endfor %}
     </div>
   {% else %}
@@ -35,81 +52,189 @@ description: 博客更新公告和历史记录
   {% endif %}
 </div>
 
-<!-- 公告详情弹窗 -->
-<div id="announcement-detail-modal" class="announcement-detail-modal hidden">
-  <div class="detail-modal-content">
-    <div class="modal-header">
-      <h3 id="detail-title"></h3>
-      <button class="close-detail-modal">&times;</button>
-    </div>
-    <div class="modal-body">
-      <p class="detail-date"></p>
-      <div class="detail-content"></div>
-    </div>
-  </div>
-</div>
-
 <style>
 .announcements-page {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
 }
 
 .announcement-item {
-  background: #fff;
-  border: 1px solid #e1e4e8;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #fff9e6, #fff0f5);
+  border: 2px dashed #ffb6c1;
+  border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.announcement-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+}
+
+.announcement-item::before {
+  content: '❤';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  color: #ffb6c1;
+  font-size: 18px;
+  background: white;
+  padding: 0 5px;
 }
 
 .announcement-header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.announcement-title-section {
+  display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .announcement-title {
   margin: 0;
   font-size: 1.3rem;
+  color: #ff69b4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.announcement-link {
-  color: #0366d6;
-  text-decoration: none;
-}
-
-.announcement-link:hover {
-  text-decoration: underline;
+.announcement-icon {
+  font-size: 1.2em;
 }
 
 .announcement-date {
-  color: #666;
+  color: #ff69b4;
+  font-weight: bold;
   font-size: 0.9rem;
+  white-space: nowrap;
 }
 
-.announcement-excerpt {
-  color: #555;
+.current-badge {
+  background: #ff69b4;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
+.announcement-content {
+  color: #666;
   line-height: 1.6;
-  margin-bottom: 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.announcement-content.expanded {
+  max-height: 500px;
+}
+
+.announcement-content :first-child {
+  margin-top: 0;
+}
+
+.announcement-content :last-child {
+  margin-bottom: 0;
+}
+
+.announcement-footer {
+  margin-top: 15px;
+  text-align: center;
 }
 
 .read-more-btn {
-  background: #0366d6;
+  background: #ffa500;
   color: white;
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 0.9rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 auto;
 }
 
 .read-more-btn:hover {
-  background: #0256b3;
+  background: #ff8c00;
+  transform: scale(1.05);
 }
+
+.btn-icon {
+  transition: transform 0.3s;
+}
+
+.btn-icon.expanded {
+  transform: rotate(180deg);
+}
+
+/* 不同类型公告的样式 */
+.announcement-feature {
+  border-color: #a8e6cf;
+}
+
+.announcement-feature::before {
+  color: #a8e6cf;
+}
+
+.announcement-maintenance {
+  border-color: #ffd3b6;
+}
+
+.announcement-maintenance::before {
+  color: #ffd3b6;
+}
+
+.announcement-release {
+  border-color: #ffaaa5;
+}
+
+.announcement-release::before {
+  color: #ffaaa5;
+}
+</style>
+
+<script>
+function toggleAnnouncement(index) {
+  const content = document.querySelectorAll('.announcement-content')[index];
+  const button = document.querySelectorAll('.read-more-btn')[index];
+  const btnText = button.querySelector('.btn-text');
+  const btnIcon = button.querySelector('.btn-icon');
+  
+  if (content.classList.contains('expanded')) {
+    content.classList.remove('expanded');
+    btnText.textContent = '展开详情';
+    btnIcon.classList.remove('expanded');
+  } else {
+    content.classList.add('expanded');
+    btnText.textContent = '收起详情';
+    btnIcon.classList.add('expanded');
+  }
+}
+
+// 默认展开当前公告
+document.addEventListener('DOMContentLoaded', function() {
+  const currentIndex = {{ site.data.announcement.current_announcement }};
+  if (currentIndex >= 0) {
+    setTimeout(() => toggleAnnouncement(currentIndex), 100);
+  }
+});
+</script>
+
 
 .no-announcements {
   text-align: center;
