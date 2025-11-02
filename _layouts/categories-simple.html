@@ -7,43 +7,115 @@
     
     <!-- 🎀 甘城猫猫风格CSS -->
     <style>
+    /* 基础重置 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
     body {
         font-family: "Comic Sans MS", "微软雅黑", sans-serif;
         background: linear-gradient(135deg, #f0f8ff, #fff0f5);
-        margin: 0;
-        padding: 0;
         min-height: 100vh;
+        line-height: 1.6;
+        color: #333;
     }
     
+    /* 容器样式 */
     .categories-container {
         max-width: 1000px;
         margin: 0 auto;
         padding: 20px;
     }
     
+    /* 页面头部 */
     .categories-header {
         text-align: center;
-        padding: 40px 0;
+        padding: 40px 0 30px;
         background: rgba(255, 255, 255, 0.95);
         border-radius: 20px;
         margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(135, 206, 235, 0.2);
         border: 2px solid #87ceeb;
     }
     
+    .categories-title {
+        color: #4682b4;
+        font-size: 2.2em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .categories-subtitle {
+        color: #87ceeb;
+        font-size: 1.1em;
+    }
+    
+    /* 内容区域 */
     .categories-content {
         background: rgba(255, 255, 255, 0.98);
         border-radius: 15px;
         padding: 30px;
+        box-shadow: 0 5px 20px rgba(255, 182, 193, 0.15);
         border: 2px solid #ffb6c1;
+        margin-bottom: 30px;
+    }
+    
+    /* 🎯 防止内容重复 */
+    .categories-content > *:nth-child(n+2) {
+        display: none !important;
+    }
+    
+    /* 🎯 看板娘定位到右下角 */
+    #waifu, .live2d-widget {
+        position: fixed !important;
+        right: 20px !important;
+        bottom: 20px !important;
+        left: auto !important;
+        top: auto !important;
+        z-index: 9999 !important;
+    }
+    
+    /* 🎯 隐藏看板娘对话气泡 */
+    #waifu-tips, .waifu-tip {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .categories-container {
+            padding: 15px;
+        }
+        
+        .categories-header {
+            padding: 30px 0 20px;
+            margin-bottom: 20px;
+        }
+        
+        .categories-title {
+            font-size: 1.8em;
+        }
+        
+        .categories-content {
+            padding: 20px;
+        }
+        
+        #waifu, .live2d-widget {
+            right: 10px !important;
+            bottom: 10px !important;
+            transform: scale(0.8) !important;
+        }
     }
     </style>
 </head>
 <body>
     <div class="categories-container">
         <header class="categories-header">
-            <h1 style="color: #4682b4;">{{ page.title }}</h1>
+            <h1 class="categories-title">喵喵分类库</h1>
             {% if page.subtitle %}
-            <p style="color: #87ceeb;">{{ page.subtitle }}</p>
+            <p class="categories-subtitle">{{ page.subtitle }}</p>
             {% endif %}
         </header>
         
@@ -51,5 +123,30 @@
             {{ content }}
         </main>
     </div>
+
+    <!-- 🎯 防止重复的脚本 -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 确保内容只显示一次
+        const contentElements = document.querySelectorAll('.categories-content > *');
+        if (contentElements.length > 1) {
+            for (let i = 1; i < contentElements.length; i++) {
+                contentElements[i].remove();
+            }
+        }
+        
+        // 强制看板娘位置
+        setTimeout(() => {
+            const waifuElements = document.querySelectorAll('#waifu, .live2d-widget');
+            waifuElements.forEach(el => {
+                el.style.cssText = 'position:fixed !important; right:20px !important; bottom:20px !important; z-index:9999 !important;';
+            });
+            
+            // 隐藏对话气泡
+            const tips = document.querySelectorAll('#waifu-tips, .waifu-tip');
+            tips.forEach(tip => tip.style.display = 'none');
+        }, 1000);
+    });
+    </script>
 </body>
 </html>
