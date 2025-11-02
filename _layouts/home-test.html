@@ -13,12 +13,12 @@
         background-color: transparent !important;
     }
     
-    /* 甘城猫猫粉色系 */
-    .neko-pink { color: #ff69b4; }
+    /* 甘城猫猫配色 */
+    .neko-pink { color: #ffb6c1; }
     .neko-blue { color: #87ceeb; }
-    .neko-bg-pink { background: #fff0f5; }
+    .neko-white { color: #ffffff; }
     
-    /* 布局样式 */
+    /* 布局基础 */
     .container { 
         max-width: 1020px; 
         margin: 0 auto; 
@@ -39,28 +39,44 @@
         width: 33.333%; 
     }
     
-    /* 文章卡片样式 */
+    /* 文章卡片 - 明显的方块设计 */
     .repo-list-item {
-        background: white;
-        border: 1px dashed #ffb6c1;
-        border-radius: 10px;
-        padding: 15px;
-        margin: 15px 0;
+        background: linear-gradient(135deg, #ffffff, #fff9f9);
+        border: 2px solid #ffb6c1;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
         transition: all 0.3s ease;
     }
+
     .repo-list-item:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(255,182,193,0.3);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(255, 182, 193, 0.4);
     }
-    
+
+    .repo-list-name a {
+        color: #ff69b4;
+        font-size: 1.3em;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .repo-list-description {
+        color: #666;
+        line-height: 1.5;
+        margin: 10px 0;
+        padding: 10px;
+        background: rgba(255, 182, 193, 0.05);
+        border-left: 3px solid #87ceeb;
+        border-radius: 5px;
+    }
+
     /* 移动端适配 */
     @media (max-width: 768px) {
-        .column { 
-            width: 100% !important; 
-        }
-        .columns { 
-            flex-direction: column; 
-        }
+        .column { width: 100% !important; }
+        .columns { flex-direction: column; }
+        .repo-list-item { margin: 15px 10px; padding: 15px; }
     }
     </style>
     
@@ -70,7 +86,6 @@
     <link rel="stylesheet" href="/assets/css/globals/responsive.css">
 </head>
 <body class="home">
-    <!-- 包含原有页头（导航栏） -->
     {% include header.html %}
     
     <section class="container content">
@@ -79,12 +94,11 @@
             <div class="column two-thirds">
                 <h2 class="neko-pink">📝 最新喵文</h2>
                 
-                <!-- 文章列表 -->
                 <ol class="repo-list">
                   {% for post in site.posts %}
                   <li class="repo-list-item">
                     <h3 class="repo-list-name">
-                      <a href="{{ post.url }}" class="neko-pink">{{ post.title }}</a>
+                      <a href="{{ post.url }}">{{ post.title }}</a>
                     </h3>
                     <p class="repo-list-description">
                       {{ post.excerpt | strip_html | strip }}
@@ -97,7 +111,7 @@
                       {% for cat in post.categories %}
                       <span class="meta-info">
                         <span class="octicon octicon-file-directory"></span>
-                        <a href="/categories/#{{ cat }}" class="neko-blue">{{ cat }}</a>
+                        <a href="/categories/#{{ cat }}">{{ cat }}</a>
                       </span>
                       {% endfor %}
                     </p>
@@ -108,32 +122,29 @@
             
             <!-- 右侧：侧边栏 -->
             <div class="column one-third">
-                <!-- 搜索框 -->
-                <div class="sidebar-search" style="margin-bottom: 20px;">
-                    <input type="text" placeholder="搜搜看有没有福眼瞄..." 
-                           style="width:100%; padding:10px; border:1px dashed #ffb6c1; border-radius:8px;">
+                <div class="sidebar-search">
+                    <input type="text" placeholder="搜搜看喵..." 
+                           style="width:100%; padding:12px; border:2px solid #87ceeb; border-radius:25px;">
                 </div>
                 
-                <!-- 分类云 -->
-                <div class="sidebar-categories" style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <div class="sidebar-categories">
                     <h3 class="neko-pink">📁 分类云</h3>
                     <div class="tags">
                         {% for category in site.categories %}
                         <a href="/categories/#{{ category[0] }}" 
-                           style="display:inline-block; background:#ffb6c1; color:white; padding:3px 8px; margin:2px; border-radius:4px; text-decoration:none;">
+                           style="display:inline-block; background:linear-gradient(45deg, #ffb6c1, #ff69b4); color:white; padding:5px 12px; margin:3px; border-radius:20px; text-decoration:none;">
                             {{ category[0] }}
                         </a>
                         {% endfor %}
                     </div>
                 </div>
                 
-                <!-- 热门喵文 -->
-                <div class="sidebar-popular" style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                <div class="sidebar-popular">
                     <h3 class="neko-pink">🔥 热门喵文</h3>
                     <ul style="list-style:none; padding-left:0;">
                         {% for post in site.posts limit:5 %}
                         <li style="margin:8px 0;">
-                            <a href="{{ post.url }}" class="neko-blue">{{ post.title }}</a>
+                            <a href="{{ post.url }}" style="color:#87ceeb; text-decoration:none;">{{ post.title }}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -142,7 +153,6 @@
         </div>
     </section>
     
-    <!-- 包含原有页脚 -->
     {% include footer.html %}
 </body>
 </html>
