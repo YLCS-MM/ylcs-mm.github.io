@@ -5,127 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
     
-    <!-- 🎀 甘城猫猫风格CSS -->
+    <!-- 🎀 复用主页的猫娘样式 -->
     <style>
-    /* 基础重置 */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        font-family: "Comic Sans MS", "微软雅黑", sans-serif;
-        background: linear-gradient(135deg, #f0f8ff, #fff0f5);
-        min-height: 100vh;
-        line-height: 1.6;
-    }
-    
-    /* 透明头部 */
-    .site-header {
-        background: transparent !important;
-        padding: 20px 0;
-        border-bottom: none !important;
-    }
-    
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
-    /* 导航样式 */
-    .site-header-nav {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        flex-wrap: wrap;
-    }
-    
-    .site-header-nav-item {
-        color: #4682b4 !important;
-        text-decoration: none;
-        padding: 8px 16px;
-        border-radius: 20px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-    }
-    
-    .site-header-nav-item:hover {
-        color: #ff69b4 !important;
-        background: rgba(255, 182, 193, 0.2);
-        transform: translateY(-2px);
-    }
-    
-    /* 主要内容区 */
-    .content {
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        padding: 30px;
-        margin: 30px auto;
-        box-shadow: 0 10px 30px rgba(135, 206, 235, 0.2);
-        border: 2px solid #87ceeb;
-    }
-    
-    /* 移动端适配 */
-    @media (max-width: 768px) {
-        .site-header-nav {
-            gap: 15px;
-        }
-        
-        .site-header-nav-item {
-            padding: 6px 12px;
-            font-size: 0.9em;
-        }
-        
-        .content {
-            padding: 20px;
-            margin: 20px auto;
-        }
-    }
+    /* 这里放入主人之前提供的主页CSS样式代码 */
+    /* 就是那个有.neko-header-section的完整CSS */
     </style>
 </head>
 <body>
-    <!-- 🎯 简洁头部 -->
-    <header class="site-header">
-        <div class="container">
-            <nav class="site-header-nav">
-                <a href="/" class="site-header-nav-item">🏠 首页</a>
-                <a href="/categories/" class="site-header-nav-item">📁 分类</a>
-                <a href="/about/" class="site-header-nav-item">🐱 关于</a>
-            </nav>
-        </div>
+    <!-- 🎯 顶部区块 - 和主页完全一样 -->
+    <header class="neko-header-section">
+        <img src="https://avatars.githubusercontent.com/u/193340716?v=4" 
+             alt="成霜喵喵" class="neko-avatar">
+        
+        <h1 class="neko-site-title">成霜喵喵の小窝</h1>
+        <p class="neko-site-location">湖南,郴州 · ylcs-mm</p>
+        
+        <nav class="neko-nav">
+            <a href="/">首页</a>
+            <a href="/categories/">分类</a>
+            <a href="/about/">关于</a>
+            <a href="/announcements/">公告</a>
+        </nav>
     </header>
 
-    <!-- 🎯 主要内容 -->
+    <!-- 📝 主体内容区域 - 显示about页面的专属内容 -->
     <main class="container">
-        <div class="content">
-            {{ content }}
-        </div>
+        {{ content }}
     </main>
 
-    <!-- 🎯 简洁页脚 -->
-    <footer style="text-align: center; padding: 30px; color: #666;">
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }} · 喵～</p>
-    </footer>
-
-<script>
-// 🎯 防止内容重复加载
-document.addEventListener('DOMContentLoaded', function() {
-    // 检查是否已经加载过主要内容
-    if (document.querySelector('.categories-container')) {
-        console.log('内容已加载，跳过重复初始化');
-        return;
-    }
-    
-    // 移除可能的重复元素
-    const duplicates = document.querySelectorAll('.category-section:not(:first-child)');
-    duplicates.forEach((dup, index) => {
-        if (index > 0) dup.remove();
-    });
-});
-</script>
-
-    
+    <!-- 🐾 页脚 -->
+    {% include footer.html %}
 </body>
 </html>
