@@ -230,3 +230,10 @@ navigation:
   # 目录高亮当前阅读部分
   highlight_active: true
 
+# 自动为长文章添加目录
+auto_toc:
+  enabled: true
+  # 当文章字数超过这个值时自动添加目录
+  min_words: 800
+  # 当标题数量超过这个值时自动添加目录
+  min_headings: 3
