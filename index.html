@@ -18,9 +18,10 @@ comments: false
     color: {{ site.index.banner.nav-color | default: 'rgba(255, 255, 255, .5)' }};
 }
 
+/* 🎯 修改1：将蓝色横幅设为透明 */
 .home .banner,
 .home .site-header {
-    background-color: {{ site.index.banner.background-color | default: '#4183c4'}};
+    background-color: transparent !important; /* 改为透明 */
 }
 
 {% if site.index.banner.background-image %}
@@ -39,7 +40,7 @@ comments: false
 
 .home .site-header {
     border-bottom: none;
-    /* 超薄蓝色横幅 */
+    /* 超薄透明横幅 */
     min-height: 35px !important;
     padding: 5px 0 !important;
 }
@@ -54,47 +55,26 @@ comments: false
   --neko-dark-pink: #ff1493;
 }
 
-/* 修改1：删除黄色猫头相关样式 */
-/* 已删除：.yellow-cat-head 相关样式 */
-
-/* 修改2：调整横幅样式 */
+/* 🎯 修改2：将主横幅背景设为透明 */
 .neko-banner {
-  background: linear-gradient(135deg, var(--neko-blue), #b0e2ff) !important;
+  background: transparent !important; /* 改为透明 */
   position: relative;
   overflow: hidden;
   padding: 12px 0;
   min-height: 100px;
 }
 
+/* 🎯 修改3：移除可能包含黄色猫头的装饰元素 */
 .neko-banner::before,
 .neko-banner::after {
-  content: '';
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.1;
-  z-index: 0;
+  display: none; /* 隐藏装饰元素 */
 }
 
-.neko-banner::before {
-  top: 5px;
-  left: 15px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff69b4' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
-}
-
-.neko-banner::after {
-  bottom: 5px;
-  right: 15px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2387ceeb' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
-}
-
-/* 修改3：重新定位头像到顶部 */
+/* 猫娘角色样式 */
 .neko-character {
   position: absolute;
   left: 20px;
-  top: 20px; /* 移到顶部 */
+  top: 20px;
   z-index: 2;
   display: flex;
   align-items: center;
@@ -123,16 +103,16 @@ comments: false
   line-height: 1.2;
 }
 
-/* 修改4：调整标题布局适应顶部头像 */
+/* 标题区域样式 */
 .collection-title {
   margin-left: 130px;
   padding-right: 20px;
-  margin-top: 10px; /* 为顶部头像留出空间 */
+  margin-top: 10px;
 }
 
 .collection-header span {
-  color: white !important;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  color: #333 !important; /* 改为深色以适应透明背景 */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
   font-size: 1.3em;
   display: block;
   margin-bottom: 3px;
@@ -146,15 +126,16 @@ comments: false
 }
 
 .meta-info {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.7); /* 半透明白色背景 */
   padding: 2px 5px;
   border-radius: 6px;
   font-size: 0.75em;
   white-space: nowrap;
+  backdrop-filter: blur(5px); /* 毛玻璃效果 */
 }
 
 .meta-info a {
-  color: white !important;
+  color: var(--neko-pink) !important;
   text-decoration: none;
 }
 
@@ -261,20 +242,6 @@ comments: false
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 8px;
-}
-
-.meta-info {
-  background: rgba(255, 182, 193, 0.2);
-  padding: 2px 5px;
-  border-radius: 8px;
-  font-size: 0.8em;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.meta-info a {
-  color: var(--neko-pink) !important;
 }
 
 .neko-category-tag {
@@ -390,6 +357,11 @@ comments: false
     flex-direction: column;
     align-items: flex-start;
   }
+  
+  /* 移动端透明背景适配 */
+  .home .site-header {
+    background-color: transparent !important;
+  }
 }
 </style>
 
@@ -403,10 +375,10 @@ comments: false
       <div class="container">
         <div class="columns">
           <div class="column two-thirds">
-            <!-- 修改5：头像移到顶部 -->
+            <!-- 🎯 修改4：确保没有黄色猫头元素 -->
             <div class="neko-character">
               <div class="neko-avatar"></div>
-              <div class="neko-bubble">欢迎来到我的小窝喵～ฅ(^•ω•^)ฅ</div>
+              <div class="neko-bubble">欢迎来到の小窝喵～(｡･ω･｡)ﾉ♡</div>
             </div>
             
             <div class="collection-title">
@@ -414,17 +386,11 @@ comments: false
               <div class="collection-info">
                 <span class="meta-info mobile-hidden">
                   <span class="octicon octicon-location"></span>
-                  {{ site.location }}
+                  湖南，郴州
                 </span>
-                {% if site.organization %}
-                <span class="meta-info">
-                  <span class="octicon octicon-organization"></span>
-                  <a href="{{ site.organization_url }}" target="_blank">{{ site.organization }}</a>
-                </span>
-                {% endif %}
                 <span class="meta-info">
                   <span class="octicon octicon-mark-github"></span>
-                  <a href="https://github.com/{{ site.github_username }}" target="_blank">{{ site.github_username }}</a>
+                  <a href="https://github.com/ylcs-mm" target="_blank">ylcs-mm</a>
                 </span>
               </div>
             </div>
