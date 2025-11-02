@@ -1,5 +1,5 @@
 ---
-layout: default    # 重要修改：从page改为default
+layout: home    # 重要修改：从page改为home
 title: 关于        
 permalink: /about/ 
 comments: false    
@@ -66,3 +66,4 @@ comments: false
     }
   </style>
 </div>
+
