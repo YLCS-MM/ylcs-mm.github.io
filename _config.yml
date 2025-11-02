@@ -187,20 +187,3 @@ google:
         markdown: kramdown
 kramdown:
   input: GFM  # 支持GitHub风格Markdown（含HTML解析）
-# ------------------------------
-# 🔔 更新公告配置（修改后）
-# ------------------------------
-announcement:
-  enabled: true                # 显示公告
-  title: "🍂 Neko的秋季版本迭代通知！🍂"  # 秋季主题标题
-  content: |                   # 最新更新内容（Markdown格式）
-    【2025-09-01 秋季更新】<br>
-    - 📁 新增「文章归档」页面（按年份/月份筛选，查找文章更方便~）；<br>
-    - 🚀 优化了图片加载速度（采用WebP格式，加载时间缩短50%！）；<br>
-    - 😺 评论区新增「猫咪表情包」（点击输入框旁的🐱图标即可发送~）。<br>
-    *提示：点击「阅读全文」查看详细更新日志~*  # Markdown斜体
-  style:                       # 秋季风格样式
-    background: "#ffe4e1"      # 浅粉色（符合秋季氛围）
-    color: "#333"              # 文字颜色（深灰，清晰易读）
-    button_bg: "#9370db"       # 浅紫色按钮（可爱风）
-    button_color: "#fff"       # 按钮文字颜色（白色）
