@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-cmn-Hans">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
-    
-    <!-- 🎀 甘城猫猫风格样式 -->
-    <style>
-    /* 全局样式重置 */
-    * {
-        margin: 0;
-        padding: 0;
+     padding: 0;
         box-sizing: border-box;
     }
     
@@ -340,38 +328,74 @@
         <p>©2025 成霜喵喵 · 本站访问量1917次 · 本站访客数491人</p>
         <p>记得把小家加入收藏夹哦！</p>
     </footer>
+
 <!-- 🎯 恢复公告弹窗 -->
 <script src="{{ site.baseurl }}/assets/js/announcement.js" defer></script>
 
 <!-- 🎯 恢复看板娘 -->
-{% if site.live2d.enabled %}
 <script>
-// 看板娘加载代码
-document.addEventListener('DOMContentLoaded', function() {
-    // 动态加载看板娘资源
-    const live2dScript = document.createElement('script');
-    live2dScript.src = '{{ site.baseurl }}/assets/vendor/live2d/js/live2d.min.js';
-    document.head.appendChild(live2dScript);
-    
-    const live2dConfig = document.createElement('script');
-    live2dConfig.src = '{{ site.baseurl }}/assets/js/live2d-config.js';
-    document.head.appendChild(live2dConfig);
-    
-    // 创建看板娘容器
-    const live2dContainer = document.createElement('div');
-    live2dContainer.id = 'live2d-widget';
-    live2dContainer.style.position = 'fixed';
-    live2dContainer.style.right = '0';
-    live2dContainer.style.bottom = '0';
-    live2dContainer.style.zIndex = '9999';
-    document.body.appendChild(live2dContainer);
-});
-</script>
-{% endif %}
+/*!
+ * Live2D Widget
+ * https://github.com/stevenjoezhang/live2d-widget
+ */
 
-<!-- 🎯 确保看板娘样式 -->
+// 使用绝对路径
+const live2d_path = 'https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/';
+
+// 异步加载资源的方法
+function loadExternalResource(url, type) {
+  return new Promise((resolve, reject) => {
+    let tag;
+    if (type === 'css') {
+      tag = document.createElement('link');
+      tag.rel = 'stylesheet';
+      tag.href = url;
+    }
+    else if (type === 'js') {
+      tag = document.createElement('script');
+      tag.type = 'module';
+      tag.src = url;
+    }
+    if (tag) {
+      tag.onload = () => resolve(url);
+      tag.onerror = () => reject(url);
+      document.head.appendChild(tag);
+    }
+  });
+}
+
+// 主函数
+(async () => {
+  // 避免图片资源跨域问题
+  const OriginalImage = window.Image;
+  window.Image = function(...args) {
+    const img = new OriginalImage(...args);
+    img.crossOrigin = "anonymous";
+    return img;
+  };
+  window.Image.prototype = OriginalImage.prototype;
+  
+  // 加载看板娘样式和脚本
+  await Promise.all([
+    loadExternalResource(live2d_path + 'waifu.css', 'css'),
+    loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
+  ]);
+  
+  // 初始化看板娘
+  initWidget({
+    waifuPath: live2d_path + 'waifu-tips.json',
+    cubism2Path: live2d_path + 'live2d.min.js',
+    cubism5Path: 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js',
+    tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
+    logLevel: 'warn',
+    drag: false,
+  });
+})();
+</script>
+
+<!-- 🎯 确保看板娘容器样式 -->
 <style>
-#live2d-widget {
+#waifu, #live2d-widget {
     position: fixed !important;
     right: 0 !important;
     bottom: 0 !important;
@@ -379,17 +403,11 @@ document.addEventListener('DOMContentLoaded', function() {
     pointer-events: auto !important;
 }
 
-/* 看板娘画布样式 */
-#live2dcanvas {
-    width: 150px !important;
-    height: 200px !important;
-}
-
 /* 移动端适配 */
 @media (max-width: 768px) {
-    #live2d-widget {
-        right: -20px !important;
-        bottom: -20px !important;
+    #waifu, #live2d-widget {
+        right: -10px !important;
+        bottom: -10px !important;
         transform: scale(0.8);
     }
 }
