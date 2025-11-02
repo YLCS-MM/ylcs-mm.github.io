@@ -370,3 +370,82 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 500);
 });
 </script>
+
+
+<!-- 公告弹窗脚本 -->
+<script src="/assets/js/announcement.js"></script>
+
+<!-- 看板娘脚本 -->
+<script>
+// 看板娘加载代码
+(function() {
+    console.log('🚀 开始加载看板娘...');
+    
+    const live2d_path = 'https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.7/dist/';
+    
+    function loadExternalResource(url, type) {
+        return new Promise((resolve, reject) => {
+            let tag;
+            if (type === 'css') {
+                tag = document.createElement('link');
+                tag.rel = 'stylesheet';
+                tag.href = url;
+            }
+            else
+            else if (type === 'js') {
+                tag = document.createElement('script');
+                tag.type = 'module';
+                tag.src = url;
+            }
+            if (tag) {
+                tag.onload = () => resolve(url);
+                tag.onerror = () => reject(url);
+                document.head.appendChild(tag);
+            }
+        });
+    }
+
+    (async () => {
+        try {
+            await Promise.all([
+                loadExternalResource(live2d_path + 'waifu.css', 'css'),
+                loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
+            ]);
+            
+            if (typeof initWidget !== 'undefined') {
+                initWidget({
+                    waifuPath: live2d_path + 'waifu-tips.json',
+                    cubism2Path: live2d_path + 'live2d.min.js',
+                    cubism5Path: 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js',
+                    tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
+                    logLevel: 'warn',
+                    drag: false,
+                });
+                console.log('✅ 看板娘加载成功！');
+            }
+        } catch (e) {
+            console.log('❌ 看板娘加载失败:', e);
+        }
+    })();
+})();
+</script>
+
+<!-- 看板娘样式确保 -->
+<style>
+#waifu, .live2d-widget {
+    position: fixed !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+}
+
+/* 移动端看板娘适配 */
+@media (max-width: 768px) {
+    #waifu, .live2d-widget {
+        right: -10px !important;
+        bottom: -10px !important;
+        transform: scale(0.8);
+    }
+}
+</style>
