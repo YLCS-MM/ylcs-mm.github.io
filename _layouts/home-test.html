@@ -19,18 +19,20 @@
         position: relative;
     }
     
-    .neko-header-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.85);
-        z-index: 0;
-        border-radius: 20px;
-    }
-    
+/* 🎯 调整顶部区块背景为中等透明度 */
+.neko-header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.65); /* 从0.85调到0.65 - 中等透明度 */
+    z-index: 0;
+    border-radius: 20px;
+}
+
+        
     /* 确保内容在遮罩上方 */
     .neko-header-section > * {
         position: relative;
