@@ -1,0 +1,73 @@
+<!-- _includes/toc.html -->
+{% assign minHeader = include.h_min | default: 2 %}
+{% assign maxHeader = include.h_max | default: 4 %}
+{% assign nodes = include.html | split: '<h' %}
+{% assign firstHeader = true %}
+
+{% capture toc %}
+{% for node in nodes %}
+  {% if node == "" %}
+    {% continue %}
+  {% endif %}
+  
+  {% assign headerLevel = node | replace: '"', '' | slice: 0, 1 | times: 1 %}
+  {% if headerLevel < minHeader or headerLevel > maxHeader %}
+    {% continue %}
+  {% endif %}
+  
+  {% assign indentAmount = headerLevel | minus: minHeader %}
+  {% assign _workspace = node | split: '</h' %}
+  {% assign _idWorkspace = _workspace[0] | split: 'id="' %}
+  {% assign _idWorkspace = _idWorkspace[1] | split: '"' %}
+  {% assign html_id = _idWorkspace[0] %}
+  
+  {% assign _classWorkspace = _workspace[0] | split: 'class="' %}
+  {% assign _classWorkspace = _classWorkspace[1] | split: '"' %}
+  {% assign html_class = _classWorkspace[0] %}
+  
+  {% if html_class contains "no_toc" %}
+    {% continue %}
+  {% endif %}
+  
+  {% capture _hAttrToStrip %}{{ _workspace[0] | split: '>' | first }}>{% endcapture %}
+  {% assign header = _workspace[0] | replace: _hAttrToStrip, '' %}
+  
+  {% capture listItemClass %} class="neko-toc-item neko-toc-level-{{ headerLevel }}"{% endcapture %}
+  
+  {% if firstHeader %}
+    {% assign firstHeader = false %}
+    <ul class="neko-toc-list">
+  {% endif %}
+  
+  <li{{ listItemClass }}>
+    <a href="#{{ html_id }}" class="neko-toc-link">
+      <span class="neko-toc-bullet">🐾</span>
+      {{ header | strip_html }}
+    </a>
+    
+    {% unless forloop.last %}
+      {% assign next = forloop.index0 | plus: 1 %}
+      {% assign nextNode = nodes[next] %}
+      {% assign nextHeaderLevel = nextNode | replace: '"', '' | slice: 0, 1 | times: 1 %}
+      
+      {% if nextHeaderLevel > headerLevel %}
+        <ul class="neko-toc-sublist">
+      {% elsif nextHeaderLevel < headerLevel %}
+        </li>
+        {% assign headerLevelDiff = headerLevel | minus: nextHeaderLevel %}
+        {% for i in (1..headerLevelDiff) %}
+          </ul></li>
+        {% endfor %}
+      {% else %}
+        </li>
+      {% endif %}
+    {% endunless %}
+{% endfor %}
+
+{% if firstHeader == false %}
+  </ul>
+{% endif %}
+{% endcapture %}
+
+{% assign toc = toc | replace: '<ul></ul>', '' %}
+{{ toc }}
