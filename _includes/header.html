@@ -108,5 +108,24 @@
     <footer style="text-align: center; padding: 30px; color: #666;">
         <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }} · 喵～</p>
     </footer>
+
+<script>
+// 🎯 防止内容重复加载
+document.addEventListener('DOMContentLoaded', function() {
+    // 检查是否已经加载过主要内容
+    if (document.querySelector('.categories-container')) {
+        console.log('内容已加载，跳过重复初始化');
+        return;
+    }
+    
+    // 移除可能的重复元素
+    const duplicates = document.querySelectorAll('.category-section:not(:first-child)');
+    duplicates.forEach((dup, index) => {
+        if (index > 0) dup.remove();
+    });
+});
+</script>
+
+    
 </body>
 </html>
