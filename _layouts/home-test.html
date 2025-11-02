@@ -7,23 +7,60 @@
     
     <!-- 🎀 甘城猫猫风格样式 -->
     <style>
-    /* 确保蓝色横幅透明 */
+    /* 透明蓝色横幅 */
     .site-header, .banner {
         background: transparent !important;
         background-color: transparent !important;
     }
     
-    /* 保持原有布局样式 */
-    .container { max-width: 1020px; margin: 0 auto; padding: 0 20px; }
-    .columns { display: flex; flex-wrap: wrap; margin: 0 -10px; }
-    .column { padding: 0 10px; }
-    .two-thirds { width: 66.666%; }
-    .one-third { width: 33.333%; }
+    /* 甘城猫猫粉色系 */
+    .neko-pink { color: #ff69b4; }
+    .neko-blue { color: #87ceeb; }
+    .neko-bg-pink { background: #fff0f5; }
+    
+    /* 布局样式 */
+    .container { 
+        max-width: 1020px; 
+        margin: 0 auto; 
+        padding: 0 20px; 
+    }
+    .columns { 
+        display: flex; 
+        flex-wrap: wrap; 
+        margin: 0 -10px; 
+    }
+    .column { 
+        padding: 0 10px; 
+    }
+    .two-thirds { 
+        width: 66.666%; 
+    }
+    .one-third { 
+        width: 33.333%; 
+    }
+    
+    /* 文章卡片样式 */
+    .repo-list-item {
+        background: white;
+        border: 1px dashed #ffb6c1;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 15px 0;
+        transition: all 0.3s ease;
+    }
+    .repo-list-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(255,182,193,0.3);
+    }
     
     /* 移动端适配 */
     @media (max-width: 768px) {
-        .column { width: 100% !important; }
-        .columns { flex-direction: column; }
+        .column { 
+            width: 100% !important; 
+        }
+        .columns { 
+            flex-direction: column; 
+        }
     }
     </style>
     
@@ -33,24 +70,24 @@
     <link rel="stylesheet" href="/assets/css/globals/responsive.css">
 </head>
 <body class="home">
-    <!-- 包含原有页头 -->
+    <!-- 包含原有页头（导航栏） -->
     {% include header.html %}
     
     <section class="container content">
         <div class="columns">
-            <!-- 左侧：文章列表 -->
+            <!-- 左侧：最新喵文 -->
             <div class="column two-thirds">
-                <h2>📝 最新喵文</h2>
+                <h2 class="neko-pink">📝 最新喵文</h2>
                 
                 <!-- 文章列表 -->
                 <ol class="repo-list">
-                  {% for post in site.posts limit:10 %}
+                  {% for post in site.posts %}
                   <li class="repo-list-item">
                     <h3 class="repo-list-name">
-                      <a href="{{ post.url }}">{{ post.title }}</a>
+                      <a href="{{ post.url }}" class="neko-pink">{{ post.title }}</a>
                     </h3>
                     <p class="repo-list-description">
-                      {{ post.excerpt | strip_html | truncate: 100 }}
+                      {{ post.excerpt | strip_html | strip }}
                     </p>
                     <p class="repo-list-meta">
                       <span class="meta-info">
@@ -60,7 +97,7 @@
                       {% for cat in post.categories %}
                       <span class="meta-info">
                         <span class="octicon octicon-file-directory"></span>
-                        <a href="/categories/#{{ cat }}">{{ cat }}</a>
+                        <a href="/categories/#{{ cat }}" class="neko-blue">{{ cat }}</a>
                       </span>
                       {% endfor %}
                     </p>
@@ -72,26 +109,32 @@
             <!-- 右侧：侧边栏 -->
             <div class="column one-third">
                 <!-- 搜索框 -->
-                <div class="sidebar-search">
-                    <input type="text" placeholder="搜索喵文..." style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                <div class="sidebar-search" style="margin-bottom: 20px;">
+                    <input type="text" placeholder="搜搜看有没有福眼瞄..." 
+                           style="width:100%; padding:10px; border:1px dashed #ffb6c1; border-radius:8px;">
                 </div>
                 
                 <!-- 分类云 -->
-                <div class="sidebar-categories">
-                    <h3>📁 分类云</h3>
+                <div class="sidebar-categories" style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 class="neko-pink">📁 分类云</h3>
                     <div class="tags">
                         {% for category in site.categories %}
-                        <a href="/categories/#{{ category[0] }}" class="tag">{{ category[0] }}</a>
+                        <a href="/categories/#{{ category[0] }}" 
+                           style="display:inline-block; background:#ffb6c1; color:white; padding:3px 8px; margin:2px; border-radius:4px; text-decoration:none;">
+                            {{ category[0] }}
+                        </a>
                         {% endfor %}
                     </div>
                 </div>
                 
-                <!-- 热门文章 -->
-                <div class="sidebar-popular">
-                    <h3>🔥 热门喵文</h3>
-                    <ul>
+                <!-- 热门喵文 -->
+                <div class="sidebar-popular" style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                    <h3 class="neko-pink">🔥 热门喵文</h3>
+                    <ul style="list-style:none; padding-left:0;">
                         {% for post in site.posts limit:5 %}
-                        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                        <li style="margin:8px 0;">
+                            <a href="{{ post.url }}" class="neko-blue">{{ post.title }}</a>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
