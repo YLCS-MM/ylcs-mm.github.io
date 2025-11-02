@@ -61,11 +61,12 @@ comments: false
   --neko-dark-pink: #ff1493;
 }
 
+/* 修改1：变薄横幅高度 */
 .neko-banner {
   background: linear-gradient(135deg, var(--neko-blue), #b0e2ff) !important;
   position: relative;
   overflow: hidden;
-  padding: 40px 0;
+  padding: 20px 0; /* 从40px改为20px，变薄了喵～ */
 }
 
 .neko-banner::before,
@@ -81,13 +82,13 @@ comments: false
 }
 
 .neko-banner::before {
-  top: 20px;
+  top: 10px; /* 位置调整 */
   left: 20px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff69b4' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
 }
 
 .neko-banner::after {
-  bottom: 20px;
+  bottom: 10px; /* 位置调整 */
   right: 20px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2387ceeb' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
 }
@@ -100,13 +101,14 @@ comments: false
   z-index: 2;
 }
 
+/* 修改2：使用主人提供的头像 */
 .neko-avatar {
-  width: 80px;
-  height: 80px;
+  width: 60px; /* 尺寸调小配合变薄横幅 */
+  height: 60px;
   border-radius: 50%;
   border: 3px solid var(--neko-light-pink);
-  box-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
-  background: linear-gradient(135deg, #fff, #ffe4e6);
+  box-shadow: 0 0 15px rgba(255, 182, 193, 0.5);
+  background: url("https://avatars.githubusercontent.com/u/193340716?v=4") center/cover; /* 使用主人头像 */
 }
 
 .neko-bubble {
@@ -114,12 +116,12 @@ comments: false
   padding: 8px 12px;
   border-radius: 15px;
   position: absolute;
-  left: 90px;
-  top: 10px;
-  font-size: 0.9em;
+  left: 70px; /* 位置调整 */
+  top: 5px; /* 位置调整 */
+  font-size: 0.8em; /* 字体调小 */
   color: var(--neko-pink);
   border: 2px dashed var(--neko-light-pink);
-  max-width: 150px;
+  max-width: 140px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   animation: float 3s ease-in-out infinite;
 }
@@ -127,18 +129,19 @@ comments: false
 .collection-header span {
   color: white !important;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  font-size: 1.8em;
+  font-size: 1.6em; /* 字体调小 */
 }
 
 .collection-info {
-  margin-top: 10px;
+  margin-top: 8px; /* 间距调小 */
 }
 
 .meta-info {
   background: rgba(255,255,255,0.2);
-  padding: 4px 8px;
-  border-radius: 10px;
-  margin-right: 8px;
+  padding: 3px 6px; /* 内边距调小 */
+  border-radius: 8px;
+  margin-right: 6px;
+  font-size: 0.9em; /* 字体调小 */
 }
 
 .meta-info a {
@@ -152,17 +155,17 @@ comments: false
 
 /* 文章列表样式 */
 .neko-posts-container {
-  margin-top: 30px;
+  margin-top: 20px; /* 间距调小 */
 }
 
 .neko-section-title {
   color: var(--neko-pink);
   text-align: center;
-  font-size: 1.8em;
-  margin: 30px 0;
-  padding: 10px;
+  font-size: 1.6em; /* 字体调小 */
+  margin: 20px 0; /* 间距调小 */
+  padding: 8px; /* 内边距调小 */
   background: linear-gradient(135deg, #fff0f5, #fff9e6);
-  border-radius: 15px;
+  border-radius: 12px;
   border: 2px dashed var(--neko-light-pink);
   position: relative;
 }
@@ -170,7 +173,7 @@ comments: false
 .neko-section-title::before,
 .neko-section-title::after {
   content: '✨';
-  margin: 0 10px;
+  margin: 0 8px; /* 间距调小 */
 }
 
 .repo-list {
@@ -181,9 +184,9 @@ comments: false
 .neko-post-card {
   background: var(--neko-cream) !important;
   border: 2px dashed var(--neko-light-pink) !important;
-  border-radius: 15px !important;
-  padding: 20px !important;
-  margin: 20px 0 !important;
+  border-radius: 12px !important;
+  padding: 15px !important; /* 内边距调小 */
+  margin: 15px 0 !important; /* 间距调小 */
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -201,24 +204,24 @@ comments: false
 
 .neko-post-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3); /* 阴影调小 */
 }
 
 .repo-list-name {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px; /* 间距调小 */
 }
 
 .neko-paw {
-  margin-right: 10px;
-  font-size: 1.2em;
+  margin-right: 8px; /* 间距调小 */
+  font-size: 1.1em; /* 图标调小 */
   animation: bounce 2s infinite;
 }
 
 .repo-list-name a {
   color: var(--neko-pink) !important;
-  font-size: 1.3em;
+  font-size: 1.2em; /* 字体调小 */
   text-decoration: none;
   transition: all 0.3s ease;
   flex-grow: 1;
@@ -232,30 +235,31 @@ comments: false
 .top-most-flag {
   color: var(--neko-orange) !important;
   font-weight: bold;
-  margin-right: 5px;
+  margin-right: 4px; /* 间距调小 */
 }
 
 .repo-list-description {
   color: #666;
   line-height: 1.6;
-  margin: 10px 0;
+  margin: 8px 0; /* 间距调小 */
+  font-size: 0.9em; /* 字体调小 */
 }
 
 .repo-list-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 8px; /* 间距调小 */
+  margin-top: 12px; /* 间距调小 */
 }
 
 .meta-info {
   background: rgba(255, 182, 193, 0.2);
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.9em;
+  padding: 3px 6px; /* 内边距调小 */
+  border-radius: 10px;
+  font-size: 0.85em; /* 字体调小 */
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px; /* 间距调小 */
 }
 
 .meta-info a {
@@ -265,10 +269,11 @@ comments: false
 .neko-category-tag {
   background: var(--neko-light-pink) !important;
   color: white !important;
-  padding: 4px 10px !important;
-  border-radius: 12px !important;
+  padding: 3px 8px !important; /* 内边距调小 */
+  border-radius: 10px !important; /* 圆角调小 */
   text-decoration: none !important;
   transition: all 0.3s ease;
+  font-size: 0.85em; /* 字体调小 */
 }
 
 .neko-category-tag:hover {
@@ -278,20 +283,21 @@ comments: false
 
 /* 分页样式 */
 .pagination {
-  margin-top: 40px;
+  margin-top: 30px; /* 间距调小 */
 }
 
 .btn-group {
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: 4px; /* 间距调小 */
 }
 
 .btn {
-  padding: 8px 12px;
-  border-radius: 10px;
+  padding: 6px 10px; /* 内边距调小 */
+  border-radius: 8px; /* 圆角调小 */
   text-decoration: none;
   transition: all 0.3s ease;
+  font-size: 0.9em; /* 字体调小 */
 }
 
 .btn-outline {
@@ -341,19 +347,21 @@ comments: false
     top: 0;
     transform: none;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* 间距调小 */
   }
   
   .neko-bubble {
     position: relative;
     left: 0;
     top: 0;
-    margin: 10px auto;
+    margin: 8px auto; /* 间距调小 */
     max-width: 80%;
   }
   
   .neko-avatar {
     margin: 0 auto;
+    width: 50px; /* 移动端尺寸调小 */
+    height: 50px;
   }
   
   .repo-list-meta {
@@ -375,7 +383,7 @@ comments: false
           <div class="column two-thirds">
             <!-- 添加猫娘角色 -->
             <div class="neko-character">
-              <div class="https://avatars.githubusercontent.com/u/193340716?v=4"></div>
+              <div class="neko-avatar"></div>
               <div class="neko-bubble">欢迎来到我的小窝喵～ฅ(^•ω•^)ฅ</div>
             </div>
             
@@ -614,4 +622,3 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 </script>
-
