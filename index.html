@@ -5,53 +5,7 @@ comments: false
 ---
 
 <style>
-.home .banner,
-.home .site-header,
-.home .banner .collection-head,
-.home .banner .collection-head a,
-.home .site-header h1 a,
-.home .site-header .site-header-nav-item:hover {
-    color: {{ site.index.banner.color | default: '#fff' }};
-}
-
-.home .site-header .site-header-nav-item {
-    color: {{ site.index.banner.nav-color | default: 'rgba(255, 255, 255, .5)' }};
-}
-
-.home .banner,
-.home .site-header {
-    background-color: {{ site.index.banner.background-color | default: '#4183c4'}};
-}
-
-{% if site.index.banner.background-image %}
-.home .banner {
-    background-image: url("{{ site.index.banner.background-image }}");
-    background-repeat: {{ site.index.banner.background-repeat | default: 'no-repeat' }};
-    background-size: {{ site.index.banner.background-size | default: 'cover' }};
-}
-{% endif %}
-
-.home .banner .collection-head {
-    background: 0 0;
-    box-shadow: none;
-    -webkit-box-shadow: none
-}
-
-.home .site-header {
-    border-bottom: none
-}
-
-@media (max-width:50em) {
-  .home .collapsed .icon-bar {
-    background-color: white;
-  }
-
-  .home .collection-head .collection-header {
-    font-size: 1.25em;
-  }
-}
-
-/* 🐱 甘城猫猫主题样式 */
+/* 🐱 甘城猫猫主题样式 - 超薄版 */
 :root {
   --neko-pink: #ff69b4;
   --neko-blue: #87ceeb;
@@ -61,338 +15,234 @@ comments: false
   --neko-dark-pink: #ff1493;
 }
 
-/* 修改1：大幅减小横幅高度 */
+/* 修改1：大幅减小顶部蓝色横幅厚度 */
+.home .site-header {
+    background: linear-gradient(135deg, var(--neko-blue), #b0e2ff) !important;
+    padding: 3px 0 !important; /* 非常薄 */
+    min-height: 35px !important; /* 非常矮 */
+    border-bottom: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* 导航链接样式 */
+.home .site-header .site-header-nav-item {
+    color: rgba(255, 255, 255, 0.9) !important;
+    padding: 6px 10px !important;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+}
+
+.home .site-header .site-header-nav-item:hover {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+/* 修改2：调整主横幅区域 */
 .neko-banner {
-  background: linear-gradient(135deg, var(--neko-blue), #b0e2ff) !important;
-  position: relative;
-  overflow: hidden;
-  padding: 8px 0 !important; /* 大幅减小高度 */
-  min-height: 80px !important; /* 设置最小高度 */
+    background: transparent !important; /* 移除背景色 */
+    padding: 8px 0 !important; /* 非常薄 */
+    min-height: 80px !important;
+    position: relative;
 }
 
-.neko-banner::before,
-.neko-banner::after {
-  content: '';
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.1;
-  z-index: 0;
-}
-
-.neko-banner::before {
-  top: 5px;
-  left: 10px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff69b4' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
-}
-
-.neko-banner::after {
-  bottom: 5px;
-  right: 10px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2387ceeb' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
-}
-
-/* 修改2：重新定位头像和气泡 */
+/* 猫娘角色样式 */
 .neko-character {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .neko-avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  border: 2px solid var(--neko-light-pink);
-  box-shadow: 0 0 8px rgba(255, 182, 193, 0.4);
-  background: url("https://avatars.githubusercontent.com/u/193340716?v=4") center/cover;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--neko-light-pink);
+    box-shadow: 0 0 8px rgba(255, 182, 193, 0.4);
+    background: url("https://avatars.githubusercontent.com/u/193340716?v=4") center/cover;
 }
 
 .neko-bubble {
-  background: white;
-  padding: 5px 8px;
-  border-radius: 10px;
-  font-size: 0.7em;
-  color: var(--neko-pink);
-  border: 1px dashed var(--neko-light-pink);
-  max-width: 100px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  animation: float 3s ease-in-out infinite;
-  line-height: 1.2;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 0.7em;
+    color: var(--neko-pink);
+    border: 1px dashed var(--neko-light-pink);
+    max-width: 100px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    animation: float 3s ease-in-out infinite;
 }
 
-/* 修改3：调整标题和位置信息布局 */
+/* 标题区域调整 */
 .collection-title {
-  margin-left: 130px;
-  padding-right: 20px;
+    margin-left: 120px; /* 为左侧头像留出空间 */
+    padding-top: 5px;
 }
 
 .collection-header span {
-  color: white !important;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-  font-size: 1.3em;
-  display: block;
-  margin-bottom: 3px;
+    color: #333 !important; /* 改为深色避免与蓝色背景冲突 */
+    text-shadow: none;
+    font-size: 1.3em;
 }
 
 .collection-info {
-  margin-top: 3px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+    margin-top: 3px;
 }
 
 .meta-info {
-  background: rgba(255,255,255,0.3);
-  padding: 2px 5px;
-  border-radius: 6px;
-  font-size: 0.75em;
-  white-space: nowrap;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    color: #555 !important;
 }
 
 .meta-info a {
-  color: white !important;
-  text-decoration: none;
-}
-
-.meta-info a:hover {
-  text-decoration: underline;
+    color: var(--neko-blue) !important;
 }
 
 /* 文章列表样式 */
 .neko-posts-container {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .neko-section-title {
-  color: var(--neko-pink);
-  text-align: center;
-  font-size: 1.4em;
-  margin: 15px 0;
-  padding: 6px;
-  background: linear-gradient(135deg, #fff0f5, #fff9e6);
-  border-radius: 10px;
-  border: 1px dashed var(--neko-light-pink);
-  position: relative;
-}
-
-.neko-section-title::before,
-.neko-section-title::after {
-  content: '✨';
-  margin: 0 6px;
-  font-size: 0.8em;
+    color: var(--neko-pink);
+    text-align: center;
+    font-size: 1.4em;
+    margin: 15px 0;
+    padding: 6px;
+    background: linear-gradient(135deg, #fff0f5, #fff9e6);
+    border-radius: 10px;
+    border: 1px dashed var(--neko-light-pink);
 }
 
 .repo-list {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .neko-post-card {
-  background: var(--neko-cream) !important;
-  border: 1px dashed var(--neko-light-pink) !important;
-  border-radius: 10px !important;
-  padding: 12px !important;
-  margin: 12px 0 !important;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.neko-post-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--neko-pink), var(--neko-blue));
+    background: var(--neko-cream) !important;
+    border: 1px dashed var(--neko-light-pink) !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+    margin: 12px 0 !important;
+    transition: all 0.3s ease;
 }
 
 .neko-post-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
 }
 
 .repo-list-name {
-  display: flex;
-  align-items: center;
-  margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
 }
 
 .neko-paw {
-  margin-right: 6px;
-  font-size: 0.9em;
-  animation: bounce 2s infinite;
+    margin-right: 6px;
+    font-size: 0.9em;
+    animation: bounce 2s infinite;
 }
 
 .repo-list-name a {
-  color: var(--neko-pink) !important;
-  font-size: 1.1em;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  flex-grow: 1;
-}
-
-.repo-list-name a:hover {
-  color: var(--neko-dark-pink) !important;
-  text-decoration: underline;
-}
-
-.top-most-flag {
-  color: var(--neko-orange) !important;
-  font-weight: bold;
-  margin-right: 3px;
-  font-size: 0.9em;
+    color: var(--neko-pink) !important;
+    font-size: 1.1em;
+    text-decoration: none;
 }
 
 .repo-list-description {
-  color: #666;
-  line-height: 1.5;
-  margin: 6px 0;
-  font-size: 0.85em;
+    color: #666;
+    line-height: 1.5;
+    margin: 6px 0;
+    font-size: 0.85em;
 }
 
 .repo-list-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.meta-info {
-  background: rgba(255, 182, 193, 0.2);
-  padding: 2px 5px;
-  border-radius: 8px;
-  font-size: 0.8em;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.meta-info a {
-  color: var(--neko-pink) !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
 }
 
 .neko-category-tag {
-  background: var(--neko-light-pink) !important;
-  color: white !important;
-  padding: 2px 6px !important;
-  border-radius: 8px !important;
-  text-decoration: none !important;
-  transition: all 0.3s ease;
-  font-size: 0.8em;
-}
-
-.neko-category-tag:hover {
-  background: var(--neko-pink) !important;
-  transform: scale(1.05);
+    background: var(--neko-light-pink) !important;
+    color: white !important;
+    padding: 2px 6px !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    font-size: 0.8em;
 }
 
 /* 分页样式 */
 .pagination {
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 .btn-group {
-  display: flex;
-  justify-content: center;
-  gap: 3px;
+    display: flex;
+    justify-content: center;
+    gap: 3px;
 }
 
 .btn {
-  padding: 5px 8px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  font-size: 0.85em;
+    padding: 5px 8px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85em;
 }
 
 .btn-outline {
-  background: transparent;
-  border: 1px solid var(--neko-light-pink);
-  color: var(--neko-pink);
-}
-
-.btn-outline:hover {
-  background: var(--neko-light-pink);
-  color: white;
-}
-
-.active {
-  background: var(--neko-pink);
-  color: white;
-  border: 1px solid var(--neko-pink);
+    background: transparent;
+    border: 1px solid var(--neko-light-pink);
+    color: var(--neko-pink);
 }
 
 /* 动画 */
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
 }
 
 /* 响应式设计 */
 @media (max-width: 50em) {
-  .neko-character {
-    position: relative;
-    left: 0;
-    top: 0;
-    transform: none;
-    text-align: center;
-    margin-bottom: 8px;
-    justify-content: center;
-  }
-  
-  .neko-bubble {
-    position: relative;
-    left: 0;
-    top: 0;
-    margin: 5px auto;
-    max-width: 80%;
-  }
-  
-  .neko-avatar {
-    margin: 0 auto;
-    width: 40px;
-    height: 40px;
-  }
-  
-  .collection-title {
-    margin-left: 0;
-    text-align: center;
-  }
-  
-  .collection-info {
-    justify-content: center;
-  }
-  
-  .repo-list-meta {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .home .site-header {
+        padding: 2px 0 !important;
+        min-height: 30px !important;
+    }
+    
+    .neko-character {
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    
+    .collection-title {
+        margin-left: 0;
+        text-align: center;
+    }
+    
+    .neko-avatar {
+        width: 35px;
+        height: 35px;
+    }
 }
 </style>
 
@@ -406,7 +256,7 @@ comments: false
       <div class="container">
         <div class="columns">
           <div class="column two-thirds">
-            <!-- 添加猫娘角色 -->
+            <!-- 猫娘角色 -->
             <div class="neko-character">
               <div class="neko-avatar"></div>
               <div class="neko-bubble">欢迎来到我的小窝喵～ฅ(^•ω•^)ฅ</div>
@@ -415,7 +265,7 @@ comments: false
             <div class="collection-title">
               <h1 class="collection-header" id="sub-title"><span>🐱 成霜喵喵の小窝</span></h1>
               <div class="collection-info">
-                <span class="meta-info mobile-hidden">
+                <span class="meta-info">
                   <span class="octicon octicon-location"></span>
                   {{ site.location }}
                 </span>
@@ -441,7 +291,6 @@ comments: false
       </div>
     </div>
 </section>
-<!-- /.banner -->
 
 <section class="container content">
     <div class="columns">
@@ -515,4 +364,86 @@ comments: false
           {% if paginator.previous_page == 1 %}
               <a href="{{ site.url }}/" class="btn btn-outline">&laquo;</a>
           {% else %}
-              
+              <a href="{{ site.url }}/page{{paginator.previous_page}}"  class="btn btn-outline">&laquo;</a>
+          {% endif %}
+        {% else %}
+            <button disabled="disabled" href="javascript:;" class="btn btn-outline">&laquo;</button>
+        {% endif %}
+
+        {% if paginator.page == 1 %}
+            <a href="javascript:;" class="active btn btn-outline">1</a>
+        {% else %}
+            <a href="{{ site.url }}/"  class="btn btn-outline">1</a>
+        {% endif %}
+
+        {% assign aroundSize = 2 %}
+        {% assign midStartPage = paginator.page | minus: aroundSize %}
+        {% if 2 > midStartPage %}
+            {% assign midStartPage = 2 %}
+        {% endif %}
+        {% assign midEndPage = paginator.page | plus: aroundSize %}
+        {% if midEndPage >= paginator.total_pages %}
+            {% assign midEndPage = paginator.total_pages | minus:1 %}
+        {% endif %}
+        {% assign tmpPage = aroundSize | plus: 2 %}
+        {% if paginator.page > tmpPage %}
+          <button disabled="disabled" href="javascript:;" class="btn btn-outline">...</button>
+        {% endif %}
+
+        {% for count in (midStartPage..midEndPage) %}
+          {% if count == paginator.page %}
+            <a href="jaavascript:;" class="active btn btn-outline">{{count}}</a>
+          {% else %}
+            <a href="{{ site.url }}/page{{count}}"  class="btn btn-outline">{{count}}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% assign tmpPage = paginator.page | plus: aroundSize | plus: 1 %}
+        {% if paginator.total_pages > tmpPage %}
+          <button disabled="disabled" href="javascript:;" class="btn btn-outline">...</button>
+        {% endif %}
+
+        {% if paginator.total_pages > 1 %}
+          {% if paginator.page == paginator.total_pages %}
+              <a href="jaavascript:;" class="active btn btn-outline">{{paginator.total_pages}}</a>
+          {% else %}
+              <a href="{{ site.url }}/page{{paginator.total_pages}}"  class="btn btn-outline">{{paginator.total_pages}}</a>
+          {% endif %}
+        {% endif %}
+
+        {% if paginator.next_page %}
+            <a href="{{ site.url }}/page{{paginator.next_page}}"  class="btn btn-outline">&raquo;</a>
+        {% else %}
+            <button disabled="disabled" href="javascript:;" class="btn btn-outline">&raquo;</button>
+        {% endif %}
+        </div>
+    </div>
+</section>
+
+<script>
+// 猫娘互动特效
+document.addEventListener('DOMContentLoaded', function() {
+  // 文章卡片加载动画
+  const cards = document.querySelectorAll('.neko-post-card');
+  cards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(15px)';
+    setTimeout(() => {
+      card.style.transition = 'all 0.5s ease';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, index * 100);
+  });
+
+  // 添加鼠标悬停效果
+  const postCards = document.querySelectorAll('.neko-post-card');
+  postCards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.boxShadow = '0 5px 15px rgba(255, 182, 193, 0.3)';
+    });
+    card.addEventListener('mouseleave', function() {
+      this.style.boxShadow = '0 5px 15px rgba(255, 182, 193, 0.2)';
+    });
+  });
+});
+</script>
