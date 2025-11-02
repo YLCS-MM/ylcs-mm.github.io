@@ -1,0 +1,336 @@
+/* 🐱 甘城猫猫主题 - 文章页面专用样式 */
+:root {
+    --neko-pink: #ff69b4;
+    --neko-blue: #87ceeb;
+    --neko-orange: #ffa500;
+    --neko-cream: #fff9e6;
+    --neko-light-pink: #ffb6c1;
+    --neko-dark-pink: #ff1493;
+    --neko-text: #2c3e50;
+    --neko-light-text: #666;
+}
+
+/* 文章容器 */
+.post-container {
+    background: white;
+    color: var(--neko-text);
+    padding: 40px 30px;
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    line-height: 1.7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.post-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--neko-pink), var(--neko-blue));
+}
+
+/* 文章标题 */
+.post-title {
+    color: var(--neko-pink);
+    text-align: center;
+    margin: 0 0 20px 0;
+    font-size: 2.2em;
+    font-weight: bold;
+    padding-bottom: 15px;
+    border-bottom: 3px dashed var(--neko-light-pink);
+    position: relative;
+}
+
+.post-title::after {
+    content: '🐾';
+    position: absolute;
+    right: 20px;
+    bottom: -12px;
+    font-size: 0.8em;
+    background: white;
+    padding: 0 5px;
+}
+
+/* 文章元信息 */
+.post-meta {
+    text-align: center;
+    color: var(--neko-light-text);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 0.9em;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    background: rgba(255, 182, 193, 0.1);
+    border-radius: 15px;
+}
+
+/* 文章内容区域 */
+.post-content {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.post-content h2 {
+    color: var(--neko-dark-pink);
+    border-left: 4px solid var(--neko-blue);
+    padding-left: 15px;
+    margin: 30px 0 15px 0;
+    font-size: 1.5em;
+}
+
+.post-content h3 {
+    color: var(--neko-pink);
+    margin: 25px 0 12px 0;
+    font-size: 1.3em;
+}
+
+.post-content p {
+    margin: 15px 0;
+    text-align: justify;
+}
+
+.post-content strong {
+    color: var(--neko-dark-pink);
+    font-weight: 600;
+}
+
+.post-content em {
+    color: var(--neko-blue);
+    font-style: italic;
+}
+
+/* 列表样式 */
+.post-content ul, .post-content ol {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.post-content li {
+    margin: 8px 0;
+    position: relative;
+}
+
+.post-content ul li::before {
+    content: '🐾';
+    position: absolute;
+    left: -25px;
+    color: var(--neko-light-pink);
+}
+
+.post-content ol {
+    counter-reset: neko-counter;
+}
+
+.post-content ol li {
+    counter-increment: neko-counter;
+}
+
+.post-content ol li::before {
+    content: counter(neko-counter) '.';
+    position: absolute;
+    left: -25px;
+    color: var(--neko-pink);
+    font-weight: bold;
+}
+
+/* 代码块样式 */
+.post-content code {
+    background: rgba(255, 182, 193, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--neko-dark-pink);
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+}
+
+.post-content pre {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    border-left: 4px solid var(--neko-blue);
+}
+
+.post-content pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+
+/* 引用块样式 */
+.post-content blockquote {
+    background: linear-gradient(135deg, #fff0f5, #e6f7ff);
+    border-left: 4px solid var(--neko-pink);
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    position: relative;
+}
+
+.post-content blockquote::before {
+    content: '"';
+    font-size: 2em;
+    color: var(--neko-light-pink);
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    opacity: 0.3;
+}
+
+/* 链接样式 */
+.post-content a {
+    color: var(--neko-blue);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--neko-light-pink);
+    transition: all 0.3s ease;
+}
+
+.post-content a:hover {
+    color: var(--neko-dark-pink);
+    border-bottom: 1px solid var(--neko-pink);
+}
+
+/* 图片样式 */
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--neko-light-pink);
+}
+
+/* 表格样式 */
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-content th {
+    background: linear-gradient(135deg, var(--neko-pink), var(--neko-blue));
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.post-content td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.post-content tr:nth-child(even) {
+    background: rgba(255, 182, 193, 0.05);
+}
+
+/* 文章页脚 */
+.post-footer {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(255, 182, 193, 0.1);
+    border-radius: 10px;
+    border-left: 4px solid var(--neko-pink);
+    text-align: center;
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.post-tag {
+    background: var(--neko-light-pink);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.post-tag:hover {
+    background: var(--neko-pink);
+    transform: translateY(-2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .post-container {
+        margin: 10px;
+        padding: 20px 15px;
+        border-radius: 10px;
+    }
+    
+    .post-title {
+        font-size: 1.8em;
+        padding-bottom: 10px;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .meta-item {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .post-content {
+        font-size: 15px;
+    }
+    
+    .post-content h2 {
+        font-size: 1.3em;
+    }
+    
+    .post-content h3 {
+        font-size: 1.1em;
+    }
+}
+
+/* 动画效果 */
+@keyframes nekoFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post-container {
+    animation: nekoFadeIn 0.6s ease-out;
+}
+
+.post-title {
+    animation: nekoFadeIn 0.8s ease-out;
+}
+
+.post-content > * {
+    animation: nekoFadeIn 0.8s ease-out;
+}
