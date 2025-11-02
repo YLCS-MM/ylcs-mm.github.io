@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: 关于
 permalink: /about/
 comments: false
@@ -181,3 +181,4 @@ comments: false
     }
   </style>
 </div>
+
