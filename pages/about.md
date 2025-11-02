@@ -1,9 +1,10 @@
 ---
-layout: home    # 使用现有的home布局
+layout: default    # 改回default布局
 title: 关于
 permalink: /about/
 comments: false
 ---
+
 
 <!-- 用纯HTML+内联CSS写内容，彻底避免Markdown解析错误 -->
 <div style="max-width: 800px; margin: 30px auto; padding: 25px; background: linear-gradient(135deg,#fff0f5,#e6e6fa); border-radius: 20px; box-shadow: 0 5px 15px rgba(255,182,193,0.3); position: relative;">
@@ -66,3 +67,4 @@ comments: false
     }
   </style>
 </div>
+
