@@ -1,81 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} - {{ site.title }}</title>
-    
-    <!-- 引入专用文章样式 -->
-    <link rel="stylesheet" href="{{ '/assets/css/post.css' | relative_url }}">
-    
-    <!-- 引入主样式（如果存在） -->
-    {% if site.css.main %}
-    <link rel="stylesheet" href="{{ site.css.main | relative_url }}">
-    {% endif %}
-    
-    <style>
-    /* 确保基础样式 */
-    body {
-        background: #f5f7fa !important;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        line-height: 1.6;
-        color: #2c3e50;
-        margin: 0;
-        padding: 20px;
-    }
-    </style>
+    {% include head-base.html %}
 </head>
 <body>
-    <!-- 文章容器 -->
-    <article class="post-container">
-        <!-- 文章标题区域 -->
-        <header>
-            <h1 class="post-title">{{ page.title }}</h1>
+    <div class="container">
+        <article class="post">
+            {% include post-header.html %}
             
-            <div class="post-meta">
-                <span class="meta-item">
-                    <span class="octicon octicon-calendar"></span>
-                    {{ page.date | date: "%Y年%m月%d日" }}
-                </span>
-                
-                {% if page.author %}
-                <span class="meta-item">
-                    <span class="octicon octicon-person"></span>
-                    {{ page.author }}
-                </span>
-                {% endif %}
-                
-                {% if page.categories %}
-                <span class="meta-item">
-                    <span class="octicon octicon-file-directory"></span>
-                    {% for category in page.categories %}
-                    <a href="{{ '/categories/#' | append: category | relative_url }}" class="post-tag">{{ category }}</a>
-                    {% endfor %}
-                </span>
-                {% endif %}
+            <div class="post-content">
+                {{ content }}
             </div>
-        </header>
-
-        <!-- 文章内容区域 -->
-        <div class="post-content">
-            {{ content }}
-        </div>
-
-        <!-- 文章页脚 -->
-        <footer class="post-footer">
-            {% if page.tags %}
-            <div class="post-tags">
-                {% for tag in page.tags %}
-                <a href="{{ '/tags/#' | append: tag | relative_url }}" class="post-tag">#{{ tag }}</a>
-                {% endfor %}
-            </div>
-            {% endif %}
             
-            <p style="text-align: center; margin-top: 15px;">
-                <span style="color: #ff69b4;">🐾</span> 
-                感谢阅读！欢迎在评论区留言喵～
-            </p>
-        </footer>
-    </article>
+            {% include post-footer.html %}
+        </article>
+    </div>
 </body>
 </html>
