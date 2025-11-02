@@ -1,191 +1,292 @@
 ---
-layout: test-layout
-title: "🐱 独立测试页面"
-permalink: /test/
-description: "这是一个完全独立的测试页面，不会与现有页面冲突"
+layout: default
+title: "关于成霜喵喵"
+permalink: /about/
+description: "高考奋斗中的成霜喵喵 - 技术思考与生活点滴"
 ---
 
-<!-- 🎀 完全独立的样式 - 不会影响其他页面 -->
+<!-- 🎀 甘城猫猫风格 - 居中名片设计 -->
 <style>
-/* 🚨 重置所有样式，确保独立 */
+/* 🎯 全局重置与基础样式 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.test-page {
+body {
     font-family: "Comic Sans MS", "微软雅黑", sans-serif;
-    background: linear-gradient(135deg, #e6f7ff, #fff0f5);
+    background: linear-gradient(135deg, #fff0f5, #f0f8ff);
     min-height: 100vh;
-    padding: 0;
-    margin: 0;
-    isolation: isolate; /* 🎯 确保样式隔离 */
-}
-
-.test-container {
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 20px;
-    margin-top: 20px;
-    box-shadow: 0 10px 30px rgba(135, 206, 235, 0.2);
-    border: 3px solid #87ceeb;
 }
 
-.test-header {
+/* 🎯 主名片容器 - 完全居中 */
+.profile-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+    border: 3px solid #ffb6c1;
     text-align: center;
-    padding: 40px 0;
-    background: linear-gradient(135deg, #87ceeb, #a8e6ff);
-    border-radius: 15px;
-    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
 }
 
-.test-title {
-    color: white;
-    font-size: 2.5em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+/* 🎯 名片装饰效果 */
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ffb6c1, #87ceeb, #ffb6c1);
 }
 
-.test-subtitle {
-    color: #f0f8ff;
-    font-size: 1.2em;
-    margin-top: 10px;
+/* 🎯 头像区域 */
+.avatar-section {
+    margin-bottom: 20px;
 }
 
-.test-content {
-    padding: 20px;
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #87ceeb;
+    background: linear-gradient(45deg, #ffb6c1, #87ceeb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 40px;
 }
 
-.test-section {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    padding: 25px;
+/* 🎯 姓名和标题 */
+.name {
+    color: #4682b4;
+    font-size: 2.2em;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #ff69b4;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+/* 🎯 介绍文本 */
+.intro {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* 🎯 信条部分 */
+.motto {
+    background: linear-gradient(135deg, #f8fdff, #fff9f9);
+    border-left: 4px solid #87ceeb;
+    padding: 15px;
     margin: 20px 0;
-    border: 2px dashed #ffb6c1;
+    border-radius: 10px;
+    text-align: left;
 }
 
-.test-button {
+.motto-text {
+    color: #4682b4;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.motto-author {
+    color: #ff69b4;
+    text-align: right;
+    font-size: 0.9em;
+}
+
+/* 🎯 标签云 */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.tag {
     background: linear-gradient(45deg, #87ceeb, #4682b4);
     color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 25px;
-    font-size: 1.1em;
-    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
     transition: all 0.3s ease;
-    margin: 10px;
 }
 
-.test-button:hover {
+.tag:hover {
     background: linear-gradient(45deg, #ffb6c1, #ff69b4);
-    transform: scale(1.05);
+    transform: translateY(-2px);
 }
 
-/* 🎯 确保绝对独立 - 不会影响其他页面 */
-.test-page * {
-    all: unset;
-    font-family: inherit;
+/* 🎯 联系信息 */
+.contact-info {
+    margin: 25px 0;
 }
 
-.test-page {
-    all: initial;
-    font-family: "Comic Sans MS", "微软雅黑", sans-serif;
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    color: #666;
 }
 
-/* 移动端适配 */
+.contact-icon {
+    margin-right: 8px;
+    color: #ff69b4;
+}
+
+/* 🎯 网站信息 */
+.site-info {
+    color: #999;
+    font-size: 0.9em;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+
+/* 🎯 页脚 */
+.footer {
+    color: #ccc;
+    margin-top: 20px;
+    font-size: 0.8em;
+}
+
+/* 🎯 移动端适配 */
 @media (max-width: 768px) {
-    .test-container {
-        margin: 10px;
-        padding: 15px;
+    body {
+        padding: 10px;
     }
     
-    .test-title {
-        font-size: 2em;
+    .profile-card {
+        padding: 30px 20px;
+        margin: 10px;
     }
+    
+    .name {
+        font-size: 1.8em;
+    }
+    
+    .tags {
+        gap: 5px;
+    }
+    
+    .tag {
+        padding: 4px 10px;
+        font-size: 0.8em;
+    }
+}
+
+/* 🎯 加载动画 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-card {
+    animation: fadeInUp 0.8s ease;
 }
 </style>
 
-<div class="test-page">
-    <div class="test-container">
-        <!-- 🎯 页面头部 -->
-        <header class="test-header">
-            <h1 class="test-title">🐱 独立测试页面</h1>
-            <p class="test-subtitle">这是一个完全独立的测试环境</p>
-        </header>
+<!-- 🎯 名片式内容 -->
+<div class="profile-card">
+    <!-- 头像区域 -->
+    <div class="avatar-section">
+        <div class="avatar">🐱</div>
+        <h1 class="name">成霜喵喵</h1>
+        <p class="subtitle">高考奋斗中的成霜喵喵</p>
+    </div>
 
-        <!-- 🎯 测试内容 -->
-        <main class="test-content">
-            <section class="test-section">
-                <h2>✅ 功能测试</h2>
-                <p>这个页面使用独立的样式和布局，不会影响其他页面。</p>
-                <button class="test-button" onclick="testFunction()">点击测试</button>
-            </section>
+    <!-- 介绍文本 -->
+    <div class="intro">
+        <p>是成霜喵喵，在为高考而奋斗喵~也许眼前充满苟且，但学习是为了诗和远方</p>
+        <p>本站于2025年6月19日正式上线，记录技术思考与生活点滴~</p>
+    </div>
 
-            <section class="test-section">
-                <h2>🎯 样式测试</h2>
-                <p>甘城猫猫风格：浅蓝、粉色、白色主题</p>
-                <div style="display: flex; gap: 10px; margin-top: 15px;">
-                    <span style="background: #87ceeb; padding: 5px 10px; border-radius: 10px; color: white;">浅蓝</span>
-                    <span style="background: #ffb6c1; padding: 5px 10px; border-radius: 10px; color: white;">粉色</span>
-                    <span style="background: white; padding: 5px 10px; border-radius: 10px; border: 1px solid #87ceeb;">白色</span>
-                </div>
-            </section>
+    <!-- 学习信条 -->
+    <div class="motto">
+        <p class="motto-text">"每一天都要像猫咪追逐阳光一样追逐知识喵！"</p>
+        <p class="motto-author">——成霜喵喵的学习信条</p>
+    </div>
 
-            <section class="test-section">
-                <h2>🔧 技术特性</h2>
-                <ul style="list-style: none;">
-                    <li>✅ 独立CSS样式</li>
-                    <li>✅ 不依赖外部文件</li>
-                    <li>✅ 不会产生构建错误</li>
-                    <li>✅ 移动端适配</li>
-                    <li>✅ 甘城猫猫风格</li>
-                </ul>
-            </section>
-        </main>
+    <!-- 标签云 -->
+    <div class="tags">
+        <span class="tag">学习型猫猫</span>
+        <span class="tag">技术爱好者</span>
+        <span class="tag">软萌爱好者</span>
+        <span class="tag">猫耳收藏家</span>
+        <span class="tag">2305班信息委员</span>
+    </div>
 
-        <!-- 🎯 测试结果 -->
-        <footer class="test-section" style="text-align: center;">
-            <h2>📊 测试结果</h2>
-            <div id="test-result" style="margin-top: 15px;">
-                <p>等待测试...</p>
-            </div>
-        </footer>
+    <!-- 联系信息 -->
+    <div class="contact-info">
+        <div class="contact-item">
+            <span class="contact-icon">🐙</span>
+            <span>GitHub: @YLCS-MM</span>
+        </div>
+        <div class="contact-item">
+            <span class="contact-icon">📧</span>
+            <span>邮箱: 15873505918@163.com</span>
+        </div>
+    </div>
+
+    <!-- 网站信息 -->
+    <div class="site-info">
+        <p>访问地址: ylcs-mm.github.io</p>
+        <p>建立时间: 2025年6月19日</p>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>©2025 成霜喵喵</p>
     </div>
 </div>
 
-<!-- 🎯 独立测试脚本 -->
+<!-- 🎯 交互效果 -->
 <script>
-// 完全独立的JavaScript，不会影响其他页面
-function testFunction() {
-    const result = document.getElementById('test-result');
-    result.innerHTML = `
-        <p style="color: #4682b4;">✅ 测试成功！</p>
-        <p>页面功能正常，没有错误。</p>
-        <p>时间: ${new Date().toLocaleString()}</p>
-    `;
-    
-    // 添加动画效果
-    result.style.transition = 'all 0.5s ease';
-    result.style.transform = 'scale(1.05)';
-    setTimeout(() => {
-        result.style.transform = 'scale(1)';
-    }, 500);
-}
-
-// 页面加载完成后的测试
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🐱 独立测试页面加载完成');
-    
-    // 测试CSS是否正常应用
-    const testElements = document.querySelectorAll('.test-section');
-    testElements.forEach((element, index) => {
-        element.style.opacity = '0';
-        setTimeout(() => {
-            element.style.transition = 'opacity 0.5s ease';
-            element.style.opacity = '1';
-        }, index * 200);
+    // 标签悬停效果
+    const tags = document.querySelectorAll('.tag');
+    tags.forEach(tag => {
+        tag.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.05)';
+        });
+        tag.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
     });
+    
+    // 卡片加载动画
+    const card = document.querySelector('.profile-card');
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.9)';
+    
+    setTimeout(() => {
+        card.style.transition = 'all 0.5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'scale(1)';
+    }, 100);
 });
 </script>
