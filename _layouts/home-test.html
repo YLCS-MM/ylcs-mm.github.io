@@ -1,38 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans">
 <head>
-    <meta charset="UTF-8">
-    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
+    
+    <!-- 🎀 甘城猫猫风格样式 -->
     <style>
-    .neko-test-container {
-        background: linear-gradient(135deg, #fff0f5, #e6f7ff);
-        min-height: 100vh;
-        padding: 20px;
-    }
-    .neko-test-header {
+    /* 确保蓝色横幅透明 */
+    .site-header, .banner {
         background: transparent !important;
-        text-align: center;
-        padding: 20px 0;
+        background-color: transparent !important;
     }
-    .neko-title {
-        color: #ff69b4;
-        font-size: 2em;
-    }
-    .neko-content {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        margin: 20px;
+    
+    /* 保持原有布局样式 */
+    .container { max-width: 1020px; margin: 0 auto; padding: 0 20px; }
+    .columns { display: flex; flex-wrap: wrap; margin: 0 -10px; }
+    .column { padding: 0 10px; }
+    .two-thirds { width: 66.666%; }
+    .one-third { width: 33.333%; }
+    
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .column { width: 100% !important; }
+        .columns { flex-direction: column; }
     }
     </style>
+    
+    <!-- 引入原有CSS -->
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
 </head>
-<body class="neko-test-container">
-    <header class="neko-test-header">
-        <h1 class="neko-title">🐱 成霜喵喵测试页</h1>
-        <p>欢迎来到新家测试版～</p>
-    </header>
-    <main class="neko-content">
-        {{ content }}
-    </main>
+<body class="home">
+    <!-- 包含原有页头 -->
+    {% include header.html %}
+    
+    <section class="container content">
+        <div class="columns">
+            <!-- 左侧：文章列表 -->
+            <div class="column two-thirds">
+                <h2>📝 最新喵文</h2>
+                
+                <!-- 文章列表 -->
+                <ol class="repo-list">
+                  {% for post in site.posts limit:10 %}
+                  <li class="repo-list-item">
+                    <h3 class="repo-list-name">
+                      <a href="{{ post.url }}">{{ post.title }}</a>
+                    </h3>
+                    <p class="repo-list-description">
+                      {{ post.excerpt | strip_html | truncate: 100 }}
+                    </p>
+                    <p class="repo-list-meta">
+                      <span class="meta-info">
+                        <span class="octicon octicon-calendar"></span> 
+                        {{ post.date | date: "%Y/%m/%d" }}
+                      </span>
+                      {% for cat in post.categories %}
+                      <span class="meta-info">
+                        <span class="octicon octicon-file-directory"></span>
+                        <a href="/categories/#{{ cat }}">{{ cat }}</a>
+                      </span>
+                      {% endfor %}
+                    </p>
+                  </li>
+                  {% endfor %}
+                </ol>
+            </div>
+            
+            <!-- 右侧：侧边栏 -->
+            <div class="column one-third">
+                <!-- 搜索框 -->
+                <div class="sidebar-search">
+                    <input type="text" placeholder="搜索喵文..." style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                </div>
+                
+                <!-- 分类云 -->
+                <div class="sidebar-categories">
+                    <h3>📁 分类云</h3>
+                    <div class="tags">
+                        {% for category in site.categories %}
+                        <a href="/categories/#{{ category[0] }}" class="tag">{{ category[0] }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <!-- 热门文章 -->
+                <div class="sidebar-popular">
+                    <h3>🔥 热门喵文</h3>
+                    <ul>
+                        {% for post in site.posts limit:5 %}
+                        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 包含原有页脚 -->
+    {% include footer.html %}
 </body>
 </html>
