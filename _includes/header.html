@@ -5,6 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
+    
+    <!-- 🎯 添加透明横幅样式 -->
+    <style>
+    /* 全局透明横幅 - 覆盖所有页面 */
+    .site-header {
+        background: transparent !important;
+        background-color: transparent !important;
+        background-image: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        backdrop-filter: blur(5px) !important;
+    }
+    
+    /* 确保导航链接在透明背景下可见 */
+    .site-header-nav-item,
+    .site-header h1 a {
+        color: #333 !important;
+        text-shadow: 0 1px 2px rgba(255,255,255,0.8) !important;
+    }
+    
+    .site-header-nav-item:hover,
+    .site-header h1 a:hover {
+        color: #ff69b4 !important;
+        text-decoration: underline !important;
+    }
+    
+    /* 头像样式调整 */
+    .site-header-avatar {
+        border: 2px solid rgba(255, 182, 193, 0.7) !important;
+        box-shadow: 0 0 10px rgba(255, 182, 193, 0.4) !important;
+        background: white !important;
+        padding: 2px;
+    }
+    
+    /* 移动端适配 */
+    @media (max-width: 50em) {
+        .site-header {
+            min-height: 40px !important;
+            padding: 5px 0 !important;
+        }
+        
+        .site-header-nav-item {
+            background: rgba(255, 255, 255, 0.8) !important;
+            padding: 3px 6px !important;
+            border-radius: 6px !important;
+            margin: 2px !important;
+        }
+    }
+    </style>
+    
     <link rel="stylesheet" href="{{ assets_base_url }}/assets/vendor/primer-css/css/primer.css">
     <link rel="stylesheet" href="{{ assets_base_url }}/assets/css/components/collection.css">
     <link rel="stylesheet" href="{{ assets_base_url }}/assets/css/components/repo-card.css">
@@ -99,9 +149,7 @@
         <div class="container">
             <h1><a href="{{ site.url }}/" title="{{ site.title }}">
   <!-- 替换成你的GitHub头像 -->
-  <img src="https://avatars.githubusercontent.com/u/193340716?v=4" 
-       alt="成霜喵喵的GitHub头像" 
-       class="site-header-avatar">
+  
   {{ site.title }}
 </a></h1>
             <button class="collapsed mobile-visible" type="button" onclick="toggleMenu();">
