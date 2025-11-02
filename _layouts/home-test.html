@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <style>
+    .neko-test-container {
+        background: linear-gradient(135deg, #fff0f5, #e6f7ff);
+        min-height: 100vh;
+        padding: 20px;
+    }
+    .neko-test-header {
+        background: transparent !important;
+        text-align: center;
+        padding: 20px 0;
+    }
+    .neko-title {
+        color: #ff69b4;
+        font-size: 2em;
+    }
+    .neko-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px;
+    }
+    </style>
+</head>
+<body class="neko-test-container">
+    <header class="neko-test-header">
+        <h1 class="neko-title">🐱 成霜喵喵测试页</h1>
+        <p>欢迎来到新家测试版～</p>
+    </header>
+    <main class="neko-content">
+        {{ content }}
+    </main>
+</body>
+</html>
