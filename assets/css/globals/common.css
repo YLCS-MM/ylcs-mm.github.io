@@ -801,8 +801,9 @@ img + em {
   pointer-events: auto;
 }
 
+/* 导航链接基础样式 */
 .nav-link {
-    display: flex;
+    display: inline-flex !important; /* 改为inline-flex保持横向 */
     align-items: center;
     gap: 5px;
     position: relative;
@@ -810,6 +811,8 @@ img + em {
     padding: 8px 12px;
     border-radius: 6px;
     transition: all 0.3s ease;
+    white-space: nowrap; /* 防止文字换行 */
+    margin: 0 5px !important; /* 添加水平间距 */
 }
 
 .nav-link:hover {
@@ -851,8 +854,46 @@ img + em {
     display: none;
 }
 
+/* 确保导航容器横向排列 */
+.site-header nav {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    justify-content: flex-end; /* 右对齐 */
+    gap: 10px;
+}
+
+/* 桌面端样式 */
 @media (min-width: 768px) {
     .mobile-hidden {
         display: flex;
+    }
+    
+    .site-header nav {
+        gap: 15px;
+    }
+}
+
+/* 手机端横向排列适配 */
+@media (max-width: 767px) {
+    .site-header nav {
+        justify-content: center !important; /* 手机端居中 */
+        flex-wrap: wrap !important; /* 允许换行 */
+        gap: 8px;
+    }
+    
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 0.9em;
+    }
+    
+    /* 如果导航项太多，缩小间距 */
+    .site-header nav:has(> :nth-child(5)) {
+        gap: 5px;
+    }
+    
+    .site-header nav:has(> :nth-child(6)) {
+        gap: 3px;
     }
 }
