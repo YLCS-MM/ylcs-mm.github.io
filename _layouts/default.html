@@ -7,6 +7,52 @@ layout: compress
 {% assign assets_base_url = "https://fastly.jsdelivr.net/gh/" | append: site.repository | append: '@master' %}
 {% endif %}
 {% assign assets_images_url = '<img src="' | append: site.url | append: "/images" %}
-{% include header.html %}
-    {{ content | replace: '<img src="/images', assets_images_url }}
-{% include footer.html %}
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
+    
+    <!-- 🎀 基础样式确保 -->
+    <style>
+    body {
+        font-family: "Comic Sans MS", "微软雅黑", sans-serif;
+        background: linear-gradient(135deg, #f0f8ff, #fff0f5);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    </style>
+</head>
+<body>
+    <!-- 🎯 确保header存在 -->
+    {% if site.header %}
+        {% include header.html %}
+    {% else %}
+        <header style="text-align: center; padding: 30px 0;">
+            <h1>{{ site.title }}</h1>
+        </header>
+    {% endif %}
+    
+    <!-- 🎯 安全的内容渲染 -->
+    <main class="container">
+        {{ content | replace: '<img src="/images', assets_images_url }}
+    </main>
+    
+    <!-- 🎯 确保footer存在 -->
+    {% if site.footer %}
+        {% include footer.html %}
+    {% else %}
+        <footer style="text-align: center; padding: 20px; color: #666;">
+            <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
+        </footer>
+    {% endif %}
+</body>
+</html>
