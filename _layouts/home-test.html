@@ -340,5 +340,61 @@
         <p>©2025 成霜喵喵 · 本站访问量1917次 · 本站访客数491人</p>
         <p>记得把小家加入收藏夹哦！</p>
     </footer>
+<!-- 🎯 恢复公告弹窗 -->
+<script src="{{ site.baseurl }}/assets/js/announcement.js" defer></script>
+
+<!-- 🎯 恢复看板娘 -->
+{% if site.live2d.enabled %}
+<script>
+// 看板娘加载代码
+document.addEventListener('DOMContentLoaded', function() {
+    // 动态加载看板娘资源
+    const live2dScript = document.createElement('script');
+    live2dScript.src = '{{ site.baseurl }}/assets/vendor/live2d/js/live2d.min.js';
+    document.head.appendChild(live2dScript);
+    
+    const live2dConfig = document.createElement('script');
+    live2dConfig.src = '{{ site.baseurl }}/assets/js/live2d-config.js';
+    document.head.appendChild(live2dConfig);
+    
+    // 创建看板娘容器
+    const live2dContainer = document.createElement('div');
+    live2dContainer.id = 'live2d-widget';
+    live2dContainer.style.position = 'fixed';
+    live2dContainer.style.right = '0';
+    live2dContainer.style.bottom = '0';
+    live2dContainer.style.zIndex = '9999';
+    document.body.appendChild(live2dContainer);
+});
+</script>
+{% endif %}
+
+<!-- 🎯 确保看板娘样式 -->
+<style>
+#live2d-widget {
+    position: fixed !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+}
+
+/* 看板娘画布样式 */
+#live2dcanvas {
+    width: 150px !important;
+    height: 200px !important;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    #live2d-widget {
+        right: -20px !important;
+        bottom: -20px !important;
+        transform: scale(0.8);
+    }
+}
+</style>
+
+
 </body>
 </html>
