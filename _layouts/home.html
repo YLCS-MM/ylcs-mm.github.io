@@ -19,18 +19,18 @@
         position: relative;
     }
     
-    /* 🎯 调整顶部区块背景为中等透明度 */
-    .neko-header-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.5); /* 从0.85调到0.65 - 中等透明度 */
-        z-index: 0;
-        border-radius: 20px;
-    }
+/* 🎯 调整顶部区块背景为中等透明度 */
+.neko-header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5); /* 从0.85调到0.65 - 中等透明度 */
+    z-index: 0;
+    border-radius: 20px;
+}
 
         
     /* 确保内容在遮罩上方 */
@@ -174,7 +174,8 @@
 <body class="home">
     <!-- 🎯 顶部区块 - 只有这里显示背景图片 -->
     <header class="neko-header-section">
-        
+        <img src="https://avatars.githubusercontent.com/u/193340716?v=4" 
+             alt="成霜喵喵" class="neko-avatar">
         
         <h1 class="neko-site-title">成霜喵喵の小窝</h1>
         <p class="neko-site-location">湖南,郴州 · ylcs-mm</p>
@@ -201,8 +202,7 @@
                       <a href="{{ post.url }}">{{ post.title }}</a>
                     </h3>
                     <p class="repo-list-description">
-                      <!-- 修复这里：使用内容截取而不是摘要 -->
-                      {{ post.content | strip_html | truncate: 150 }}
+                      {{ post.excerpt | strip_html | strip }}
                     </p>
                     <p class="repo-list-meta">
                       <span class="meta-info">
@@ -335,4 +335,4 @@
     }
     </style>
 </body>
-</html>
+    </html>
