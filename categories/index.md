@@ -10,7 +10,7 @@ permalink: /categories/
 .categories-header {
     background: linear-gradient(135deg, #e6f7ff, #f0f8ff);
     padding: 25px 0;
-    margin: 0;
+ margin: 0;
     border-radius: 0 0 20px 20px;
     box-shadow: 0 5px 15px rgba(135, 206, 235, 0.3);
     position: relative;
