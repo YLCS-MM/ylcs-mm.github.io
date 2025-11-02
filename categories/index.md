@@ -1,92 +1,99 @@
 ---
 layout: page
-title: " 🐾喵喵分类库 🐾"
+title: "🐾成霜·喵喵分类库🐾"
 permalink: /categories/
 description: "按主题浏览所有喵文～"
 ---
 
-<!-- 🎀 甘城猫猫风格样式 -->
+<!-- 🎀 甘城猫猫风格 - 浅蓝为主色调 -->
 <style>
+/* 页面整体样式 */
 .categories-container {
-    background: linear-gradient(135deg, #fff0f5, #f0f8ff);
+    background: linear-gradient(135deg, #f0f8ff, #e6f7ff);
     min-height: 100vh;
     padding: 20px;
+    font-family: "Comic Sans MS", "微软雅黑", sans-serif;
 }
 
+/* 页面头部 */
 .categories-header {
     text-align: center;
-    padding: 30px 0;
-    background: rgba(255, 255, 255, 0.9);
+    padding: 40px 0 30px;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
-    border: 2px dashed #ffb6c1;
+    margin: 0 auto 30px;
+    max-width: 90%;
+    box-shadow: 0 10px 30px rgba(135, 206, 235, 0.2);
+    border: 2px solid #87ceeb;
 }
 
 .categories-title {
-    color: #ff69b4;
+    color: #4682b4;
     font-size: 2.5em;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .categories-subtitle {
-    color: #87ceeb;
+    color: #5f9ea0;
     font-size: 1.2em;
+    margin-bottom: 15px;
 }
 
-/* 分类云样式 */
+/* 分类云 - 浅蓝色主题 */
 .category-cloud {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
-    margin: 30px 0;
+    gap: 12px;
+    margin: 30px auto;
+    max-width: 90%;
 }
 
 .category-tag {
     display: inline-block;
-    background: linear-gradient(45deg, #ffb6c1, #ff69b4);
+    background: linear-gradient(45deg, #87ceeb, #4682b4);
     color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 10px 18px;
+    border-radius: 20px;
     text-decoration: none;
     font-weight: bold;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    box-shadow: 0 4px 15px rgba(135, 206, 235, 0.3);
     position: relative;
 }
 
 .category-tag:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
-    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    background: linear-gradient(45deg, #ffb6c1, #ff69b4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.3);
 }
 
 .category-count {
     background: rgba(255, 255, 255, 0.3);
     padding: 3px 8px;
-    border-radius: 15px;
+    border-radius: 12px;
     margin-left: 5px;
     font-size: 0.9em;
 }
 
-/* 分类内容区 */
+/* 分类内容区 - 白色卡片 */
 .category-section {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
     border-radius: 15px;
     padding: 25px;
-    margin: 25px 0;
-    box-shadow: 0 5px 20px rgba(255, 182, 193, 0.2);
-    border: 2px solid #ffb6c1;
+    margin: 25px auto;
+    max-width: 90%;
+    box-shadow: 0 5px 20px rgba(135, 206, 235, 0.15);
+    border: 2px solid #b0e0e6;
 }
 
 .category-name {
-    color: #ff69b4;
+    color: #4682b4;
     font-size: 1.8em;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 2px dotted #87ceeb;
+    border-bottom: 2px solid #87ceeb;
     display: flex;
     align-items: center;
 }
@@ -104,50 +111,50 @@ description: "按主题浏览所有喵文～"
 }
 
 .post-item {
-    background: linear-gradient(135deg, #ffffff, #fff9f9);
-    border: 1px solid #ffd6e0;
-    border-radius: 12px;
+    background: linear-gradient(135deg, #ffffff, #f8fdff);
+    border: 1px solid #b0e0e6;
+    border-radius: 10px;
     padding: 15px;
     margin: 12px 0;
     transition: all 0.3s ease;
     position: relative;
 }
 
-.post-item::before {
-    content: '📝';
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
 .post-item:hover {
     transform: translateX(5px);
-    box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
-    border-color: #ff69b4;
+    box-shadow: 0 5px 15px rgba(135, 206, 235, 0.2);
+    border-color: #87ceeb;
 }
 
 .post-link {
-    color: #ff69b4;
+    color: #4682b4;
     text-decoration: none;
-    font-weight: bold;
-    margin-left: 30px;
+    font-weight: 600;
+    font-size: 1.1em;
     display: block;
+    margin-bottom: 5px;
 }
 
 .post-link:hover {
-    color: #ff1493;
-    text-decoration: underline wavy #ffb6c1;
+    color: #ff69b4;
+    text-decoration: underline;
 }
 
 .post-meta {
-    color: #87ceeb;
+    color: #5f9ea0;
     font-size: 0.9em;
-    margin-left: 30px;
-    margin-top: 5px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-/* 空状态 */
+.meta-item {
+    background: rgba(135, 206, 235, 0.1);
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+/* 空状态样式 */
 .empty-categories {
     text-align: center;
     padding: 40px;
@@ -157,7 +164,7 @@ description: "按主题浏览所有喵文～"
 .empty-icon {
     font-size: 3em;
     margin-bottom: 15px;
-    color: #ffb6c1;
+    color: #87ceeb;
 }
 
 /* 移动端适配 */
@@ -166,12 +173,17 @@ description: "按主题浏览所有喵文～"
         padding: 15px;
     }
     
+    .categories-header {
+        padding: 30px 0 20px;
+        margin: 0 auto 20px;
+    }
+    
     .categories-title {
         font-size: 2em;
     }
     
     .category-cloud {
-        gap: 10px;
+        gap: 8px;
     }
     
     .category-tag {
@@ -181,11 +193,15 @@ description: "按主题浏览所有喵文～"
     
     .category-section {
         padding: 20px;
-        margin: 20px 0;
+        margin: 20px auto;
     }
     
     .post-item {
         padding: 12px;
+    }
+    
+    .post-meta {
+        gap: 10px;
     }
 }
 </style>
@@ -216,7 +232,7 @@ description: "按主题浏览所有喵文～"
             <section class="category-section" id="{{ category[0] | slugify }}">
                 <h2 class="category-name">
                     {{ category[0] }}
-                    <span class="category-count">({{ category[1].size }}篇喵文)</span>
+                    <span class="category-count">({{ category[1].size }}篇)</span>
                 </h2>
                 
                 <ul class="posts-list">
@@ -224,9 +240,9 @@ description: "按主题浏览所有喵文～"
                     <li class="post-item">
                         <a href="{{ post.url }}" class="post-link">{{ post.title }}</a>
                         <div class="post-meta">
-                            📅 {{ post.date | date: "%Y/%m/%d" }}
+                            <span class="meta-item">📅 {{ post.date | date: "%Y/%m/%d" }}</span>
                             {% if post.tags %}
-                            · 🏷️ {{ post.tags | join: ", " }}
+                            <span class="meta-item">🏷️ {{ post.tags | join: ", " }}</span>
                             {% endif %}
                         </div>
                     </li>
