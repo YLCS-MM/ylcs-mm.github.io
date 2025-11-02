@@ -38,17 +38,10 @@ comments: false
 }
 
 .home .site-header {
-    border-bottom: none
-}
-
-@media (max-width:50em) {
-  .home .collapsed .icon-bar {
-    background-color: white;
-  }
-
-  .home .collection-head .collection-header {
-    font-size: 1.25em;
-  }
+    border-bottom: none;
+    /* 超薄蓝色横幅 */
+    min-height: 35px !important;
+    padding: 5px 0 !important;
 }
 
 /* 🐱 甘城猫猫主题样式 */
@@ -61,13 +54,16 @@ comments: false
   --neko-dark-pink: #ff1493;
 }
 
-/* 修改1：大幅减小横幅高度 */
+/* 修改1：删除黄色猫头相关样式 */
+/* 已删除：.yellow-cat-head 相关样式 */
+
+/* 修改2：调整横幅样式 */
 .neko-banner {
   background: linear-gradient(135deg, var(--neko-blue), #b0e2ff) !important;
   position: relative;
   overflow: hidden;
-  padding: 12px 0; /* 进一步减小高度 */
-  min-height: 100px; /* 设置最小高度 */
+  padding: 12px 0;
+  min-height: 100px;
 }
 
 .neko-banner::before,
@@ -94,12 +90,11 @@ comments: false
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2387ceeb' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
 }
 
-/* 修改2：重新定位头像和气泡 */
+/* 修改3：重新定位头像到顶部 */
 .neko-character {
   position: absolute;
   left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 20px; /* 移到顶部 */
   z-index: 2;
   display: flex;
   align-items: center;
@@ -128,10 +123,11 @@ comments: false
   line-height: 1.2;
 }
 
-/* 修改3：调整标题和位置信息布局 */
+/* 修改4：调整标题布局适应顶部头像 */
 .collection-title {
-  margin-left: 130px; /* 为左侧头像留出空间 */
+  margin-left: 130px;
   padding-right: 20px;
+  margin-top: 10px; /* 为顶部头像留出空间 */
 }
 
 .collection-header span {
@@ -383,6 +379,7 @@ comments: false
   .collection-title {
     margin-left: 0;
     text-align: center;
+    margin-top: 0;
   }
   
   .collection-info {
@@ -406,7 +403,7 @@ comments: false
       <div class="container">
         <div class="columns">
           <div class="column two-thirds">
-            <!-- 添加猫娘角色 -->
+            <!-- 修改5：头像移到顶部 -->
             <div class="neko-character">
               <div class="neko-avatar"></div>
               <div class="neko-bubble">欢迎来到我的小窝喵～ฅ(^•ω•^)ฅ</div>
