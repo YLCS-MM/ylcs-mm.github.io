@@ -1,3 +1,64 @@
+/* 🎯 核心修改：彻底移除蓝色横幅 */
+.site-header {
+    /* 移除所有背景 */
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    
+    /* 移除边框和阴影 */
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    
+    /* 确保透明效果 */
+    backdrop-filter: blur(5px) !important;
+    
+    /* 高度优化 */
+    min-height: 40px !important;
+    padding: 8px 0 !important;
+}
+
+/* 导航链接样式 - 确保在透明背景下可见 */
+.site-header-nav-item,
+.site-header h1 a {
+    color: #333 !important;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8) !important;
+}
+
+.site-header-nav-item:hover,
+.site-header h1 a:hover {
+    color: #ff69b4 !important;
+    text-decoration: underline !important;
+}
+
+/* 移动端适配 */
+@media (max-width:50em) {
+    .site-header {
+        /* 移动端保持透明 */
+        background: transparent !important;
+        background-color: transparent !important;
+        background-image: none !important;
+        
+        /* 调整尺寸 */
+        min-height: 35px !important;
+        padding: 5px 0 !important;
+    }
+    
+    /* 确保移动端导航链接可见 */
+    .site-header-nav-item {
+        background: rgba(255,255,255,0.8) !important;
+        padding: 3px 6px !important;
+        border-radius: 6px !important;
+        margin: 2px !important;
+    }
+    
+    /* 汉堡菜单图标颜色 */
+    .collapsed .icon-bar {
+        background-color: #333 !important;
+    }
+}
+
+/* ===== 以下是原始样式保持不变 ===== */
 .site-header,.site-header-actions .select-menu {
     position: relative
 }
@@ -36,42 +97,20 @@
     margin: 5px
 }
 
-.site-header {
-  /* 修正链接 + 强制覆盖 */
-  background: url('https://raw.githubusercontent.com/YLCS-MM/ylcs-mm2.gthub.io/refs/heads/miao/84b1ade4028efc77b2dd33f136c7712c.jpg') 
-              center/cover no-repeat !important;
-  
-  /* 彻底清除蓝色残留 */
-  background-color: transparent !important;
-  border-bottom: none !important;  /* 移除底部灰线 */
-  
-  /* 高度优化 */
-  min-height: 400px;  /* 建议增大高度 */
-  padding: 60px 0;    /* 增加内边距 */
-  
-  /* 文字优化 */
-  color: white;  /* 文字白色 */
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* 文字阴影 */
+.site-header-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px;
+    vertical-align: middle;
+    box-shadow: 0 0 8px rgba(255,255,255,0.8);
 }
 
-/* 必须添加！导航栏透明化 */
-.site-header-nav, 
-.site-header-nav-item {
-  background: transparent !important;
-  border: none !important;
-  color: inherit !important; /* 继承文字白色 */
+.site-header-avatar:hover {
+    filter: hue-rotate(30deg) brightness(1.1);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
 }
-
-/* 汉堡菜单按钮变白 */
-.site-header button.collapsed span.icon-bar {
-  background-color: white !important;
-}
-
-.profile-header {
-  background: url('https://github.com/user-attachments/assets/ecf0e042-763d-4601-ab25-effad8d2e92f') center/cover no-repeat !important;
-  background-color: transparent !important;
-}
-
 
 .site-header .account-switcher {
     display: inline-block;
@@ -774,20 +813,6 @@ img + em {
 @media (min-width:500px) { .content-header-ad { width: 468px; height: 60px; } }
 @media (min-width:800px) { .content-header-ad { width: 728px; height: 90px; } }
 
-.site-header-avatar:hover {
-  filter: hue-rotate(30deg) brightness(1.1); /* 色调旋转+变亮，更粉 */
-  transform: scale(1.1); /* 轻微放大，有互动感 */
-  transition: all 0.3s ease; /* 动画过渡自然 */
-}
-.site-header-avatar {
-  width: 48px;          /* 头像尺寸（调大更显眼） */
-  height: 48px;        
-  border-radius: 50%;   /* 圆形更柔和，像猫爪肉垫~ */
-  margin-right: 12px;   /* 和标题保持呼吸感 */
-  vertical-align: middle; /* 对齐标题文字 */
-  box-shadow: 0 0 8px rgba(255,255,255,0.8); /* 白边发光，模拟猫耳反光 */
-  position: relative;   /* 为后续“猫耳伪元素”做定位准备 */
-}
 /* 看板娘固定右下角（正确写法） */
 #live2dcanvas,
 .live2d-widget,
@@ -896,4 +921,146 @@ img + em {
     .site-header nav:has(> :nth-child(6)) {
         gap: 3px;
     }
+}
+
+.container {
+  width: auto;
+  max-width: 1020px;
+  padding-left: 20px;
+  padding-right: 20px
+}
+
+.mobile-visible {
+  display: none
+}
+
+@media (max-width:60em) {
+  .collection-card {
+    width: 45%;
+    height: 225px
+  }
+}
+
+@media (max-width:35em) {
+  .collection-card {
+    width: 100%;
+    max-width: 350px;
+    margin: 10px auto
+  }
+}
+
+@media (max-width:50em) {
+  .mobile-block {
+    display: block;
+    float: none
+  }
+  .mobile-hidden {
+    display: none
+  }
+  .mobile-visible {
+    display: inline-block
+  }
+  .mobile-md-section {
+    padding: 10px 0
+  }
+  .column,
+  .one-third-column {
+    width: 100%!important;
+    float: none;
+  }
+  .home .banner .collection-head {
+    padding: 1rem 1rem 1rem 0;
+  }
+  .home .collection-head .collection-title {
+    padding: 0;
+  }
+  .collection-head .collection-header {
+    line-height: 1;
+  }
+  .collection-head.small .collection-title h1.collection-header {
+    font-size: 1.25em;
+  }
+  .collection-head .collection-info .meta-info,
+  .collection-head .collection-info .meta-info .octicon {
+    font-size: 0.75em;
+  }
+  .site-header {
+    padding-bottom: 0;
+    padding-top: 5px;
+  }
+  .site-header h1, .site-header h1 .octicon {
+    font-size: 1em;
+  }
+  .site-header .site-header-nav {
+    float: right;
+    display: none;
+    margin-bottom: 0;
+  }
+  .site-header .site-header-nav .site-header-nav-item {
+    padding: 0 .5rem;
+    margin-left: 0;
+    font-size: 1rem;
+    text-align: right;
+  }
+  .collapsed {
+    float: right;
+    display: block;
+    width: 22px;
+    height: 2em;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+  }
+  .collapsed:active {
+    border: 1px solid transparent;
+  }
+
+  .collapsed .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: #563d7c;
+  }
+
+  .collapsed .icon-bar + .icon-bar {
+    margin-top: 4px;
+  }
+
+  .mini-repo-list-item .owner.css-truncate-target,
+  .mini-repo-list-item .repo-and-owner.css-truncate-target {
+    max-width: 300px
+  }
+  .markdown-body h1 {
+    font-size: 2rem
+  }
+  .markdown-body h2 {
+    font-size: 1.4rem
+  }
+  .markdown-body h3 {
+    font-size: 1.2rem
+  }
+  .markdown-body h4 {
+    font-size: 1.1em
+  }
+  .markdown-body h5 {
+    font-size: 1em
+  }
+
+  .tools-wrapper {
+    bottom: 1em;
+  }
+}
+
+@media (max-width:20em) {
+  .site-header-nav .site-header-nav-item {
+    min-width: 20%
+  }
+  .collection-head .collection-info .meta-info {
+    display: block;
+    margin-top: 15px
+  }
 }
