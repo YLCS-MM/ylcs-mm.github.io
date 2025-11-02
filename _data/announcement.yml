@@ -1,25 +1,11 @@
+# 当前弹窗公告配置
 popup_enabled: true
+current_announcement: 0  # 对应公告历史中的索引
 
-announcements:
-  - title: "博客施工中喵～"
-    title_color: "#ff69b4"
-    background: "linear-gradient(135deg, #ffe4e6 0%, #f0f8ff 100%)"
-    border_color: "#ffb6c1"
-    content: |
-      **【2025年11月1日更新】** 施工中喵～请耐心等待...
-      
-      喵喵～主人正在对博客进行魔法改造喵！
-      
-      **当前施工项目：**
-      - 调整看板娘位置代码优化
-      - 美化公告弹窗样式
-      - 添加公告按钮
-      - 添加历史公告
-      - 三角洲行动专栏
-      
-      **预计完成时间：** soon...
-      
-      *施工期间可能会有页面闪烁，请多见谅喵～ฅ(^•ω•^)ฅ*
-    button_text: "明白啦～继续探索"
-    button_bg: "linear-gradient(135deg, #ff6b6b, #ffa726)"
-    button_color: "white"
+# 弹窗样式配置
+style:
+  background: "#fff9e6"
+  border_color: "#ffb6c1" 
+  title_color: "#ff69b4"
+  button_bg: "#ffa500"
+  button_text: "明白啦～"
