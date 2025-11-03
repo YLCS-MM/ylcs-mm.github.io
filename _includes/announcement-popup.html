@@ -15,25 +15,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* 添加内边距避免边缘挤压 */
+  padding: 20px;
 }
 
 .modal-container {
   position: relative;
-  width: 90%; /* 改为百分比，避免固定宽度拉伸 */
-  max-width: 380px; /* 最大宽度适当减小 */
-  min-width: 300px; /* 最小宽度防止过小 */
+  width: 90%;
+  max-width: 380px;
+  min-width: 300px;
   background: #fff9e6;
   border: 2px dashed #ffb6c1;
   border-radius: 15px;
   padding: 25px 20px 20px;
   box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
   z-index: 2147483647 !important;
-  /* 添加弹性布局确保内容居中 */
   display: flex;
   flex-direction: column;
-  align-items: center; /* 水平居中 */
-  text-align: center; /* 文本居中 */
+  align-items: center;
+  text-align: center;
 }
 
 .modal-container::before,
@@ -52,21 +51,21 @@
 .modal-header { 
   text-align: center; 
   margin-bottom: 15px;
-  width: 100%; /* 确保头部宽度100% */
+  width: 100%;
 }
 
 .modal-title {
-  font-size: 1.3em; /* 适当减小字体避免溢出 */
+  font-size: 1.3em;
   font-weight: bold;
   color: #ff69b4;
   display: inline-block;
-  padding: 8px 20px; /* 调整内边距 */
+  padding: 8px 20px;
   background: rgba(255, 182, 193, 0.1);
   border-radius: 20px;
-  margin: 0 auto; /* 水平居中 */
+  margin: 0 auto;
   text-align: center;
-  max-width: 90%; /* 防止标题过长 */
-  word-wrap: break-word; /* 长单词换行 */
+  max-width: 90%;
+  word-wrap: break-word;
 }
 
 .update-date {
@@ -75,7 +74,7 @@
   color: #ff69b4;
   margin: 8px 0 15px;
   font-weight: bold;
-  width: 100%; /* 确保宽度100% */
+  width: 100%;
 }
 
 .modal-content {
@@ -83,29 +82,29 @@
   font-size: 0.95em;
   color: #666;
   margin-bottom: 20px;
-  width: 100%; /* 确保内容区域宽度100% */
-  text-align: center; /* 内容文本居中 */
+  width: 100%;
+  text-align: center;
 }
 
 .modal-content p,
 .modal-content ul,
 .modal-content li {
-  text-align: center; /* 所有文本元素居中 */
-  margin-left: 0; /* 移除左边距 */
-  padding-left: 0; /* 移除左内边距 */
+  text-align: center;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .modal-content ul { 
-  margin: 10px auto; /* 居中对齐 */
-  padding-left: 0; /* 移除默认左内边距 */
-  list-style-position: inside; /* 列表标记在内部 */
-  display: inline-block; /* 内联块级元素 */
-  text-align: left; /* 列表项左对齐 */
+  margin: 10px auto;
+  padding-left: 0;
+  list-style-position: inside;
+  display: inline-block;
+  text-align: left;
 }
 
 .modal-content li { 
   margin: 5px 0;
-  text-align: left; /* 列表项文本左对齐 */
+  text-align: left;
 }
 
 .footer-note {
@@ -130,7 +129,7 @@
   transition: all 0.3s;
   position: relative;
   font-size: 1em;
-  min-width: 120px; /* 按钮最小宽度 */
+  min-width: 120px;
 }
 
 .modal-button::before,
@@ -179,10 +178,10 @@
   z-index: 9999 !important;
 }
 
-/* 🐱 响应式设计 - 针对不同屏幕优化 */
+/* 🐱 响应式设计 */
 @media (max-width: 480px) {
   .modal-container {
-    width: 95%; /* 小屏幕上更宽一些 */
+    width: 95%;
     max-width: 350px;
     padding: 20px 15px;
   }
@@ -205,7 +204,7 @@
 
 @media (min-width: 769px) {
   .modal-container {
-    max-width: 420px; /* 桌面端稍大一些 */
+    max-width: 420px;
   }
 }
 
@@ -214,10 +213,18 @@
   max-width: 100%;
   overflow-wrap: break-word;
 }
+
+/* 🐱 修复数学公式显示 */
+.modal-content math,
+.modal-content mjx-container {
+  display: inline-block !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+}
 </style>
 
 <div id="announcement-modal" style="display:none;">
-  <div class="modal-overlay">
+  <div class="modal-overlay" id="modalOverlay">
     <div class="modal-container">
       <div class="modal-header">
         <div class="modal-title">🐾🚧 {{ latest_announcement.title }} 🐾</div>
@@ -248,8 +255,6 @@ function closeModal() {
     modal.style.opacity = '0';
     setTimeout(function() {
       modal.style.display = 'none';
-      // 移除Cookie设置，实现每次刷新都弹出
-      // document.cookie = "announcement_seen=true; max-age=86400; path=/"; // 注释掉这行
     }, 300);
   }
 }
@@ -258,17 +263,21 @@ function closeModal() {
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('announcement-modal');
   
-  // 移除Cookie检查，确保每次刷新都显示
-  // var announcementSeen = document.cookie.includes('announcement_seen=true');
-  
-  if (modal && {{ site.data.announcement.popup_enabled }} && '{{ latest_announcement.title }}') {
+  // 修复：直接显示，不依赖Liquid变量（因为Liquid已经在服务端处理）
+  if (modal) {
     // 短暂延迟后显示，确保页面加载完成
     setTimeout(function() {
       modal.style.display = 'block';
-    }, 800); // 稍微延长显示时间，让页面完全加载
+    }, 1000);
   }
 });
 
+// 🐱 修复：遮罩层点击关闭
+document.addEventListener('click', function(event) {
+  if (event.target.id === 'modalOverlay') {
+    closeModal();
+  }
+});
 
 // 🐱 ESC键关闭
 document.addEventListener('keydown', function(event) {
@@ -278,8 +287,28 @@ document.addEventListener('keydown', function(event) {
 });
 
 // 🐱 防止弹窗内容点击事件冒泡
-document.querySelector('.modal-container').addEventListener('click', function(event) {
-  event.stopPropagation();
+document.addEventListener('DOMContentLoaded', function() {
+  var modalContainer = document.querySelector('.modal-container');
+  if (modalContainer) {
+    modalContainer.addEventListener('click', function(event) {
+      event.stopPropagation();
+    });
+  }
+});
+
+// 🐱 修复数学公式显示（如果使用了MathJax）
+if (typeof MathJax !== 'undefined') {
+  MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+}
+</script>
+
+{% else %}
+<!-- 🐱 如果没有启用公告或没有公告数据，输出调试信息 -->
+<script>
+console.log('公告弹窗未启用或没有公告数据:', {
+  popup_enabled: {% if site.data.announcement.popup_enabled %}true{% else %}false{% endif %},
+  has_announcement: {% if latest_announcement %}true{% else %}false{% endif %},
+  announcement_title: '{{ latest_announcement.title }}'
 });
 </script>
 {% endif %}
