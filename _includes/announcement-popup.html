@@ -3,7 +3,7 @@
 
 {% if latest_announcement and site.data.announcement.popup_enabled %}
 <style>
-/* 🐱 公告弹窗样式修复 - 解决拉伸和字体居中问题 */
+/* 🐱 公告弹窗样式修复 - 重点解决手机端显示问题 */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -15,73 +15,95 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 10px; /* 减少内边距，为小屏幕腾出空间 */
 }
 
 .modal-container {
   position: relative;
-  width: 90%;
-  max-width: 380px;
-  min-width: 300px;
+  width: 95%; /* 手机端使用更大百分比 */
+  max-width: 350px; /* 减小最大宽度 */
+  min-width: 280px; /* 减小最小宽度 */
+  max-height: 85vh; /* 限制最大高度，避免超出屏幕 */
   background: #fff9e6;
   border: 2px dashed #ffb6c1;
   border-radius: 15px;
-  padding: 25px 20px 20px;
+  padding: 20px 15px 15px; /* 减少内边距 */
   box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
   z-index: 2147483647 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  overflow: hidden; /* 防止内容溢出 */
+}
+
+/* 🆕 新增：可滚动的内容区域 */
+.modal-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  width: 100%;
+  max-height: calc(85vh - 120px); /* 为按钮留出空间 */
+  padding-right: 5px; /* 为滚动条留空间 */
+}
+
+/* 🆕 自定义滚动条 */
+.modal-scrollable::-webkit-scrollbar {
+  width: 4px;
+}
+
+.modal-scrollable::-webkit-scrollbar-thumb {
+  background: #ffb6c1;
+  border-radius: 2px;
 }
 
 .modal-container::before,
 .modal-container::after {
   content: '❤';
   position: absolute;
-  top: -10px;
+  top: -8px; /* 调整位置 */
   color: #ffb6c1;
-  font-size: 18px;
+  font-size: 16px; /* 减小图标 */
   z-index: 2147483647 !important;
 }
 
-.modal-container::before { left: 20%; }
-.modal-container::after { right: 20%; }
+.modal-container::before { left: 15%; }
+.modal-container::after { right: 15%; }
 
 .modal-header { 
   text-align: center; 
-  margin-bottom: 15px;
+  margin-bottom: 10px; /* 减少间距 */
   width: 100%;
 }
 
 .modal-title {
-  font-size: 1.3em;
+  font-size: 1.1em; /* 手机端字体更小 */
   font-weight: bold;
   color: #ff69b4;
   display: inline-block;
-  padding: 8px 20px;
+  padding: 6px 15px; /* 减小内边距 */
   background: rgba(255, 182, 193, 0.1);
   border-radius: 20px;
   margin: 0 auto;
   text-align: center;
   max-width: 90%;
   word-wrap: break-word;
+  line-height: 1.3; /* 更好的行高 */
 }
 
 .update-date {
   text-align: center;
-  font-size: 0.9em;
+  font-size: 0.8em; /* 更小字体 */
   color: #ff69b4;
-  margin: 8px 0 15px;
+  margin: 5px 0 10px; /* 减少间距 */
   font-weight: bold;
   width: 100%;
 }
 
 .modal-content {
-  line-height: 1.6;
-  font-size: 0.95em;
+  line-height: 1.5; /* 更紧凑的行高 */
+  font-size: 0.9em; /* 更小字体 */
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   width: 100%;
   text-align: center;
 }
@@ -95,7 +117,7 @@
 }
 
 .modal-content ul { 
-  margin: 10px auto;
+  margin: 8px auto; /* 减少间距 */
   padding-left: 0;
   list-style-position: inside;
   display: inline-block;
@@ -103,33 +125,45 @@
 }
 
 .modal-content li { 
-  margin: 5px 0;
-  text-align: left;
+  margin: 3px 0; /* 减少列表项间距 */
+  font-size: 0.85em; /* 列表项更小字体 */
+  line-height: 1.4;
 }
 
 .footer-note {
-  font-size: 0.85em;
+  font-size: 0.8em; /* 更小字体 */
   color: #999;
   text-align: center;
-  margin: 15px 0 20px;
-  line-height: 1.4;
+  margin: 10px 0 15px; /* 减少间距 */
+  line-height: 1.3;
   width: 100%;
+}
+
+/* 🆕 固定底部按钮区域 */
+.modal-footer {
+  width: 100%;
+  padding-top: 10px;
+  border-top: 1px dashed #ffb6c1;
+  position: sticky;
+  bottom: 0;
+  background: #fff9e6;
+  z-index: 10;
 }
 
 .modal-button {
   display: block;
   margin: 0 auto;
-  padding: 10px 30px;
+  padding: 8px 20px; /* 减小按钮内边距 */
   border: none;
-  border-radius: 25px;
+  border-radius: 20px;
   background: #ffa500;
   color: white;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
   position: relative;
-  font-size: 1em;
-  min-width: 120px;
+  font-size: 0.9em; /* 按钮字体更小 */
+  min-width: 100px; /* 减小最小宽度 */
 }
 
 .modal-button::before,
@@ -138,11 +172,11 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.9em;
+  font-size: 0.8em; /* 更小爪子图标 */
 }
 
-.modal-button::before { left: -25px; }
-.modal-button::after { right: -25px; }
+.modal-button::before { left: -20px; }
+.modal-button::after { right: -20px; }
 
 .modal-button:hover {
   filter: brightness(1.1);
@@ -178,30 +212,77 @@
   z-index: 9999 !important;
 }
 
-/* 🐱 响应式设计 */
+/* 📱🆕 重点修复：手机端特别优化 */
 @media (max-width: 480px) {
+  .modal-overlay {
+    padding: 5px; /* 更小的内边距 */
+    align-items: flex-start; /* 顶部对齐，避免被键盘遮挡 */
+    padding-top: 10vh; /* 为顶部留出空间 */
+  }
+  
   .modal-container {
-    width: 95%;
-    max-width: 350px;
-    padding: 20px 15px;
+    width: 98%; /* 几乎全宽 */
+    max-width: 320px; /* 进一步减小最大宽度 */
+    max-height: 80vh; /* 限制高度 */
+    padding: 15px 10px 10px; /* 更紧凑的内边距 */
+  }
+  
+  .modal-scrollable {
+    max-height: calc(80vh - 100px); /* 调整可滚动区域高度 */
   }
   
   .modal-title {
-    font-size: 1.1em;
-    padding: 6px 15px;
+    font-size: 1em; /* 更小的标题 */
+    padding: 5px 12px;
+  }
+  
+  .update-date {
+    font-size: 0.75em;
+    margin: 3px 0 8px;
   }
   
   .modal-content {
-    font-size: 0.9em;
+    font-size: 0.85em;
+    line-height: 1.4;
+  }
+  
+  .modal-content li {
+    font-size: 0.8em;
+    margin: 2px 0;
+  }
+  
+  .footer-note {
+    font-size: 0.75em;
+    margin: 8px 0 10px;
   }
   
   .modal-button {
-    padding: 8px 25px;
-    font-size: 0.9em;
-    min-width: 100px;
+    padding: 6px 16px;
+    font-size: 0.85em;
+    min-width: 80px;
+  }
+  
+  .modal-button::before { left: -15px; }
+  .modal-button::after { right: -15px; }
+}
+
+/* 🆕 超小屏幕手机（如iPhone 5/SE） */
+@media (max-width: 320px) {
+  .modal-container {
+    max-width: 300px;
+    max-height: 75vh;
+  }
+  
+  .modal-title {
+    font-size: 0.95em;
+  }
+  
+  .modal-content {
+    font-size: 0.8em;
   }
 }
 
+/* 平板设备 */
 @media (min-width: 769px) {
   .modal-container {
     max-width: 420px;
@@ -214,12 +295,15 @@
   overflow-wrap: break-word;
 }
 
-/* 🐱 修复数学公式显示 */
-.modal-content math,
-.modal-content mjx-container {
-  display: inline-block !important;
-  max-width: 100% !important;
-  overflow-x: auto !important;
+/* 🆕 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  .modal-button:hover {
+    transform: none; /* 移除移动端悬停效果 */
+  }
+  
+  .modal-button:active {
+    transform: scale(0.95); /* 点击反馈 */
+  }
 }
 </style>
 
@@ -234,15 +318,21 @@
       <div class="update-date">【{{ latest_announcement.date }}】</div>
       {% endif %}
       
-      <div class="modal-content">
-        {{ latest_announcement.content | markdownify }}
+      <!-- 🆕 可滚动的内容区域 -->
+      <div class="modal-scrollable">
+        <div class="modal-content">
+          {{ latest_announcement.content | markdownify }}
+        </div>
+        
+        <div class="footer-note">施工期间可能会有页面闪烁，请多见谅喵~ (A·ω·A)</div>
       </div>
       
-      <div class="footer-note">施工期间可能会有页面闪烁，请多见谅喵~ (A·ω·A)</div>
-      
-      <button class="modal-button" onclick="closeModal()">
-        明白啦～
-      </button>
+      <!-- 🆕 固定的底部按钮 -->
+      <div class="modal-footer">
+        <button class="modal-button" onclick="closeModal()">
+          明白啦～
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -259,20 +349,18 @@ function closeModal() {
   }
 }
 
-// 🐱 页面加载后显示弹窗 - 每次刷新都显示
+// 🐱 页面加载后显示弹窗
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('announcement-modal');
   
-  // 修复：直接显示，不依赖Liquid变量（因为Liquid已经在服务端处理）
   if (modal) {
-    // 短暂延迟后显示，确保页面加载完成
     setTimeout(function() {
       modal.style.display = 'block';
     }, 1000);
   }
 });
 
-// 🐱 修复：遮罩层点击关闭
+// 🐱 遮罩层点击关闭
 document.addEventListener('click', function(event) {
   if (event.target.id === 'modalOverlay') {
     closeModal();
@@ -296,19 +384,33 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// 🐱 修复数学公式显示（如果使用了MathJax）
-if (typeof MathJax !== 'undefined') {
-  MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-}
-</script>
+// 🆕 手机端触摸优化：滑动关闭
+var startY = 0;
+var modalOverlay = document.getElementById('modalOverlay');
 
-{% else %}
-<!-- 🐱 如果没有启用公告或没有公告数据，输出调试信息 -->
-<script>
-console.log('公告弹窗未启用或没有公告数据:', {
-  popup_enabled: {% if site.data.announcement.popup_enabled %}true{% else %}false{% endif %},
-  has_announcement: {% if latest_announcement %}true{% else %}false{% endif %},
-  announcement_title: '{{ latest_announcement.title }}'
+if (modalOverlay) {
+  modalOverlay.addEventListener('touchstart', function(e) {
+    startY = e.touches[0].clientY;
+  });
+  
+  modalOverlay.addEventListener('touchmove', function(e) {
+    var currentY = e.touches[0].clientY;
+    var diffY = currentY - startY;
+    
+    // 向下滑动超过50px关闭弹窗
+    if (diffY > 50) {
+      closeModal();
+    }
+  });
+}
+
+// 🆕 防止手机端弹窗被键盘顶起
+window.addEventListener('resize', function() {
+  var modal = document.getElementById('announcement-modal');
+  if (modal && modal.style.display === 'block') {
+    // 滚动到顶部，确保弹窗可见
+    window.scrollTo(0, 0);
+  }
 });
 </script>
 {% endif %}
