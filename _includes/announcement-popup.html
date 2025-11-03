@@ -3,7 +3,6 @@
 
 {% if latest_announcement and site.data.announcement.popup_enabled %}
 <style>
-/* 🐱 优化版公告弹窗 - 更紧凑的尺寸，带滚动条 */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -11,7 +10,7 @@
   width: 100%;
   height: 100%;
   background: rgba(255, 240, 245, 0.8);
-  z-index: 2147483647 !important;
+  z-index: 2147483647;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,14 +21,12 @@
   position: relative;
   width: 90%;
   max-width: 400px;
-  min-width: 280px;
   max-height: 70vh;
   background: #fff9e6;
   border: 2px dashed #ffb6c1;
   border-radius: 15px;
   padding: 15px;
   box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
-  z-index: 2147483647 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,13 +38,6 @@
   text-align: center; 
   margin-bottom: 8px;
   width: 100%;
-  flex-shrink: 0;
-  cursor: grab;
-  user-select: none;
-}
-
-.modal-header:active {
-  cursor: grabbing;
 }
 
 .modal-title {
@@ -59,14 +49,12 @@
   background: rgba(255, 182, 193, 0.1);
   border-radius: 20px;
   margin: 0 auto;
-  text-align: center;
   max-width: 90%;
   word-wrap: break-word;
   line-height: 1.3;
 }
 
 .update-date {
-  text-align: center;
   font-size: 0.8em;
   color: #ff69b4;
   margin: 3px 0 8px;
@@ -97,29 +85,12 @@
   border-radius: 3px;
 }
 
-.modal-scrollable::-webkit-scrollbar-thumb:hover {
-  background: #ff69b4;
-}
-
 .modal-content {
   line-height: 1.5;
   font-size: 0.9em;
   color: #666;
   margin-bottom: 10px;
   width: 100%;
-  text-align: center;
-  padding: 0 5px;
-}
-
-.modal-content h2,
-.modal-content h3,
-.modal-content h4 {
-  margin: 12px 0 8px;
-  text-align: center;
-}
-
-.modal-content p {
-  margin: 8px 0;
   text-align: center;
 }
 
@@ -135,7 +106,6 @@
   margin: 4px 0;
   font-size: 0.85em;
   line-height: 1.4;
-  text-align: left;
 }
 
 .footer-note {
@@ -144,15 +114,12 @@
   text-align: center;
   margin: 8px 0 10px;
   line-height: 1.3;
-  width: 100%;
-  flex-shrink: 0;
 }
 
 .modal-footer {
   width: 100%;
   padding-top: 8px;
   border-top: 1px dashed #ffb6c1;
-  flex-shrink: 0;
 }
 
 .modal-button {
@@ -165,15 +132,8 @@
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s;
-  position: relative;
   font-size: 0.9em;
   min-width: 100px;
-}
-
-.modal-button:hover {
-  filter: brightness(1.1);
-  transform: scale(1.05);
 }
 
 @keyframes nekoSlideIn {
@@ -197,7 +157,6 @@
 @media (max-width: 768px) {
   .modal-overlay {
     padding: 15px;
-    align-items: center;
   }
   
   .modal-container {
@@ -213,115 +172,18 @@
   
   .modal-title {
     font-size: 1em;
-    padding: 5px 10px;
-  }
-  
-  .update-date {
-    font-size: 0.75em;
-    margin: 2px 0 6px;
   }
   
   .modal-content {
     font-size: 0.85em;
-    line-height: 1.4;
   }
-  
-  .modal-content li {
-    font-size: 0.8em;
-    margin: 3px 0;
-  }
-  
-  .footer-note {
-    font-size: 0.75em;
-    margin: 6px 0 8px;
-  }
-  
-  .modal-button {
-    padding: 6px 16px;
-    font-size: 0.85em;
-    min-width: 90px;
-  }
-}
-
-@media (min-width: 769px) {
-  .modal-container {
-    max-width: 450px;
-    max-height: 75vh;
-  }
-  
-  .modal-scrollable {
-    max-height: calc(75vh - 100px);
-  }
-  
-  .modal-title {
-    font-size: 1.2em;
-  }
-  
-  .modal-content {
-    font-size: 0.95em;
-  }
-}
-
-@media (max-width: 320px) {
-  .modal-container {
-    max-width: 300px;
-    max-height: 60vh;
-    padding: 10px;
-  }
-  
-  .modal-scrollable {
-    max-height: calc(60vh - 80px);
-  }
-  
-  .modal-title {
-    font-size: 0.95em;
-  }
-  
-  .modal-content {
-    font-size: 0.8em;
-  }
-}
-
-@media (min-width: 1200px) {
-  .modal-container {
-    max-width: 500px;
-  }
-}
-
-.modal-content * {
-  max-width: 100%;
-  overflow-wrap: break-word;
-}
-
-@media (hover: none) and (pointer: coarse) {
-  .modal-button:hover {
-    transform: none;
-  }
-  
-  .modal-button:active {
-    transform: scale(0.95);
-  }
-}
-
-.modal-scrollable {
-  scrollbar-width: thin;
-  scrollbar-color: #ffb6c1 rgba(255, 182, 193, 0.1);
-}
-
-@keyframes swipeHint {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(3px); }
-}
-
-.modal-header {
-  animation: swipeHint 2s ease-in-out infinite;
 }
 </style>
 
 <div id="announcement-modal" style="display:none;">
-  <div class="modal-overlay" id="modalOverlay">
+  <div class="modal-overlay">
     <div class="modal-container">
-      <div class="modal-header" id="modalHeader">
+      <div class="modal-header">
         <div class="modal-title">🐾 {{ latest_announcement.title }} 🐾</div>
       </div>
       
@@ -347,212 +209,63 @@
 </div>
 
 <script>
-// 🐱 测试模式配置
-const TEST_MODE = true; // 🆕 设置为 true 开启测试模式（每次刷新都显示）
+// 测试模式配置
+const TEST_MODE = false;
 
-// 🐱 关闭弹窗函数
+// 关闭弹窗函数
 function closeModal() {
   var modal = document.getElementById('announcement-modal');
   if (modal) {
-    modal.style.opacity = '0';
-    setTimeout(function() {
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }, 300);
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
   }
 }
 
-// 🐱 页面加载后显示弹窗
+// 页面加载后显示弹窗
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('announcement-modal');
   
-  if (modal) {
-    // 🆕 测试模式：总是显示弹窗
-    if (TEST_MODE || shouldShowAnnouncement()) {
-      document.body.style.overflow = 'hidden';
+  if (modal && (TEST_MODE || shouldShowAnnouncement())) {
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(function() {
+      modal.style.display = 'block';
       
-      setTimeout(function() {
-        modal.style.display = 'block';
-        
-        // 🆕 测试模式下不记录显示状态
-        if (!TEST_MODE) {
-          recordAnnouncementShown();
-        }
-        
-        // 🆕 测试模式提示
-        if (TEST_MODE) {
-          console.log('🐱 测试模式：弹窗已显示');
-        }
-      }, 1000);
-    }
+      if (!TEST_MODE) {
+        recordAnnouncementShown();
+      }
+    }, 1000);
   }
 });
 
-// 🐱 ESC键关闭
+// ESC键关闭
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
     closeModal();
   }
 });
 
-// 🆕 防止弹窗内容点击事件冒泡
-document.addEventListener('DOMContentLoaded', function() {
-  var modalContainer = document.querySelector('.modal-container');
-  if (modalContainer) {
-    modalContainer.addEventListener('click', function(event) {
-      event.stopPropagation();
-    });
-  }
-});
-
-// 🆕 修复版：手机端触摸优化 - 滑动关闭
-let touchStartY = 0;
-let touchStartTime = 0;
-let isSwiping = false;
-
-const modalHeader = document.getElementById('modalHeader');
-const modalContainer = document.querySelector('.modal-container');
-
-if (modalHeader) {
-  modalHeader.addEventListener('touchstart', function(e) {
-    touchStartY = e.touches[0].clientY;
-    touchStartTime = Date.now();
-    isSwiping = true;
-  });
-  
-  modalHeader.addEventListener('touchmove', function(e) {
-    if (!isSwiping) return;
-    
-    const currentY = e.touches[0].clientY;
-    const diffY = currentY - touchStartY;
-    
-    if (diffY > 0) {
-      modalContainer.style.transform = `translateY(${Math.min(diffY, 100)}px)`;
-      modalContainer.style.opacity = `${1 - (diffY / 200)}`;
-    }
-  });
-  
-  modalHeader.addEventListener('touchend', function(e) {
-    if (!isSwiping) return;
-    
-    const currentY = e.changedTouches[0].clientY;
-    const diffY = currentY - touchStartY;
-    const swipeTime = Date.now() - touchStartTime;
-    
-    if ((diffY > 50) || (diffY > 30 && swipeTime < 300)) {
-      closeModal();
-    } else {
-      modalContainer.style.transform = 'translateY(0)';
-      modalContainer.style.opacity = '1';
-    }
-    
-    isSwiping = false;
-  });
-  
-  modalHeader.addEventListener('touchcancel', function() {
-    modalContainer.style.transform = 'translateY(0)';
-    modalContainer.style.opacity = '1';
-    isSwiping = false;
-  });
-}
-
-// 🆕 电脑端鼠标拖拽关闭（修复版）
-if (modalHeader) {
-  let isDragging = false; // 🆕 修复：添加变量声明
-  let dragStartY = 0;     // 🆕 修复：添加变量声明
-  
-  modalHeader.addEventListener('mousedown', function(e) {
-    isDragging = true;
-    dragStartY = e.clientY;
-    modalHeader.style.cursor = 'grabbing';
-  });
-  
-  document.addEventListener('mousemove', function(e) {
-    if (!isDragging) return;
-    
-    const diffY = e.clientY - dragStartY;
-    
-    if (diffY > 0) {
-      modalContainer.style.transform = `translateY(${Math.min(diffY, 100)}px)`;
-      modalContainer.style.opacity = `${1 - (diffY / 200)}`;
-    }
-  });
-  
-  document.addEventListener('mouseup', function(e) {
-    if (!isDragging) return;
-    
-    const diffY = e.clientY - dragStartY;
-    
-    if (diffY > 50) {
-      closeModal();
-    } else {
-      modalContainer.style.transform = 'translateY(0)';
-      modalContainer.style.opacity = '1';
-    }
-    
-    isDragging = false;
-    modalHeader.style.cursor = 'grab';
-  });
-}
-
-// 🆕 窗口调整大小时重新计算尺寸
-window.addEventListener('resize', function() {
-  var modal = document.getElementById('announcement-modal');
-  if (modal && modal.style.display === 'block') {
-    // 响应式调整逻辑
-  }
-});
-
-// 🆕 页面卸载时清理事件
-window.addEventListener('beforeunload', function() {
-  closeModal();
-});
-
-// 🐱 🆕 修改版：检查是否需要显示公告弹窗
+// 检查是否需要显示公告弹窗
 function shouldShowAnnouncement() {
-  // 🆕 测试模式：总是显示
-  if (TEST_MODE) {
-    console.log('🐱 测试模式激活：每次刷新都显示弹窗');
-    return true; // 🆕 修复：应该返回true
-  }
+  if (TEST_MODE) return true;
   
-  // 🆕 正式模式：原有逻辑
   try {
     const storedData = localStorage.getItem('nekoAnnouncementData');
-    
-    if (!storedData) {
-      console.log('从未显示过公告，需要显示');
-      return true;
-    }
+    if (!storedData) return true;
     
     const data = JSON.parse(storedData);
     const today = new Date().toDateString();
     const latestTitle = "{{ latest_announcement.title }}";
     
-    console.log('存储的数据:', data);
-    console.log('今天日期:', today);
-    console.log('最新公告标题:', latestTitle);
-    
-    if (data.date !== today || data.title !== latestTitle) {
-      console.log('需要显示公告：日期不同或标题不同');
-      return true;
-    }
-    
-    console.log('同一天已经显示过相同公告，不需要显示');
-    return true; // 🆕 修复：应该返回false
+    return data.date !== today || data.title !== latestTitle;
   } catch (error) {
-    console.error('检查公告显示状态出错:', error);
     return true;
   }
 }
 
-// 🐱 🆕 修改版：记录公告已显示
+// 记录公告已显示
 function recordAnnouncementShown() {
-  // 🆕 测试模式下不记录
-  if (TEST_MODE) {
-    console.log('🐱 测试模式：跳过记录显示状态');
-    return;
-  }
+  if (TEST_MODE) return;
   
   try {
     const data = {
@@ -560,12 +273,9 @@ function recordAnnouncementShown() {
       title: "{{ latest_announcement.title }}",
       timestamp: Date.now()
     };
-    
-    console.log('记录公告已显示:', data);
     localStorage.setItem('nekoAnnouncementData', JSON.stringify(data));
-  } catch (error) {
-    console.error('记录公告显示状态出错:', error);
-  }
+  } catch (error) {}
 }
+</script>
 
-{% endif %} <!-- 🆕 修复：添加缺失的 endif 闭合标签 -->
+{% endif %}
