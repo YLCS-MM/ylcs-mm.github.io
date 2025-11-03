@@ -5,7 +5,7 @@
     
     <!-- 目录特有样式 -->
     <style>
-    /* 目录侧边栏样式 - 修改为图二效果 */
+    /* 目录侧边栏样式 - 图二折叠效果 */
     .toc-sidebar {
         position: fixed;
         top: 0;
@@ -45,6 +45,12 @@
         color: #ff69b4;
         cursor: pointer;
         padding: 5px;
+        border-radius: 50%;
+        transition: background 0.3s;
+    }
+    
+    .toc-close:hover {
+        background: rgba(255, 105, 180, 0.1);
     }
     
     .toc-list {
@@ -60,7 +66,8 @@
     .toc-link {
         color: #666;
         text-decoration: none;
-        display: block;
+        display: flex;
+        align-items: center;
         padding: 12px 15px;
         border-radius: 8px;
         transition: all 0.3s ease;
@@ -84,13 +91,19 @@
         border-left-color: #ff1493;
     }
     
+    .toc-bullet {
+        margin-right: 8px;
+        color: #ff69b4;
+        font-size: 0.8em;
+    }
+    
     /* 汉堡菜单按钮 */
     .hamburger-menu {
         position: fixed;
         top: 20px;
         right: 20px;
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
         background: #ff69b4;
         border: none;
         border-radius: 50%;
@@ -99,8 +112,8 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        z-index: 999;
-        box-shadow: 0 3px 10px rgba(255, 105, 180, 0.3);
+        z-index: 1001;
+        box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
         transition: all 0.3s ease;
     }
     
@@ -138,7 +151,7 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.5);
-        z-index: 998;
+        z-index: 999;
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
@@ -170,8 +183,8 @@
         .hamburger-menu {
             top: 15px;
             right: 15px;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
         }
     }
     
@@ -202,7 +215,7 @@
     <aside class="toc-sidebar" id="tocSidebar">
         <div class="toc-header">
             <span>📑 文章目录</span>
-            <button class="toc-close" onclick="hideToc()">✕</button>
+            <button class="toc-close" id="tocClose">✕</button>
         </div>
         <ul class="toc-list" id="tocList">
             <!-- 目录内容由JavaScript动态生成 -->
@@ -221,78 +234,100 @@
         </article>
     </div>
     
-    <!-- 目录JavaScript -->
+    <!-- 修改后的JavaScript控制逻辑 -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // 获取DOM元素
         const hamburgerMenu = document.getElementById('hamburgerMenu');
         const tocSidebar = document.getElementById('tocSidebar');
-        const overlay = document.getElementById('tocOverlay');
+        const tocOverlay = document.getElementById('tocOverlay');
         const tocList = document.getElementById('tocList');
+        const tocClose = document.getElementById('tocClose');
         
         // 确保目录默认隐藏
-        tocSidebar.classList.remove('active');
-        overlay.classList.remove('active');
+        hideToc();
         
         // 获取所有标题元素
         const headings = document.querySelectorAll('h2, h3, h4');
         
         // 生成目录
-        headings.forEach((heading, index) => {
-            if (!heading.id) {
-                heading.id = 'heading-' + index;
-            }
-            
-            const listItem = document.createElement('li');
-            listItem.className = 'toc-item';
-            
-            const link = document.createElement('a');
-            link.href = '#' + heading.id;
-            link.className = 'toc-link';
-            link.innerHTML = '<span class="toc-bullet">🐾</span>' + heading.textContent;
-            
-            // 根据标题级别添加层级样式
-            const level = parseInt(heading.tagName.substring(1));
-            if (level === 3) {
-                listItem.classList.add('toc-level-3');
-            } else if (level === 4) {
-                listItem.classList.add('toc-level-4');
-            }
-            
-            listItem.appendChild(link);
-            tocList.appendChild(listItem);
-            
-            // 添加点击事件
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                hideToc();
-                
-                // 滚动到对应标题
-                const targetElement = document.getElementById(heading.id);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+        if (headings.length > 0) {
+            headings.forEach((heading, index) => {
+                // 确保标题有ID
+                if (!heading.id) {
+                    heading.id = 'heading-' + index;
                 }
+                
+                // 创建目录项
+                const listItem = document.createElement('li');
+                listItem.className = 'toc-item';
+                
+                // 根据标题级别添加层级样式
+                const level = parseInt(heading.tagName.substring(1));
+                if (level === 3) {
+                    listItem.classList.add('toc-level-3');
+                } else if (level === 4) {
+                    listItem.classList.add('toc-level-4');
+                }
+                
+                // 创建链接
+                const link = document.createElement('a');
+                link.href = '#' + heading.id;
+                link.className = 'toc-link';
+                link.innerHTML = '<span class="toc-bullet">🐾</span>' + heading.textContent;
+                
+                // 添加点击事件
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    hideToc(); // 点击目录项后隐藏目录
+                    
+                    // 平滑滚动到对应标题
+                    const targetElement = document.getElementById(heading.id);
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+                
+                listItem.appendChild(link);
+                tocList.appendChild(listItem);
             });
+        } else {
+            // 如果没有标题，显示提示信息
+            tocList.innerHTML = '<li class="toc-item"><span style="color: #888; font-style: italic;">这篇文章没有标题结构</span></li>';
+        }
+        
+        // 汉堡菜单点击事件 - 切换目录显示/隐藏
+        hamburgerMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleToc();
         });
         
-        // 汉堡菜单点击事件
-        hamburgerMenu.addEventListener('click', function() {
-            this.classList.toggle('active');
-            tocSidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+        // 关闭按钮点击事件
+        tocClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            hideToc();
         });
         
-        // 遮罩层点击事件
-        overlay.addEventListener('click', hideToc);
+        // 遮罩层点击事件 - 点击遮罩层关闭目录
+        tocOverlay.addEventListener('click', function() {
+            hideToc();
+        });
         
-        // 关闭目录函数
-        window.hideToc = function() {
-            hamburgerMenu.classList.remove('active');
-            tocSidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        };
+        // 点击目录外部关闭目录
+        document.addEventListener('click', function(e) {
+            if (!tocSidebar.contains(e.target) && e.target !== hamburgerMenu) {
+                hideToc();
+            }
+        });
+        
+        // 阻止目录内部点击事件冒泡
+        tocSidebar.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
         
         // ESC键关闭目录
         document.addEventListener('keydown', function(e) {
@@ -304,28 +339,75 @@
         // 滚动时高亮当前章节
         function highlightActiveToc() {
             const tocLinks = document.querySelectorAll('.toc-link');
-            let currentActive = null;
+            let activeIndex = -1;
             
             // 找到当前可见的标题
             for (let i = headings.length - 1; i >= 0; i--) {
                 const rect = headings[i].getBoundingClientRect();
-                if (rect.top <= 100) {
-                    currentActive = headings[i].id;
+                if (rect.top <= 100) { // 距离顶部100px以内
+                    activeIndex = i;
                     break;
                 }
             }
             
             // 更新激活状态
-            tocLinks.forEach(link => {
+            tocLinks.forEach((link, index) => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + currentActive) {
+                if (index === activeIndex) {
                     link.classList.add('active');
                 }
             });
         }
         
+        // 监听滚动事件
         window.addEventListener('scroll', highlightActiveToc);
-        highlightActiveToc();
+        
+        // 初始化高亮
+        setTimeout(highlightActiveToc, 100);
+        
+        // 控制函数
+        function toggleToc() {
+            hamburgerMenu.classList.toggle('active');
+            tocSidebar.classList.toggle('active');
+            tocOverlay.classList.toggle('active');
+        }
+        
+        function hideToc() {
+            hamburgerMenu.classList.remove('active');
+            tocSidebar.classList.remove('active');
+            tocOverlay.classList.remove('active');
+        }
+        
+        function showToc() {
+            hamburgerMenu.classList.add('active');
+            tocSidebar.classList.add('active');
+            tocOverlay.classList.add('active');
+        }
+        
+        // 将函数暴露到全局，方便其他元素调用
+        window.toggleToc = toggleToc;
+        window.hideToc = hideToc;
+        window.showToc = showToc;
+        
+        // 移动端触摸优化
+        let startX = 0;
+        let currentX = 0;
+        
+        tocSidebar.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+        
+        tocSidebar.addEventListener('touchmove', function(e) {
+            currentX = e.touches[0].clientX;
+        });
+        
+        tocSidebar.addEventListener('touchend', function(e) {
+            const diffX = startX - currentX;
+            // 如果从右向左滑动超过50px，关闭目录
+            if (diffX > 50) {
+                hideToc();
+            }
+        });
     });
     </script>
 </body>
