@@ -10,7 +10,7 @@
         文章目录
       {% endif %}
     </h3>
-    <button class="neko-toc-close" onclick="hideNekoToc()">✕</button>
+    <button class="neko-toc-close" id="nekoTocClose" aria-label="关闭目录">✕</button>
   </div>
   
   <div class="neko-toc-content">
@@ -19,73 +19,475 @@
 </aside>
 
 <!-- 汉堡菜单按钮 -->
-<button class="neko-toc-toggle" id="nekoTocToggle" onclick="toggleNekoToc()">
+<button class="neko-toc-toggle" id="nekoTocToggle" aria-label="显示/隐藏目录">
   <span class="neko-toc-toggle-icon">📑</span>
 </button>
 
 <!-- 遮罩层 -->
-<div class="neko-toc-overlay" id="nekoTocOverlay" onclick="hideNekoToc()"></div>
+<div class="neko-toc-overlay" id="nekoTocOverlay"></div>
+
+<style>
+/* CSS重置 - 确保跨浏览器一致性 */
+.neko-toc-sidebar * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 目录侧边栏样式 */
+.neko-toc-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  background: linear-gradient(135deg, #fff0f5 0%, #e6f7ff 100%);
+  background: -webkit-linear-gradient(135deg, #fff0f5 0%, #e6f7ff 100%);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), -webkit-transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-left: 3px solid #ffb6c1;
+}
+
+.neko-toc-sidebar.active {
+  right: 0;
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+}
+
+/* 修复iOS Safari的视口高度问题 */
+@supports (-webkit-touch-callout: none) {
+  .neko-toc-sidebar {
+    height: -webkit-fill-available;
+  }
+}
+
+/* 目录头部样式 */
+.neko-toc-header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 2px dashed #ffb6c1;
+  flex-shrink: 0;
+}
+
+.neko-toc-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.neko-toc-title {
+  font-size: 18px;
+  color: #ff69b4;
+  font-weight: bold;
+  flex: 1;
+  margin: 0;
+}
+
+.neko-toc-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #ff69b4;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.neko-toc-close:hover,
+.neko-toc-close:focus {
+  background: #ffb6c1;
+  color: white;
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+}
+
+/* 目录内容区域 */
+.neko-toc-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
+}
+
+/* 自定义目录列表样式 */
+.neko-toc-list {
+  list-style: none;
+}
+
+.neko-toc-list li {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.neko-toc-link {
+  display: block;
+  padding: 10px 15px;
+  color: #666;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.neko-toc-link:hover,
+.neko-toc-link:focus {
+  background: rgba(255, 182, 193, 0.1);
+  color: #ff69b4;
+  border-left-color: #ff69b4;
+  transform: translateX(5px);
+  -webkit-transform: translateX(5px);
+}
+
+.neko-toc-link.active {
+  background: rgba(255, 105, 180, 0.1);
+  color: #ff69b4;
+  border-left-color: #ff69b4;
+  font-weight: bold;
+}
+
+/* 层级缩进 */
+.neko-toc-list .neko-toc-list {
+  margin-left: 15px;
+  margin-top: 5px;
+}
+
+/* 汉堡菜单按钮 */
+.neko-toc-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.neko-toc-toggle:hover,
+.neko-toc-toggle:focus {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(255, 105, 180, 0.4);
+}
+
+.neko-toc-toggle-icon {
+  font-size: 20px;
+  color: white;
+}
+
+/* 遮罩层 */
+.neko-toc-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.neko-toc-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .neko-toc-sidebar {
+    max-width: 100%;
+    right: -100%;
+  }
+  
+  .neko-toc-toggle {
+    width: 45px;
+    height: 45px;
+    top: 15px;
+    right: 15px;
+  }
+  
+  .neko-toc-header {
+    padding: 15px;
+  }
+  
+  .neko-toc-content {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .neko-toc-sidebar {
+    border-left: none;
+    border-right: 3px solid #ffb6c1;
+  }
+  
+  .neko-toc-toggle {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .neko-toc-toggle-icon {
+    font-size: 18px;
+  }
+}
+
+/* 针对旧版浏览器的回退样式 */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* IE10+ 特定样式 */
+  .neko-toc-sidebar {
+    transition: right 0.3s ease;
+  }
+  
+  .neko-toc-link:hover {
+    background: #f0f0f0;
+  }
+}
+
+/* 打印样式 - 隐藏目录 */
+@media print {
+  .neko-toc-sidebar,
+  .neko-toc-toggle,
+  .neko-toc-overlay {
+    display: none !important;
+  }
+}
+</style>
 
 <script>
-// 猫娘风格目录控制函数
-function toggleNekoToc() {
-  const sidebar = document.getElementById('nekoTocSidebar');
-  const overlay = document.getElementById('nekoTocOverlay');
-  sidebar.classList.toggle('active');
-  overlay.classList.toggle('active');
-}
-
-function hideNekoToc() {
-  const sidebar = document.getElementById('nekoTocSidebar');
-  const overlay = document.getElementById('nekoTocOverlay');
-  sidebar.classList.remove('active');
-  overlay.classList.remove('active');
-}
-
-// 滚动时高亮当前章节
-function highlightActiveToc() {
-  const sections = document.querySelectorAll('h2, h3, h4');
-  const tocLinks = document.querySelectorAll('.neko-toc-link');
+// 猫娘风格目录控制函数 - 增强兼容性
+(function() {
+  'use strict';
   
-  let currentSection = '';
+  // 防止多次初始化
+  if (window.nekoTocInitialized) {
+    return;
+  }
+  window.nekoTocInitialized = true;
   
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top <= 100) {
-      currentSection = section.id;
+  // 获取DOM元素
+  var sidebar = document.getElementById('nekoTocSidebar');
+  var toggle = document.getElementById('nekoTocToggle');
+  var closeBtn = document.getElementById('nekoTocClose');
+  var overlay = document.getElementById('nekoTocOverlay');
+  
+  // 检查元素是否存在
+  if (!sidebar || !toggle) {
+    console.warn('目录侧边栏元素未找到');
+    return;
+  }
+  
+  // 切换目录显示/隐藏
+  function toggleNekoToc() {
+    if (!sidebar || !overlay) return;
+    
+    var isActive = sidebar.classList.contains('active');
+    
+    if (isActive) {
+      hideNekoToc();
+    } else {
+      showNekoToc();
     }
-  });
+  }
   
-  tocLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === '#' + currentSection) {
-      link.classList.add('active');
+  // 显示目录
+  function showNekoToc() {
+    if (!sidebar || !overlay) return;
+    
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+    
+    // 防止背景滚动
+    document.body.style.overflow = 'hidden';
+    
+    // 为移动设备添加触摸事件处理
+    if ('ontouchstart' in window) {
+      document.addEventListener('touchmove', preventScroll, { passive: false });
     }
-  });
-}
-
-// 初始化
-document.addEventListener('DOMContentLoaded', function() {
-  // 监听滚动
-  window.addEventListener('scroll', highlightActiveToc);
-  highlightActiveToc();
+  }
   
-  // 点击目录项平滑滚动
-  document.querySelectorAll('.neko-toc-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const targetElement = document.getElementById(targetId);
+  // 隐藏目录
+  function hideNekoToc() {
+    if (!sidebar || !overlay) return;
+    
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    
+    // 恢复背景滚动
+    document.body.style.overflow = '';
+    
+    // 移除触摸事件处理
+    if ('ontouchstart' in window) {
+      document.removeEventListener('touchmove', preventScroll);
+    }
+  }
+  
+  // 防止背景滚动
+  function preventScroll(e) {
+    e.preventDefault();
+  }
+  
+  // 高亮当前章节
+  function highlightActiveToc() {
+    var tocLinks = document.querySelectorAll('.neko-toc-link');
+    if (tocLinks.length === 0) return;
+    
+    var sections = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    var currentSection = '';
+    var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // 查找当前可见的章节
+    for (var i = 0; i < sections.length; i++) {
+      var section = sections[i];
+      var sectionTop = section.offsetTop - 100;
       
-      if (targetElement) {
+      if (scrollPosition >= sectionTop) {
+        currentSection = section.id;
+      } else {
+        break;
+      }
+    }
+    
+    // 移除所有活动状态
+    for (var j = 0; j < tocLinks.length; j++) {
+      tocLinks[j].classList.remove('active');
+    }
+    
+    // 添加当前活动状态
+    if (currentSection) {
+      var activeLink = document.querySelector('.neko-toc-link[href="#' + currentSection + '"]');
+      if (activeLink) {
+        activeLink.classList.add('active');
+        
+        // 确保活动链接在可视区域内
+        var tocContent = document.querySelector('.neko-toc-content');
+        if (tocContent && activeLink.offsetTop > tocContent.clientHeight) {
+          tocContent.scrollTop = activeLink.offsetTop - 100;
+        }
+      }
+    }
+  }
+  
+  // 平滑滚动到目标位置
+  function smoothScrollTo(targetId) {
+    var targetElement = document.getElementById(targetId);
+    if (!targetElement) return;
+    
+    var targetPosition = targetElement.offsetTop - 80;
+    var startPosition = window.pageYOffset;
+    var distance = targetPosition - startPosition;
+    var duration = 500;
+    var startTime = null;
+    
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      var timeElapsed = currentTime - startTime;
+      var run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    }
+    
+    // 缓动函数
+    function easeInOutQuad(t, b, c, d) {
+      t /= d/2;
+      if (t < 1) return c/2*t*t + b;
+      t--;
+      return -c/2 * (t*(t-2) - 1) + b;
+    }
+    
+    requestAnimationFrame(animation);
+  }
+  
+  // 初始化函数
+  function initNekoToc() {
+    // 添加事件监听
+    if (toggle) {
+      toggle.addEventListener('click', toggleNekoToc);
+    }
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', hideNekoToc);
+    }
+    
+    if (overlay) {
+      overlay.addEventListener('click', hideNekoToc);
+    }
+    
+    // 为目录链接添加点击事件
+    var tocLinks = document.querySelectorAll('.neko-toc-link');
+    for (var i = 0; i < tocLinks.length; i++) {
+      tocLinks[i].addEventListener('click', function(e) {
+        e.preventDefault();
+        var targetId = this.getAttribute('href').substring(1);
         hideNekoToc();
-        window.scrollTo({
-          top: targetElement.offsetTop - 80,
-          behavior: 'smooth'
-        });
+        smoothScrollTo(targetId);
+      });
+    }
+    
+    // 监听滚动事件
+    window.addEventListener('scroll', function() {
+      // 使用requestAnimationFrame优化性能
+      requestAnimationFrame(highlightActiveToc);
+    });
+    
+    // 初始高亮
+    highlightActiveToc();
+    
+    // 监听ESC键关闭目录
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' || e.keyCode === 27) {
+        hideNekoToc();
       }
     });
-  });
-});
+    
+    // 监听窗口大小变化
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        // 在桌面端自动隐藏遮罩层
+        overlay.classList.remove('active');
+      }
+    });
+  }
+  
+  // 页面加载完成后初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNekoToc);
+  } else {
+    initNekoToc();
+  }
+  
+  // 暴露函数到全局作用域，以便HTML中调用
+  window.toggleNekoToc = toggleNekoToc;
+  window.hideNekoToc = hideNekoToc;
+})();
 </script>
 {% endif %}
