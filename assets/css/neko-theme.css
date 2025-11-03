@@ -143,3 +143,78 @@ body {
         gap: 5px;
     }
 }
+
+/* 🚨 紧急修复：适配现有HTML结构 */
+
+/* 修复文章标题 */
+h1 {
+    font-size: 2em !important;
+    color: var(--neko-pink) !important;
+    text-align: center !important;
+    margin-bottom: 15px !important;
+}
+
+/* 修复文章头部区域 */
+article header {
+    text-align: center !important;
+    padding: 30px 0 !important;
+    margin-bottom: 30px !important;
+    border-bottom: 2px solid var(--neko-light-pink) !important;
+}
+
+/* 修复元信息区域 */
+.post-meta, .meta-item {
+    color: var(--neko-light-text) !important;
+    font-size: 0.9em !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 15px !important;
+    flex-wrap: wrap !important;
+}
+
+.meta-item {
+    background-color: var(--neko-light-pink) !important;
+    padding: 5px 10px !important;
+    border-radius: 12px !important;
+}
+
+/* 修复文章内容 */
+article {
+    line-height: 1.7 !important;
+}
+
+/* 修复所有标题 */
+h2 {
+    color: var(--neko-pink) !important;
+    font-size: 1.5em !important;
+    margin: 30px 0 15px 0 !important;
+    padding-left: 10px !important;
+    border-left: 3px solid var(--neko-blue) !important;
+}
+
+h3 {
+    color: var(--neko-blue) !important;
+    font-size: 1.3em !important;
+    margin: 25px 0 12px 0 !important;
+}
+
+/* 修复链接 */
+a {
+    color: var(--neko-blue) !important;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color: var(--neko-pink) !important;
+    text-decoration: underline !important;
+}
+
+/* 修复图片 */
+img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 20px auto !important;
+    border: 2px solid var(--neko-light-pink) !important;
+    border-radius: 8px !important;
+}
