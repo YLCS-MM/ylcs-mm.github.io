@@ -1,11 +1,11 @@
 ---
 layout: post-with-toc
-title: "🐾 测试文章：甘城猫猫风格目录功能验证"
+title: "🐾 测试文章：猫猫风格目录功能验证"
 date: 2025-11-03
 categories: [测试, 功能验证]
 tags: [目录, 测试, 猫娘风格]
 author: 成霜喵喵
-description: "这是一篇测试文章，用来验证甘城猫猫风格目录功能是否正常工作"
+description: "这是一篇测试文章，用来验证猫猫风格目录功能是否正常工作"
 toc: true
 toc_levels: 2-4
 ---
