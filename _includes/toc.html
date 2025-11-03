@@ -1,8 +1,13 @@
 <!-- _includes/toc.html -->
 {% assign minHeader = include.h_min | default: 2 %}
 {% assign maxHeader = include.h_max | default: 4 %}
-{% assign nodes = include.html | split: '<h' %}
+
+{% comment %} 安全过滤：移除异常排版标签 {% endcomment %}
+{% assign clean_html = include.html | replace: '<pFig>', '' | replace: '</pFig>', '' | replace: '<quad>', '' | replace: '</quad>', '' | replace: '<pos_', '' | replace: '>', '' %}
+
+{% assign nodes = clean_html | split: '<h' %}
 {% assign firstHeader = true %}
+{% assign headerCount = 0 %}
 
 {% capture toc %}
 {% for node in nodes %}
@@ -10,64 +15,232 @@
     {% continue %}
   {% endif %}
   
-  {% assign headerLevel = node | replace: '"', '' | slice: 0, 1 | times: 1 %}
+  {% comment %} 安全提取标题级别 {% endcomment %}
+  {% assign headerLevel = node | strip | slice: 0, 1 %}
+  {% if headerLevel == "" or headerLevel contains "<" %}
+    {% continue %}
+  {% endif %}
+  
+  {% assign headerLevel = headerLevel | times: 1 %}
   {% if headerLevel < minHeader or headerLevel > maxHeader %}
     {% continue %}
   {% endif %}
   
-  {% assign indentAmount = headerLevel | minus: minHeader %}
-  {% assign _workspace = node | split: '</h' %}
-  {% assign _idWorkspace = _workspace[0] | split: 'id="' %}
-  {% assign _idWorkspace = _idWorkspace[1] | split: '"' %}
-  {% assign html_id = _idWorkspace[0] %}
-  
-  {% assign _classWorkspace = _workspace[0] | split: 'class="' %}
-  {% assign _classWorkspace = _classWorkspace[1] | split: '"' %}
-  {% assign html_class = _classWorkspace[0] %}
-  
-  {% if html_class contains "no_toc" %}
+  {% comment %} 安全检查：确保是有效数字 {% endcomment %}
+  {% if headerLevel == 0 or headerLevel > 6 %}
     {% continue %}
   {% endif %}
   
-  {% capture _hAttrToStrip %}{{ _workspace[0] | split: '>' | first }}>{% endcapture %}
-  {% assign header = _workspace[0] | replace: _hAttrToStrip, '' %}
+  {% assign _workspace = node | split: '</h' %}
   
-  {% capture listItemClass %} class="neko-toc-item neko-toc-level-{{ headerLevel }}"{% endcapture %}
+  {% comment %} 安全提取ID - 多重保护 {% endcomment %}
+  {% assign html_id = "" %}
+  {% assign id_search = _workspace[0] | split: 'id="' %}
+  {% if id_search.size > 1 %}
+    {% assign id_part = id_search[1] | split: '"' %}
+    {% assign html_id = id_part[0] | strip %}
+  {% endif %}
   
+  {% comment %} 如果ID为空，从标题生成安全ID {% endcomment %}
+  {% if html_id == "" %}
+    {% assign header_text = _workspace[0] | split: '>' %}
+    {% if header_text.size > 1 %}
+      {% assign header_text = header_text | last | strip_html | strip %}
+      {% assign html_id = header_text | slugify %}
+    {% endif %}
+  {% endif %}
+  
+  {% comment %} 最终安全处理ID {% endcomment %}
+  {% if html_id == "" %}
+    {% assign html_id = "section-" | append: forloop.index %}
+  {% endif %}
+  
+  {% assign html_id = html_id | replace: '<', '' | replace: '>', '' | replace: '"', '' | replace: "'", '' | replace: '&', '' %}
+  
+  {% comment %} 提取标题文本 - 多重过滤 {% endcomment %}
+  {% assign header_content = "" %}
+  {% assign content_parts = _workspace[0] | split: '>' %}
+  {% if content_parts.size > 1 %}
+    {% assign header_content = content_parts | last %}
+    
+    {% comment %} 过滤异常标签和内容 {% endcomment %}
+    {% assign header_content = header_content | replace: '<pFig>', '' | replace: '</pFig>', '' %}
+    {% assign header_content = header_content | replace: '<quad>', '' | replace: '</quad>', '' %}
+    {% assign header_content = header_content | replace: '<pos_', '' %}
+    {% assign header_content = header_content | strip_html | strip %}
+    
+    {% comment %} 跳过空标题或异常内容 {% endcomment %}
+    {% if header_content == "" or header_content contains "pFig" or header_content contains "quad" or header_content contains "pos_" %}
+      {% continue %}
+    {% endif %}
+  {% else %}
+    {% continue %}
+  {% endif %}
+  
+  {% comment %} 开始目录结构 {% endcomment %}
   {% if firstHeader %}
     {% assign firstHeader = false %}
     <ul class="neko-toc-list">
   {% endif %}
   
-  <li{{ listItemClass }}>
+  {% assign headerCount = headerCount | plus: 1 %}
+  
+  <li class="neko-toc-item neko-toc-level-{{ headerLevel }}">
     <a href="#{{ html_id }}" class="neko-toc-link">
-      <span class="neko-toc-bullet">🐾</span>
-      {{ header | strip_html }}
+      <span class="neko-toc-bullet">
+        {% case headerLevel %}
+          {% when 2 %}🐾
+          {% when 3 %}📌
+          {% when 4 %}🔹
+          {% else %}• 
+        {% endcase %}
+      </span>
+      {{ header_content }}
     </a>
     
+    {% comment %} 处理子层级 {% endcomment %}
     {% unless forloop.last %}
-      {% assign next = forloop.index0 | plus: 1 %}
-      {% assign nextNode = nodes[next] %}
-      {% assign nextHeaderLevel = nextNode | replace: '"', '' | slice: 0, 1 | times: 1 %}
+      {% assign next_index = forloop.index0 | plus: 1 %}
+      {% assign next_node = nodes[next_index] %}
       
-      {% if nextHeaderLevel > headerLevel %}
-        <ul class="neko-toc-sublist">
-      {% elsif nextHeaderLevel < headerLevel %}
-        </li>
-        {% assign headerLevelDiff = headerLevel | minus: nextHeaderLevel %}
-        {% for i in (1..headerLevelDiff) %}
-          </ul></li>
-        {% endfor %}
+      {% if next_node %}
+        {% assign next_header_level = next_node | strip | slice: 0, 1 | times: 1 %}
+        
+        {% if next_header_level > headerLevel %}
+          <ul class="neko-toc-sublist">
+        {% elsif next_header_level < headerLevel %}
+          </li>
+          {% assign levels_to_close = headerLevel | minus: next_header_level %}
+          {% for i in (1..levels_to_close) %}
+            </ul></li>
+          {% endfor %}
+        {% else %}
+          </li>
+        {% endif %}
       {% else %}
         </li>
       {% endif %}
     {% endunless %}
 {% endfor %}
 
+{% comment %} 关闭未闭合的标签 {% endcomment %}
 {% if firstHeader == false %}
+  {% for i in (1..headerCount) %}
+    </li>
+  {% endfor %}
   </ul>
 {% endif %}
 {% endcapture %}
 
-{% assign toc = toc | replace: '<ul></ul>', '' %}
-{{ toc }}
+{% comment %} 最终安全检查 {% endcomment %}
+{% assign toc = toc | strip %}
+{% if toc == "" or toc contains "<pFig>" or toc contains "<quad>" or toc contains "pos_" %}
+  {% comment %} 如果生成失败，显示备选目录 {% endcomment %}
+  <div class="neko-toc-fallback">
+    <p class="neko-toc-warning">🐾 目录生成遇到问题，显示简化版本</p>
+    <ul class="neko-toc-list">
+      <li class="neko-toc-item">
+        <a href="#实用资源导航" class="neko-toc-link">
+          <span class="neko-toc-bullet">🐾</span>实用资源导航
+        </a>
+      </li>
+      <li class="neko-toc-item">
+        <a href="#官方资源" class="neko-toc-link">
+          <span class="neko-toc-bullet">🎯</span>官方资源
+        </a>
+      </li>
+      <li class="neko-toc-item">
+        <a href="#玩家社区" class="neko-toc-link">
+          <span class="neko-toc-bullet">👥</span>玩家社区
+        </a>
+      </li>
+      <li class="neko-toc-item">
+        <a href="#战术工具" class="neko-toc-link">
+          <span class="neko-toc-bullet">🛠️</span>战术工具
+        </a>
+      </li>
+      <li class="neko-toc-item">
+        <a href="#游戏数据" class="neko-toc-link">
+          <span class="neko-toc-bullet">📊</span>游戏数据
+        </a>
+      </li>
+      <li class="neko-toc-item">
+        <a href="#车队核心成员" class="neko-toc-link">
+          <span class="neko-toc-bullet">🚗</span>车队核心成员
+        </a>
+      </li>
+      <li class="neko-toc-item">
+        <a href="#游戏名片" class="neko-toc-link">
+          <span class="neko-toc-bullet">🎮</span>游戏名片
+        </a>
+      </li>
+      <li class="neko-toc-item">
+        <a href="#车队载具展示" class="neko-toc-link">
+          <span class="neko-toc-bullet">🚀</span>车队载具展示
+        </a>
+      </li>
+    </ul>
+  </div>
+{% else %}
+  {{ toc }}
+{% endif %}
+
+<style>
+.neko-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.neko-toc-item {
+  margin-bottom: 8px;
+}
+
+.neko-toc-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color: #666;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.neko-toc-link:hover {
+  background: rgba(255, 182, 193, 0.1);
+  color: #ff69b4;
+  border-left-color: #ff69b4;
+  transform: translateX(5px);
+}
+
+.neko-toc-link.active {
+  background: rgba(255, 105, 180, 0.1);
+  color: #ff69b4;
+  border-left-color: #ff69b4;
+  font-weight: bold;
+}
+
+.neko-toc-bullet {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.neko-toc-sublist {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.neko-toc-fallback {
+  background: #fff9db;
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 4px solid #ff6b6b;
+}
+
+.neko-toc-warning {
+  color: #ff6b6b;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+</style>
