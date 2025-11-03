@@ -43,6 +43,12 @@
   margin-bottom: 8px; /* 减少间距 */
   width: 100%;
   flex-shrink: 0; /* 防止头部被压缩 */
+  cursor: grab; /* 添加抓取光标提示 */
+  user-select: none; /* 防止文字被选中 */
+}
+
+.modal-header:active {
+  cursor: grabbing; /* 抓取时的光标 */
 }
 
 .modal-title {
@@ -314,12 +320,22 @@
   scrollbar-width: thin;
   scrollbar-color: #ffb6c1 rgba(255, 182, 193, 0.1);
 }
+
+/* 🆕 滑动关闭提示动画 */
+@keyframes swipeHint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+.modal-header {
+  animation: swipeHint 2s ease-in-out infinite;
+}
 </style>
 
 <div id="announcement-modal" style="display:none;">
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-container">
-      <div class="modal-header">
+      <div class="modal-header" id="modalHeader">
         <div class="modal-title">🐾 {{ latest_announcement.title }} 🐾</div>
       </div>
       
@@ -339,7 +355,7 @@
       <!-- 🆕 固定底部按钮 -->
       <div class="modal-footer">
         <button class="modal-button" onclick="closeModal()">
-          明白啦～
+          吉岛喏～
         </button>
       </div>
     </div>
@@ -381,13 +397,6 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-// 🐱 点击遮罩层关闭
-document.getElementById('modalOverlay').addEventListener('click', function(event) {
-  if (event.target === this) {
-    closeModal();
-  }
-});
-
 // 🆕 防止弹窗内容点击事件冒泡
 document.addEventListener('DOMContentLoaded', function() {
   var modalContainer = document.querySelector('.modal-container');
@@ -398,23 +407,101 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// 🆕 手机端触摸优化：滑动关闭
-var startY = 0;
-var modalOverlay = document.getElementById('modalOverlay');
+// 🆕 修复版：手机端触摸优化 - 滑动关闭
+let touchStartY = 0;
+let touchStartTime = 0;
+let isSwiping = false;
 
-if (modalOverlay) {
-  modalOverlay.addEventListener('touchstart', function(e) {
-    startY = e.touches[0].clientY;
+const modalHeader = document.getElementById('modalHeader');
+const modalContainer = document.querySelector('.modal-container');
+
+if (modalHeader) {
+  // 🆕 触摸开始
+  modalHeader.addEventListener('touchstart', function(e) {
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+    isSwiping = true;
   });
   
-  modalOverlay.addEventListener('touchmove', function(e) {
-    var currentY = e.touches[0].clientY;
-    var diffY = currentY - startY;
+  // 🆕 触摸移动
+  modalHeader.addEventListener('touchmove', function(e) {
+    if (!isSwiping) return;
     
-    // 向下滑动超过50px关闭弹窗
+    const currentY = e.touches[0].clientY;
+    const diffY = currentY - touchStartY;
+    
+    // 🆕 只有向下滑动才处理
+    if (diffY > 0) {
+      // 🆕 添加滑动反馈 - 弹窗跟随手指移动
+      modalContainer.style.transform = `translateY(${Math.min(diffY, 100)}px)`;
+      modalContainer.style.opacity = `${1 - (diffY / 200)}`;
+    }
+  });
+  
+  // 🆕 触摸结束
+  modalHeader.addEventListener('touchend', function(e) {
+    if (!isSwiping) return;
+    
+    const currentY = e.changedTouches[0].clientY;
+    const diffY = currentY - touchStartY;
+    const swipeTime = Date.now() - touchStartTime;
+    
+    // 🆕 滑动条件：向下滑动超过50px 或 快速向下滑动超过30px
+    if ((diffY > 50) || (diffY > 30 && swipeTime < 300)) {
+      closeModal();
+    } else {
+      // 🆕 滑动距离不够，恢复原位置
+      modalContainer.style.transform = 'translateY(0)';
+      modalContainer.style.opacity = '1';
+    }
+    
+    isSwiping = false;
+  });
+  
+  // 🆕 触摸取消
+  modalHeader.addEventListener('touchcancel', function() {
+    modalContainer.style.transform = 'translateY(0)';
+    modalContainer.style.opacity = '1';
+    isSwiping = false;
+  });
+}
+
+// 🆕 电脑端鼠标拖拽关闭（可选功能）
+if (modalHeader) {
+  let isDragging = false;
+  let dragStartY = 0;
+  
+  modalHeader.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    dragStartY = e.clientY;
+    modalHeader.style.cursor = 'grabbing';
+  });
+  
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    
+    const diffY = e.clientY - dragStartY;
+    
+    if (diffY > 0) {
+      modalContainer.style.transform = `translateY(${Math.min(diffY, 100)}px)`;
+      modalContainer.style.opacity = `${1 - (diffY / 200)}`;
+    }
+  });
+  
+  document.addEventListener('mouseup', function(e) {
+    if (!isDragging) return;
+    
+    const diffY = e.clientY - dragStartY;
+    
     if (diffY > 50) {
       closeModal();
+    } else {
+      modalContainer.style.transform = 'translateY(0)';
+      modalContainer.style.opacity = '1';
     }
+    
+    isDragging = false;
+    modalHeader.style.cursor = 'grab';
   });
 }
 
@@ -424,6 +511,11 @@ window.addEventListener('resize', function() {
   if (modal && modal.style.display === 'block') {
     // 可以在这里添加响应式调整逻辑
   }
+});
+
+// 🆕 页面卸载时清理事件
+window.addEventListener('beforeunload', function() {
+  closeModal();
 });
 </script>
 {% endif %}
