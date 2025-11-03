@@ -1,11 +1,6 @@
-# 当前弹窗公告配置
+# 公告系统配置
 popup_enabled: true
-current_announcement: 0  # 对应公告历史中的索引
-
-# 弹窗样式配置
-style:
-  background: "#fff9e6"
-  border_color: "#ffb6c1" 
-  title_color: "#ff69b4"
-  button_bg: "#ffa500"
-  button_text: "明白啦～"
+auto_show_delay: 1000  # 弹窗自动显示延迟（毫秒）
+show_on_refresh: true  # 每次刷新都显示
+max_width: 400         # 弹窗最大宽度
+theme: "neko"          # 猫娘主题
