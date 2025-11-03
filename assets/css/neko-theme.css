@@ -1,0 +1,166 @@
+/* 🐱 甘城猫猫主题 - 简洁白色风格 */
+:root {
+    --neko-pink: #ff69b4;
+    --neko-light-pink: #fff0f5;
+    --neko-blue: #87ceeb;
+    --neko-text: #333333;
+    --neko-light-text: #666666;
+    --neko-border: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: white;
+    color: var(--neko-text);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.container {
+    background: white;
+    padding: 0;
+}
+
+/* 文章头部 */
+.post-header {
+    text-align: center;
+    padding: 30px 0;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--neko-light-pink);
+}
+
+.post-title {
+    font-size: 2em;
+    color: var(--neko-pink);
+    margin-bottom: 10px;
+}
+
+.post-meta {
+    color: var(--neko-light-text);
+    font-size: 0.9em;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: var(--neko-light-pink);
+}
+
+/* 文章内容 */
+.post-content {
+    line-height: 1.7;
+}
+
+.post-content h2 {
+    color: var(--neko-pink);
+    font-size: 1.5em;
+    margin: 30px 0 15px 0;
+    padding-left: 15px;
+    border-left: 3px solid var(--neko-blue);
+}
+
+.post-content h3 {
+    color: var(--neko-blue);
+    font-size: 1.3em;
+    margin: 25px 0 12px 0;
+}
+
+.post-content p {
+    margin-bottom: 15px;
+    color: var(--neko-light-text);
+}
+
+/* 链接样式 */
+a {
+    color: var(--neko-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--neko-pink);
+    text-decoration: underline;
+}
+
+/* 图片样式 */
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+    border: 2px solid var(--neko-light-pink);
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .post-title {
+        font-size: 1.6em;
+    }
+    
+    .post-meta {
+        gap: 10px;
+    }
+    
+    .post-content h2 {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-title {
+        font-size: 1.3em;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* 猫娘特色元素 */
+.neko-intro {
+    background: var(--neko-light-pink);
+    border-left: 3px solid var(--neko-pink);
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+
+.neko-decoration {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.neko-paw {
+    display: inline-block;
+    font-size: 1.5em;
+    margin: 0 5px;
+    color: var(--neko-pink);
+}
+
+/* 页脚样式 */
+.post-footer {
+    background: white;
+    color: var(--neko-light-text);
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-top: 1px solid var(--neko-light-pink);
+}
