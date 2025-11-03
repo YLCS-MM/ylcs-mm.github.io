@@ -1,18 +1,45 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    {% include head-base.html %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% if page.title %}
+            {{ page.title }} | 甘城猫猫的博客
+        {% else %}
+            甘城猫猫的博客
+        {% endif %}
+    </title>
+    <!-- 引入我们刚刚创建的主题CSS文件 -->
+    <link rel="stylesheet" href="/assets/css/neko-theme.css">
 </head>
 <body>
     <div class="container">
         <article class="post">
-            {% include post-header.html %}
+            <!-- 文章头部 -->
+            <header class="post-header">
+                <h1 class="post-title">{{ page.title }}</h1>
+                <div class="post-meta">
+                    <span class="meta-item">📅 {{ page.date | date: "%Y年%m月%d日" }}</span>
+                    {% if page.categories %}
+                    <span class="meta-item">🏷️ 
+                        {% for category in page.categories %}
+                            {{ category }}{% unless forloop.last %}, {% endunless %}
+                        {% endfor %}
+                    </span>
+                    {% endif %}
+                </div>
+            </header>
             
+            <!-- 文章主要内容 -->
             <div class="post-content">
                 {{ content }}
             </div>
             
-            {% include post-footer.html %}
+            <!-- 文章页脚 -->
+            <footer class="post-footer">
+                <p>🐾 感谢阅读 ~</p>
+            </footer>
         </article>
     </div>
 </body>
