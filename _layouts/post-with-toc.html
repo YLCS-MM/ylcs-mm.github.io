@@ -5,31 +5,209 @@
     
     <!-- 目录特有样式 -->
     <style>
-    /* 目录侧边栏样式 */
+    /* 目录侧边栏样式 - 修改为图二效果 */
     .toc-sidebar {
         position: fixed;
         top: 0;
-        right: -300px;
+        right: -300px; /* 默认隐藏在屏幕外 */
         width: 280px;
         height: 100vh;
         background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
         z-index: 1000;
-        padding: 70px 20px 20px;
+        padding: 20px 15px;
         transition: right 0.3s ease;
         overflow-y: auto;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        border-left: 3px solid #ff69b4;
     }
     
     .toc-sidebar.active {
-        right: 0;
+        right: 0; /* 激活时滑入屏幕 */
     }
     
-    /* 更多目录样式...（保持您原来的目录样式不变） */
+    .toc-header {
+        color: #ff1493;
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-align: center;
+        padding-bottom: 10px;
+        border-bottom: 2px dashed #ff69b4;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .toc-close {
+        background: none;
+        border: none;
+        font-size: 1.2em;
+        color: #ff69b4;
+        cursor: pointer;
+        padding: 5px;
+    }
+    
+    .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .toc-item {
+        margin-bottom: 8px;
+    }
+    
+    .toc-link {
+        color: #666;
+        text-decoration: none;
+        display: block;
+        padding: 12px 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+        background: rgba(255, 255, 255, 0.7);
+        line-height: 1.4;
+        border-left: 3px solid transparent;
+    }
+    
+    .toc-link:hover {
+        background: rgba(255, 255, 255, 0.9);
+        color: #ff1493;
+        border-left-color: #ff69b4;
+        transform: translateX(3px);
+    }
+    
+    .toc-link.active {
+        background: rgba(255, 255, 255, 0.95);
+        color: #ff1493;
+        font-weight: bold;
+        border-left-color: #ff1493;
+    }
+    
+    /* 汉堡菜单按钮 */
+    .hamburger-menu {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        background: #ff69b4;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 999;
+        box-shadow: 0 3px 10px rgba(255, 105, 180, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger-menu:hover {
+        background: #ff1493;
+        transform: scale(1.1);
+    }
+    
+    .hamburger-line {
+        width: 20px;
+        height: 2px;
+        background: white;
+        margin: 2px 0;
+        border-radius: 1px;
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    /* 遮罩层 */
+    .toc-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .toc-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* 层级缩进 */
+    .toc-level-3 .toc-link {
+        padding-left: 25px;
+        background: rgba(255, 255, 255, 0.6);
+    }
+    
+    .toc-level-4 .toc-link {
+        padding-left: 40px;
+        background: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .toc-sidebar {
+            width: 85%;
+            right: -100%;
+        }
+        
+        .hamburger-menu {
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+        }
+    }
+    
+    @media (min-width: 1200px) {
+        .hamburger-menu {
+            display: none;
+        }
+        
+        .toc-sidebar {
+            right: 0;
+            width: 300px;
+        }
+    }
     </style>
 </head>
 <body>
-    <!-- 包含目录 -->
-    {% include toc-sidebar.html %}
+    <!-- 汉堡菜单按钮 -->
+    <button class="hamburger-menu" id="hamburgerMenu">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </button>
+    
+    <!-- 遮罩层 -->
+    <div class="toc-overlay" id="tocOverlay"></div>
+    
+    <!-- 目录侧边栏 -->
+    <aside class="toc-sidebar" id="tocSidebar">
+        <div class="toc-header">
+            <span>📑 文章目录</span>
+            <button class="toc-close" onclick="hideToc()">✕</button>
+        </div>
+        <ul class="toc-list" id="tocList">
+            <!-- 目录内容由JavaScript动态生成 -->
+        </ul>
+    </aside>
     
     <div class="container">
         <article class="post">
@@ -45,7 +223,110 @@
     
     <!-- 目录JavaScript -->
     <script>
-    // 保持您原来的JavaScript代码不变
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const tocSidebar = document.getElementById('tocSidebar');
+        const overlay = document.getElementById('tocOverlay');
+        const tocList = document.getElementById('tocList');
+        
+        // 确保目录默认隐藏
+        tocSidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        
+        // 获取所有标题元素
+        const headings = document.querySelectorAll('h2, h3, h4');
+        
+        // 生成目录
+        headings.forEach((heading, index) => {
+            if (!heading.id) {
+                heading.id = 'heading-' + index;
+            }
+            
+            const listItem = document.createElement('li');
+            listItem.className = 'toc-item';
+            
+            const link = document.createElement('a');
+            link.href = '#' + heading.id;
+            link.className = 'toc-link';
+            link.innerHTML = '<span class="toc-bullet">🐾</span>' + heading.textContent;
+            
+            // 根据标题级别添加层级样式
+            const level = parseInt(heading.tagName.substring(1));
+            if (level === 3) {
+                listItem.classList.add('toc-level-3');
+            } else if (level === 4) {
+                listItem.classList.add('toc-level-4');
+            }
+            
+            listItem.appendChild(link);
+            tocList.appendChild(listItem);
+            
+            // 添加点击事件
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideToc();
+                
+                // 滚动到对应标题
+                const targetElement = document.getElementById(heading.id);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 汉堡菜单点击事件
+        hamburgerMenu.addEventListener('click', function() {
+            this.classList.toggle('active');
+            tocSidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+        
+        // 遮罩层点击事件
+        overlay.addEventListener('click', hideToc);
+        
+        // 关闭目录函数
+        window.hideToc = function() {
+            hamburgerMenu.classList.remove('active');
+            tocSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        };
+        
+        // ESC键关闭目录
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideToc();
+            }
+        });
+        
+        // 滚动时高亮当前章节
+        function highlightActiveToc() {
+            const tocLinks = document.querySelectorAll('.toc-link');
+            let currentActive = null;
+            
+            // 找到当前可见的标题
+            for (let i = headings.length - 1; i >= 0; i--) {
+                const rect = headings[i].getBoundingClientRect();
+                if (rect.top <= 100) {
+                    currentActive = headings[i].id;
+                    break;
+                }
+            }
+            
+            // 更新激活状态
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentActive) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', highlightActiveToc);
+        highlightActiveToc();
+    });
     </script>
 </body>
 </html>
