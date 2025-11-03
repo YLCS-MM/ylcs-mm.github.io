@@ -1,400 +1,516 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐱 甘城猫猫的宝藏咖啡厅 | ylcs-mm.github.io</title>
-    <style>
-        /* 🎨 甘城猫猫主题色彩 */
-        :root {
-            --neko-pink: #ff69b4;
-            --neko-light-pink: #ffb6c1;
-            --neko-blue: #87ceeb;
-            --neko-gold: #ffd700;
-            --neko-purple: #dda0dd;
-            --neko-white: #fffaf0;
-            --neko-bg: linear-gradient(135deg, #fff0f5, #f0f8ff);
-        }
-        
-        /* 📱 移动端优化重置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial Rounded MT Bold', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: var(--neko-bg);
-            min-height: 100vh;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        /* 🐾 页面头部 - 甘城猫猫风格 */
-        .neko-header {
-            background: linear-gradient(135deg, var(--neko-pink), var(--neko-purple));
-            padding: 20px 15px;
-            text-align: center;
-            border-bottom: 5px dashed var(--neko-gold);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .neko-header::before {
-            content: "🐾🐾🐾";
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 20px;
-            opacity: 0.3;
-        }
-        
-        .neko-header::after {
-            content: "🐾🐾🐾";
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 20px;
-            opacity: 0.3;
-        }
-        
-        .neko-title {
-            font-size: 2.2em;
-            color: white;
-            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
-            margin-bottom: 10px;
-        }
-        
-        .neko-subtitle {
-            color: var(--neko-gold);
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-        
-        /* ☕ 主要内容区域 */
-        .neko-container {
-            max-width: 100%;
-            padding: 20px 15px;
-        }
-        
-        /* 🎀 版块样式 */
-        .neko-section {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            margin: 20px 0;
-            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.1);
-            border: 3px solid var(--neko-light-pink);
-            position: relative;
-        }
-        
-        .neko-section::before {
-            content: "";
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            height: 5px;
-            background: linear-gradient(90deg, var(--neko-pink), var(--neko-blue));
-            border-radius: 20px 20px 0 0;
-        }
-        
-        .section-title {
-            color: var(--neko-pink);
-            font-size: 1.6em;
-            margin-bottom: 20px;
-            padding-left: 15px;
-            border-left: 5px solid var(--neko-blue);
-        }
-        
-        /* 📚 资源卡片网格 */
-        .resource-grid {
-            display: grid;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .resource-card {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px dashed var(--neko-blue);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(135, 206, 235, 0.3);
-            border-color: var(--neko-pink);
-        }
-        
-        .resource-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        .resource-title {
-            color: var(--neko-pink);
-            font-size: 1.2em;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        
-        .resource-desc {
-            color: #666;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-        
-        .resource-link {
-            display: inline-block;
-            background: var(--neko-blue);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            margin-top: 10px;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-        }
-        
-        .resource-link:hover {
-            background: var(--neko-pink);
-            transform: scale(1.05);
-        }
-        
-        /* 🎵 音乐播放器样式 */
-        .music-player {
-            background: linear-gradient(135deg, #ffe4e1, #f0f8ff);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-            border: 2px solid var(--neko-light-pink);
-        }
-        
-        .music-title {
-            color: var(--neko-purple);
-            font-size: 1.3em;
-            margin-bottom: 10px;
-        }
-        
-        /* 🐱 猫猫装饰元素 */
-        .neko-decoration {
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .neko-paw {
-            display: inline-block;
-            font-size: 2em;
-            margin: 0 5px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        /* 📱 移动端响应式设计 */
-        @media (max-width: 768px) {
-            .neko-title {
-                font-size: 1.8em;
-            }
-            
-            .neko-container {
-                padding: 15px 10px;
-            }
-            
-            .neko-section {
-                padding: 20px 15px;
-                margin: 15px 0;
-            }
-            
-            .section-title {
-                font-size: 1.4em;
-            }
-            
-            .resource-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-        }
-        
-        /* 小屏幕手机优化 */
-        @media (max-width: 480px) {
-            .neko-header {
-                padding: 15px 10px;
-            }
-            
-            .neko-title {
-                font-size: 1.5em;
-            }
-            
-            .neko-section {
-                padding: 15px 10px;
-                border-radius: 15px;
-            }
-            
-            .resource-card {
-                padding: 15px;
-            }
-        }
-        
-        /* 🎯 页脚样式 */
-        .neko-footer {
-            background: linear-gradient(135deg, var(--neko-blue), var(--neko-purple));
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 40px;
-            border-top: 5px dashed var(--neko-gold);
-        }
-        
-        .footer-text {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-        
-        /* ✨ 特殊效果 */
-        .sparkle {
-            animation: sparkle 3s infinite;
-        }
-        
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
-        }
-    </style>
-</head>
-<body>
-    <!-- 🐱 页面头部 -->
-    <header class="neko-header">
-        <h1 class="neko-title">🐱 甘城猫猫的宝藏咖啡厅</h1>
-        <p class="neko-subtitle">☕ 一边rua猫一边探索网络宝藏的美好时光~</p>
-    </header>
+/* 🐱 成霜喵喵博客样式 - 和Neko测试页面复刻版 */
 
-    <!-- 📱 主要内容容器 -->
-    <main class="neko-container">
-        <!-- 🎀 欢迎板块 -->
-        <section class="neko-section">
-            <h2 class="section-title">🎀 欢迎光临猫猫咖啡厅！</h2>
-            <div class="neko-decoration">
-                <span class="neko-paw">🐾</span>
-                <span class="neko-paw" style="animation-delay: 0.2s;">🐾</span>
-                <span class="neko-paw" style="animation-delay: 0.4s;">🐾</span>
-            </div>
-            <p>亲爱的访客，欢迎来到甘城猫猫的小窝！这里是我精心收集的网络资源宝藏，希望能为你带来帮助和快乐~</p>
-            <p><strong>🎯 使用提示：</strong> 所有资源都可以在手机上直接使用，点击链接即可探索！</p>
-        </section>
+/* 色彩变量 - 基于截图风格调整 */
+:root {
+    --neko-pink: #ff69b4;
+    --neko-light-pink: #ffb6c1;
+    --neko-blue: #87ceeb;
+    --neko-dark: #2c3e50;
+    --neko-light: #f9f9f9;
+    --neko-purple: #d8bfd8;
+    --neko-green: #98fb98;
+}
 
-        <!-- 📚 资源导航区 -->
-        <section class="neko-section">
-            <h2 class="section-title">📚 效率工具区</h2>
-            <p>熬夜赶due时，这些神器能帮主人省出摸猫猫的时间！</p>
-            
-            <div class="resource-grid">
-                <!-- PDF工具卡片 -->
-                <div class="resource-card">
-                    <span class="resource-icon">📄</span>
-                    <h3 class="resource-title">PDF神器·MinerU</h3>
-                    <p class="resource-desc">程序员狂喜！能把PDF秒转成可编辑的Markdown，连复杂数学公式都不乱码~</p>
-                    <a href="#" class="resource-link">立即使用</a>
-                </div>
-                
-                <!-- 密码工具卡片 -->
-                <div class="resource-card">
-                    <span class="resource-icon">🔐</span>
-                    <h3 class="resource-title">猫密网</h3>
-                    <p class="resource-desc">生成个性化密码字典，查常见密码规律，保护你的数字身份安全~</p>
-                    <a href="#" class="resource-link">探索密码</a>
-                </div>
-                
-                <!-- 学习工具卡片 -->
-                <div class="resource-card">
-                    <span class="resource-icon">🎓</span>
-                    <h3 class="resource-title">学习助力站</h3>
-                    <p class="resource-desc">湖南考生专属！查院校专业排名，选志愿像给猫猫选爬架一样清晰~</p>
-                    <a href="#" class="resource-link">开始学习</a>
-                </div>
-            </div>
-        </section>
+/* 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        <!-- 🎵 音乐猫窝区 -->
-        <section class="neko-section">
-            <h2 class="section-title">🎵 音乐猫窝</h2>
-            <p>边rua猫猫边听歌，尾巴摇成节拍器~</p>
-            
-            <div class="music-player">
-                <h3 class="music-title">🐾 当前播放：甘城猫猫主题曲</h3>
-                <p>🎶 轻快的旋律搭配猫猫呼噜声，治愈一整天~</p>
-            </div>
-            
-            <div class="resource-grid">
-                <div class="resource-card">
-                    <span class="resource-icon">🎧</span>
-                    <h3 class="resource-title">全网音乐下载</h3>
-                    <p>复古风界面，支持无损音质下载，发现音乐新大陆！</p>
-                    <a href="#" class="resource-link">听歌去</a>
-                </div>
-                
-                <div class="resource-card">
-                    <span class="resource-icon">⭐</span>
-                    <h3 class="resource-title">爱听音乐网</h3>
-                    <p>分类超全！"治愈系日语""睡前轻音乐"专区，像给耳朵盖猫毯~</p>
-                    <a href="#" class="resource-link">探索音乐</a>
-                </div>
-            </div>
-        </section>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--neko-dark);
+    background: linear-gradient(135deg, #fff5f5, #f0f8ff);
+    margin: 0;
+    padding: 15px;
+    overflow-x: hidden;
+}
 
-        <!-- 🐱 猫猫互动区 -->
-        <section class="neko-section">
-            <h2 class="section-title">🐱 与猫猫互动</h2>
-            <div class="neko-decoration">
-                <span class="neko-paw sparkle">😻</span>
-                <span class="neko-paw sparkle" style="animation-delay: 0.3s;">🐈</span>
-                <span class="neko-paw sparkle" style="animation-delay: 0.6s;">💕</span>
-            </div>
-            <p>喜欢这个猫猫咖啡厅吗？可以在下方留下你的爪印（评论）哦~</p>
-        </section>
-    </main>
+/* 文章容器 - 截图风格 */
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(255, 105, 180, 0.1);
+    border: 2px solid #ffebf3;
+    position: relative;
+}
 
-    <!-- 🎯 页脚 -->
-    <footer class="neko-footer">
-        <p class="footer-text">🐾 本页面由甘城猫猫精心制作 · 最后更新：2025年11月</p>
-        <p class="footer-text">💕 感谢你的访问，期待再次在猫猫咖啡厅相遇~</p>
-    </footer>
+/* 截图风格的顶部装饰 */
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--neko-pink), var(--neko-blue));
+    border-radius: 15px 15px 0 0;
+}
 
-    <script>
-        // 🐱 简单的交互效果
-        document.addEventListener('DOMContentLoaded', function() {
-            // 卡片悬停效果
-            const cards = document.querySelectorAll('.resource-card');
-            cards.forEach(card => {
-                card.addEventListener('touchstart', function() {
-                    this.style.transform = 'translateY(-5px) scale(1.02)';
-                });
-                
-                card.addEventListener('touchend', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-            
-            // 猫爪动画
-            const paws = document.querySelectorAll('.neko-paw');
-            setInterval(() => {
-                paws.forEach(paw => {
-                    paw.style.animation = 'none';
-                    setTimeout(() => {
-                        paw.style.animation = '';
-                    }, 10);
-                });
-            }, 5000);
-        });
-    </script>
-</body>
-</html>
+/* 🎯 文章头部 - 复刻截图风格 */
+.post-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px dashed var(--neko-light-pink);
+    background: linear-gradient(135deg, #fffaf0, #fff5f5);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.post-title {
+    color: var(--neko-pink);
+    font-size: 2em;
+    margin-bottom: 0.8rem;
+    text-shadow: 2px 2px 0 rgba(255, 182, 193, 0.3);
+    position: relative;
+    display: inline-block;
+}
+
+.post-title::after {
+    content: "🐾";
+    position: absolute;
+    right: -30px;
+    top: 0;
+    font-size: 0.8em;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.post-meta {
+    color: var(--neko-blue);
+    font-size: 0.95em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(135, 206, 235, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px dashed var(--neko-blue);
+}
+
+.meta-item::before {
+    content: "📅";
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+/* 🎀 文章内容区域 - 复刻截图特色 */
+.post-content {
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* 猫娘风格引言块 */
+.neko-intro {
+    background: linear-gradient(135deg, #fff0f5, #f0f8ff);
+    border-left: 5px solid var(--neko-pink);
+    padding: 20px;
+    margin: 25px 0;
+    border-radius: 0 15px 15px 0;
+    position: relative;
+    font-style: italic;
+    color: #666;
+}
+
+.neko-intro::before {
+    content: "「";
+    font-size: 2em;
+    color: var(--neko-pink);
+    position: absolute;
+    left: 10px;
+    top: 5px;
+}
+
+.neko-intro::after {
+    content: "」";
+    font-size: 2em;
+    color: var(--neko-pink);
+    position: absolute;
+    right: 10px;
+    bottom: -15px;
+}
+
+/* 🎯 功能检查清单 - 复刻截图样式 */
+.function-checklist {
+    background: white;
+    border: 2px solid #ffebf3;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 25px 0;
+    position: relative;
+}
+
+.checklist-title {
+    color: var(--neko-pink);
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.checklist-title::before {
+    content: "✅";
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.checklist-items {
+    list-style: none;
+    padding: 0;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #f0f0f0;
+    position: relative;
+    padding-left: 35px;
+}
+
+.checklist-item:last-child {
+    border-bottom: none;
+}
+
+.checklist-item::before {
+    content: "🐾";
+    position: absolute;
+    left: 0;
+    font-size: 1.2em;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.checklist-item::after {
+    content: "";
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background: var(--neko-blue);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+/* 📝 标题层级测试 - 复刻截图样式 */
+.post-content h2 {
+    color: var(--neko-pink);
+    border-left: 5px solid var(--neko-blue);
+    padding: 15px 20px;
+    margin: 2.5rem 0 1.5rem 0;
+    font-size: 1.5em;
+    background: linear-gradient(135deg, #fffaf0, #fff5f5);
+    border-radius: 0 12px 12px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.post-content h2::before {
+    content: "🔸";
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.post-content h3 {
+    color: var(--neko-blue);
+    margin: 2rem 0 1rem 0;
+    padding: 12px 15px;
+    border-bottom: 2px dotted var(--neko-light-pink);
+    font-size: 1.3em;
+    background: rgba(255, 182, 193, 0.05);
+    border-radius: 8px;
+    position: relative;
+    padding-left: 40px;
+}
+
+.post-content h3::before {
+    content: "🐱";
+    position: absolute;
+    left: 15px;
+    font-size: 1.1em;
+}
+
+.post-content h4 {
+    color: var(--neko-purple);
+    margin: 1.5rem 0 0.8rem 0;
+    padding-left: 20px;
+    font-size: 1.1em;
+    border-left: 3px solid var(--neko-green);
+}
+
+/* 📋 列表样式优化 */
+.post-content ul {
+    padding-left: 25px;
+    margin-bottom: 1.5rem;
+}
+
+.post-content li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 10px;
+}
+
+.post-content li::before {
+    content: "🌸";
+    position: absolute;
+    left: -25px;
+    color: var(--neko-pink);
+    font-size: 0.8em;
+}
+
+/* 链接样式 */
+a {
+    color: var(--neko-blue);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--neko-blue);
+    transition: all 0.3s ease;
+    word-break: break-all;
+}
+
+a:hover {
+    color: var(--neko-pink);
+    border-bottom: 1px solid var(--neko-pink);
+    background: rgba(255, 182, 193, 0.1);
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+/* 文章页脚 */
+.post-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 2px dashed var(--neko-light-pink);
+    text-align: center;
+    background: linear-gradient(135deg, #fffaf0, #f8f8ff);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.post-tags {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.post-tag {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--neko-blue), var(--neko-purple));
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    margin: 0.2rem;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: transform 0.3s ease;
+}
+
+.post-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(135, 206, 235, 0.3);
+}
+
+.post-tag::before {
+    content: "🏷️";
+    margin-right: 5px;
+}
+
+/* 🎯 猫娘特色元素 */
+.neko-decoration {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.neko-paw-print {
+    display: inline-flex;
+    gap: 15px;
+    font-size: 1.5em;
+}
+
+.paw {
+    animation: float 3s ease-in-out infinite;
+}
+
+.paw:nth-child(2) { animation-delay: 0.5s; }
+.paw:nth-child(3) { animation-delay: 1s; }
+.paw:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* 📱 移动端优化 - 复刻截图响应式 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 16px;
+    }
+    
+    .container {
+        padding: 20px 15px;
+        border-radius: 12px;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+    
+    .post-title {
+        font-size: 1.7em;
+    }
+    
+    .post-content h2 {
+        font-size: 1.3em;
+        padding: 12px 15px;
+    }
+    
+    .post-content h3 {
+        font-size: 1.2em;
+        padding: 10px 12px;
+        padding-left: 35px;
+    }
+    
+    .meta-item {
+        font-size: 0.85em;
+        padding: 4px 10px;
+    }
+    
+    .neko-intro {
+        padding: 15px;
+        margin: 20px 0;
+    }
+    
+    .function-checklist {
+        padding: 15px;
+    }
+    
+    .checklist-item {
+        padding: 10px 0;
+        padding-left: 30px;
+    }
+}
+
+/* 小屏幕手机额外优化 */
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+    
+    .container {
+        padding: 15px 10px;
+        border-radius: 10px;
+    }
+    
+    .post-header {
+        padding: 15px;
+    }
+    
+    .post-title {
+        font-size: 1.5em;
+    }
+    
+    .post-content h2 {
+        font-size: 1.2em;
+        padding: 10px 12px;
+    }
+}
+
+/* 平板和桌面 */
+@media (min-width: 769px) {
+    .container {
+        max-width: 750px;
+        padding: 30px;
+        border-radius: 18px;
+    }
+    
+    .post-title {
+        font-size: 2.2em;
+    }
+}
+
+/* 大屏幕 */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 800px;
+    }
+}
+
+/* ============================================
+   🎯 截图特色元素增强
+   ============================================ */
+
+/* 代码块样式 - 截图中的代码测试 */
+.post-content pre {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin: 20px 0;
+    border-left: 5px solid var(--neko-pink);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* 引用块样式 */
+.post-content blockquote {
+    background: linear-gradient(135deg, #fffaf0, #fff5f5);
+    border-left: 4px solid var(--neko-blue);
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 0 10px 10px 0;
+    font-style: italic;
+    color: #666;
+}
+
+/* 图片样式保持原有优化 */
+.post-content img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+    border: 3px solid #ffb6c1;
+    transition: all 0.3s ease;
+    object-fit: cover !important;
+    object-position: left center !important;
+}
+
+/* 移动端图片优化 */
+@media (max-width: 768px) {
+    .post-content img {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin: 15px calc(50% - 50vw) !important;
+        border-radius: 8px;
+        border-width: 2px;
+    }
+}
