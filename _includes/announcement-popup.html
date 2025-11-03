@@ -21,7 +21,7 @@
 .modal-container {
   position: relative;
   width: 90%;
-  max-width: 400px; /* 修复：px 而不是 极 */
+  max-width: 400px;
   min-width: 280px;
   max-height: 70vh;
   background: #fff9e6;
@@ -55,7 +55,7 @@
   font-weight: bold;
   color: #ff69b4;
   display: inline-block;
-  padding: 6px 12px; /* 修复：px 而不是 极 */
+  padding: 6px 12px;
   background: rgba(255, 182, 193, 0.1);
   border-radius: 20px;
   margin: 0 auto;
@@ -114,7 +114,7 @@
 .modal-content h2,
 .modal-content h3,
 .modal-content h4 {
-  margin: 12px 0 8px; /* 修复：px 而不是 极 */
+  margin: 12px 0 8px;
   text-align: center;
 }
 
@@ -227,7 +227,7 @@
   }
   
   .modal-content li {
-    font-size: 0.8em; /* 修复：px 而不是 极 */
+    font-size: 0.8em;
     margin: 3px 0;
   }
   
@@ -347,6 +347,9 @@
 </div>
 
 <script>
+// 🐱 测试模式配置
+const TEST_MODE = true; // 🆕 设置为 true 开启测试模式（每次刷新都显示）
+
 // 🐱 关闭弹窗函数
 function closeModal() {
   var modal = document.getElementById('announcement-modal');
@@ -364,14 +367,22 @@ document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('announcement-modal');
   
   if (modal) {
-    // 🆕 检查是否需要显示弹窗
-    if (shouldShowAnnouncement()) {
+    // 🆕 测试模式：总是显示弹窗
+    if (TEST_MODE || shouldShowAnnouncement()) {
       document.body.style.overflow = 'hidden';
       
       setTimeout(function() {
         modal.style.display = 'block';
-        // 🆕 记录已显示弹窗
-        recordAnnouncementShown();
+        
+        // 🆕 测试模式下不记录显示状态
+        if (!TEST_MODE) {
+          recordAnnouncementShown();
+        }
+        
+        // 🆕 测试模式提示
+        if (TEST_MODE) {
+          console.log('🐱 测试模式：弹窗已显示');
+        }
       }, 1000);
     }
   }
@@ -444,6 +455,11 @@ if (modalHeader) {
     isSwiping = false;
   });
 }
+
+// 🆕 电脑端鼠标拖拽关闭
+if (modalHeader) {
+  let isDragging = false;
+  let dragStartY = 0;
   
   modalHeader.addEventListener('mousedown', function(e) {
     isDragging = true;
@@ -492,15 +508,21 @@ window.addEventListener('beforeunload', function() {
   closeModal();
 });
 
-// 🐱 🆕 关键修复：检查是否需要显示公告弹窗
+// 🐱 🆕 修改版：检查是否需要显示公告弹窗
 function shouldShowAnnouncement() {
+  // 🆕 测试模式：总是显示
+  if (TEST_MODE) {
+    console.log('🐱 测试模式激活：每次刷新都显示弹窗');
+    return true;
+  }
+  
+  // 🆕 正式模式：原有逻辑
   try {
-    // 🆕 获取存储的公告信息
     const storedData = localStorage.getItem('nekoAnnouncementData');
     
     if (!storedData) {
       console.log('从未显示过公告，需要显示');
-      return true; // 从未显示过，需要显示
+      return true;
     }
     
     const data = JSON.parse(storedData);
@@ -511,27 +533,32 @@ function shouldShowAnnouncement() {
     console.log('今天日期:', today);
     console.log('最新公告标题:', latestTitle);
     
-    // 🆕 检查条件：不是同一天 或 公告标题不同
     if (data.date !== today || data.title !== latestTitle) {
       console.log('需要显示公告：日期不同或标题不同');
-      return true; // 需要显示
+      return true;
     }
     
     console.log('同一天已经显示过相同公告，不需要显示');
-    return false; // 同一天已经显示过相同公告
+    return false;
   } catch (error) {
     console.error('检查公告显示状态出错:', error);
-    return true; // 出错时默认显示
+    return true;
   }
 }
 
-// 🐱 🆕 关键修复：记录公告已显示
+// 🐱 🆕 修改版：记录公告已显示
 function recordAnnouncementShown() {
+  // 🆕 测试模式下不记录
+  if (TEST_MODE) {
+    console.log('🐱 测试模式：跳过记录显示状态');
+    return;
+  }
+  
   try {
     const data = {
       date: new Date().toDateString(),
       title: "{{ latest_announcement.title }}",
-      timestamp: Date.now() // 添加时间戳更精确
+      timestamp: Date.now()
     };
     
     console.log('记录公告已显示:', data);
@@ -559,6 +586,14 @@ function checkAnnouncementData() {
 function forceShowAnnouncement() {
   clearAnnouncementData();
   location.reload();
+}
+
+// 🆕 测试模式状态显示
+if (TEST_MODE) {
+  console.log('🎯 弹窗测试模式已激活');
+  console.log('📝 每次页面刷新都会显示弹窗');
+  console.log('🔧 要关闭测试模式，请将 TEST_MODE 改为 false');
+  console.log('🐱 测试提示：刷新页面查看效果');
 }
 </script>
 
