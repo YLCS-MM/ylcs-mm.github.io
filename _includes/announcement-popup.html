@@ -456,6 +456,10 @@ if (modalHeader) {
   });
 }
 
+// 🆕 电脑端鼠标拖拽关闭（修复版）
+if (modalHeader) {
+  let isDragging = false; // 🆕 修复：添加变量声明
+  let dragStartY = 0;     // 🆕 修复：添加变量声明
   
   modalHeader.addEventListener('mousedown', function(e) {
     isDragging = true;
@@ -509,7 +513,7 @@ function shouldShowAnnouncement() {
   // 🆕 测试模式：总是显示
   if (TEST_MODE) {
     console.log('🐱 测试模式激活：每次刷新都显示弹窗');
-    return false;
+    return true; // 🆕 修复：应该返回true
   }
   
   // 🆕 正式模式：原有逻辑
@@ -535,10 +539,33 @@ function shouldShowAnnouncement() {
     }
     
     console.log('同一天已经显示过相同公告，不需要显示');
-    return true;
+    return false; // 🆕 修复：应该返回false
   } catch (error) {
     console.error('检查公告显示状态出错:', error);
     return true;
   }
 }
 
+// 🐱 🆕 修改版：记录公告已显示
+function recordAnnouncementShown() {
+  // 🆕 测试模式下不记录
+  if (TEST_MODE) {
+    console.log('🐱 测试模式：跳过记录显示状态');
+    return;
+  }
+  
+  try {
+    const data = {
+      date: new Date().toDateString(),
+      title: "{{ latest_announcement.title }}",
+      timestamp: Date.now()
+    };
+    
+    console.log('记录公告已显示:', data);
+    localStorage.setItem('nekoAnnouncementData', JSON.stringify(data));
+  } catch (error) {
+    console.error('记录公告显示状态出错:', error);
+  }
+}
+
+{% endif %} <!-- 🆕 修复：添加缺失的 endif 闭合标签 -->
