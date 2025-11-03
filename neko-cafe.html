@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🐱 和Nekoの超全测试-排版+图片+链接+代码全解锁 | ylcs-mm.github.io</title>
     <style>
-        /* 🎨 甘城猫猫主题色彩 - 测试页面风格 */
+        /* 🎨 简化色彩方案 - 白色为主，粉色点缀 */
         :root {
             --neko-pink: #ff69b4;
-            --neko-light-pink: #ffb6c1;
+            --neko-light-pink: #ffebf3;
             --neko-blue: #87ceeb;
-            --neko-gold: #ffd700;
-            --neko-purple: #dda0dd;
-            --neko-white: #fffaf0;
-            --neko-bg: linear-gradient(135deg, #f8f9fa, #f0f8ff);
+            --neko-text: #333333;
+            --neko-light-text: #666666;
+            --neko-border: #e0e0e0;
         }
         
-        /* 📱 移动端优化重置 */
+        /* 📱 基础重置 */
         * {
             margin: 0;
             padding: 0;
@@ -25,53 +24,32 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background: var(--neko-bg);
+            background: white;
             min-height: 100vh;
-            color: #2c3e50;
+            color: var(--neko-text);
             line-height: 1.6;
             overflow-x: hidden;
             padding: 15px;
         }
         
-        /* 🐾 页面头部 - 测试页面风格 */
+        /* 🐾 简化页面头部 */
         .test-header {
-            background: linear-gradient(135deg, #ff69b4, #ff1493);
-            padding: 25px 20px;
+            background: white;
+            padding: 20px 0;
             text-align: center;
-            border-radius: 15px 15px 0 0;
-            margin-bottom: 0;
-            position: relative;
-            border-bottom: 3px dashed #ffb6c1;
-        }
-        
-        .test-header::before {
-            content: "🐾";
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            font-size: 24px;
-            opacity: 0.7;
-        }
-        
-        .test-header::after {
-            content: "🐾";
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 24px;
-            opacity: 0.7;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--neko-light-pink);
         }
         
         .test-title {
             font-size: 1.8em;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: var(--neko-pink);
             margin-bottom: 10px;
             line-height: 1.3;
         }
         
         .test-meta {
-            color: #ffd700;
+            color: var(--neko-light-text);
             font-size: 0.95em;
             display: flex;
             justify-content: center;
@@ -80,82 +58,49 @@
         }
         
         .meta-item {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 12px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: var(--neko-light-pink);
         }
         
-        /* 📝 主要内容容器 - 测试页面风格 */
+        /* 📝 主要内容容器 */
         .test-container {
             background: white;
-            border-radius: 0 0 15px 15px;
             padding: 0;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             margin-top: 0;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         /* 🎀 内容区域 */
         .test-content {
-            padding: 25px;
+            padding: 20px 0;
         }
         
-        /* 💬 引言区块 - 复刻图片中的粉色火花引言 */
+        /* 💬 简化引言区块 */
         .neko-intro {
-            background: linear-gradient(135deg, #fff0f5, #f0f8ff);
-            border-left: 4px solid #ff69b4;
-            padding: 20px;
+            background: var(--neko-light-pink);
+            border-left: 3px solid var(--neko-pink);
+            padding: 15px;
             margin: 20px 0;
-            border-radius: 0 12px 12px 0;
+            border-radius: 0 8px 8px 0;
             font-style: italic;
-            color: #666;
-            position: relative;
-            border-right: 1px solid #ffebf3;
+            color: var(--neko-light-text);
         }
         
-        .neko-intro::before {
-            content: "「";
-            font-size: 2em;
-            color: #ff69b4;
-            position: absolute;
-            left: 10px;
-            top: 5px;
-        }
-        
-        .neko-intro::after {
-            content: "」";
-            font-size: 2em;
-            color: #ff69b4;
-            position: absolute;
-            right: 10px;
-            bottom: -15px;
-        }
-        
-        /* ✅ 功能检查清单 - 复刻图片样式 */
+        /* ✅ 简化功能检查清单 */
         .function-checklist {
-            background: linear-gradient(135deg, #fffaf0, #fff5f5);
-            border: 2px solid #ffebf3;
-            border-radius: 12px;
+            background: white;
+            border: 1px solid var(--neko-border);
+            border-radius: 8px;
             padding: 20px;
             margin: 25px 0;
-            position: relative;
         }
         
         .checklist-title {
-            color: #ff69b4;
+            color: var(--neko-pink);
             font-size: 1.3em;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            padding-left: 35px;
-            position: relative;
-        }
-        
-        .checklist-title::before {
-            content: "🎯";
-            position: absolute;
-            left: 0;
-            font-size: 1.5em;
         }
         
         .checklist-items {
@@ -166,8 +111,8 @@
         .checklist-item {
             display: flex;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px dashed #f0f0f0;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--neko-border);
             position: relative;
             padding-left: 30px;
         }
@@ -177,36 +122,28 @@
         }
         
         .checklist-item::before {
-            content: "✅";
+            content: "✓";
             position: absolute;
             left: 0;
+            color: var(--neko-pink);
             font-size: 1.1em;
+            font-weight: bold;
         }
         
         /* 🎨 标题层级测试区域 */
         .typing-test {
             background: white;
-            border-radius: 12px;
-            padding: 25px;
+            border-radius: 8px;
+            padding: 20px 0;
             margin: 25px 0;
-            border: 2px solid #e3f2fd;
         }
         
         .section-title {
-            color: #ff69b4;
-            font-size: 1.5em;
+            color: var(--neko-pink);
+            font-size: 1.4em;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #ffb6c1;
-            position: relative;
-            padding-left: 40px;
-        }
-        
-        .section-title::before {
-            content: "🔤";
-            position: absolute;
-            left: 0;
-            font-size: 1.3em;
+            border-bottom: 1px solid var(--neko-light-pink);
         }
         
         .level-test {
@@ -214,55 +151,49 @@
         }
         
         .level-test h2 {
-            color: #ff69b4;
-            font-size: 1.4em;
-            margin: 25px 0 15px 0;
-            padding-left: 15px;
-            border-left: 4px solid #87ceeb;
+            color: var(--neko-pink);
+            font-size: 1.3em;
+            margin: 20px 0 12px 0;
+            padding-left: 10px;
+            border-left: 3px solid var(--neko-blue);
         }
         
         .level-test h3 {
-            color: #87ceeb;
-            font-size: 1.2em;
-            margin: 20px 0 12px 0;
-            padding-left: 25px;
-            border-bottom: 1px dashed #87ceeb;
+            color: var(--neko-blue);
+            font-size: 1.1em;
+            margin: 15px 0 10px 0;
+            padding-left: 15px;
         }
         
         .level-test h4 {
-            color: #dda0dd;
-            font-size: 1.1em;
-            margin: 15px 0 10px 0;
-            padding-left: 35px;
+            color: var(--neko-light-text);
+            font-size: 1em;
+            margin: 12px 0 8px 0;
+            padding-left: 20px;
         }
         
-        /* 🐱 猫娘特色元素 */
+        .level-test p {
+            margin-bottom: 10px;
+            color: var(--neko-light-text);
+        }
+        
+        /* 🐱 简化猫娘特色元素 */
         .neko-decoration {
             text-align: center;
-            margin: 30px 0;
+            margin: 25px 0;
         }
         
         .neko-paw {
             display: inline-block;
-            font-size: 1.8em;
-            margin: 0 8px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            font-size: 1.5em;
+            margin: 0 5px;
+            color: var(--neko-pink);
         }
         
         /* 📱 移动端响应式设计 */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
-            }
-            
-            .test-header {
-                padding: 20px 15px;
-                border-radius: 12px 12px 0 0;
             }
             
             .test-title {
@@ -275,15 +206,15 @@
             
             .meta-item {
                 font-size: 0.85em;
-                padding: 4px 10px;
+                padding: 3px 8px;
             }
             
             .test-content {
-                padding: 20px 15px;
+                padding: 15px 0;
             }
             
             .neko-intro {
-                padding: 15px;
+                padding: 12px;
                 margin: 15px 0;
             }
             
@@ -293,33 +224,32 @@
             }
             
             .checklist-item {
-                padding: 10px 0;
+                padding: 8px 0;
                 padding-left: 25px;
             }
             
             .typing-test {
-                padding: 20px 15px;
+                padding: 15px 0;
                 margin: 20px 0;
             }
             
             .section-title {
-                font-size: 1.3em;
-                padding-left: 35px;
-            }
-            
-            .level-test h2 {
                 font-size: 1.2em;
             }
             
-            .level-test h3 {
+            .level-test h2 {
                 font-size: 1.1em;
+            }
+            
+            .level-test h3 {
+                font-size: 1em;
             }
         }
         
         /* 小屏幕手机优化 */
         @media (max-width: 480px) {
             .test-header {
-                padding: 15px 10px;
+                padding: 15px 0;
             }
             
             .test-title {
@@ -328,33 +258,28 @@
             
             .test-meta {
                 flex-direction: column;
-                gap: 8px;
-            }
-            
-            .test-content {
-                padding: 15px 10px;
+                gap: 5px;
             }
         }
         
-        /* 🎯 页脚样式 */
+        /* 🎯 简化页脚样式 */
         .test-footer {
-            background: linear-gradient(135deg, #87ceeb, #dda0dd);
-            color: white;
+            background: white;
+            color: var(--neko-light-text);
             text-align: center;
-            padding: 20px;
-            border-radius: 0 0 15px 15px;
-            border-top: 3px dashed #ffb6c1;
+            padding: 20px 0;
+            margin-top: 30px;
+            border-top: 1px solid var(--neko-light-pink);
         }
         
         .footer-text {
             font-size: 0.9em;
-            opacity: 0.9;
             margin: 5px 0;
         }
     </style>
 </head>
 <body>
-    <!-- 🐱 页面头部 - 复刻图一风格 -->
+    <!-- 🐱 简化页面头部 -->
     <header class="test-header">
         <h1 class="test-title">和Nekoの超全测试-排版+图片+链接+代码全解锁</h1>
         <div class="test-meta">
@@ -366,7 +291,7 @@
     <!-- 📝 主要内容容器 -->
     <main class="test-container">
         <div class="test-content">
-            <!-- 💬 引言区块 -->
+            <!-- 💬 简化引言区块 -->
             <div class="neko-intro">
                 （肉垫拍键盘冒粉色火花）主人主人~Neko把测试文章塞得满满当当啦！
             </div>
@@ -386,12 +311,11 @@
                 </ul>
             </div>
             
-            <!-- 🐱 猫爪装饰 -->
+            <!-- 🐱 简化猫爪装饰 -->
             <div class="neko-decoration">
                 <span class="neko-paw">🐾</span>
-                <span class="neko-paw" style="animation-delay: 0.2s;">🐾</span>
-                <span class="neko-paw" style="animation-delay: 0.4s;">🐾</span>
-                <span class="neko-paw" style="animation-delay: 0.6s;">🐾</span>
+                <span class="neko-paw">🐾</span>
+                <span class="neko-paw">🐾</span>
             </div>
             
             <!-- 🎨 文字排版测试区域 -->
@@ -429,7 +353,7 @@
             </section>
         </div>
         
-        <!-- 🎯 页脚 -->
+        <!-- 🎯 简化页脚 -->
         <footer class="test-footer">
             <p class="footer-text">🐾 测试页面生成时间：2025年06月20日 15:24</p>
             <p class="footer-text">💕 Neko会继续努力完善博客功能的~</p>
@@ -444,20 +368,9 @@
             checklistItems.forEach(item => {
                 item.addEventListener('click', function() {
                     this.style.textDecoration = this.style.textDecoration === 'line-through' ? 'none' : 'line-through';
-                    this.style.opacity = this.style.opacity === '0.6' ? '1' : '0.6';
+                    this.style.color = this.style.color === 'var(--neko-light-text)' ? 'var(--neko-text)' : 'var(--neko-light-text)';
                 });
             });
-            
-            // 猫爪动画
-            const paws = document.querySelectorAll('.neko-paw');
-            setInterval(() => {
-                paws.forEach(paw => {
-                    paw.style.animation = 'none';
-                    setTimeout(() => {
-                        paw.style.animation = 'bounce 2s infinite';
-                    }, 10);
-                });
-            }, 5000);
         });
     </script>
 </body>
