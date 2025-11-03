@@ -1,0 +1,284 @@
+/* ========================================
+   🐱 甘城猫猫完整主题 - 基于示例页面
+   ======================================== */
+
+/* 1. 色彩变量 */
+:root {
+    --neko-pink: #ff69b4;
+    --neko-light-pink: #ffebf3;
+    --neko-blue: #87ceeb;
+    --neko-text: #333333;
+    --neko-light-text: #666666;
+    --neko-border: #e0e0e0;
+}
+
+/* 2. 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: white;
+    min-height: 100vh;
+    color: var(--neko-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding: 15px;
+}
+
+/* 3. 页面头部 */
+.test-header {
+    background: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--neko-light-pink);
+}
+
+.test-title {
+    font-size: 1.8em;
+    color: var(--neko-pink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.test-meta {
+    color: var(--neko-light-text);
+    font-size: 0.95em;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: var(--neko-light-pink);
+}
+
+/* 4. 主要内容容器 */
+.test-container {
+    background: white;
+    padding: 0;
+    margin-top: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.test-content {
+    padding: 20px 0;
+}
+
+/* 5. 引言区块 */
+.neko-intro {
+    background: var(--neko-light-pink);
+    border-left: 3px solid var(--neko-pink);
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--neko-light-text);
+}
+
+/* 6. 功能检查清单 */
+.function-checklist {
+    background: white;
+    border: 1px solid var(--neko-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 25px 0;
+}
+
+.checklist-title {
+    color: var(--neko-pink);
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}
+
+.checklist-items {
+    list-style: none;
+    padding: 0;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--neko-border);
+    position: relative;
+    padding-left: 30px;
+}
+
+.checklist-item:last-child {
+    border-bottom: none;
+}
+
+.checklist-item::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--neko-pink);
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+/* 7. 文字排版测试区域 */
+.typing-test {
+    background: white;
+    border-radius: 8px;
+    padding: 20px 0;
+    margin: 25px 0;
+}
+
+.section-title {
+    color: var(--neko-pink);
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--neko-light-pink);
+}
+
+.level-test {
+    margin: 20px 0;
+}
+
+.level-test h2 {
+    color: var(--neko-pink);
+    font-size: 1.3em;
+    margin: 20px 0 12px 0;
+    padding-left: 10px;
+    border-left: 3px solid var(--neko-blue);
+}
+
+.level-test h3 {
+    color: var(--neko-blue);
+    font-size: 1.1em;
+    margin: 15px 0 10px 0;
+    padding-left: 15px;
+}
+
+.level-test h4 {
+    color: var(--neko-light-text);
+    font-size: 1em;
+    margin: 12px 0 8px 0;
+    padding-left: 20px;
+}
+
+.level-test p {
+    margin-bottom: 10px;
+    color: var(--neko-light-text);
+}
+
+/* 8. 猫娘特色元素 */
+.neko-decoration {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.neko-paw {
+    display: inline-block;
+    font-size: 1.5em;
+    margin: 0 5px;
+    color: var(--neko-pink);
+}
+
+/* 9. 页脚样式 */
+.test-footer {
+    background: white;
+    color: var(--neko-light-text);
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-top: 1px solid var(--neko-light-pink);
+}
+
+.footer-text {
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+/* 10. 移动端响应式设计 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .test-title {
+        font-size: 1.5em;
+    }
+    
+    .test-meta {
+        gap: 10px;
+    }
+    
+    .meta-item {
+        font-size: 0.85em;
+        padding: 3px 8px;
+    }
+    
+    .test-content {
+        padding: 15px 0;
+    }
+    
+    .neko-intro {
+        padding: 12px;
+        margin: 15px 0;
+    }
+    
+    .function-checklist {
+        padding: 15px;
+        margin: 20px 0;
+    }
+    
+    .checklist-item {
+        padding: 8px 0;
+        padding-left: 25px;
+    }
+    
+    .typing-test {
+        padding: 15px 0;
+        margin: 20px 0;
+    }
+    
+    .section-title {
+        font-size: 1.2em;
+    }
+    
+    .level-test h2 {
+        font-size: 1.1em;
+    }
+    
+    .level-test h3 {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .test-header {
+        padding: 15px 0;
+    }
+    
+    .test-title {
+        font-size: 1.3em;
+    }
+    
+    .test-meta {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* 11. 交互效果 */
+.checklist-item {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checklist-item:hover {
+    background-color: var(--neko-light-pink);
+    border-radius: 5px;
+}
