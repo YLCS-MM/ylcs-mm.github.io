@@ -535,68 +535,10 @@ function shouldShowAnnouncement() {
     }
     
     console.log('同一天已经显示过相同公告，不需要显示');
-    return false;
+    return true;
   } catch (error) {
     console.error('检查公告显示状态出错:', error);
     return true;
   }
 }
 
-// 🐱 🆕 修改版：记录公告已显示
-function recordAnnouncementShown() {
-  // 🆕 测试模式下不记录
-  if (TEST_MODE) {
-    console.log('🐱 测试模式：跳过记录显示状态');
-    return;
-  }
-  
-  try {
-    const data = {
-      date: new Date().toDateString(),
-      title: "{{ latest_announcement.title }}",
-      timestamp: Date.now()
-    };
-    
-    console.log('记录公告已显示:', data);
-    localStorage.setItem('nekoAnnouncementData', JSON.stringify(data));
-  } catch (error) {
-    console.error('记录公告显示状态出错:', error);
-  }
-}
-
-// 🐱 🆕 新增：清除存储的公告数据（用于测试）
-function clearAnnouncementData() {
-  localStorage.removeItem('nekoAnnouncementData');
-  console.log('公告数据已清除喵~');
-  alert('公告数据已清除，下次访问会重新显示弹窗喵~');
-}
-
-// 🐱 🆕 新增：查看当前存储的数据（用于调试）
-function checkAnnouncementData() {
-  const data = localStorage.getItem('nekoAnnouncementData');
-  console.log('当前存储的公告数据:', data);
-  alert('当前存储数据: ' + data);
-}
-
-// 🐱 🆕 测试函数：立即显示弹窗（用于调试）
-function forceShowAnnouncement() {
-  clearAnnouncementData();
-  location.reload();
-}
-
-// 🆕 测试模式状态显示
-if (TEST_MODE) {
-  console.log('🎯 弹窗测试模式已激活');
-  console.log('📝 每次页面刷新都会显示弹窗');
-  console.log('🔧 要关闭测试模式，请将 TEST_MODE 改为 false');
-  console.log('🐱 测试提示：刷新页面查看效果');
-}
-</script>
-
-<!-- 🐱 🆕 调试按钮（开发时使用，正式版可删除） -->
-<div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
-  <button onclick="clearAnnouncementData()" style="font-size: 12px; padding: 5px;">清除记录</button>
-  <button onclick="checkAnnouncementData()" style="font-size: 12px; padding: 5px;">查看数据</button>
-  <button onclick="forceShowAnnouncement()" style="font-size: 12px; padding: 5px;">强制显示</button>
-</div>
-{% endif %}
