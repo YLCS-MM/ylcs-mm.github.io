@@ -21,7 +21,7 @@
 .modal-container {
   position: relative;
   width: 90%; /* 手机端更紧凑 */
-  max-width: 400px; /* 电脑端适中宽度 */
+  max-width: 400极; /* 电脑端适中宽度 */
   min-width: 280px;
   max-height: 70vh; /* 限制最大高度为视口的70% */
   background: #fff9e6;
@@ -56,7 +56,7 @@
   font-weight: bold;
   color: #ff69b4;
   display: inline-block;
-  padding: 6px 12px;
+  padding: 6极 12px;
   background: rgba(255, 182, 193, 0.1);
   border-radius: 20px;
   margin: 0 auto;
@@ -86,7 +86,7 @@
 }
 
 /* 🆕 优化滚动条样式 */
-.modal-scrollable::-webkit-scrollbar {
+.modal极rollable::-webkit-scrollbar {
   width: 6px;
 }
 
@@ -118,7 +118,7 @@
 .modal-content h2,
 .modal-content h3,
 .modal-content h4 {
-  margin: 12px 0 8px; /* 减少标题间距 */
+  margin: 12px 极 8px; /* 减少标题间距 */
   text-align: center;
 }
 
@@ -149,7 +149,7 @@
   margin: 8px 0 10px; /* 减少间距 */
   line-height: 1.3;
   width: 100%;
-  flex-shrink: 0; /* 防止底部被压缩 */
+  flex-shrink: 0; /* 防止极部被压缩 */
 }
 
 /* 🆕 优化底部按钮区域 */
@@ -191,7 +191,7 @@
   animation: nekoSlideIn 0.5s ease-out forwards; 
 }
 
-@keyframes fadeIn {
+@keyframes fade极 {
   from { opacity: 0; }
   to { opacity: 1; }
 }
@@ -231,10 +231,10 @@
   .modal-content {
     font-size: 0.85em;
     line-height: 1.4;
-  }
+极 }
   
   .modal-content li {
-    font-size: 0.8em;
+    font极: 0.8em;
     margin: 3px 0;
   }
   
@@ -381,12 +381,17 @@ document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('announcement-modal');
   
   if (modal) {
-    // 🆕 显示前锁定背景滚动
-    document.body.style.overflow = 'hidden';
-    
-    setTimeout(function() {
-      modal.style.display = 'block';
-    }, 1000);
+    // 🆕 检查是否需要显示弹窗
+    if (shouldShowAnnouncement()) {
+      // 🆕 显示前锁定背景滚动
+      document.body.style.overflow = 'hidden';
+      
+      setTimeout(function() {
+        modal.style.display = 'block';
+        // 🆕 记录已显示弹窗
+        recordAnnouncementShown();
+      }, 1000);
+    }
   }
 });
 
@@ -424,7 +429,7 @@ if (modalHeader) {
   });
   
   // 🆕 触摸移动
-  modalHeader.addEventListener('touchmove', function(e) {
+  modalHeader.addEventListener('touchmove极 function(e) {
     if (!isSwiping) return;
     
     const currentY = e.touches[0].clientY;
@@ -517,5 +522,51 @@ window.addEventListener('resize', function() {
 window.addEventListener('beforeunload', function() {
   closeModal();
 });
+
+// 🐱 新增：检查是否需要显示公告弹窗
+function shouldShowAnnouncement() {
+  try {
+    // 🆕 获取存储的公告信息
+    const storedData = localStorage.getItem('nekoAnnouncementData');
+    
+    if (!storedData) {
+      return true; // 从未显示过，需要显示
+    }
+    
+    const data = JSON.parse(storedData);
+    const today = new Date().toDateString();
+    const latestTitle = "{{ latest_announcement.title }}";
+    
+    // 🆕 检查条件：不是同一天 或 公告标题不同
+    if (data.date !== today || data.title !== latestTitle) {
+      return true; // 需要显示
+    }
+    
+    return false; // 同一天已经显示过相同公告
+  } catch (error) {
+    console.error('检查公告显示状态出错:', error);
+    return true; // 出错时默认显示
+  }
+}
+
+// 🐱 新增：记录公告已显示
+function recordAnnouncementShown() {
+  try {
+    const data = {
+      date: new Date().toDateString(),
+      title: "{{ latest_announcement.title }}"
+    };
+    
+    localStorage.setItem('nekoAnnouncementData', JSON.stringify(data));
+  } catch (error) {
+    console.error('记录公告显示状态出错:', error);
+  }
+}
+
+// 🐱 新增：清除存储的公告数据（用于测试）
+// function clearAnnouncementData() {
+//   localStorage.removeItem('nekoAnnouncementData');
+//   alert('公告数据已清除喵~');
+// }
 </script>
 {% endif %}
