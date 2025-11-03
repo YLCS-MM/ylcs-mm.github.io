@@ -10,7 +10,7 @@
         文章目录
       {% endif %}
     </h3>
-    <button class="neko-toc-close" id="nekoTocClose" aria-label="关闭目录">✕</button>
+    <button class="neko-toc-close" id="nekoTocClose" aria-label="关闭目录" onclick="window.hideNekoToc && window.hideNekoToc()">✕</button>
   </div>
   
   <div class="neko-toc-content">
@@ -19,12 +19,12 @@
 </aside>
 
 <!-- 汉堡菜单按钮 -->
-<button class="neko-toc-toggle" id="nekoTocToggle" aria-label="显示/隐藏目录">
+<button class="neko-toc-toggle" id="nekoTocToggle" aria-label="显示/隐藏目录" onclick="window.toggleNekoToc && window.toggleNekoToc()">
   <span class="neko-toc-toggle-icon">📑</span>
 </button>
 
 <!-- 遮罩层 -->
-<div class="neko-toc-overlay" id="nekoTocOverlay"></div>
+<div class="neko-toc-overlay" id="nekoTocOverlay" onclick="window.hideNekoToc && window.hideNekoToc()"></div>
 
 <style>
 /* CSS重置 - 确保跨浏览器一致性 */
@@ -34,7 +34,7 @@
   box-sizing: border-box;
 }
 
-/* 目录侧边栏样式 */
+/* 目录侧边栏样式 - 修复z-index问题 */
 .neko-toc-sidebar {
   position: fixed;
   top: 0;
@@ -45,7 +45,7 @@
   background: linear-gradient(135deg, #fff0f5 0%, #e6f7ff 100%);
   background: -webkit-linear-gradient(135deg, #fff0f5 0%, #e6f7ff 100%);
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  z-index: 10000;
+  z-index: 10001; /* 提高层级确保在最前面 */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), -webkit-transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
@@ -67,7 +67,7 @@
   }
 }
 
-/* 目录头部样式 */
+/* 目录头部样式 - 确保关闭按钮可点击 */
 .neko-toc-header {
   display: flex;
   align-items: center;
@@ -75,6 +75,8 @@
   background: rgba(255, 255, 255, 0.9);
   border-bottom: 2px dashed #ffb6c1;
   flex-shrink: 0;
+  position: relative;
+  z-index: 10002; /* 确保头部内容在最前面 */
 }
 
 .neko-toc-icon {
@@ -90,12 +92,13 @@
   margin: 0;
 }
 
+/* 关闭按钮样式 - 修复暗淡和点击问题 */
 .neko-toc-close {
   background: none;
   border: none;
   font-size: 24px;
-  color: #ff69b4;
-  cursor: pointer;
+  color: #ff69b4 !important; /* 强制颜色，避免被覆盖 */
+  cursor: pointer !important; /* 强制指针样式 */
   width: 40px;
   height: 40px;
   display: flex;
@@ -104,14 +107,25 @@
   border-radius: 50%;
   transition: all 0.3s ease;
   -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 10003; /* 最高层级确保可点击 */
+  opacity: 1 !important; /* 强制不透明 */
+  pointer-events: auto !important; /* 强制可点击 */
 }
 
 .neko-toc-close:hover,
 .neko-toc-close:focus {
-  background: #ffb6c1;
-  color: white;
+  background: #ffb6c1 !important;
+  color: white !important;
   transform: scale(1.1);
   -webkit-transform: scale(1.1);
+  opacity: 1 !important;
+}
+
+/* 确保关闭按钮在任何状态下都可见 */
+.neko-toc-sidebar .neko-toc-close {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* 目录内容区域 */
@@ -120,6 +134,8 @@
   overflow-y: auto;
   padding: 20px;
   -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
+  position: relative;
+  z-index: 10000;
 }
 
 /* 自定义目录列表样式 */
@@ -167,7 +183,7 @@
   margin-top: 5px;
 }
 
-/* 汉堡菜单按钮 */
+/* 汉堡菜单按钮 - 提高层级 */
 .neko-toc-toggle {
   position: fixed;
   top: 20px;
@@ -178,7 +194,7 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 9999;
+  z-index: 10000; /* 确保按钮在最前面 */
   box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
   display: flex;
   align-items: center;
@@ -199,7 +215,7 @@
   color: white;
 }
 
-/* 遮罩层 */
+/* 遮罩层 - 降低层级确保在侧边栏后面 */
 .neko-toc-overlay {
   position: fixed;
   top: 0;
@@ -207,7 +223,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+  z-index: 9999; /* 确保在侧边栏后面 */
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -269,6 +285,12 @@
   .neko-toc-link:hover {
     background: #f0f0f0;
   }
+  
+  /* IE中确保关闭按钮可点击 */
+  .neko-toc-close {
+    background: #ff69b4 !important;
+    color: white !important;
+  }
 }
 
 /* 打印样式 - 隐藏目录 */
@@ -278,6 +300,15 @@
   .neko-toc-overlay {
     display: none !important;
   }
+}
+
+/* 强制修复暗淡按钮问题 */
+.neko-toc-sidebar.active .neko-toc-close {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: #ff69b4 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
 }
 </style>
 
@@ -292,7 +323,7 @@
   }
   window.nekoTocInitialized = true;
   
-  // 获取DOM元素
+  // 获取DOM元素 - 添加更健壮的选择器
   var sidebar = document.getElementById('nekoTocSidebar');
   var toggle = document.getElementById('nekoTocToggle');
   var closeBtn = document.getElementById('nekoTocClose');
@@ -326,6 +357,15 @@
     
     // 防止背景滚动
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    
+    // 强制修复关闭按钮状态
+    if (closeBtn) {
+      closeBtn.style.opacity = '1';
+      closeBtn.style.visibility = 'visible';
+      closeBtn.style.pointerEvents = 'auto';
+      closeBtn.style.cursor = 'pointer';
+    }
     
     // 为移动设备添加触摸事件处理
     if ('ontouchstart' in window) {
@@ -342,6 +382,7 @@
     
     // 恢复背景滚动
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     
     // 移除触摸事件处理
     if ('ontouchstart' in window) {
@@ -427,19 +468,32 @@
     requestAnimationFrame(animation);
   }
   
-  // 初始化函数
+  // 初始化函数 - 增强事件绑定
   function initNekoToc() {
-    // 添加事件监听
+    console.log('初始化目录侧边栏');
+    
+    // 添加事件监听 - 使用多种方式确保绑定成功
     if (toggle) {
       toggle.addEventListener('click', toggleNekoToc);
+      toggle.onclick = toggleNekoToc; // 双重绑定
     }
     
     if (closeBtn) {
+      // 多重事件绑定确保关闭按钮可用
       closeBtn.addEventListener('click', hideNekoToc);
+      closeBtn.onclick = hideNekoToc;
+      closeBtn.addEventListener('touchend', hideNekoToc); // 触摸设备
+      
+      // 强制设置关闭按钮样式
+      closeBtn.style.opacity = '1';
+      closeBtn.style.visibility = 'visible';
+      closeBtn.style.pointerEvents = 'auto';
+      closeBtn.style.cursor = 'pointer';
     }
     
     if (overlay) {
       overlay.addEventListener('click', hideNekoToc);
+      overlay.onclick = hideNekoToc;
     }
     
     // 为目录链接添加点击事件
@@ -476,18 +530,60 @@
         overlay.classList.remove('active');
       }
     });
+    
+    // 检测浏览器类型并应用特定修复
+    detectBrowserAndFix();
+  }
+  
+  // 浏览器检测和修复
+  function detectBrowserAndFix() {
+    var userAgent = navigator.userAgent.toLowerCase();
+    
+    // 针对特定浏览器的修复
+    if (userAgent.indexOf('chrome') > -1) {
+      // Chrome浏览器特定修复
+      console.log('检测到Chrome浏览器，应用特定修复');
+    } else if (userAgent.indexOf('safari') > -1 && userAgent.indexOf('chrome') == -1) {
+      // Safari浏览器特定修复
+      console.log('检测到Safari浏览器，应用特定修复');
+      fixSafariIssues();
+    } else if (userAgent.indexOf('firefox') > -1) {
+      // Firefox浏览器特定修复
+      console.log('检测到Firefox浏览器，应用特定修复');
+    } else if (userAgent.indexOf('edge') > -1) {
+      // Edge浏览器特定修复
+      console.log('检测到Edge浏览器，应用特定修复');
+    }
+  }
+  
+  // Safari特定问题修复
+  function fixSafariIssues() {
+    // Safari中z-index问题修复
+    var closeBtn = document.getElementById('nekoTocClose');
+    if (closeBtn) {
+      closeBtn.style.zIndex = '10003';
+      closeBtn.style.position = 'relative';
+    }
   }
   
   // 页面加载完成后初始化
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initNekoToc);
   } else {
-    initNekoToc();
+    // 如果DOM已经加载完成，直接初始化
+    setTimeout(initNekoToc, 100);
   }
   
   // 暴露函数到全局作用域，以便HTML中调用
   window.toggleNekoToc = toggleNekoToc;
   window.hideNekoToc = hideNekoToc;
+  
+  // 添加全局错误处理
+  window.addEventListener('error', function(e) {
+    console.error('目录侧边栏错误:', e.error);
+  });
+  
+  console.log('目录侧边栏脚本加载完成');
 })();
 </script>
 {% endif %}
