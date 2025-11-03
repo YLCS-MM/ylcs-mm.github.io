@@ -5,31 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
     
-    <!-- 🎀 浅蓝色主题样式 -->
+    <!-- 🎀 可爱粉色主题样式 -->
     <style>
-    /* 🎯 颜色变量定义 - 浅蓝色为主，粉色为辅 */
+    /* 🎯 颜色变量定义 - 增加粉色比例 */
     :root {
-        --primary-blue: #87ceeb;      /* 主蓝色 - 天蓝色 */
-        --light-blue: #e1f5fe;        /* 浅蓝色背景 */
-        --accent-pink: #ffb6c1;       /* 强调粉色 */
-        --highlight-pink: #ff69b4;     /* 高亮粉色 */
+        --primary-pink: #ff69b4;      /* 主粉色 - 更鲜艳 */
+        --light-pink: #ffb6c1;        /* 浅粉色背景 */
+        --accent-blue: #87ceeb;       /* 强调蓝色 */
+        --highlight-blue: #4fc3f7;    /* 高亮蓝色 */
+        --soft-white: #fff9fb;        /* 柔和的粉色系白色 */
         --text-dark: #2c3e50;         /* 深色文字 */
         --text-light: #666;           /* 浅色文字 */
-        --white: #ffffff;             /* 纯白色 */
-        --shadow: rgba(135, 206, 235, 0.3); /* 蓝色阴影 */
+        --shadow-pink: rgba(255, 105, 180, 0.3); /* 粉色阴影 */
+        --gradient-pink: linear-gradient(135deg, #ff69b4, #ffb6c1); /* 粉色渐变 */
     }
     
-    /* 🎯 顶部头像区块背景 */
+    /* 🎯 整体背景增加粉色氛围 */
+    body {
+        background: linear-gradient(180deg, #fff9fb 0%, #fff0f5 100%);
+        min-height: 100vh;
+    }
+    
+    /* 🎯 顶部头像区块 - 粉色主题 */
     .neko-header-section {
         background-image: url('https://raw.githubusercontent.com/YLCS-MM/ylcs-mm2.gthub.io/refs/heads/miao/84b1ade4028efc77b2dd33f136c7712c.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         position: relative;
-        background-color: var(--light-blue); /* 添加浅蓝色背景层 */
+        background-color: var(--light-pink); /* 粉色背景层 */
     }
     
-    /* 🎯 调整顶部区块透明度 */
+    /* 🎯 调整顶部区块为粉色透明遮罩 */
     .neko-header-section::before {
         content: '';
         position: absolute;
@@ -37,7 +44,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(225, 245, 254, 0.7); /* 浅蓝色半透明遮罩 */
+        background: rgba(255, 182, 193, 0.6); /* 粉色半透明遮罩 */
         z-index: 0;
         border-radius: 20px;
     }
@@ -55,32 +62,68 @@
         margin: 30px auto;
         max-width: 90%;
         text-align: center;
-        box-shadow: 0 10px 30px var(--shadow);
-        border: 2px solid var(--primary-blue); /* 蓝色边框 */
+        box-shadow: 0 10px 30px var(--shadow-pink);
+        border: 3px solid var(--primary-pink); /* 粉色边框 */
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* 🎯 添加可爱装饰元素 */
+    .neko-header-section::after {
+        content: '🐾🐾🐾';
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 1.2em;
+        color: rgba(255, 255, 255, 0.7);
+        z-index: 0;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
     }
 
     .neko-avatar {
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        border: 3px solid var(--primary-blue); /* 蓝色边框 */
-        box-shadow: 0 0 20px rgba(135, 206, 235, 0.4); /* 蓝色阴影 */
+        border: 3px solid var(--primary-pink); /* 粉色边框 */
+        box-shadow: 0 0 25px rgba(255, 105, 180, 0.5); /* 粉色光晕 */
         margin: 0 auto 15px;
+        transition: all 0.3s ease;
+    }
+
+    .neko-avatar:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 105, 180, 0.7);
     }
 
     .neko-site-title {
-        color: var(--primary-blue); /* 改为蓝色标题 */
+        color: var(--primary-pink); /* 粉色标题 */
         font-size: 2.2em;
         font-weight: bold;
         margin: 10px 0 5px 0;
-        text-shadow: 0 2px 4px rgba(135, 206, 235, 0.3);
+        text-shadow: 0 2px 8px rgba(255, 105, 180, 0.3);
+        background: linear-gradient(45deg, #ff69b4, #ff1493);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .neko-site-location {
-        color: var(--primary-blue); /* 蓝色文字 */
+        color: var(--primary-pink); /* 粉色文字 */
         font-size: 1.1em;
         margin-bottom: 20px;
-        opacity: 0.8;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.7);
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 105, 180, 0.3);
     }
 
     .neko-nav {
@@ -90,22 +133,47 @@
         padding: 12px 25px;
         border-radius: 25px;
         margin-top: 15px;
-        border: 1px solid var(--primary-blue);
+        border: 2px solid var(--primary-pink);
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+        position: relative;
     }
 
+    /* 🎯 导航栏添加心形装饰 */
+    .neko-nav::before,
+    .neko-nav::after {
+        content: '❤';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-pink);
+        font-size: 1.2em;
+    }
+
+    .neko-nav::before { left: -25px; }
+    .neko-nav::after { right: -25px; }
+
     .neko-nav a {
-        color: var(--text-dark);
+        color: var(--primary-pink);
         text-decoration: none;
         padding: 8px 16px;
         border-radius: 20px;
         transition: all 0.3s ease;
         font-weight: 500;
+        position: relative;
     }
 
     .neko-nav a:hover {
-        color: var(--highlight-pink); /* 悬停时粉色 */
-        background: rgba(255, 182, 193, 0.15); /* 浅粉色背景 */
+        color: white;
+        background: var(--gradient-pink);
         transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+    }
+
+    /* 🎯 导航链接添加小图标 */
+    .neko-nav a::before {
+        content: '🌸';
+        margin-right: 5px;
+        font-size: 0.9em;
     }
 
     /* 布局基础 */
@@ -129,34 +197,78 @@
         width: 33.333%; 
     }
     
-    /* 文章卡片 - 蓝色主题 */
+    /* 🎯 文章卡片 - 粉色可爱主题 */
     .repo-list-item {
-        background: var(--white);
-        border: 2px solid var(--primary-blue); /* 蓝色边框 */
+        background: var(--soft-white);
+        border: 2px solid var(--light-pink);
         border-radius: 15px;
         padding: 20px;
         margin: 20px 0;
-        box-shadow: 0 4px 15px var(--shadow);
+        box-shadow: 0 4px 15px var(--shadow-pink);
         transition: all 0.3s ease;
         position: relative;
+        overflow: hidden;
+    }
+
+    /* 🎯 卡片添加粉色装饰角 */
+    .repo-list-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 30px 30px 0;
+        border-color: transparent var(--primary-pink) transparent transparent;
+        z-index: 1;
+    }
+
+    .repo-list-item::after {
+        content: '📝';
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        z-index: 2;
+        font-size: 0.8em;
+        color: white;
     }
 
     .repo-list-item:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(135, 206, 235, 0.4);
-        border-color: var(--accent-pink); /* 悬停时粉色边框 */
+        box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+        border-color: var(--primary-pink);
     }
 
     .repo-list-name a {
-        color: var(--primary-blue); /* 蓝色标题 */
+        color: var(--primary-pink);
         font-size: 1.3em;
         font-weight: bold;
         text-decoration: none;
         transition: color 0.3s ease;
+        display: inline-block;
+        position: relative;
     }
 
     .repo-list-name a:hover {
-        color: var(--highlight-pink); /* 悬停粉色 */
+        color: var(--highlight-blue);
+        transform: scale(1.05);
+    }
+
+    /* 🎯 标题添加下划线动画 */
+    .repo-list-name a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background: var(--gradient-pink);
+        transition: width 0.3s ease;
+    }
+
+    .repo-list-name a:hover::after {
+        width: 100%;
     }
 
     .repo-list-description {
@@ -164,59 +276,106 @@
         line-height: 1.5;
         margin: 10px 0;
         padding: 12px;
-        background: rgba(135, 206, 235, 0.05); /* 浅蓝色背景 */
-        border-left: 3px solid var(--primary-blue);
-        border-radius: 5px;
+        background: rgba(255, 182, 193, 0.1);
+        border-left: 3px solid var(--primary-pink);
+        border-radius: 8px;
+        position: relative;
+    }
+
+    /* 🎯 描述框添加可爱图标 */
+    .repo-list-description::before {
+        content: '💖';
+        position: absolute;
+        left: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: white;
+        padding: 2px;
+        border-radius: 50%;
+        font-size: 0.8em;
     }
 
     /* 元信息样式 */
     .repo-list-meta {
         margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
     .meta-info {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
         margin-right: 15px;
-        color: var(--primary-blue);
+        color: var(--primary-pink);
         font-size: 0.9em;
+        background: rgba(255, 182, 193, 0.1);
+        padding: 4px 8px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .meta-info:hover {
+        background: rgba(255, 182, 193, 0.2);
+        transform: scale(1.05);
     }
 
     .meta-info a {
-        color: var(--primary-blue);
+        color: var(--primary-pink);
         text-decoration: none;
     }
 
     .meta-info a:hover {
-        color: var(--highlight-pink);
+        color: var(--highlight-blue);
     }
 
-    /* 侧边栏样式 */
+    /* 🎯 侧边栏样式 - 更多粉色 */
     .sidebar-search input {
         width: 100%;
-        padding: 12px;
-        border: 2px solid var(--primary-blue);
+        padding: 12px 20px;
+        border: 2px solid var(--light-pink);
         border-radius: 25px;
-        background: var(--light-blue);
+        background: rgba(255, 255, 255, 0.9);
         color: var(--text-dark);
         font-size: 14px;
+        transition: all 0.3s ease;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="%23ff69b4" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: 15px center;
+        padding-left: 45px;
     }
 
     .sidebar-search input:focus {
         outline: none;
-        border-color: var(--accent-pink);
-        box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+        border-color: var(--primary-pink);
+        box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+        background-color: white;
     }
 
     .sidebar-categories h3,
     .sidebar-popular h3 {
-        color: var(--primary-blue);
+        color: var(--primary-pink);
         margin-bottom: 15px;
         font-size: 1.2em;
+        position: relative;
+        padding-left: 25px;
+    }
+
+    .sidebar-categories h3::before {
+        content: '📁';
+        position: absolute;
+        left: 0;
+    }
+
+    .sidebar-popular h3::before {
+        content: '🔥';
+        position: absolute;
+        left: 0;
     }
 
     .tags a {
         display: inline-block;
-        background: linear-gradient(45deg, var(--primary-blue), var(--accent-pink)); /* 蓝粉渐变 */
+        background: var(--gradient-pink);
         color: white;
         padding: 6px 14px;
         margin: 3px;
@@ -224,6 +383,23 @@
         text-decoration: none;
         font-size: 0.9em;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tags a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .tags a:hover::before {
+        left: 100%;
     }
 
     .tags a:hover {
@@ -238,26 +414,37 @@
 
     .sidebar-popular li {
         margin: 8px 0;
-        padding: 8px;
+        padding: 8px 12px;
         border-radius: 8px;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
     }
 
     .sidebar-popular li:hover {
-        background: rgba(135, 206, 235, 0.1);
+        background: rgba(255, 182, 193, 0.1);
+        border-left-color: var(--primary-pink);
+        transform: translateX(5px);
     }
 
     .sidebar-popular a {
-        color: var(--primary-blue);
+        color: var(--primary-pink);
         text-decoration: none;
         transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar-popular a::before {
+        content: '📄';
+        margin-right: 8px;
+        font-size: 0.9em;
     }
 
     .sidebar-popular a:hover {
-        color: var(--highlight-pink);
+        color: var(--highlight-blue);
     }
 
-    /* 移动端适配 */
+    /* 🎯 移动端适配 */
     @media (max-width: 768px) {
         .column { width: 100% !important; }
         .columns { flex-direction: column; }
@@ -276,6 +463,10 @@
             flex-wrap: wrap;
             gap: 10px;
             padding: 10px 15px;
+        }
+        .neko-nav::before,
+        .neko-nav::after {
+            display: none; /* 小屏幕隐藏装饰 */
         }
         
         /* 移动端看板娘缩小 */
@@ -309,6 +500,24 @@
             bottom: -20px !important;
         }
     }
+
+    /* 🎯 页面标题样式 */
+    h2 {
+        color: var(--primary-pink);
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px dashed var(--light-pink);
+        position: relative;
+    }
+
+    h2::after {
+        content: '✨';
+        position: absolute;
+        right: 0;
+        bottom: -5px;
+        font-size: 0.8em;
+    }
     </style>
     
     <!-- 引入原有CSS -->
@@ -319,8 +528,7 @@
 <body class="home">
     <!-- 🎯 顶部区块 -->
     <header class="neko-header-section">
-        <img src="https://avatars.githubusercontent.com/u/193340716?v=4" 
-             alt="成霜喵喵" class="neko-avatar">
+        
         
         <h1 class="neko-site-title">成霜喵喵の小窝</h1>
         <p class="neko-site-location">湖南,郴州 · ylcs-mm</p>
@@ -338,7 +546,7 @@
         <div class="columns">
             <!-- 左侧：最新喵文 -->
             <div class="column two-thirds">
-                <h2 style="color: var(--primary-blue); margin-bottom: 20px;">📝 最新喵文</h2>
+                <h2>📝 最新喵文</h2>
                 
                 <ol class="repo-list">
                   {% for post in site.posts %}
