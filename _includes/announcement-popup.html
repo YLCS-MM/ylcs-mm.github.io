@@ -3,7 +3,7 @@
 
 {% if latest_announcement and site.data.announcement.popup_enabled %}
 <style>
-/* 🐱 公告弹窗样式 - 确保显示在最上层 */
+/* 🐱 公告弹窗样式修复 - 解决拉伸和字体居中问题 */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -11,22 +11,29 @@
   width: 100%;
   height: 100%;
   background: rgba(255, 240, 245, 0.8);
-  z-index: 2147483647 !important; /* 最大可能值，确保在最上层 */
+  z-index: 2147483647 !important;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px; /* 添加内边距避免边缘挤压 */
 }
 
 .modal-container {
   position: relative;
-  width: 85%;
-  max-width: 450px;
+  width: 90%; /* 改为百分比，避免固定宽度拉伸 */
+  max-width: 380px; /* 最大宽度适当减小 */
+  min-width: 300px; /* 最小宽度防止过小 */
   background: #fff9e6;
   border: 2px dashed #ffb6c1;
   border-radius: 15px;
   padding: 25px 20px 20px;
   box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
-  z-index: 2147483647 !important; /* 最大可能值，确保在最上层 */
+  z-index: 2147483647 !important;
+  /* 添加弹性布局确保内容居中 */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 水平居中 */
+  text-align: center; /* 文本居中 */
 }
 
 .modal-container::before,
@@ -36,7 +43,7 @@
   top: -10px;
   color: #ffb6c1;
   font-size: 18px;
-  z-index: 2147483647 !important; /* 装饰元素也要提高层级 */
+  z-index: 2147483647 !important;
 }
 
 .modal-container::before { left: 20%; }
@@ -44,17 +51,22 @@
 
 .modal-header { 
   text-align: center; 
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
+  width: 100%; /* 确保头部宽度100% */
 }
 
 .modal-title {
-  font-size: 1.4em;
+  font-size: 1.3em; /* 适当减小字体避免溢出 */
   font-weight: bold;
   color: #ff69b4;
   display: inline-block;
-  padding: 5px 15px;
+  padding: 8px 20px; /* 调整内边距 */
   background: rgba(255, 182, 193, 0.1);
   border-radius: 20px;
+  margin: 0 auto; /* 水平居中 */
+  text-align: center;
+  max-width: 90%; /* 防止标题过长 */
+  word-wrap: break-word; /* 长单词换行 */
 }
 
 .update-date {
@@ -63,6 +75,7 @@
   color: #ff69b4;
   margin: 8px 0 15px;
   font-weight: bold;
+  width: 100%; /* 确保宽度100% */
 }
 
 .modal-content {
@@ -70,15 +83,29 @@
   font-size: 0.95em;
   color: #666;
   margin-bottom: 20px;
+  width: 100%; /* 确保内容区域宽度100% */
+  text-align: center; /* 内容文本居中 */
+}
+
+.modal-content p,
+.modal-content ul,
+.modal-content li {
+  text-align: center; /* 所有文本元素居中 */
+  margin-left: 0; /* 移除左边距 */
+  padding-left: 0; /* 移除左内边距 */
 }
 
 .modal-content ul { 
-  margin: 10px 0; 
-  padding-left: 20px; 
+  margin: 10px auto; /* 居中对齐 */
+  padding-left: 0; /* 移除默认左内边距 */
+  list-style-position: inside; /* 列表标记在内部 */
+  display: inline-block; /* 内联块级元素 */
+  text-align: left; /* 列表项左对齐 */
 }
 
 .modal-content li { 
-  margin: 5px 0; 
+  margin: 5px 0;
+  text-align: left; /* 列表项文本左对齐 */
 }
 
 .footer-note {
@@ -87,6 +114,7 @@
   text-align: center;
   margin: 15px 0 20px;
   line-height: 1.4;
+  width: 100%;
 }
 
 .modal-button {
@@ -102,6 +130,7 @@
   transition: all 0.3s;
   position: relative;
   font-size: 1em;
+  min-width: 120px; /* 按钮最小宽度 */
 }
 
 .modal-button::before,
@@ -121,6 +150,7 @@
   transform: scale(1.05);
 }
 
+/* 🐱 动画效果 */
 @keyframes nekoSlideIn {
   0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
   100% { transform: scale(1) translateY(0); opacity: 1; }
@@ -146,31 +176,43 @@
 [class*="waifu"],
 .board-girl,
 .floating-character {
-  z-index: 9999 !important; /* 降低板娘层级 */
+  z-index: 9999 !important;
 }
 
-/* 🐱 防止其他元素遮挡 */
-* {
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-/* 🐱 响应式设计 */
-@media (max-width: 768px) {
+/* 🐱 响应式设计 - 针对不同屏幕优化 */
+@media (max-width: 480px) {
   .modal-container {
-    width: 95%;
+    width: 95%; /* 小屏幕上更宽一些 */
     max-width: 350px;
     padding: 20px 15px;
   }
   
   .modal-title {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    padding: 6px 15px;
+  }
+  
+  .modal-content {
+    font-size: 0.9em;
   }
   
   .modal-button {
     padding: 8px 25px;
     font-size: 0.9em;
+    min-width: 100px;
   }
+}
+
+@media (min-width: 769px) {
+  .modal-container {
+    max-width: 420px; /* 桌面端稍大一些 */
+  }
+}
+
+/* 🐱 防止内容溢出 */
+.modal-content * {
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 </style>
 
@@ -206,23 +248,24 @@ function closeModal() {
     modal.style.opacity = '0';
     setTimeout(function() {
       modal.style.display = 'none';
-      // 可选：设置cookie，避免重复显示
-      document.cookie = "announcement_seen=true; max-age=86400; path=/"; // 24小时
+      // 移除Cookie设置，实现每次刷新都弹出
+      // document.cookie = "announcement_seen=true; max-age=86400; path=/"; // 注释掉这行
     }, 300);
   }
 }
 
-// 🐱 页面加载后显示弹窗
+// 🐱 页面加载后显示弹窗 - 每次刷新都显示
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('announcement-modal');
   
-  // 检查是否已经看过公告
-  var announcementSeen = document.cookie.includes('announcement_seen=true');
+  // 移除Cookie检查，确保每次刷新都显示
+  // var announcementSeen = document.cookie.includes('announcement_seen=true');
   
-  if (modal && {{ site.data.announcement.popup_enabled }} && '{{ latest_announcement.title }}' && !announcementSeen) {
+  if (modal && {{ site.data.announcement.popup_enabled }} && '{{ latest_announcement.title }}') {
+    // 短暂延迟后显示，确保页面加载完成
     setTimeout(function() {
       modal.style.display = 'block';
-    }, 1000);
+    }, 800); // 稍微延长显示时间，让页面完全加载
   }
 });
 
@@ -239,6 +282,11 @@ document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
     closeModal();
   }
+});
+
+// 🐱 防止弹窗内容点击事件冒泡
+document.querySelector('.modal-container').addEventListener('click', function(event) {
+  event.stopPropagation();
 });
 </script>
 {% endif %}
