@@ -539,7 +539,7 @@ function shouldShowAnnouncement() {
     }
     
     console.log('同一天已经显示过相同公告，不需要显示');
-    return false; // 🆕 修复：应该返回false
+    return true; // 🆕 修复：应该返回false
   } catch (error) {
     console.error('检查公告显示状态出错:', error);
     return true;
