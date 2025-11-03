@@ -269,13 +269,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// 🐱 点击遮罩层也可关闭
-document.addEventListener('click', function(event) {
-  var modal = document.getElementById('announcement-modal');
-  if (modal && event.target.classList.contains('modal-overlay')) {
-    closeModal();
-  }
-});
 
 // 🐱 ESC键关闭
 document.addEventListener('keydown', function(event) {
