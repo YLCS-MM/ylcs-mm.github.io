@@ -15,40 +15,39 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* 增加内边距，避免贴边 */
+  padding: 20px;
 }
 
 .modal-container {
   position: relative;
-  width: 90%; /* 手机端更紧凑 */
-  max-width: 400极; /* 电脑端适中宽度 */
+  width: 90%;
+  max-width: 400px; /* 修复：px 而不是 极 */
   min-width: 280px;
-  max-height: 70vh; /* 限制最大高度为视口的70% */
+  max-height: 70vh;
   background: #fff9e6;
   border: 2px dashed #ffb6c1;
   border-radius: 15px;
-  padding: 15px; /* 减少内边距 */
+  padding: 15px;
   box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
   z-index: 2147483647 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  overflow: hidden; /* 防止内容溢出 */
+  overflow: hidden;
 }
 
-/* 🆕 优化：更紧凑的头部 */
 .modal-header { 
   text-align: center; 
-  margin-bottom: 8px; /* 减少间距 */
+  margin-bottom: 8px;
   width: 100%;
-  flex-shrink: 0; /* 防止头部被压缩 */
-  cursor: grab; /* 添加抓取光标提示 */
-  user-select: none; /* 防止文字被选中 */
+  flex-shrink: 0;
+  cursor: grab;
+  user-select: none;
 }
 
 .modal-header:active {
-  cursor: grabbing; /* 抓取时的光标 */
+  cursor: grabbing;
 }
 
 .modal-title {
@@ -56,7 +55,7 @@
   font-weight: bold;
   color: #ff69b4;
   display: inline-block;
-  padding: 6极 12px;
+  padding: 6px 12px; /* 修复：px 而不是 极 */
   background: rgba(255, 182, 193, 0.1);
   border-radius: 20px;
   margin: 0 auto;
@@ -70,23 +69,21 @@
   text-align: center;
   font-size: 0.8em;
   color: #ff69b4;
-  margin: 3px 0 8px; /* 减少间距 */
+  margin: 3px 0 8px;
   font-weight: bold;
   width: 100%;
 }
 
-/* 🆕 优化：可滚动的内容区域 - 更紧凑 */
 .modal-scrollable {
   flex: 1;
-  overflow-y: auto; /* 关键：添加垂直滚动条 */
+  overflow-y: auto;
   width: 100%;
-  max-height: calc(70vh - 100px); /* 为头部和底部留出空间 */
-  padding: 0 5px; /* 减少内边距 */
+  max-height: calc(70vh - 100px);
+  padding: 0 5px;
   margin-bottom: 5px;
 }
 
-/* 🆕 优化滚动条样式 */
-.modal极rollable::-webkit-scrollbar {
+.modal-scrollable::-webkit-scrollbar {
   width: 6px;
 }
 
@@ -104,26 +101,25 @@
   background: #ff69b4;
 }
 
-/* 🆕 优化内容样式 - 更紧凑 */
 .modal-content {
   line-height: 1.5;
   font-size: 0.9em;
   color: #666;
-  margin-bottom: 10px; /* 减少底部间距 */
+  margin-bottom: 10px;
   width: 100%;
   text-align: center;
-  padding: 0 5px; /* 减少内边距 */
+  padding: 0 5px;
 }
 
 .modal-content h2,
 .modal-content h3,
 .modal-content h4 {
-  margin: 12px 极 8px; /* 减少标题间距 */
+  margin: 12px 0 8px; /* 修复：px 而不是 极 */
   text-align: center;
 }
 
 .modal-content p {
-  margin: 8px 0; /* 减少段落间距 */
+  margin: 8px 0;
   text-align: center;
 }
 
@@ -136,7 +132,7 @@
 }
 
 .modal-content li { 
-  margin: 4px 0; /* 减少列表项间距 */
+  margin: 4px 0;
   font-size: 0.85em;
   line-height: 1.4;
   text-align: left;
@@ -146,18 +142,17 @@
   font-size: 0.8em;
   color: #999;
   text-align: center;
-  margin: 8px 0 10px; /* 减少间距 */
+  margin: 8px 0 10px;
   line-height: 1.3;
   width: 100%;
-  flex-shrink: 0; /* 防止极部被压缩 */
+  flex-shrink: 0;
 }
 
-/* 🆕 优化底部按钮区域 */
 .modal-footer {
   width: 100%;
   padding-top: 8px;
   border-top: 1px dashed #ffb6c1;
-  flex-shrink: 0; /* 固定底部高度 */
+  flex-shrink: 0;
 }
 
 .modal-button {
@@ -181,7 +176,6 @@
   transform: scale(1.05);
 }
 
-/* 🐱 动画效果 */
 @keyframes nekoSlideIn {
   0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
   100% { transform: scale(1) translateY(0); opacity: 1; }
@@ -191,7 +185,7 @@
   animation: nekoSlideIn 0.5s ease-out forwards; 
 }
 
-@keyframes fade极 {
+@keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
@@ -200,22 +194,21 @@
   animation: fadeIn 0.3s ease-out forwards; 
 }
 
-/* 📱 手机端特别优化 - 更紧凑 */
 @media (max-width: 768px) {
   .modal-overlay {
-    padding: 15px; /* 减少内边距 */
+    padding: 15px;
     align-items: center;
   }
   
   .modal-container {
-    width: 95%; /* 手机端稍微宽一点 */
+    width: 95%;
     max-width: 350px;
-    max-height: 65vh; /* 手机端高度更小 */
-    padding: 12px; /* 更紧凑的内边距 */
+    max-height: 65vh;
+    padding: 12px;
   }
   
   .modal-scrollable {
-    max-height: calc(65vh - 90px); /* 调整可滚动区域 */
+    max-height: calc(65vh - 90px);
   }
   
   .modal-title {
@@ -231,10 +224,10 @@
   .modal-content {
     font-size: 0.85em;
     line-height: 1.4;
-极 }
+  }
   
   .modal-content li {
-    font极: 0.8em;
+    font-size: 0.8em; /* 修复：px 而不是 极 */
     margin: 3px 0;
   }
   
@@ -250,11 +243,10 @@
   }
 }
 
-/* 🖥️ 电脑端优化 */
 @media (min-width: 769px) {
   .modal-container {
-    max-width: 450px; /* 电脑端稍宽 */
-    max-height: 75vh; /* 电脑端高度可稍大 */
+    max-width: 450px;
+    max-height: 75vh;
   }
   
   .modal-scrollable {
@@ -270,11 +262,10 @@
   }
 }
 
-/* 🆕 超小屏幕手机（如iPhone 5/SE） */
 @media (max-width: 320px) {
   .modal-container {
     max-width: 300px;
-    max-height: 60vh; /* 超小屏幕高度更小 */
+    max-height: 60vh;
     padding: 10px;
   }
   
@@ -291,20 +282,17 @@
   }
 }
 
-/* 🆕 大屏幕电脑 */
 @media (min-width: 1200px) {
   .modal-container {
     max-width: 500px;
   }
 }
 
-/* 🐱 防止内容溢出 */
 .modal-content * {
   max-width: 100%;
   overflow-wrap: break-word;
 }
 
-/* 🆕 触摸设备优化 */
 @media (hover: none) and (pointer: coarse) {
   .modal-button:hover {
     transform: none;
@@ -315,13 +303,11 @@
   }
 }
 
-/* 🆕 确保滚动条在Firefox中正常工作 */
 .modal-scrollable {
   scrollbar-width: thin;
   scrollbar-color: #ffb6c1 rgba(255, 182, 193, 0.1);
 }
 
-/* 🆕 滑动关闭提示动画 */
 @keyframes swipeHint {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(3px); }
@@ -343,7 +329,6 @@
       <div class="update-date">【{{ latest_announcement.date }}】</div>
       {% endif %}
       
-      <!-- 🆕 优化的可滚动内容区域 -->
       <div class="modal-scrollable">
         <div class="modal-content">
           {{ latest_announcement.content | markdownify }}
@@ -352,7 +337,6 @@
         <div class="footer-note">施工期间可能会有页面闪烁，请多见谅喵~ (A·ω·A)</div>
       </div>
       
-      <!-- 🆕 固定底部按钮 -->
       <div class="modal-footer">
         <button class="modal-button" onclick="closeModal()">
           吉岛喏～
@@ -370,7 +354,6 @@ function closeModal() {
     modal.style.opacity = '0';
     setTimeout(function() {
       modal.style.display = 'none';
-      // 🆕 移除滚动条锁定
       document.body.style.overflow = 'auto';
     }, 300);
   }
@@ -383,7 +366,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (modal) {
     // 🆕 检查是否需要显示弹窗
     if (shouldShowAnnouncement()) {
-      // 🆕 显示前锁定背景滚动
       document.body.style.overflow = 'hidden';
       
       setTimeout(function() {
@@ -421,29 +403,24 @@ const modalHeader = document.getElementById('modalHeader');
 const modalContainer = document.querySelector('.modal-container');
 
 if (modalHeader) {
-  // 🆕 触摸开始
   modalHeader.addEventListener('touchstart', function(e) {
     touchStartY = e.touches[0].clientY;
     touchStartTime = Date.now();
     isSwiping = true;
   });
   
-  // 🆕 触摸移动
-  modalHeader.addEventListener('touchmove极 function(e) {
+  modalHeader.addEventListener('touchmove', function(e) {
     if (!isSwiping) return;
     
     const currentY = e.touches[0].clientY;
     const diffY = currentY - touchStartY;
     
-    // 🆕 只有向下滑动才处理
     if (diffY > 0) {
-      // 🆕 添加滑动反馈 - 弹窗跟随手指移动
       modalContainer.style.transform = `translateY(${Math.min(diffY, 100)}px)`;
       modalContainer.style.opacity = `${1 - (diffY / 200)}`;
     }
   });
   
-  // 🆕 触摸结束
   modalHeader.addEventListener('touchend', function(e) {
     if (!isSwiping) return;
     
@@ -451,11 +428,9 @@ if (modalHeader) {
     const diffY = currentY - touchStartY;
     const swipeTime = Date.now() - touchStartTime;
     
-    // 🆕 滑动条件：向下滑动超过50px 或 快速向下滑动超过30px
     if ((diffY > 50) || (diffY > 30 && swipeTime < 300)) {
       closeModal();
     } else {
-      // 🆕 滑动距离不够，恢复原位置
       modalContainer.style.transform = 'translateY(0)';
       modalContainer.style.opacity = '1';
     }
@@ -463,18 +438,12 @@ if (modalHeader) {
     isSwiping = false;
   });
   
-  // 🆕 触摸取消
   modalHeader.addEventListener('touchcancel', function() {
     modalContainer.style.transform = 'translateY(0)';
     modalContainer.style.opacity = '1';
     isSwiping = false;
   });
 }
-
-// 🆕 电脑端鼠标拖拽关闭（可选功能）
-if (modalHeader) {
-  let isDragging = false;
-  let dragStartY = 0;
   
   modalHeader.addEventListener('mousedown', function(e) {
     isDragging = true;
@@ -514,7 +483,7 @@ if (modalHeader) {
 window.addEventListener('resize', function() {
   var modal = document.getElementById('announcement-modal');
   if (modal && modal.style.display === 'block') {
-    // 可以在这里添加响应式调整逻辑
+    // 响应式调整逻辑
   }
 });
 
@@ -523,13 +492,14 @@ window.addEventListener('beforeunload', function() {
   closeModal();
 });
 
-// 🐱 新增：检查是否需要显示公告弹窗
+// 🐱 🆕 关键修复：检查是否需要显示公告弹窗
 function shouldShowAnnouncement() {
   try {
     // 🆕 获取存储的公告信息
     const storedData = localStorage.getItem('nekoAnnouncementData');
     
     if (!storedData) {
+      console.log('从未显示过公告，需要显示');
       return true; // 从未显示过，需要显示
     }
     
@@ -537,11 +507,17 @@ function shouldShowAnnouncement() {
     const today = new Date().toDateString();
     const latestTitle = "{{ latest_announcement.title }}";
     
+    console.log('存储的数据:', data);
+    console.log('今天日期:', today);
+    console.log('最新公告标题:', latestTitle);
+    
     // 🆕 检查条件：不是同一天 或 公告标题不同
     if (data.date !== today || data.title !== latestTitle) {
+      console.log('需要显示公告：日期不同或标题不同');
       return true; // 需要显示
     }
     
+    console.log('同一天已经显示过相同公告，不需要显示');
     return false; // 同一天已经显示过相同公告
   } catch (error) {
     console.error('检查公告显示状态出错:', error);
@@ -549,24 +525,47 @@ function shouldShowAnnouncement() {
   }
 }
 
-// 🐱 新增：记录公告已显示
+// 🐱 🆕 关键修复：记录公告已显示
 function recordAnnouncementShown() {
   try {
     const data = {
       date: new Date().toDateString(),
-      title: "{{ latest_announcement.title }}"
+      title: "{{ latest_announcement.title }}",
+      timestamp: Date.now() // 添加时间戳更精确
     };
     
+    console.log('记录公告已显示:', data);
     localStorage.setItem('nekoAnnouncementData', JSON.stringify(data));
   } catch (error) {
     console.error('记录公告显示状态出错:', error);
   }
 }
 
-// 🐱 新增：清除存储的公告数据（用于测试）
-// function clearAnnouncementData() {
-//   localStorage.removeItem('nekoAnnouncementData');
-//   alert('公告数据已清除喵~');
-// }
+// 🐱 🆕 新增：清除存储的公告数据（用于测试）
+function clearAnnouncementData() {
+  localStorage.removeItem('nekoAnnouncementData');
+  console.log('公告数据已清除喵~');
+  alert('公告数据已清除，下次访问会重新显示弹窗喵~');
+}
+
+// 🐱 🆕 新增：查看当前存储的数据（用于调试）
+function checkAnnouncementData() {
+  const data = localStorage.getItem('nekoAnnouncementData');
+  console.log('当前存储的公告数据:', data);
+  alert('当前存储数据: ' + data);
+}
+
+// 🐱 🆕 测试函数：立即显示弹窗（用于调试）
+function forceShowAnnouncement() {
+  clearAnnouncementData();
+  location.reload();
+}
 </script>
+
+<!-- 🐱 🆕 调试按钮（开发时使用，正式版可删除） -->
+<div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
+  <button onclick="clearAnnouncementData()" style="font-size: 12px; padding: 5px;">清除记录</button>
+  <button onclick="checkAnnouncementData()" style="font-size: 12px; padding: 5px;">查看数据</button>
+  <button onclick="forceShowAnnouncement()" style="font-size: 12px; padding: 5px;">强制显示</button>
+</div>
 {% endif %}
