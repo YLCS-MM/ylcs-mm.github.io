@@ -456,10 +456,6 @@ if (modalHeader) {
   });
 }
 
-// 🆕 电脑端鼠标拖拽关闭
-if (modalHeader) {
-  let isDragging = false;
-  let dragStartY = 0;
   
   modalHeader.addEventListener('mousedown', function(e) {
     isDragging = true;
@@ -513,7 +509,7 @@ function shouldShowAnnouncement() {
   // 🆕 测试模式：总是显示
   if (TEST_MODE) {
     console.log('🐱 测试模式激活：每次刷新都显示弹窗');
-    return true;
+    return false;
   }
   
   // 🆕 正式模式：原有逻辑
