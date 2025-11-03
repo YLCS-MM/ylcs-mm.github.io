@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
+    <title>成霜喵喵の小窝</title>
     
     <!-- 🎨 甘城猫猫粉蓝色主题样式 -->
     <style>
@@ -27,9 +27,26 @@
         --neko-gray: #7f8c8d;
     }
 
+    /* 🎯 基础重置 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--neko-dark);
+        background: var(--neko-light);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+
     /* 🎯 顶部区块 - 甘城猫猫风格 */
     .neko-header-section {
-        background-image: url('https://raw.githubusercontent.com/YLCS-MM/ylcs-mm2.gthub.io/refs/heads/miao/84b1ade4028efc77b2dd33f136c7712c.jpg');
+        background-image: url('https://raw.githubusercontent.com/YLCS-MM/ylcs-mm2.github.io/refs/heads/miao/84b1ade4028efc77b2dd33f136c7712c.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -111,160 +128,105 @@
         background: rgba(255, 182, 193, 0.2);
     }
 
-    /* 布局基础 */
+    /* 🎯 内容区域 - 简化版本 */
     .container { 
         max-width: 1020px; 
         margin: 0 auto; 
         padding: 0 20px; 
     }
-    .columns { 
-        display: flex; 
-        flex-wrap: wrap; 
-        margin: 0 -10px; 
-    }
-    .column { 
-        padding: 0 10px; 
-    }
-    .two-thirds { 
-        width: 66.666%; 
-    }
-    .one-third { 
-        width: 33.333%; 
+    
+    .content-message {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--neko-gray);
+        font-size: 1.2em;
     }
     
-    /* 文章卡片 - 甘城风格 */
-    .repo-list-item {
-        background: var(--neko-white);
-        border: 2px solid var(--neko-light-blue);
-        border-radius: 15px;
-        padding: 20px;
+    .content-message h2 {
+        color: var(--neko-accent-pink);
+        margin-bottom: 20px;
+    }
+    
+    .coming-soon {
+        font-size: 3em;
+        margin-bottom: 20px;
+        color: var(--neko-light-pink);
+    }
+
+    /* 🎯 页脚样式 */
+    .site-footer {
+        background: linear-gradient(135deg, var(--neko-pale-blue), var(--neko-white));
+        border-top: 3px solid var(--neko-light-pink);
+        margin-top: 50px;
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    .footer-stats {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
         margin: 20px 0;
-        box-shadow: 0 4px 15px rgba(135, 206, 235, 0.2);
-        transition: all 0.3s ease;
+        flex-wrap: wrap;
     }
 
-    .repo-list-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(135, 206, 235, 0.4);
-        border-color: var(--neko-accent-pink);
+    .stat-item {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 10px 20px;
+        border-radius: 15px;
+        border: 1px solid var(--neko-light-blue);
     }
 
-    .repo-list-name a {
-        color: var(--neko-main-blue);
-        font-size: 1.3em;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
-    .repo-list-name a:hover {
-        color: var(--neko-accent-pink);
-    }
-
-    .repo-list-description {
-        color: var(--neko-dark);
-        line-height: 1.5;
-        margin: 10px 0;
-        padding: 10px;
-        background: rgba(135, 206, 235, 0.05);
-        border-left: 3px solid var(--neko-main-blue);
-        border-radius: 5px;
-    }
-
-    /* 侧边栏搜索框 */
-    .sidebar-search input {
-        width: 100%; 
-        padding: 12px; 
-        border: 2px solid var(--neko-light-blue);
-        border-radius: 25px;
-        background: var(--neko-pale-blue);
-    }
-
-    .sidebar-search input:focus {
-        border-color: var(--neko-accent-pink);
-        outline: none;
-    }
-
-    /* 分类标签 - 甘城粉蓝搭配 */
-    .tags a {
-        display: inline-block;
-        background: linear-gradient(45deg, var(--neko-light-blue), var(--neko-main-blue));
-        color: white;
-        padding: 5px 12px;
-        margin: 3px;
-        border-radius: 20px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-
-    .tags a:hover {
-        background: linear-gradient(45deg, var(--neko-light-pink), var(--neko-accent-pink));
-        transform: scale(1.05);
-    }
-
-    /* 热门文章链接 */
-    .sidebar-popular a {
-        color: var(--neko-main-blue);
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-
-    .sidebar-popular a:hover {
-        color: var(--neko-accent-pink);
-        padding-left: 5px;
-    }
-
-    /* 小标题样式 */
-    h2, h3 {
-        color: var(--neko-main-blue);
-    }
-
-    h2 {
-        border-bottom: 2px solid var(--neko-light-blue);
-        padding-bottom: 10px;
-    }
-
-    /* 元信息样式 */
-    .repo-list-meta {
+    .footer-copyright {
         color: var(--neko-gray);
+        margin-top: 20px;
     }
 
-    .meta-info {
-        margin-right: 15px;
+    .footer-nav {
+        margin: 15px 0;
     }
 
-    .meta-info a {
+    .footer-nav a {
         color: var(--neko-dark-blue);
+        margin: 0 10px;
+        text-decoration: none;
+        transition: all 0.3s ease;
     }
 
-    .meta-info a:hover {
+    .footer-nav a:hover {
         color: var(--neko-accent-pink);
+        transform: scale(1.1);
     }
 
-    /* 移动端适配 */
+    /* 🎯 移动端适配 */
     @media (max-width: 768px) {
-        .column { width: 100% !important; }
-        .columns { flex-direction: column; }
-        .repo-list-item { 
-            margin: 15px 10px; 
-            padding: 15px; 
-        }
         .neko-header-section {
             padding: 20px 0;
             margin: 20px auto;
         }
+        
         .neko-site-title {
             font-size: 1.8em;
         }
+        
         .neko-nav {
             flex-wrap: wrap;
             gap: 10px;
+        }
+        
+        .content-message {
+            padding: 40px 15px;
+        }
+        
+        .footer-stats {
+            flex-direction: column;
+            gap: 15px;
         }
     }
 
     /* 🎨 全局色彩调整 */
     body {
         background: var(--neko-light);
-        color: var(--neko-dark);
     }
 
     /* 链接全局样式 */
@@ -275,19 +237,6 @@
 
     a:hover {
         color: var(--neko-accent-pink);
-    }
-
-    /* 代码块样式 */
-    code {
-        background: var(--neko-pale-blue);
-        color: var(--neko-dark-blue);
-        border: 1px solid var(--neko-light-blue);
-    }
-
-    /* 选择文本颜色 */
-    ::selection {
-        background: var(--neko-light-pink);
-        color: var(--neko-white);
     }
 
     /* ============================================
@@ -358,37 +307,8 @@
         body {
             padding-bottom: 80px !important;
         }
-        
-        /* 确保弹窗在看板娘上方 */
-        .modal-overlay,
-        .announcement-popup {
-            z-index: 2147483647 !important;
-        }
-    }
-
-    /* 🎯 触摸设备优化 */
-    @media (hover: none) and (pointer: coarse) {
-        /* 移动端增加点击区域 */
-        #waifu, .live2d-widget {
-            min-width: 80px !important;
-            min-height: 80px !important;
-        }
-    }
-
-    /* 🎯 横屏模式优化 */
-    @media (max-width: 768px) and (orientation: landscape) {
-        #waifu, .live2d-widget {
-            transform: scale(0.4) !important;
-            right: 2px !important;
-            bottom: 2px !important;
-        }
     }
     </style>
-    
-    <!-- 引入原有CSS -->
-    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
-    <link rel="stylesheet" href="/assets/css/globals/common.css">
-    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
 </head>
 <body class="home">
     <!-- 🎯 顶部区块 -->
@@ -406,80 +326,39 @@
             <a href="/announcements/">公告</a>
         </nav>
     </header>
-
-    <!-- 📝 主体内容区域 -->
-    <section class="container content">
-        <div class="columns">
-            <!-- 左侧：最新喵文 -->
-            <div class="column two-thirds">
-                <h2>📝 最新喵文</h2>
-                
-                <ol class="repo-list">
-                  {% for post in site.posts %}
-                  <li class="repo-list-item">
-                    <h3 class="repo-list-name">
-                      <a href="{{ post.url }}">{{ post.title }}</a>
-                    </h3>
-                    <p class="repo-list-description">
-                      {{ post.excerpt | strip_html | strip }}
-                    </p>
-                    <p class="repo-list-meta">
-                      <span class="meta-info">
-                        <span class="octicon octicon-calendar"></span> 
-                        {{ post.date | date: "%Y/%m/%d" }}
-                      </span>
-                      {% for cat in post.categories %}
-                      <span class="meta-info">
-                        <span class="octicon octicon-file-directory"></span>
-                        <a href="/categories/#{{ cat }}">{{ cat }}</a>
-                      </span>
-                      {% endfor %}
-                    </p>
-                  </li>
-                  {% endfor %}
-                </ol>
-            </div>
-            
-            <!-- 右侧：侧边栏 -->
-            <div class="column one-third">
-                <div class="sidebar-search">
-                    <input type="text" placeholder="搜搜看喵..." 
-                           class="search-input">
-                </div>
-                
-                <div class="sidebar-categories">
-                    <h3>📁 分类云</h3>
-                    <div class="tags">
-                        {% for category in site.categories %}
-                        <a href="/categories/#{{ category[0] }}">
-                            {{ category[0] }}
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-                
-                <div class="sidebar-popular">
-                    <h3>🔥 热门喵文</h3>
-                    <ul>
-                        {% for post in site.posts limit:5 %}
-                        <li>
-                            <a href="{{ post.url }}">{{ post.title }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
     
     <!-- 🐾 页脚 -->
-    {% include footer.html %}
+    <footer class="site-footer">
+        <div class="footer-stats">
+            <div class="stat-item">
+                <strong>本站访问量</strong>
+                <div>2200次</div>
+            </div>
+            <div class="stat-item">
+                <strong>独立访客</strong>
+                <div>497人</div>
+            </div>
+            <div class="stat-item">
+                <strong>总访问量</strong>
+                <div>2131次</div>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <a href="/">首页</a>
+            <a href="/categories/">分类</a>
+            <a href="/about/">关于</a>
+            <a href="/announcements/">公告</a>
+            <a href="#top" class="back-to-top">TOP</a>
+        </div>
+
+        <div class="footer-copyright">
+            <p>统计始于2025-06-19</p>
+            <p>&copy; 2025 成霜喵喵 · ylcs-mm.github.io</p>
+        </div>
+    </footer>
     
-    <!-- 🎯 确保公告弹窗和看板娘不丢失 -->
-    <!-- 公告弹窗脚本 -->
-    <script src="/assets/js/announcement.js"></script>
-    
-    <!-- 看板娘脚本 -->
+    <!-- 🎯 看板娘脚本 -->
     <script>
     // 看板娘加载代码
     (function() {
