@@ -1,73 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        {% if page.title %}
-            🐱 {{ page.title }} | ylcs-mm.github.io
-        {% else %}
-            🐱 甘城猫猫的博客 | ylcs-mm.github.io
-        {% endif %}
-    </title>
-    <!-- 引用新的主题CSS -->
-    <link rel="stylesheet" href="/assets/css/neko-full-theme.css">
-    {% seo %}
+    {% include head-base.html %}
 </head>
 <body>
-    <!-- 🐱 页面头部 -->
-    <header class="test-header">
-        <h1 class="test-title">{{ page.title }}</h1>
-        <div class="test-meta">
-            <span class="meta-item">{{ page.date | date: "%Y年%m月%d日" }}</span>
-            {% if page.categories %}
-            <span class="meta-item">{{ page.categories | join: ", " }}</span>
-            {% endif %}
-            {% if page.tags %}
-            <span class="meta-item">
-                {% for tag in page.tags %}
-                {{ tag }}{% unless forloop.last %}, {% endunless %}
-                {% endfor %}
-            </span>
-            {% endif %}
-        </div>
-    </header>
-
-    <!-- 📝 主要内容容器 -->
-    <main class="test-container">
-        <div class="test-content">
-            <!-- 文章内容 -->
-            <article class="post-content">
-                {{ content }}
-            </article>
+    <div class="container">
+        <article class="post">
+            {% include post-header.html %}
             
-            <!-- 🐱 猫爪装饰 -->
-            <div class="neko-decoration">
-                <span class="neko-paw">🐾</span>
-                <span class="neko-paw">🐾</span>
-                <span class="neko-paw">🐾</span>
+            <div class="post-content">
+                {{ content }}
             </div>
-        </div>
-        
-        <!-- 🎯 页脚 -->
-        <footer class="test-footer">
-            <p class="footer-text">🐾 文章发布时间: {{ page.date | date: "%Y年%m月%d日 %H:%M" }}</p>
-            <p class="footer-text">💕 感谢阅读 ~ Neko会继续努力的！</p>
-        </footer>
-    </main>
-
-    <script>
-        // 🐱 交互效果
-        document.addEventListener('DOMContentLoaded', function() {
-            // 清单项点击效果
-            const checklistItems = document.querySelectorAll('.checklist-item');
-            checklistItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    this.style.textDecoration = this.style.textDecoration === 'line-through' ? 'none' : 'line-through';
-                    this.style.color = this.style.color === 'var(--neko-light-text)' ? 'var(--neko-text)' : 'var(--neko-light-text)';
-                });
-            });
-        });
-    </script>
+            
+            {% include post-footer.html %}
+        </article>
+    </div>
 </body>
 </html>
