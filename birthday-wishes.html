@@ -150,12 +150,12 @@
     <!-- 密码输入界面 -->
     <div class="password-screen" id="passwordScreen">
         <h2>🎈 欢迎来到秘密花园 🎈</h2>
-        <p>请输入神秘的「生日密码」来解锁祝福<br><small>(提示：8位数字，格式：YYYYMMDD)</small></p>
+        <p>请输入神秘的「生日密码」来解锁祝福<br><small>(提示：4位数字，格式：MMDD)</small></p>
         
         <input 
             type="password" 
             id="passwordInput" 
-            placeholder="例如：20231225" 
+            placeholder="例如：0624" 
             maxlength="8"
             inputmode="numeric"
             pattern="\d*"
@@ -191,8 +191,8 @@
 
     <script>
         // 在这里设置你的生日密码喵！
-        // 将 '0122' 替换为真实的8位生日日期（格式：YYYYMMDD）
-        const CORRECT_PASSWORD = '20231225';
+        // 将 '20231225' 替换为真实的8位生日日期（格式：MMDD）
+        const CORRECT_PASSWORD = '0122';
         
         // 密码验证函数
         function checkPassword() {
