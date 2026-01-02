@@ -2,241 +2,34 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>成霜·喵喵的19岁生日祝福</title>
+    <title>给猫猫葉子的生日祝福</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Arial Rounded MT Bold', 'Hiragino Sans GB', sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #ffd1dc, #faf0e6);
             padding: 20px;
         }
-        
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 3rem 2rem;
-            border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            border: 3px solid #ffd1dc;
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
-        .password-section h2 {
+        h1 {
             color: #e75480;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
         }
-        
-        .password-hint {
-            color: #666;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        
-        .password-input {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.2rem;
-            border: 3px solid #ffd1dc;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            background: #fffafb;
-            letter-spacing: 8px;
-            font-weight: bold;
-        }
-        
-        .unlock-btn {
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            width: 100%;
-        }
-        
-        .unlock-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 154, 158, 0.4);
-        }
-        
-        .error-msg {
-            color: #ff4757;
-            margin-top: 1rem;
-            display: none;
-        }
-        
-        .birthday-content {
-            display: none;
-            animation: fadeIn 1s ease;
-        }
-        
-        .birthday-cake {
-            font-size: 4rem;
-            margin: 1rem 0;
-            animation: bounce 2s infinite;
-        }
-        
-        .birthday-message {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #333;
-            text-align: left;
-            margin: 2rem 0;
-        }
-        
-        .cat-paw {
-            font-size: 2rem;
-            margin: 1rem 0;
-            color: #ff9a9e;
-        }
-        
-        .heart {
-            color: #ff6b6b;
-            animation: pulse 1.5s infinite;
-            display: inline-block;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* 这里可以加入更多可爱的样式 */
     </style>
 </head>
 <body>
-    <!-- 密码输入界面 -->
-    <div class="container password-section" id="passwordSection">
-        <h2>🐾 成霜·喵喵的19岁秘密花园 🐾</h2>
-        <p class="password-hint">
-            请输入四位数字生日密码解锁祝福<br>
-            <small>💡 提示：就像六月廿四日是0624那样的日期格式</small>
-        </p>
-        
-        <input type="password" 
-               id="passwordInput" 
-               class="password-input"
-               placeholder="____" 
-               maxlength="4"
-               inputmode="numeric">
-        
-        <button class="unlock-btn" onclick="checkPassword()">
-            🗝️ 解锁19岁生日祝福
-        </button>
-        
-        <p class="error-msg" id="errorMsg">
-            🐱 密码不对哦，再想想看喵～
-        </p>
+    <div class="container">
+        <h1>🎂 猫猫葉子，19岁生日快乐！ 🎂</h1>
+        <p>你的朋友 成霜·喵喵</p>
+        <!-- 在这里写下你的祝福 -->
+        猫猫葉子，愿你的19岁如猫般悠闲自在，每一天都有阳光、零食和小确幸。🐾
     </div>
-    
-    <!-- 生日祝福内容 -->
-    <div class="container birthday-content" id="birthdayContent">
-        <div class="birthday-cake">🎂</div>
-        <h1>祝成霜·喵喵19岁生日快乐！</h1>
-        
-        <div class="cat-paw">🐾 ⋆ 🐱 ⋆ 🐾</div>
-        
-        <div class="birthday-message">
-            <p>亲爱的<strong>成霜·喵喵</strong>：</p>
-            
-            <p>🎉 恭喜你迎来了美好的<strong>19岁</strong>！愿你的新一岁充满：</p>
-            
-            <p>🐱 <strong>数不尽的猫猫快乐</strong> - 像小猫追尾巴一样无忧无虑</p>
-            <p>🎂 <strong>甜蜜的惊喜时刻</strong> - 每一天都像吃到最美味的猫零食</p>
-            <p>🌟 <strong>闪闪发光的梦想</strong> - 所有愿望都能如愿实现</p>
-            
-            <p>希望这份特别的生日祝福能给你带来惊喜～</p>
-            
-            <p>愿你永远保持那份独特的可爱与灵动，</p>
-            <p>在新的一岁里，每一天都充满阳光与欢笑<span class="heart">♥</span></p>
-            
-            <p style="text-align: center; margin-top: 2rem;">
-                <strong>Happy 19th Birthday!</strong><br>
-                🐾 来自关心你的小伙伴 🐾
-            </p>
-        </div>
-    </div>
-
-    <script>
-        // 密码验证函数
-        function checkPassword() {
-            const userInput = document.getElementById('passwordInput').value;
-            const errorMsg = document.getElementById('errorMsg');
-            const passwordSection = document.getElementById('passwordSection');
-            const birthdayContent = document.getElementById('birthdayContent');
-            
-            // 正确的密码是0122
-            if (userInput === '0122') {
-                // 密码正确：显示生日祝福内容
-                passwordSection.style.display = 'none';
-                birthdayContent.style.display = 'block';
-                
-                // 添加庆祝效果
-                celebrateBirthday();
-            } else {
-                // 密码错误：显示错误提示
-                errorMsg.style.display = 'block';
-                document.getElementById('passwordInput').value = '';
-                
-                // 添加抖动效果
-                passwordSection.style.transform = 'translateX(-10px)';
-                setTimeout(() => {
-                    passwordSection.style.transform = 'translateX(10px)';
-                }, 100);
-                setTimeout(() => {
-                    passwordSection.style.transform = 'translateX(0)';
-                }, 200);
-            }
-        }
-        
-        // 生日庆祝效果
-        function celebrateBirthday() {
-            const title = document.querySelector('.birthday-content h1');
-            title.style.color = '#ff0066';
-        }
-        
-        // 按回车键提交密码
-        document.getElementById('passwordInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                checkPassword();
-            }
-        });
-        
-        // 输入时自动聚焦并隐藏错误信息
-        document.getElementById('passwordInput').addEventListener('input', function() {
-            document.getElementById('errorMsg').style.display = 'none';
-        });
-        
-        // 页面加载时自动聚焦输入框
-        window.onload = function() {
-            document.getElementById('passwordInput').focus();
-        };
-    </script>
 </body>
 </html>
