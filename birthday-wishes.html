@@ -2,34 +2,178 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>给猫猫葉子的生日祝福</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给猫猫葉子的19岁生日祝福</title>
     <style>
+        /* 基础样式 */
         body {
-            font-family: 'Arial Rounded MT Bold', sans-serif;
+            font-family: 'Arial Rounded MT Bold', 'Hiragino Sans GB', sans-serif;
             text-align: center;
-            background: linear-gradient(135deg, #ffd1dc, #faf0e6);
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffd1dc 0%, #faf0e6 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
             padding: 20px;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            border: 3px solid #ffd1dc;
         }
-        h1 {
+        /* 密码界面 */
+        #passwordScreen h2 {
+            color: #e75480;
+            margin-bottom: 1rem;
+        }
+        .password-hint {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        #passwordInput {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            border: 2px solid #ffd1dc;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            letter-spacing: 3px;
+            background: #fffafb;
+        }
+        #unlockBtn {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        #unlockBtn:active {
+            transform: scale(0.98);
+        }
+        #errorMsg {
+            color: #ff4757;
+            margin-top: 1rem;
+            display: none;
+            font-size: 0.9rem;
+        }
+        /* 祝福内容界面 - 初始隐藏 */
+        #birthdayScreen {
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+        .birthday-cake {
+            font-size: 3.5rem;
+            margin: 0.5rem 0;
+        }
+        .birthday-title {
+            color: #e75480;
+            margin-bottom: 1.5rem;
+        }
+        .birthday-message {
+            text-align: left;
+            line-height: 1.7;
+            color: #333;
+            font-size: 1.05rem;
+        }
+        .heart {
+            color: #ff6b6b;
+            animation: pulse 1.5s infinite;
+        }
+        .signature {
+            text-align: right;
+            margin-top: 2rem;
+            font-style: italic;
             color: #e75480;
         }
-        /* 这里可以加入更多可爱的样式 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎂 猫猫葉子，19岁生日快乐！ 🎂</h1>
-        <p>你的朋友 成霜·喵喵</p>
-        <!-- 在这里写下你的祝福 -->
-        猫猫葉子，愿你的19岁如猫般悠闲自在，每一天都有阳光、零食和小确幸。🐾
+    <!-- 密码输入界面 -->
+    <div class="container" id="passwordScreen">
+        <h2>🐾 欢迎来到秘密祝福 🐾</h2>
+        <p class="password-hint">请输入四位数字密码解锁给猫猫葉子的祝福</p>
+        <input type="password" 
+               id="passwordInput" 
+               placeholder="请输入密码" 
+               maxlength="4"
+               inputmode="numeric">
+        <button id="unlockBtn">🗝️ 解锁祝福</button>
+        <p id="errorMsg">密码错误，请再试一次喵～</p>
     </div>
+
+    <!-- 生日祝福内容 -->
+    <div class="container" id="birthdayScreen">
+        <div class="birthday-cake">🎂</div>
+        <h1 class="birthday-title">猫猫葉子，19岁生日快乐！</h1>
+        <div class="birthday-message">
+            <p>亲爱的<strong>猫猫葉子</strong>：</p>
+            <p>恭喜你迎来了美好的19岁！🎉 愿你的新一岁像小猫一样，充满阳光、温暖和数不尽的快乐喵～</p>
+            <p>愿你每一天都：<br>
+               - 有吃不完的小鱼干<br>
+               - 有晒不完的太阳<br>
+               - 有实现不完的小梦想<br>
+               - 最重要的是，永远保持现在的可爱与美好！</p>
+            <p>希望这份小小的祝福能为你带来一整天的好心情～ <span class="heart">♥</span></p>
+            <p class="signature">—— 你的朋友 成霜·喵喵</p>
+        </div>
+    </div>
+
+    <script>
+        // 密码验证函数
+        document.getElementById('unlockBtn').addEventListener('click', checkPassword);
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        function checkPassword() {
+            const userInput = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            const passwordScreen = document.getElementById('passwordScreen');
+            const birthdayScreen = document.getElementById('birthdayScreen');
+
+            // 验证密码是否为 0122
+            if (userInput === '0122') {
+                passwordScreen.style.display = 'none';
+                birthdayScreen.style.display = 'block';
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                passwordScreen.style.animation = 'shake 0.5s';
+                setTimeout(() => { passwordScreen.style.animation = ''; }, 500);
+            }
+        }
+
+        // 添加一个简单的抖动动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
