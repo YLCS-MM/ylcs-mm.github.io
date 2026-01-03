@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>给猫猫葉子的19岁生日祝福</title>
     <style>
-        /* 基础重置和全局样式 */
+        /* 基础重置 */
         * {
             margin: 0;
             padding: 0;
@@ -13,179 +13,168 @@
         }
         
         body {
-            font-family: 'Arial Rounded MT Bold', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            font-family: 'Arial Rounded MT Bold', 'Hiragino Sans GB', sans-serif;
             min-height: 100vh;
             background: linear-gradient(135deg, #ffd1dc 0%, #fff0f5 30%, #faf0e6 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 20px;
             position: relative;
             overflow: hidden;
         }
         
-        /* 猫爪漂浮特效 */
+        /* 🐾 猫爪漂浮特效 */
         .floating-paw {
             position: absolute;
             width: 40px;
             height: 40px;
-            background: rgba(255, 182, 193, 0.4);
+            background: rgba(255, 182, 193, 0.3);
             border-radius: 50%;
             pointer-events: none;
             z-index: 1;
             opacity: 0;
+            animation-timing-function: linear;
         }
         
         .floating-paw::before,
         .floating-paw::after {
             content: '';
             position: absolute;
-            width: 15px;
-            height: 15px;
-            background: rgba(255, 182, 193, 0.6);
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 182, 193, 0.5);
             border-radius: 50%;
-            top: 5px;
+            top: 6px;
         }
         
-        .floating-paw::before { left: 5px; }
-        .floating-paw::after { right: 5px; }
+        .floating-paw::before { left: 6px; }
+        .floating-paw::after { right: 6px; }
         
         /* 主容器 */
         .main-container {
-            background: rgba(255, 255, 255, 0.92);
-            padding: 3rem 2.5rem;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(255, 182, 193, 0.3),
-                        inset 0 0 0 3px #ffd1dc;
-            max-width: 700px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.25);
+            max-width: 500px;
             width: 100%;
             position: relative;
             z-index: 10;
-            backdrop-filter: blur(5px);
+            border: 3px solid #ffd1dc;
         }
         
-        /* 密码界面样式 */
+        /* 密码界面 */
         .password-screen {
             text-align: center;
         }
         
-        .password-title {
+        .paw-title {
             color: #e75480;
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
         }
         
-        .password-subtitle {
-            color: #ff6b9d;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+        .paw-title::before,
+        .paw-title::after {
+            content: '🐾';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
         }
+        
+        .paw-title::before { left: -35px; }
+        .paw-title::after { right: -35px; }
         
         .password-hint {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 2.5rem;
+            color: #666;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
             line-height: 1.5;
         }
         
-        .password-input-container {
-            position: relative;
-            margin: 2rem auto;
-            max-width: 300px;
-        }
-        
-        /* 修改点1：占位符改为0624 */
         .password-input {
             width: 100%;
-            padding: 18px 25px;
-            font-size: 1.4rem;
-            border: 3px solid #ffb6c1;
-            border-radius: 20px;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid #ffb6c1;
+            border-radius: 15px;
             text-align: center;
+            margin: 1.5rem 0;
             background: #fffafb;
-            letter-spacing: 8px;
-            font-weight: bold;
+            letter-spacing: 10px;
             color: #333;
             transition: all 0.3s ease;
-        }
-        
-        .password-input::placeholder {
-            color: #ccc;
-            letter-spacing: 8px;
         }
         
         .password-input:focus {
             outline: none;
             border-color: #ff6b9d;
             box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.2);
-            transform: translateY(-2px);
         }
         
-        .paw-button {
-            background: linear-gradient(135deg, #ff9a9e, #ffb6c1);
+        .unlock-btn {
+            background: linear-gradient(45deg, #ff9a9e, #ffb6c1);
             color: white;
             border: none;
-            padding: 18px 45px;
-            font-size: 1.3rem;
-            border-radius: 30px;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin: 2rem auto;
+            margin: 1.5rem auto;
             transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .unlock-btn:hover {
+            transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(255, 154, 158, 0.3);
         }
         
-        .paw-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 12px 25px rgba(255, 154, 158, 0.4);
-        }
-        
-        .paw-button:active {
-            transform: translateY(-2px) scale(1.02);
-        }
-        
-        .error-message {
+        .error-msg {
             color: #ff4757;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             display: none;
-            font-size: 1rem;
+            font-size: 0.9rem;
             background: rgba(255, 71, 87, 0.1);
-            padding: 10px 20px;
-            border-radius: 15px;
+            padding: 8px 15px;
+            border-radius: 10px;
             display: inline-block;
         }
         
-        /* 生日祝福界面 */
+        /* 🎂 豪华生日蛋糕 */
         .birthday-screen {
             display: none;
-            animation: fadeInUp 1s ease;
+            animation: fadeIn 0.8s ease;
         }
         
-        /* 修改点2：全新的豪华蛋糕设计 */
         .cake-container {
-            margin: 2rem auto;
+            margin: 1.5rem auto;
             width: 220px;
-            height: 200px;
+            height: 180px;
             position: relative;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
         }
         
         /* 蛋糕盘 */
         .cake-plate {
             position: absolute;
             width: 180px;
-            height: 15px;
-            background: #f0f0f0;
-            border-radius: 10px;
+            height: 10px;
+            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+            border-radius: 5px;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         
         /* 三层蛋糕 */
@@ -199,8 +188,8 @@
         .layer-1 {
             width: 160px;
             height: 50px;
-            background: linear-gradient(to bottom, #ff8fa3, #f76d8f);
-            bottom: 15px;
+            background: linear-gradient(to bottom, #ff8fa3, #ff6b9d);
+            bottom: 10px;
             z-index: 3;
         }
         
@@ -208,7 +197,7 @@
             width: 130px;
             height: 45px;
             background: linear-gradient(to bottom, #ffb6c1, #ff8fa3);
-            bottom: 65px;
+            bottom: 60px;
             z-index: 2;
         }
         
@@ -216,559 +205,406 @@
             width: 100px;
             height: 40px;
             background: linear-gradient(to bottom, #ffd1dc, #ffb6c1);
-            bottom: 110px;
+            bottom: 105px;
             z-index: 1;
         }
         
-        /* 奶油糖衣 */
+        /* 奶油装饰 */
         .icing {
             position: absolute;
-            background: #fff;
+            background: white;
             border-radius: 50%;
             z-index: 4;
+            animation: icingGlow 2s infinite alternate;
         }
         
         .icing-1 {
             width: 170px;
             height: 20px;
-            bottom: 50px;
+            bottom: 45px;
             left: 50%;
             transform: translateX(-50%);
-            animation: icingGlow 2s infinite alternate;
         }
         
         .icing-2 {
             width: 140px;
             height: 18px;
-            bottom: 95px;
+            bottom: 90px;
             left: 50%;
             transform: translateX(-50%);
-            animation: icingGlow 2s infinite alternate-reverse;
-        }
-        
-        /* 蜡烛 */
-        .candle {
-            position: absolute;
-            width: 10px;
-            height: 50px;
-            background: linear-gradient(to bottom, #4cd964, #2ecc71, #27ae60);
-            bottom: 150px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 5px 5px 0 0;
-            z-index: 5;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
-        }
-        
-        /* 火焰 */
-        .flame {
-            position: absolute;
-            width: 18px;
-            height: 30px;
-            background: linear-gradient(to bottom, #ffcc00, #ff9500, #ff3300);
-            border-radius: 50% 50% 20% 20%;
-            bottom: 200px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: flameFlicker 0.5s infinite alternate, flameColor 3s infinite;
-            z-index: 6;
-            filter: blur(1px) drop-shadow(0 0 10px #ff9900);
-        }
-        
-        /* 装饰点 */
-        .decoration {
-            position: absolute;
-            border-radius: 50%;
-            z-index: 4;
-        }
-        
-        .dot {
-            width: 12px;
-            height: 12px;
-            background: #ff4d94;
-            animation: floatUp 3s infinite ease-in-out;
-        }
-        
-        .dot-1 {
-            top: 40px;
-            left: 40px;
-            animation-delay: 0s;
-        }
-        
-        .dot-2 {
-            top: 30px;
-            right: 50px;
-            animation-delay: 0.5s;
-        }
-        
-        .dot-3 {
-            top: 60px;
-            left: 60px;
             animation-delay: 1s;
         }
         
-        .dot-4 {
-            top: 50px;
-            right: 30px;
-            animation-delay: 1.5s;
-        }
-        
-        /* 光晕效果 */
-        .cake-glow {
+        /* 19数字蜡烛 */
+        .number-candles {
             position: absolute;
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(255,182,193,0.2) 100%);
-            border-radius: 50%;
-            top: 50%;
+            bottom: 145px;
             left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            animation: glowPulse 3s infinite ease-in-out;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 5;
         }
         
+        .candle-number {
+            width: 22px;
+            height: 45px;
+            background: linear-gradient(to bottom, #4cd964, #2ecc71);
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(46, 204, 113, 0.3);
+        }
+        
+        .candle-number::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+        }
+        
+        /* 火焰特效 */
+        .flame-group {
+            position: absolute;
+            bottom: 190px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 6;
+        }
+        
+        .flame {
+            width: 16px;
+            height: 28px;
+            background: linear-gradient(to bottom, #ffff00, #ffcc00, #ff9900);
+            border-radius: 50% 50% 20% 20%;
+            animation: flameFlicker 0.5s infinite alternate;
+            filter: blur(1px);
+        }
+        
+        /* 装饰糖粒 */
+        .sprinkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+        }
+        
+        .sprinkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: sprinkleFloat 3s infinite ease-in-out;
+        }
+        
+        /* 祝福内容 */
         .birthday-header {
-            margin: 2rem 0;
+            margin: 1.5rem 0;
+            text-align: center;
         }
         
         .birthday-title {
             color: #e75480;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
         }
         
         .birthday-subtitle {
             color: #ff6b9d;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .birthday-message {
-            background: rgba(255, 250, 251, 0.8);
-            padding: 2rem;
-            border-radius: 20px;
-            margin: 2rem 0;
-            text-align: left;
-            border-left: 5px solid #ffb6c1;
-        }
-        
-        .birthday-message p {
             font-size: 1.1rem;
-            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .birthday-content {
+            background: rgba(255, 250, 251, 0.9);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            text-align: left;
+            border-left: 4px solid #ffb6c1;
+        }
+        
+        .birthday-content p {
+            font-size: 1rem;
+            line-height: 1.6;
             color: #333;
             margin-bottom: 1rem;
         }
         
         .cat-list {
             list-style: none;
-            padding: 1rem 0;
+            padding: 0.5rem 0;
         }
         
         .cat-list li {
-            padding: 8px 0;
-            padding-left: 35px;
+            padding: 6px 0;
+            padding-left: 30px;
             position: relative;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
         }
         
-        .cat-list li:before {
+        .cat-list li::before {
             content: '🐾';
             position: absolute;
             left: 0;
+            font-size: 1rem;
         }
         
         .signature {
             text-align: right;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 2px dashed #ffd1dc;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #ffd1dc;
         }
         
         .signature-name {
             color: #e75480;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
             font-style: italic;
         }
         
         .heart {
             color: #ff6b6b;
-            display: inline-block;
             animation: heartbeat 1.5s infinite;
-            margin: 0 5px;
-        }
-        
-        .cat-ears {
             display: inline-block;
-            position: relative;
-            margin: 0 10px;
         }
         
-        .cat-ears:before,
-        .cat-ears:after {
-            content: '^';
-            position: absolute;
-            top: -15px;
-            font-size: 1.5rem;
-            color: #ff9a9e;
+        /* 动画定义 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .cat-ears:before { left: -15px; }
-        .cat-ears:after { right: -15px; }
-        
-        /* 新动画定义 */
         @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
         
         @keyframes flameFlicker {
-            0% {
-                transform: translateX(-50%) scale(1, 1);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(-50%) scale(1.1, 0.9);
-                opacity: 0.8;
-            }
-        }
-        
-        @keyframes flameColor {
-            0%, 100% {
-                background: linear-gradient(to bottom, #ffcc00, #ff9500, #ff3300);
-            }
-            50% {
-                background: linear-gradient(to bottom, #ffff00, #ffcc00, #ff6600);
-            }
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.1, 0.9); opacity: 0.8; }
         }
         
         @keyframes icingGlow {
-            0% {
-                box-shadow: 0 0 5px rgba(255,255,255,0.5);
-                transform: translateX(-50%) scale(1);
-            }
-            100% {
-                box-shadow: 0 0 20px rgba(255,255,255,0.8);
-                transform: translateX(-50%) scale(1.05);
-            }
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
         }
         
-        @keyframes floatUp {
-            0%, 100% {
-                transform: translateY(0);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translateY(-10px);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes glowPulse {
-            0%, 100% {
-                opacity: 0.5;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                opacity: 0.8;
-                transform: translate(-50%, -50%) scale(1.1);
-            }
+        @keyframes sprinkleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-        
-        /* 响应式调整 */
-        @media (max-width: 768px) {
-            .main-container {
-                padding: 2rem 1.5rem;
-                border-radius: 25px;
-            }
-            
-            .password-title {
-                font-size: 1.8rem;
-            }
-            
-            .birthday-title {
-                font-size: 2rem;
-            }
-            
-            .paw-button {
-                padding: 15px 30px;
-                font-size: 1.1rem;
-            }
-            
-            .cake-container {
-                width: 180px;
-                height: 180px;
-            }
-        }
-        
-        @media (min-width: 1200px) {
-            .main-container {
-                max-width: 800px;
-                padding: 4rem 3rem;
-            }
-            
-            .birthday-title {
-                font-size: 3rem;
-            }
+            50% { transform: scale(1.1); }
         }
     </style>
 </head>
 <body>
     <!-- 密码输入界面 -->
     <div class="main-container password-screen" id="passwordScreen">
-        <h1 class="password-title">🐾 秘密祝福花园 🐾</h1>
-        <p class="password-subtitle">成霜·喵喵 给 猫猫葉子 的专属祝福</p>
-        <p class="password-hint">请输入四位数字密码解锁19岁生日惊喜<br><small>💡 就像六月廿四日是0624那样的日期格式</small></p>
+        <h1 class="paw-title">秘密祝福花园</h1>
+        <p class="password-hint">
+            成霜·喵喵 给 猫猫葉子 的专属祝福<br>
+            请输入四位数字密码解锁19岁生日惊喜<br>
+            <small>💡 就像六月廿四日是0624那样的日期格式</small>
+        </p>
         
-        <div class="password-input-container">
-            <!-- 修改点1：占位符改为0624，不泄露真正密码 -->
-            <input type="password" 
-                   id="passwordInput" 
-                   class="password-input"
-                   placeholder="0624" 
-                   maxlength="4"
-                   inputmode="numeric"
-                   autocomplete="off">
-        </div>
+        <input type="password" 
+               id="passwordInput"
+               class="password-input"
+               placeholder="0624"  <!-- 只显示示例，不泄露真密码 -->
+               maxlength="4"
+               inputmode="numeric"
+               autocomplete="off">
         
-        <button class="paw-button" id="unlockBtn">
+        <button class="unlock-btn" id="unlockBtn">
             <span>🐱</span> 用猫爪解锁祝福 <span>🐱</span>
         </button>
         
-        <p class="error-message" id="errorMsg">
+        <p class="error-msg" id="errorMsg">
             🐾 密码不对哦，再想想看喵～
         </p>
     </div>
     
     <!-- 生日祝福界面 -->
     <div class="main-container birthday-screen" id="birthdayScreen">
-        <!-- 修改点2：全新的豪华蛋糕 -->
+        <!-- 豪华蛋糕 -->
         <div class="cake-container">
-            <div class="cake-glow"></div>
             <div class="cake-plate"></div>
             <div class="cake-layer layer-1"></div>
             <div class="cake-layer layer-2"></div>
             <div class="cake-layer layer-3"></div>
             <div class="icing icing-1"></div>
             <div class="icing icing-2"></div>
-            <div class="candle"></div>
-            <div class="flame"></div>
-            <div class="decoration dot dot-1"></div>
-            <div class="decoration dot dot-2"></div>
-            <div class="decoration dot dot-3"></div>
-            <div class="decoration dot dot-4"></div>
+            
+            <div class="number-candles">
+                <div class="candle-number">1</div>
+                <div class="candle-number">9</div>
+            </div>
+            
+            <div class="flame-group">
+                <div class="flame"></div>
+                <div class="flame"></div>
+            </div>
+            
+            <div class="sprinkles" id="sprinklesContainer"></div>
         </div>
         
         <div class="birthday-header">
             <h1 class="birthday-title">
-                <span class="cat-ears">猫猫葉子</span><br>
+                猫猫葉子<br>
                 19岁生日快乐！<span class="heart">♥</span>
             </h1>
-            <p class="birthday-subtitle">🎂 专属你的猫猫主题生日祝福 🎂</p>
+            <p class="birthday-subtitle">🎂 专属你的豪华猫猫主题生日蛋糕 🎂</p>
         </div>
         
-        <div class="birthday-message">
+        <div class="birthday-content">
             <p>亲爱的<strong>猫猫葉子</strong>：</p>
             
             <p>恭喜你迎来了美好的19岁！🎉 愿你的新一岁像最幸福的小猫一样，充满阳光、温暖和数不尽的快乐时光喵～</p>
             
             <p>愿你每一天都拥有：</p>
             <ul class="cat-list">
-                <li>吃不完的小鱼干和猫零食</li>
-                <li>晒不完的温暖太阳和柔软垫子</li>
-                <li>实现不完的奇妙小梦想</li>
-                <li>探索不完的趣味新事物</li>
-                <li>最重要的是，永远保持现在这份独一无二的可爱与美好！</li>
+                <li>吃不完的小鱼干和顶级猫零食</li>
+                <li>晒不完的温暖阳光和柔软垫子</li>
+                <li>实现不完的奇妙梦想和小心愿</li>
+                <li>探索不完的趣味新世界和冒险</li>
+                <li>最重要的是，永远保持这份独一无二的可爱与美好！</li>
             </ul>
             
-            <p>希望这些漂浮的猫爪印和闪烁的生日蜡烛，能为你带来一整天的好心情～</p>
+            <p>这个特别定制的19岁生日蛋糕，每一层都代表着对你最真挚的祝福～</p>
             
-            <p>无论未来走到哪里，都愿温暖与快乐常伴你左右。<span class="heart">♥</span></p>
+            <p>希望这些漂浮的猫爪印、闪烁的生日蜡烛和甜甜的装饰，能为你带来一整年的好心情！</p>
+            
+            <p>无论未来走到哪里，都愿温暖、快乐与好运常伴你左右。<span class="heart">♥</span></p>
             
             <div class="signature">
                 <p>永远支持你的好朋友</p>
                 <p class="signature-name">成霜·喵喵 <span class="heart">♥</span></p>
-                <p style="color: #888; font-size: 0.9rem; margin-top: 5px;">19岁生日特别制作</p>
+                <p style="color: #888; font-size: 0.9rem; margin-top: 5px;">19岁生日特别定制</p>
             </div>
         </div>
     </div>
 
     <script>
-        // 创建猫爪漂浮特效
-        function createFloatingPaws() {
-            const pawCount = 12;
-            const container = document.body;
-            
-            for (let i = 0; i < pawCount; i++) {
+        // 🐾 创建漂浮猫爪
+        function createPaws() {
+            for (let i = 0; i < 8; i++) {
                 setTimeout(() => {
                     const paw = document.createElement('div');
                     paw.className = 'floating-paw';
                     
-                    const size = 20 + Math.random() * 40;
+                    const size = 25 + Math.random() * 25;
                     paw.style.width = `${size}px`;
                     paw.style.height = `${size}px`;
-                    
                     paw.style.left = `${Math.random() * 100}vw`;
-                    paw.style.top = `${100 + Math.random() * 20}vh`;
                     
-                    const opacity = 0.3 + Math.random() * 0.4;
-                    paw.style.background = `rgba(255, 182, 193, ${opacity})`;
+                    const duration = 8 + Math.random() * 10;
+                    paw.style.animation = `float ${duration}s linear forwards`;
                     
-                    const duration = 8 + Math.random() * 12;
-                    const delay = Math.random() * 5;
-                    paw.style.animation = `float ${duration}s linear ${delay}s forwards`;
+                    document.body.appendChild(paw);
                     
-                    container.appendChild(paw);
-                    
-                    setTimeout(() => {
-                        if (paw.parentNode) {
-                            paw.parentNode.removeChild(paw);
-                        }
-                    }, (duration + delay) * 1000);
-                    
+                    setTimeout(() => paw.remove(), (duration + 1) * 1000);
                 }, i * 800);
             }
         }
         
-        // 初始化猫爪特效
-        createFloatingPaws();
-        setInterval(createFloatingPaws, 10000);
+        // 🎂 创建装饰糖粒
+        function createSprinkles() {
+            const container = document.getElementById('sprinklesContainer');
+            const colors = ['#ff4d94', '#ffcc00', '#4cd964', '#3498db', '#9b59b6'];
+            
+            for (let i = 0; i < 12; i++) {
+                const sprinkle = document.createElement('div');
+                sprinkle.className = 'sprinkle';
+                sprinkle.style.background = colors[i % colors.length];
+                sprinkle.style.left = `${10 + Math.random() * 80}%`;
+                sprinkle.style.top = `${20 + Math.random() * 70}%`;
+                sprinkle.style.animationDelay = `${i * 0.3}s`;
+                container.appendChild(sprinkle);
+            }
+        }
         
-        // 密码验证
-        const unlockBtn = document.getElementById('unlockBtn');
-        const passwordInput = document.getElementById('passwordInput');
-        const errorMsg = document.getElementById('errorMsg');
-        const passwordScreen = document.getElementById('passwordScreen');
-        const birthdayScreen = document.getElementById('birthdayScreen');
+        // 🔑 修复密码验证
+        const CORRECT_PASSWORD = '0122'; // 真密码
         
-        // 点击解锁按钮
-        unlockBtn.addEventListener('click', checkPassword);
+        document.getElementById('unlockBtn').addEventListener('click', function() {
+            const input = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            if (input === CORRECT_PASSWORD) {
+                // 密码正确
+                document.getElementById('passwordScreen').style.display = 'none';
+                document.getElementById('birthdayScreen').style.display = 'block';
+                enhanceCelebration();
+            } else {
+                // 密码错误
+                errorMsg.style.display = 'inline-block';
+                document.getElementById('passwordInput').value = '';
+                
+                // 抖动效果
+                const screen = document.getElementById('passwordScreen');
+                screen.style.transform = 'translateX(-5px)';
+                setTimeout(() => screen.style.transform = 'translateX(5px)', 100);
+                setTimeout(() => screen.style.transform = 'translateX(0)', 200);
+            }
+        });
         
-        // 按回车键
-        passwordInput.addEventListener('keypress', function(e) {
+        // 回车键支持
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                checkPassword();
+                document.getElementById('unlockBtn').click();
             }
         });
         
         // 输入时隐藏错误信息
-        passwordInput.addEventListener('input', function() {
-            errorMsg.style.display = 'none';
+        document.getElementById('passwordInput').addEventListener('input', function() {
+            document.getElementById('errorMsg').style.display = 'none';
         });
         
-        function checkPassword() {
-            const userInput = passwordInput.value;
-            
-            // 正确的密码仍然是 0122
-            if (userInput === '0122') {
-                // 密码正确
-                passwordScreen.style.display = 'none';
-                birthdayScreen.style.display = 'block';
-                
-                // 增强庆祝效果
-                celebrateBirthday();
-            } else {
-                // 密码错误
-                errorMsg.style.display = 'block';
-                passwordInput.value = '';
-                
-                // 抖动效果
-                passwordScreen.style.animation = 'shake 0.5s';
-                setTimeout(() => {
-                    passwordScreen.style.animation = '';
+        // 🎉 增强庆祝效果
+        function enhanceCelebration() {
+            // 火焰颜色变化
+            const flames = document.querySelectorAll('.flame');
+            flames.forEach(flame => {
+                setInterval(() => {
+                    flame.style.background = `linear-gradient(to bottom, 
+                        hsl(${Math.random() * 60}, 100%, 60%),
+                        hsl(${Math.random() * 60 + 30}, 100%, 50%),
+                        hsl(${Math.random() * 60 + 60}, 100%, 40%))`;
                 }, 500);
-            }
-        }
-        
-        // 生日庆祝效果
-        function celebrateBirthday() {
+            });
+            
             // 增加猫爪密度
-            setInterval(createFloatingPaws, 3000);
-            
-            // 增强蛋糕动画
-            const flame = document.querySelector('.flame');
-            const dots = document.querySelectorAll('.dot');
-            const glow = document.querySelector('.cake-glow');
-            
-            // 火焰颜色循环
-            let flameHue = 0;
-            setInterval(() => {
-                flameHue = (flameHue + 10) % 360;
-                flame.style.background = `linear-gradient(to bottom, 
-                    hsl(${flameHue}, 100%, 60%), 
-                    hsl(${(flameHue + 20) % 360}, 100%, 50%),
-                    hsl(${(flameHue + 40) % 360}, 100%, 40%))`;
-            }, 500);
-            
-            // 装饰点跳动
-            dots.forEach((dot, index) => {
-                setInterval(() => {
-                    dot.style.transform = `scale(${1 + Math.random() * 0.3})`;
-                    dot.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
-                }, 1000 + index * 300);
-            });
-            
-            // 光晕脉冲
-            setInterval(() => {
-                glow.style.opacity = 0.4 + Math.random() * 0.4;
-            }, 800);
-            
-            // 蛋糕层轻微动画
-            const layers = document.querySelectorAll('.cake-layer');
-            layers.forEach((layer, index) => {
-                setInterval(() => {
-                    layer.style.transform = `translateX(-50%) translateY(${Math.random() * 3}px)`;
-                }, 1500 + index * 200);
-            });
+            setInterval(createPaws, 3000);
         }
         
-        // 页面加载时自动聚焦输入框
-        window.onload = function() {
-            passwordInput.focus();
+        // 📱 初始化
+        window.addEventListener('DOMContentLoaded', function() {
+            createPaws();
+            createSprinkles();
+            setInterval(createPaws, 8000);
             
-            // 在电脑端添加更多初始猫爪
-            if (window.innerWidth > 768) {
-                setTimeout(() => {
-                    createFloatingPaws();
-                    createFloatingPaws();
-                }, 1000);
-            }
-        };
+            // 自动聚焦输入框
+            document.getElementById('passwordInput').focus();
+        });
     </script>
 </body>
 </html>
