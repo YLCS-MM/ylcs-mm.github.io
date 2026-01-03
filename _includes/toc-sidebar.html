@@ -63,22 +63,33 @@
   flex-direction: column;
   border-left: 3px solid #ffb6c1;
   box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  /* 修复1：确保初始状态完全隐藏 */
+  visibility: hidden;
+  opacity: 0;
 }
 
 /* 激活状态 */
 .neko-toc-sidebar.active {
   right: 0;
+  /* 修复2：激活时才显示 */
+  visibility: visible;
+  opacity: 1;
 }
 
-/* ==================== 第三步：修复Via浏览器电脑模式问题 ==================== */
-/* 电脑模式特殊修复 */
+/* ==================== 第三步：修复电脑模式下的显示问题 ==================== */
+/* 电脑模式特殊修复 - 修复bug：避免一直打开 */
 @media (min-width: 769px) {
   .neko-toc-sidebar {
     right: -400px;
+    /* 修复3：电脑模式下也要确保初始隐藏 */
+    visibility: hidden;
+    opacity: 0;
   }
   
   .neko-toc-sidebar.active {
     right: 0;
+    visibility: visible;
+    opacity: 1;
   }
   
   /* 强制关闭按钮在电脑模式下可见可点击 */
@@ -90,6 +101,16 @@
     pointer-events: auto !important;
     cursor: pointer !important;
     z-index: 10003 !important;
+  }
+  
+  /* 修复4：电脑模式下遮罩层不需要 */
+  .neko-toc-overlay {
+    display: none !important;
+  }
+  
+  /* 修复5：电脑模式下侧边栏打开时，汉堡菜单隐藏 */
+  .neko-toc-sidebar.active ~ .neko-toc-toggle {
+    display: none;
   }
 }
 
@@ -298,39 +319,52 @@
         console.log('📖 打开目录侧边栏');
         if (!sidebar || !overlay) return;
         
+        // 修复bug：确保移除可能存在的错误状态
+        sidebar.classList.remove('force-hidden');
+        
         sidebar.classList.add('active');
-        overlay.classList.add('active');
+        
+        // 只在移动端显示遮罩层
+        if (window.innerWidth <= 768) {
+            overlay.classList.add('active');
+        }
         
         // 防止背景滚动
         document.body.style.overflow = 'hidden';
         document.documentElement.style.overflow = 'hidden';
         
-        // 强制设置样式（Via浏览器电脑模式修复）
-        sidebar.style.display = 'flex';
-        overlay.style.display = 'block';
+        console.log('✅ 侧边栏已打开');
     }
     
-    // 隐藏目录侧边栏 - 重点修复Via浏览器问题
+    // 隐藏目录侧边栏 - 重点修复电脑端无法关闭的bug
     function hideNekoToc() {
         console.log('📕 关闭目录侧边栏');
         if (!sidebar || !overlay) return;
         
-        // 方法1：使用classList
+        // 修复bug：多重方法确保侧边栏关闭
+        // 方法1：移除active类
         sidebar.classList.remove('active');
+        
+        // 方法2：添加强制隐藏类（针对电脑端bug）
+        sidebar.classList.add('force-hidden');
+        
+        // 方法3：直接设置样式（终极备用方案）
+        sidebar.style.right = window.innerWidth > 768 ? '-400px' : '-100%';
+        sidebar.style.visibility = 'hidden';
+        sidebar.style.opacity = '0';
+        
+        // 隐藏遮罩层
         overlay.classList.remove('active');
-        
-        // 方法2：强制设置样式（Via浏览器备用方案）
-        sidebar.style.right = '-100%';
         overlay.style.display = 'none';
-        
-        // 方法3：设置display属性（最终备用）
-        setTimeout(function() {
-            sidebar.style.display = 'none';
-        }, 300);
         
         // 恢复背景滚动
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
+        
+        // 确保汉堡菜单可见
+        if (toggle) {
+            toggle.style.display = 'flex';
+        }
         
         console.log('✅ 侧边栏已关闭');
     }
@@ -354,75 +388,86 @@
         
         // 汉堡菜单按钮事件
         if (toggle) {
-            // 方法1：addEventListener
+            // 清除之前的onclick，防止重复绑定
+            toggle.onclick = null;
+            
+            // 使用addEventListener
             toggle.addEventListener('click', function(e) {
                 console.log('🖱️ 汉堡按钮被点击');
                 e.preventDefault();
                 e.stopPropagation();
                 toggleNekoToc();
                 return false;
-            });
-            
-            // 方法2：onclick备用（Via浏览器兼容）
-            toggle.onclick = function(e) {
-                if (e) e.preventDefault();
-                toggleNekoToc();
-                return false;
-            };
+            }, { passive: false });
         }
         
-        // 关闭按钮事件 - 多重绑定确保Via浏览器可用
+        // 关闭按钮事件 - 多重绑定确保电脑端可用
         if (closeBtn) {
-            // 方法1：标准事件监听
+            // 清除之前的onclick
+            closeBtn.onclick = null;
+            
+            // 标准事件监听
             closeBtn.addEventListener('click', function(e) {
                 console.log('❌ 关闭按钮被点击');
                 e.preventDefault();
                 e.stopPropagation();
-                e.stopImmediatePropagation();
                 hideNekoToc();
                 return false;
-            });
+            }, { passive: false });
             
-            // 方法2：onclick备用
-            closeBtn.onclick = function(e) {
-                if (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                hideNekoToc();
-                return false;
-            };
-            
-            // 方法3：触摸事件（移动端）
+            // 触摸事件（移动端）
             closeBtn.addEventListener('touchend', function(e) {
                 e.preventDefault();
                 hideNekoToc();
                 return false;
-            });
+            }, { passive: false });
         }
         
         // 遮罩层点击事件
         if (overlay) {
+            overlay.onclick = null;
             overlay.addEventListener('click', function(e) {
                 e.preventDefault();
                 hideNekoToc();
                 return false;
-            });
-            
-            overlay.onclick = function(e) {
-                if (e) e.preventDefault();
-                hideNekoToc();
-                return false;
-            };
+            }, { passive: false });
         }
         
         console.log('✅ 事件绑定完成');
+    }
+    
+    // ==================== 检测屏幕宽度并应用初始状态 ====================
+    
+    function applyInitialState() {
+        console.log('📱 检测屏幕宽度:', window.innerWidth, 'px');
+        
+        // 确保初始状态是隐藏的
+        hideNekoToc();
+        
+        // 如果是电脑端，应用特殊处理
+        if (window.innerWidth > 768) {
+            console.log('💻 电脑端模式，应用特殊处理');
+            
+            // 确保侧边栏初始隐藏
+            sidebar.style.right = '-400px';
+            sidebar.style.visibility = 'hidden';
+            sidebar.style.opacity = '0';
+            
+            // 确保遮罩层隐藏
+            overlay.style.display = 'none';
+            
+            // 确保汉堡菜单可见
+            toggle.style.display = 'flex';
+        }
     }
     
     // ==================== 初始化函数 ====================
     
     function initNekoToc() {
         console.log('🚀 初始化目录侧边栏功能');
+        
+        // 应用初始状态
+        applyInitialState();
         
         // 绑定事件
         bindEvents();
@@ -446,7 +491,7 @@
                         });
                     }
                 }
-            });
+            }, { passive: false });
         });
         
         // ESC键关闭
@@ -456,12 +501,13 @@
                 hideNekoToc();
                 if (e.preventDefault) e.preventDefault();
             }
-        });
+        }, { passive: false });
         
-        // 确保初始状态是隐藏的
-        setTimeout(function() {
-            hideNekoToc();
-        }, 100);
+        // 监听窗口大小变化，重新应用状态
+        window.addEventListener('resize', function() {
+            console.log('🔄 窗口大小变化，重新应用状态');
+            applyInitialState();
+        }, { passive: true });
         
         console.log('🎉 目录侧边栏初始化完成');
     }
@@ -498,7 +544,7 @@
                     e.target !== toggle) {
                     hideNekoToc();
                 }
-            });
+            }, { passive: false });
         }
     }
     
