@@ -911,14 +911,14 @@
             <div class="emoji-container">
                 <!-- 左侧表情包 -->
                 <!-- 请替换为您自己的图片链接 -->
-                <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f63a.png" 
+                <img src="/images/left-cat.png" 
                      alt="成霜·喵喵" 
                      class="left-emoji"
                      id="leftEmoji">
                 
                 <!-- 右侧表情包 -->
                 <!-- 请替换为您自己的图片链接 -->
-                <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f638.png" 
+                <img src="/images/right-image.png" 
                      alt="猫猫葉子" 
                      class="right-emoji"
                      id="rightEmoji">
@@ -1196,16 +1196,16 @@
         // 🎭 加载自定义表情包
         function loadCustomEmojis() {
             // 主人可以在这里修改为你的表情包URL
-            const leftEmoji = document.getElementById('https://ylcs-mm.github.io/images/left-cat.png');
-            const rightEmoji = document.getElementById('https://ylcs-mm.github.io/images/right-image.png');
+            const leftEmoji = document.getElementById('leftEmoji');
+            const rightEmoji = document.getElementById('rightEmoji');
             
             // 示例：如果主人上传了自己的图片，可以取消注释并修改下面的URL
             // 左侧表情包（成霜·喵喵）
-            // leftEmoji.src = "https://ylcs-mm.github.io/images/left-cat.png";
+            // leftEmoji.src = "/images/your-left-image.png";
             // leftEmoji.alt = "成霜·喵喵";
             
             // 右侧表情包（猫猫葉子）
-            // rightEmoji.src = "https://ylcs-mm.github.io/images/right-image.png";
+            // rightEmoji.src = "/images/your-right-image.png";
             // rightEmoji.alt = "猫猫葉子";
         }
         
