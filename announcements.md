@@ -12,12 +12,18 @@ description: "甘城猫猫博客的更新公告和历史记录"
   </header>
 
   {% if site.data.announcement-history %}
-    {% assign sorted_announcements = site.data.announcement-history | sort: "date" | reverse %}
+    {% assign today = site.time | date: "%Y-%m-%d" %}
+    {% assign past_announcements = site.data.announcement-history | where_exp: "item", "item.date <= today" %}
+    {% assign sorted_announcements = past_announcements | sort: "date" | reverse %}
     
     <div class="announcements-stats">
       <div class="stat-item">
-        <span class="stat-number">{{ sorted_announcements.size }}</span>
+        <span class="stat-number">{{ site.data.announcement-history.size }}</span>
         <span class="stat-label">总公告数</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">{{ sorted_announcements.size }}</span>
+        <span class="stat-label">已发布公告</span>
       </div>
       <div class="stat-item">
         <span class="stat-number">{{ sorted_announcements.first.date }}</span>
@@ -25,37 +31,58 @@ description: "甘城猫猫博客的更新公告和历史记录"
       </div>
     </div>
 
-    <div class="announcement-list">
-      {% for announcement in sorted_announcements %}
-        <article class="announcement-item {% if forloop.first %}latest-announcement{% endif %}">
-          <header class="announcement-header">
-            <h2 class="announcement-title">
-              <span class="announcement-icon">
-                {% if forloop.first %}🎉{% else %}📌{% endif %}
-              </span>
-              {{ announcement.title }}
-            </h2>
-            <div class="announcement-meta">
-              <span class="announcement-date">📅 {{ announcement.date }}</span>
-              {% if forloop.first %}
-              <span class="latest-badge">最新</span>
-              {% endif %}
+    {% if sorted_announcements.size > 0 %}
+      <div class="announcement-list">
+        {% for announcement in sorted_announcements %}
+          <article class="announcement-item {% if forloop.first %}latest-announcement{% endif %}">
+            <header class="announcement-header">
+              <h2 class="announcement-title">
+                <span class="announcement-icon">
+                  {% if forloop.first %}🎉{% else %}📌{% endif %}
+                </span>
+                {{ announcement.title }}
+              </h2>
+              <div class="announcement-meta">
+                <span class="announcement-date">📅 {{ announcement.date }}</span>
+                {% if announcement.date == today %}
+                <span class="today-badge">今天</span>
+                {% endif %}
+                {% if forloop.first %}
+                <span class="latest-badge">最新</span>
+                {% endif %}
+              </div>
+            </header>
+
+            <div class="announcement-content">
+              {{ announcement.content | markdownify }}
             </div>
-          </header>
 
-          <div class="announcement-content">
-            {{ announcement.content | markdownify }}
-          </div>
-
-          <footer class="announcement-footer">
-            <button class="read-more-btn" onclick="toggleAnnouncement({{ forloop.index0 }})">
-              <span class="btn-text">📖 展开详情</span>
-              <span class="btn-icon">▼</span>
-            </button>
-          </footer>
-        </article>
-      {% endfor %}
-    </div>
+            <footer class="announcement-footer">
+              <button class="read-more-btn" onclick="toggleAnnouncement({{ forloop.index0 }})">
+                <span class="btn-text">📖 展开详情</span>
+                <span class="btn-icon">▼</span>
+              </button>
+            </footer>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="no-announcements">
+        <div class="empty-state">
+          <span class="empty-icon">📅</span>
+          <h3>当前没有已发布的公告喵～</h3>
+          <p>所有公告都在等待未来的日期发布，请耐心等待喵！</p>
+        </div>
+      </div>
+    {% endif %}
+    
+    {% assign future_announcements = site.data.announcement-history | where_exp: "item", "item.date > today" %}
+    {% if future_announcements.size > 0 %}
+      <div class="future-announcements-info">
+        <p>🎯 还有 <strong>{{ future_announcements.size }}</strong> 个公告将在未来发布喵～</p>
+      </div>
+    {% endif %}
+    
   {% else %}
     <div class="no-announcements">
       <div class="empty-state">
@@ -284,6 +311,31 @@ description: "甘城猫猫博客的更新公告和历史记录"
     align-items: flex-start;
     gap: 5px;
   }
+}
+
+/* 🆕 新增样式（不影响原有样式） */
+.today-badge {
+  background: #4cd964;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.future-announcements-info {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #e6f7ff, #f0f9ff);
+  border: 1px solid #87ceeb;
+  border-radius: 10px;
+  text-align: center;
+  color: #1e90ff;
+  font-size: 0.9em;
+}
+
+.future-announcements-info strong {
+  color: #ff69b4;
 }
 </style>
 
