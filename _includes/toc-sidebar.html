@@ -11,10 +11,8 @@
         文章目录
       {% endif %}
     </h3>
-    <!-- 关闭按钮 - 修复Via浏览器电脑模式问题 -->
-    <button class="neko-toc-close" id="nekoTocClose" 
-            onclick="window.hideNekoToc ? window.hideNekoToc() : (document.getElementById('nekoTocSidebar').classList.remove('active'), document.getElementById('nekoTocOverlay').classList.remove('active'))"
-            style="background:#ff69b4;color:white;border:none;width:40px;height:40px;border-radius:50%;font-size:24px;cursor:pointer;z-index:10003;">
+    <!-- 关闭按钮 -->
+    <button class="neko-toc-close" id="nekoTocClose">
       ✕
     </button>
   </div>
@@ -25,20 +23,15 @@
 </aside>
 
 <!-- 汉堡菜单按钮 -->
-<button class="neko-toc-toggle" id="nekoTocToggle" 
-        onclick="window.toggleNekoToc ? window.toggleNekoToc() : (document.getElementById('nekoTocSidebar').classList.toggle('active'), document.getElementById('nekoTocOverlay').classList.toggle('active'))"
-        style="position:fixed;top:20px;right:20px;width:50px;height:50px;background:#ff69b4;border-radius:50%;border:none;color:white;font-size:20px;z-index:10001;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+<button class="neko-toc-toggle" id="nekoTocToggle">
   📑
 </button>
 
 <!-- 遮罩层 -->
-<div class="neko-toc-overlay" id="nekoTocOverlay" 
-     onclick="window.hideNekoToc ? window.hideNekoToc() : (document.getElementById('nekoTocSidebar').classList.remove('active'), this.classList.remove('active'))"
-     style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:none;"></div>
+<div class="neko-toc-overlay" id="nekoTocOverlay"></div>
 
 <style>
-/* ==================== 第一步：CSS重置 ==================== */
-/* 确保所有元素使用相同的盒模型 */
+/* ==================== 重置和基础样式 ==================== */
 .neko-toc-sidebar * {
   margin: 0;
   padding: 0;
@@ -46,15 +39,16 @@
   -webkit-box-sizing: border-box;
 }
 
-/* ==================== 第二步：侧边栏基础样式 ==================== */
+/* ==================== 侧边栏基础样式 - 确保始终隐藏 ==================== */
 .neko-toc-sidebar {
   position: fixed;
   top: 0;
+  /* 修复关键：始终在屏幕外，不受媒体查询影响 */
   right: -100%;
   width: 100%;
   max-width: 400px;
   height: 100vh;
-  height: 100dvh; /* 动态视口高度，更好的移动端支持 */
+  height: 100dvh;
   background: linear-gradient(135deg, #fff0f5, #e6f7ff);
   background: -webkit-linear-gradient(135deg, #fff0f5, #e6f7ff);
   z-index: 10000;
@@ -63,58 +57,43 @@
   flex-direction: column;
   border-left: 3px solid #ffb6c1;
   box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-  /* 修复1：确保初始状态完全隐藏 */
+  /* 修复关键：确保任何情况下都不可见 */
   visibility: hidden;
   opacity: 0;
+  pointer-events: none;
 }
 
-/* 激活状态 */
+/* 激活状态 - 明确且强制 */
 .neko-toc-sidebar.active {
+  /* 激活时才显示在屏幕内 */
   right: 0;
-  /* 修复2：激活时才显示 */
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
 }
 
-/* ==================== 第三步：修复电脑模式下的显示问题 ==================== */
-/* 电脑模式特殊修复 - 修复bug：避免一直打开 */
+/* ==================== 移除有问题的媒体查询 ==================== */
+/* 注释掉或删除可能导致自动显示的媒体查询 */
+/* 原代码中可能导致问题的部分：
 @media (min-width: 769px) {
   .neko-toc-sidebar {
-    right: -400px;
-    /* 修复3：电脑模式下也要确保初始隐藏 */
-    visibility: hidden;
-    opacity: 0;
+    right: -400px;  ← 这个可能被某些浏览器错误解析
+  }
+}
+*/
+
+/* 修复：只有一个统一的媒体查询，用于调整宽度 */
+@media (min-width: 769px) {
+  .neko-toc-sidebar {
+    max-width: 400px;
   }
   
   .neko-toc-sidebar.active {
     right: 0;
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  /* 强制关闭按钮在电脑模式下可见可点击 */
-  .neko-toc-close {
-    background: #ff69b4 !important;
-    color: white !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    cursor: pointer !important;
-    z-index: 10003 !important;
-  }
-  
-  /* 修复4：电脑模式下遮罩层不需要 */
-  .neko-toc-overlay {
-    display: none !important;
-  }
-  
-  /* 修复5：电脑模式下侧边栏打开时，汉堡菜单隐藏 */
-  .neko-toc-sidebar.active ~ .neko-toc-toggle {
-    display: none;
   }
 }
 
-/* ==================== 第四步：头部样式 ==================== */
+/* ==================== 头部样式 ==================== */
 .neko-toc-header {
   display: flex;
   align-items: center;
@@ -139,7 +118,7 @@
   margin: 0;
 }
 
-/* ==================== 第五步：关闭按钮强化样式 ==================== */
+/* ==================== 关闭按钮 ==================== */
 .neko-toc-close {
   background: #ff69b4;
   color: white;
@@ -162,15 +141,15 @@
   transform: scale(1.1);
 }
 
-/* ==================== 第六步：内容区域 ==================== */
+/* ==================== 内容区域 ==================== */
 .neko-toc-content {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
-  -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
+  -webkit-overflow-scrolling: touch;
 }
 
-/* ==================== 第七步：目录列表样式 ==================== */
+/* ==================== 目录列表样式 ==================== */
 .neko-toc-list {
   list-style: none;
 }
@@ -204,7 +183,7 @@
   font-weight: bold;
 }
 
-/* ==================== 第八步：汉堡菜单按钮 ==================== */
+/* ==================== 汉堡菜单按钮 ==================== */
 .neko-toc-toggle {
   position: fixed;
   top: 20px;
@@ -230,7 +209,7 @@
   box-shadow: 0 6px 16px rgba(255,105,180,0.4);
 }
 
-/* ==================== 第九步：遮罩层 ==================== */
+/* ==================== 遮罩层 ==================== */
 .neko-toc-overlay {
   position: fixed;
   top: 0;
@@ -248,15 +227,10 @@
   display: block;
 }
 
-/* ==================== 第十步：响应式设计 ==================== */
+/* ==================== 响应式设计 ==================== */
 @media (max-width: 768px) {
   .neko-toc-sidebar {
     max-width: 100%;
-    right: -100%;
-  }
-  
-  .neko-toc-sidebar.active {
-    right: 0;
   }
   
   .neko-toc-toggle {
@@ -267,7 +241,6 @@
   }
 }
 
-/* 小屏幕优化 */
 @media (max-width: 480px) {
   .neko-toc-header {
     padding: 15px;
@@ -286,7 +259,7 @@
 </style>
 
 <script>
-// ==================== JavaScript修复代码 ====================
+// ==================== 修复后的JavaScript ====================
 (function() {
     'use strict';
     
@@ -312,21 +285,52 @@
     
     console.log('✅ 找到所有必需的元素');
     
+    // ==================== 修复关键：强制初始状态 ====================
+    function forceInitialHiddenState() {
+        console.log('🔧 强制设置初始隐藏状态');
+        
+        // 1. 确保移除任何可能存在的active类
+        sidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        
+        // 2. 强制设置内联样式，覆盖任何CSS
+        sidebar.style.right = '-100%';
+        sidebar.style.visibility = 'hidden';
+        sidebar.style.opacity = '0';
+        sidebar.style.pointerEvents = 'none';
+        
+        // 3. 确保遮罩层隐藏
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
+        
+        // 4. 确保页面可以滚动
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        
+        console.log('✅ 初始隐藏状态已强制设置');
+    }
+    
     // ==================== 核心功能函数 ====================
     
     // 显示目录侧边栏
     function showNekoToc() {
         console.log('📖 打开目录侧边栏');
-        if (!sidebar || !overlay) return;
+        if (!sidebar) return;
         
-        // 修复bug：确保移除可能存在的错误状态
-        sidebar.classList.remove('force-hidden');
-        
+        // 添加active类
         sidebar.classList.add('active');
         
+        // 更新样式
+        sidebar.style.right = '0';
+        sidebar.style.visibility = 'visible';
+        sidebar.style.opacity = '1';
+        sidebar.style.pointerEvents = 'auto';
+        
         // 只在移动端显示遮罩层
-        if (window.innerWidth <= 768) {
+        if (overlay && window.innerWidth <= 768) {
             overlay.classList.add('active');
+            overlay.style.display = 'block';
         }
         
         // 防止背景滚动
@@ -336,35 +340,28 @@
         console.log('✅ 侧边栏已打开');
     }
     
-    // 隐藏目录侧边栏 - 重点修复电脑端无法关闭的bug
+    // 隐藏目录侧边栏
     function hideNekoToc() {
         console.log('📕 关闭目录侧边栏');
-        if (!sidebar || !overlay) return;
         
-        // 修复bug：多重方法确保侧边栏关闭
-        // 方法1：移除active类
+        // 移除active类
         sidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
         
-        // 方法2：添加强制隐藏类（针对电脑端bug）
-        sidebar.classList.add('force-hidden');
-        
-        // 方法3：直接设置样式（终极备用方案）
-        sidebar.style.right = window.innerWidth > 768 ? '-400px' : '-100%';
+        // 强制重置样式
+        sidebar.style.right = '-100%';
         sidebar.style.visibility = 'hidden';
         sidebar.style.opacity = '0';
+        sidebar.style.pointerEvents = 'none';
         
         // 隐藏遮罩层
-        overlay.classList.remove('active');
-        overlay.style.display = 'none';
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
         
         // 恢复背景滚动
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
-        
-        // 确保汉堡菜单可见
-        if (toggle) {
-            toggle.style.display = 'flex';
-        }
         
         console.log('✅ 侧边栏已关闭');
     }
@@ -388,91 +385,31 @@
         
         // 汉堡菜单按钮事件
         if (toggle) {
-            // 清除之前的onclick，防止重复绑定
-            toggle.onclick = null;
-            
-            // 使用addEventListener
             toggle.addEventListener('click', function(e) {
-                console.log('🖱️ 汉堡按钮被点击');
                 e.preventDefault();
                 e.stopPropagation();
                 toggleNekoToc();
-                return false;
-            }, { passive: false });
+            });
         }
         
-        // 关闭按钮事件 - 多重绑定确保电脑端可用
+        // 关闭按钮事件
         if (closeBtn) {
-            // 清除之前的onclick
-            closeBtn.onclick = null;
-            
-            // 标准事件监听
             closeBtn.addEventListener('click', function(e) {
-                console.log('❌ 关闭按钮被点击');
                 e.preventDefault();
                 e.stopPropagation();
                 hideNekoToc();
-                return false;
-            }, { passive: false });
-            
-            // 触摸事件（移动端）
-            closeBtn.addEventListener('touchend', function(e) {
-                e.preventDefault();
-                hideNekoToc();
-                return false;
-            }, { passive: false });
+            });
         }
         
         // 遮罩层点击事件
         if (overlay) {
-            overlay.onclick = null;
             overlay.addEventListener('click', function(e) {
                 e.preventDefault();
                 hideNekoToc();
-                return false;
-            }, { passive: false });
+            });
         }
         
-        console.log('✅ 事件绑定完成');
-    }
-    
-    // ==================== 检测屏幕宽度并应用初始状态 ====================
-    
-    function applyInitialState() {
-        console.log('📱 检测屏幕宽度:', window.innerWidth, 'px');
-        
-        // 确保初始状态是隐藏的
-        hideNekoToc();
-        
-        // 如果是电脑端，应用特殊处理
-        if (window.innerWidth > 768) {
-            console.log('💻 电脑端模式，应用特殊处理');
-            
-            // 确保侧边栏初始隐藏
-            sidebar.style.right = '-400px';
-            sidebar.style.visibility = 'hidden';
-            sidebar.style.opacity = '0';
-            
-            // 确保遮罩层隐藏
-            overlay.style.display = 'none';
-            
-            // 确保汉堡菜单可见
-            toggle.style.display = 'flex';
-        }
-    }
-    
-    // ==================== 初始化函数 ====================
-    
-    function initNekoToc() {
-        console.log('🚀 初始化目录侧边栏功能');
-        
-        // 应用初始状态
-        applyInitialState();
-        
-        // 绑定事件
-        bindEvents();
-        
-        // 为目录链接添加点击事件
+        // 目录链接点击事件
         var tocLinks = document.querySelectorAll('.neko-toc-link');
         console.log('找到目录链接:', tocLinks.length);
         
@@ -491,76 +428,44 @@
                         });
                     }
                 }
-            }, { passive: false });
+            });
         });
         
         // ESC键关闭
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' || e.keyCode === 27) {
+            if (e.key === 'Escape') {
                 console.log('ESC键按下，关闭目录');
                 hideNekoToc();
-                if (e.preventDefault) e.preventDefault();
             }
-        }, { passive: false });
+        });
         
-        // 监听窗口大小变化，重新应用状态
-        window.addEventListener('resize', function() {
-            console.log('🔄 窗口大小变化，重新应用状态');
-            applyInitialState();
-        }, { passive: true });
-        
-        console.log('🎉 目录侧边栏初始化完成');
+        console.log('✅ 事件绑定完成');
     }
     
-    // ==================== 检测Via浏览器并应用特殊修复 ====================
+    // ==================== 初始化函数 ====================
     
-    function detectAndFixViaBrowser() {
-        var userAgent = navigator.userAgent.toLowerCase();
-        var isViaBrowser = userAgent.indexOf('via') > -1 || userAgent.indexOf('viabrowser') > -1;
+    function initNekoToc() {
+        console.log('🚀 初始化目录侧边栏功能');
         
-        if (isViaBrowser) {
-            console.log('🔍 检测到Via浏览器，应用特殊修复');
-            
-            // Via浏览器特殊修复
-            if (closeBtn) {
-                // 强制设置关闭按钮样式
-                closeBtn.style.cssText = [
-                    'background: #ff69b4 !important',
-                    'color: white !important',
-                    'opacity: 1 !important',
-                    'visibility: visible !important',
-                    'pointer-events: auto !important',
-                    'cursor: pointer !important',
-                    'z-index: 10003 !important',
-                    'position: relative !important'
-                ].join(';');
-            }
-            
-            // 添加Via浏览器特定的事件处理
-            document.addEventListener('click', function(e) {
-                // 点击侧边栏外部时关闭
-                if (sidebar.classList.contains('active') && 
-                    !sidebar.contains(e.target) && 
-                    e.target !== toggle) {
-                    hideNekoToc();
-                }
-            }, { passive: false });
-        }
+        // 修复关键：在初始化时强制设置隐藏状态
+        forceInitialHiddenState();
+        
+        // 绑定事件
+        bindEvents();
+        
+        console.log('🎉 目录侧边栏初始化完成');
     }
     
     // ==================== 页面加载初始化 ====================
     
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
-            initNekoToc();
-            detectAndFixViaBrowser();
+            // 修复关键：延迟初始化，确保所有样式已加载
+            setTimeout(initNekoToc, 100);
         });
     } else {
         // DOM已经加载完成
-        setTimeout(function() {
-            initNekoToc();
-            detectAndFixViaBrowser();
-        }, 100);
+        setTimeout(initNekoToc, 100);
     }
     
     // 暴露函数到全局作用域
