@@ -1,18 +1,236 @@
-<!-- 不蒜子访问统计 -->
+<!-- 不蒜子访问统计 - 放置在页面最底部 -->
 {% if site.components.busuanzi.enabled == true and page.visit-stat != 'hidden' and page.layout != 'mindmap' %}
 <script async src="{{ assets_base_url }}/assets/vendor/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="mobile-hidden" style="margin-top:8px">
-  <span id="busuanzi_container_site_pv" style="display:none">
-    本站访问量<span id="busuanzi_value_site_pv"></span>次
-  </span>
-  <span id="busuanzi_container_site_uv" style="display:none">
-    / 本站访客数<span id="busuanzi_value_site_uv"></span>人
-  </span>
-  <span id="busuanzi_container_page_pv" style="display:none">
-    / 本页访问量<span id="busuanzi_value_page_pv"></span>次
+
+<div class="busuanzi-counter-container">
+  <div class="busuanzi-counter-content">
+    <span id="busuanzi_container_site_pv" class="busuanzi-stat">
+      <span class="busuanzi-icon">🐾</span>
+      <span class="busuanzi-label">本站访问量</span>
+      <span id="busuanzi_value_site_pv" class="busuanzi-value">0</span>
+      <span class="busuanzi-unit">次</span>
+    </span>
+    
+    <span class="busuanzi-separator">|</span>
+    
+    <span id="busuanzi_container_site_uv" class="busuanzi-stat">
+      <span class="busuanzi-icon">👤</span>
+      <span class="busuanzi-label">本站访客数</span>
+      <span id="busuanzi_value_site_uv" class="busuanzi-value">0</span>
+      <span class="busuanzi-unit">人</span>
+    </span>
+    
+    <span class="busuanzi-separator">|</span>
+    
+    <span id="busuanzi_container_page_pv" class="busuanzi-stat">
+      <span class="busuanzi-icon">📄</span>
+      <span class="busuanzi-label">本页访问量</span>
+      <span id="busuanzi_value_page_pv" class="busuanzi-value">0</span>
+      <span class="busuanzi-unit">次</span>
+    </span>
+    
     {% if site.components.busuanzi.start_date %}
-    / 统计始于{{ site.components.busuanzi.start_date }}
+    <span class="busuanzi-separator">|</span>
+    <span class="busuanzi-stat">
+      <span class="busuanzi-icon">📅</span>
+      <span class="busuanzi-label">统计始于</span>
+      <span class="busuanzi-date">{{ site.components.busuanzi.start_date }}</span>
+    </span>
     {% endif %}
-  </span>
+  </div>
 </div>
+
+<style>
+/* 访问统计容器样式 */
+.busuanzi-counter-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(255, 240, 245, 0.95), rgba(255, 250, 251, 0.95));
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 182, 193, 0.3);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 9998;
+  padding: 8px 0;
+  transition: all 0.3s ease;
+}
+
+/* 内容居中 */
+.busuanzi-counter-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* 统计项样式 */
+.busuanzi-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 182, 193, 0.2);
+  transition: all 0.3s ease;
+}
+
+.busuanzi-stat:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(255, 182, 193, 0.2);
+}
+
+/* 图标样式 */
+.busuanzi-icon {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* 标签样式 */
+.busuanzi-label {
+  color: #888;
+  white-space: nowrap;
+}
+
+/* 数值样式 */
+.busuanzi-value {
+  color: #ff6b9d;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* 单位样式 */
+.busuanzi-unit {
+  color: #87ceeb;
+  font-size: 0.75rem;
+}
+
+/* 日期样式 */
+.busuanzi-date {
+  color: #4cd964;
+  font-weight: 500;
+}
+
+/* 分隔符 */
+.busuanzi-separator {
+  color: #ddd;
+  opacity: 0.5;
+  padding: 0 2px;
+  user-select: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .busuanzi-counter-content {
+    font-size: 0.7rem;
+    padding: 0 10px;
+    gap: 5px;
+  }
+  
+  .busuanzi-stat {
+    padding: 2px 6px;
+  }
+  
+  .busuanzi-label {
+    display: none; /* 在手机上隐藏标签，只显示图标和数值 */
+  }
+  
+  .busuanzi-unit {
+    font-size: 0.7rem;
+  }
+  
+  .busuanzi-separator {
+    display: none; /* 在手机上隐藏分隔符 */
+  }
+  
+  /* 在手机上显示为两行 */
+  .busuanzi-counter-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .busuanzi-counter-container {
+    padding: 6px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .busuanzi-counter-content {
+    font-size: 0.65rem;
+  }
+  
+  .busuanzi-stat {
+    flex: 1;
+    justify-content: center;
+    min-width: 100px;
+  }
+  
+  .busuanzi-counter-container {
+    position: static; /* 在非常小的屏幕上改为静态定位 */
+  }
+}
+
+/* 打印时隐藏 */
+@media print {
+  .busuanzi-counter-container {
+    display: none;
+  }
+}
+</style>
+
+<script>
+// 添加数值变化动画
+document.addEventListener('DOMContentLoaded', function() {
+  // 检查不蒜子是否加载成功
+  setTimeout(function() {
+    const stats = [
+      { id: 'busuanzi_value_site_pv', target: 0 },
+      { id: 'busuanzi_value_site_uv', target: 0 },
+      { id: 'busuanzi_value_page_pv', target: 0 }
+    ];
+    
+    stats.forEach(stat => {
+      const element = document.getElementById(stat.id);
+      if (element) {
+        const currentValue = parseInt(element.textContent) || 0;
+        
+        // 如果值大于0，添加增长动画
+        if (currentValue > 0) {
+          element.style.transform = 'scale(1.1)';
+          element.style.color = '#ff1493';
+          element.style.transition = 'all 0.3s ease';
+          
+          setTimeout(() => {
+            element.style.transform = 'scale(1)';
+            element.style.color = '#ff6b9d';
+          }, 300);
+        }
+      }
+    });
+  }, 1000);
+});
+
+// 鼠标悬停时提升层级
+document.querySelectorAll('.busuanzi-stat').forEach(stat => {
+  stat.addEventListener('mouseenter', function() {
+    this.style.zIndex = '10000';
+  });
+  
+  stat.addEventListener('mouseleave', function() {
+    this.style.zIndex = '';
+  });
+});
+</script>
+
 {% endif %}
