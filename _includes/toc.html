@@ -1,195 +1,157 @@
-<!-- _includes/toc.html -->
-{% assign minHeader = include.h_min | default: 2 %}
-{% assign maxHeader = include.h_max | default: 4 %}
-
-{% comment %} 安全过滤：移除异常排版标签 {% endcomment %}
-{% assign clean_html = include.html | replace: '<pFig>', '' | replace: '</pFig>', '' | replace: '<quad>', '' | replace: '</quad>', '' | replace: '<pos_', '' | replace: '>', '' %}
-
-{% assign nodes = clean_html | split: '<h' %}
-{% assign firstHeader = true %}
-{% assign headerCount = 0 %}
-
-{% capture toc %}
-{% for node in nodes %}
-  {% if node == "" %}
-    {% continue %}
-  {% endif %}
-  
-  {% comment %} 安全提取标题级别 {% endcomment %}
-  {% assign headerLevel = node | strip | slice: 0, 1 %}
-  {% if headerLevel == "" or headerLevel contains "<" %}
-    {% continue %}
-  {% endif %}
-  
-  {% assign headerLevel = headerLevel | times: 1 %}
-  {% if headerLevel < minHeader or headerLevel > maxHeader %}
-    {% continue %}
-  {% endif %}
-  
-  {% comment %} 安全检查：确保是有效数字 {% endcomment %}
-  {% if headerLevel == 0 or headerLevel > 6 %}
-    {% continue %}
-  {% endif %}
-  
-  {% assign _workspace = node | split: '</h' %}
-  
-  {% comment %} 安全提取ID - 多重保护 {% endcomment %}
-  {% assign html_id = "" %}
-  {% assign id_search = _workspace[0] | split: 'id="' %}
-  {% if id_search.size > 1 %}
-    {% assign id_part = id_search[1] | split: '"' %}
-    {% assign html_id = id_part[0] | strip %}
-  {% endif %}
-  
-  {% comment %} 如果ID为空，从标题生成安全ID {% endcomment %}
-  {% if html_id == "" %}
-    {% assign header_text = _workspace[0] | split: '>' %}
-    {% if header_text.size > 1 %}
-      {% assign header_text = header_text | last | strip_html | strip %}
-      {% assign html_id = header_text | slugify %}
-    {% endif %}
-  {% endif %}
-  
-  {% comment %} 最终安全处理ID {% endcomment %}
-  {% if html_id == "" %}
-    {% assign html_id = "section-" | append: forloop.index %}
-  {% endif %}
-  
-  {% assign html_id = html_id | replace: '<', '' | replace: '>', '' | replace: '"', '' | replace: "'", '' | replace: '&', '' %}
-  
-  {% comment %} 提取标题文本 - 多重过滤 {% endcomment %}
-  {% assign header_content = "" %}
-  {% assign content_parts = _workspace[0] | split: '>' %}
-  {% if content_parts.size > 1 %}
-    {% assign header_content = content_parts | last %}
-    
-    {% comment %} 过滤异常标签和内容 {% endcomment %}
-    {% assign header_content = header_content | replace: '<pFig>', '' | replace: '</pFig>', '' %}
-    {% assign header_content = header_content | replace: '<quad>', '' | replace: '</quad>', '' %}
-    {% assign header_content = header_content | replace: '<pos_', '' %}
-    {% assign header_content = header_content | strip_html | strip %}
-    
-    {% comment %} 跳过空标题或异常内容 {% endcomment %}
-    {% if header_content == "" or header_content contains "pFig" or header_content contains "quad" or header_content contains "pos_" %}
-      {% continue %}
-    {% endif %}
-  {% else %}
-    {% continue %}
-  {% endif %}
-  
-  {% comment %} 开始目录结构 {% endcomment %}
-  {% if firstHeader %}
-    {% assign firstHeader = false %}
-    <ul class="neko-toc-list">
-  {% endif %}
-  
-  {% assign headerCount = headerCount | plus: 1 %}
-  
-  <li class="neko-toc-item neko-toc-level-{{ headerLevel }}">
-    <a href="#{{ html_id }}" class="neko-toc-link">
-      <span class="neko-toc-bullet">
-        {% case headerLevel %}
-          {% when 2 %}🐾
-          {% when 3 %}📌
-          {% when 4 %}🔹
-          {% else %}• 
-        {% endcase %}
-      </span>
-      {{ header_content }}
-    </a>
-    
-    {% comment %} 处理子层级 {% endcomment %}
-    {% unless forloop.last %}
-      {% assign next_index = forloop.index0 | plus: 1 %}
-      {% assign next_node = nodes[next_index] %}
-      
-      {% if next_node %}
-        {% assign next_header_level = next_node | strip | slice: 0, 1 | times: 1 %}
-        
-        {% if next_header_level > headerLevel %}
-          <ul class="neko-toc-sublist">
-        {% elsif next_header_level < headerLevel %}
-          </li>
-          {% assign levels_to_close = headerLevel | minus: next_header_level %}
-          {% for i in (1..levels_to_close) %}
-            </ul></li>
-          {% endfor %}
-        {% else %}
-          </li>
-        {% endif %}
+<!-- _includes/toc-sidebar.html -->
+{% if page.toc != false and site.toc.enabled %}
+<!-- 目录侧边栏容器 -->
+<aside class="neko-toc-sidebar" id="nekoTocSidebar">
+  <div class="neko-toc-header">
+    <span class="neko-toc-icon">🐾</span>
+    <h3 class="neko-toc-title">
+      {% if site.toc.title %}
+        {{ site.toc.title }}
       {% else %}
-        </li>
+        文章目录
       {% endif %}
-    {% endunless %}
-{% endfor %}
-
-{% comment %} 关闭未闭合的标签 {% endcomment %}
-{% if firstHeader == false %}
-  {% for i in (1..headerCount) %}
-    </li>
-  {% endfor %}
-  </ul>
-{% endif %}
-{% endcapture %}
-
-{% comment %} 最终安全检查 {% endcomment %}
-{% assign toc = toc | strip %}
-{% if toc == "" or toc contains "<pFig>" or toc contains "<quad>" or toc contains "pos_" %}
-  {% comment %} 如果生成失败，显示备选目录 {% endcomment %}
-  <div class="neko-toc-fallback">
-    <p class="neko-toc-warning">🐾 目录生成遇到问题，显示简化版本</p>
-    <ul class="neko-toc-list">
-      <li class="neko-toc-item">
-        <a href="#实用资源导航" class="neko-toc-link">
-          <span class="neko-toc-bullet">🐾</span>实用资源导航
-        </a>
-      </li>
-      <li class="neko-toc-item">
-        <a href="#官方资源" class="neko-toc-link">
-          <span class="neko-toc-bullet">🎯</span>官方资源
-        </a>
-      </li>
-      <li class="neko-toc-item">
-        <a href="#玩家社区" class="neko-toc-link">
-          <span class="neko-toc-bullet">👥</span>玩家社区
-        </a>
-      </li>
-      <li class="neko-toc-item">
-        <a href="#战术工具" class="neko-toc-link">
-          <span class="neko-toc-bullet">🛠️</span>战术工具
-        </a>
-      </li>
-      <li class="neko-toc-item">
-        <a href="#游戏数据" class="neko-toc-link">
-          <span class="neko-toc-bullet">📊</span>游戏数据
-        </a>
-      </li>
-      <li class="neko-toc-item">
-        <a href="#车队核心成员" class="neko-toc-link">
-          <span class="neko-toc-bullet">🚗</span>车队核心成员
-        </a>
-      </li>
-      <li class="neko-toc-item">
-        <a href="#游戏名片" class="neko-toc-link">
-          <span class="neko-toc-bullet">🎮</span>游戏名片
-        </a>
-      </li>
-      <li class="neko-toc-item">
-        <a href="#车队载具展示" class="neko-toc-link">
-          <span class="neko-toc-bullet">🚀</span>车队载具展示
-        </a>
-      </li>
-    </ul>
+    </h3>
+    <!-- 关闭按钮 -->
+    <button class="neko-toc-close" id="nekoTocClose">
+      ✕
+    </button>
   </div>
-{% else %}
-  {{ toc }}
-{% endif %}
+  
+  <div class="neko-toc-content">
+    {% include toc.html html=content sanitize=true class="neko-toc-list" h_min=site.toc.min_level h_max=site.toc.max_level %}
+  </div>
+</aside>
+
+<!-- 汉堡菜单按钮 -->
+<button class="neko-toc-toggle" id="nekoTocToggle">
+  📑
+</button>
+
+<!-- 遮罩层 -->
+<div class="neko-toc-overlay" id="nekoTocOverlay"></div>
 
 <style>
+/* ==================== 重置和基础样式 ==================== */
+.neko-toc-sidebar * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+/* ==================== 侧边栏基础样式 - 确保始终隐藏 ==================== */
+.neko-toc-sidebar {
+  position: fixed;
+  top: 0;
+  /* 修复关键：始终在屏幕外，不受媒体查询影响 */
+  right: -100%;
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  height: 100dvh;
+  background: linear-gradient(135deg, #fff0f5, #e6f7ff);
+  background: -webkit-linear-gradient(135deg, #fff0f5, #e6f7ff);
+  z-index: 10000;
+  transition: right 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid #ffb6c1;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  /* 修复关键：确保任何情况下都不可见 */
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 激活状态 - 明确且强制 */
+.neko-toc-sidebar.active {
+  /* 激活时才显示在屏幕内 */
+  right: 0;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==================== 移除有问题的媒体查询 ==================== */
+/* 注释掉或删除可能导致自动显示的媒体查询 */
+/* 原代码中可能导致问题的部分：
+@media (min-width: 769px) {
+  .neko-toc-sidebar {
+    right: -400px;  ← 这个可能被某些浏览器错误解析
+  }
+}
+*/
+
+/* 修复：只有一个统一的媒体查询，用于调整宽度 */
+@media (min-width: 769px) {
+  .neko-toc-sidebar {
+    max-width: 400px;
+  }
+  
+  .neko-toc-sidebar.active {
+    right: 0;
+  }
+}
+
+/* ==================== 头部样式 ==================== */
+.neko-toc-header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255,255,255,0.9);
+  border-bottom: 2px dashed #ffb6c1;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10002;
+}
+
+.neko-toc-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.neko-toc-title {
+  font-size: 18px;
+  color: #ff69b4;
+  font-weight: bold;
+  flex: 1;
+  margin: 0;
+}
+
+/* ==================== 关闭按钮 ==================== */
+.neko-toc-close {
+  background: #ff69b4;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10003;
+}
+
+.neko-toc-close:hover {
+  background: #ff1493;
+  transform: scale(1.1);
+}
+
+/* ==================== 内容区域 ==================== */
+.neko-toc-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ==================== 目录列表样式 ==================== */
 .neko-toc-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .neko-toc-item {
@@ -197,8 +159,7 @@
 }
 
 .neko-toc-link {
-  display: flex;
-  align-items: center;
+  display: block;
   padding: 10px 15px;
   color: #666;
   text-decoration: none;
@@ -207,40 +168,311 @@
   border-left: 3px solid transparent;
 }
 
-.neko-toc-link:hover {
-  background: rgba(255, 182, 193, 0.1);
+.neko-toc-link:hover,
+.neko-toc-link:focus {
+  background: rgba(255,182,193,0.1);
   color: #ff69b4;
   border-left-color: #ff69b4;
   transform: translateX(5px);
 }
 
 .neko-toc-link.active {
-  background: rgba(255, 105, 180, 0.1);
+  background: rgba(255,105,180,0.1);
   color: #ff69b4;
   border-left-color: #ff69b4;
   font-weight: bold;
 }
 
-.neko-toc-bullet {
-  margin-right: 10px;
-  font-size: 16px;
+/* ==================== 汉堡菜单按钮 ==================== */
+.neko-toc-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10001;
+  box-shadow: 0 4px 12px rgba(255,105,180,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
-.neko-toc-sublist {
-  margin-left: 20px;
-  margin-top: 5px;
+.neko-toc-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(255,105,180,0.4);
 }
 
-.neko-toc-fallback {
-  background: #fff9db;
-  padding: 15px;
-  border-radius: 10px;
-  border-left: 4px solid #ff6b6b;
+/* ==================== 遮罩层 ==================== */
+.neko-toc-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  display: none;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 
-.neko-toc-warning {
-  color: #ff6b6b;
-  font-style: italic;
-  margin-bottom: 10px;
+.neko-toc-overlay.active {
+  display: block;
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  .neko-toc-sidebar {
+    max-width: 100%;
+  }
+  
+  .neko-toc-toggle {
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .neko-toc-header {
+    padding: 15px;
+  }
+  
+  .neko-toc-content {
+    padding: 15px;
+  }
+  
+  .neko-toc-close {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
 }
 </style>
+
+<script>
+// ==================== 修复后的JavaScript ====================
+(function() {
+    'use strict';
+    
+    // 防止重复初始化
+    if (window.nekoTocInitialized) {
+        return;
+    }
+    window.nekoTocInitialized = true;
+    
+    console.log('🐾 初始化猫娘风格目录侧边栏...');
+    
+    // 获取DOM元素
+    var sidebar = document.getElementById('nekoTocSidebar');
+    var toggle = document.getElementById('nekoTocToggle');
+    var closeBtn = document.getElementById('nekoTocClose');
+    var overlay = document.getElementById('nekoTocOverlay');
+    
+    // 检查元素是否存在
+    if (!sidebar || !toggle) {
+        console.warn('❌ 目录侧边栏元素未找到');
+        return;
+    }
+    
+    console.log('✅ 找到所有必需的元素');
+    
+    // ==================== 修复关键：强制初始状态 ====================
+    function forceInitialHiddenState() {
+        console.log('🔧 强制设置初始隐藏状态');
+        
+        // 1. 确保移除任何可能存在的active类
+        sidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        
+        // 2. 强制设置内联样式，覆盖任何CSS
+        sidebar.style.right = '-100%';
+        sidebar.style.visibility = 'hidden';
+        sidebar.style.opacity = '0';
+        sidebar.style.pointerEvents = 'none';
+        
+        // 3. 确保遮罩层隐藏
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
+        
+        // 4. 确保页面可以滚动
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        
+        console.log('✅ 初始隐藏状态已强制设置');
+    }
+    
+    // ==================== 核心功能函数 ====================
+    
+    // 显示目录侧边栏
+    function showNekoToc() {
+        console.log('📖 打开目录侧边栏');
+        if (!sidebar) return;
+        
+        // 添加active类
+        sidebar.classList.add('active');
+        
+        // 更新样式
+        sidebar.style.right = '0';
+        sidebar.style.visibility = 'visible';
+        sidebar.style.opacity = '1';
+        sidebar.style.pointerEvents = 'auto';
+        
+        // 只在移动端显示遮罩层
+        if (overlay && window.innerWidth <= 768) {
+            overlay.classList.add('active');
+            overlay.style.display = 'block';
+        }
+        
+        // 防止背景滚动
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        
+        console.log('✅ 侧边栏已打开');
+    }
+    
+    // 隐藏目录侧边栏
+    function hideNekoToc() {
+        console.log('📕 关闭目录侧边栏');
+        
+        // 移除active类
+        sidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        
+        // 强制重置样式
+        sidebar.style.right = '-100%';
+        sidebar.style.visibility = 'hidden';
+        sidebar.style.opacity = '0';
+        sidebar.style.pointerEvents = 'none';
+        
+        // 隐藏遮罩层
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
+        
+        // 恢复背景滚动
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        
+        console.log('✅ 侧边栏已关闭');
+    }
+    
+    // 切换目录显示/隐藏
+    function toggleNekoToc() {
+        var isActive = sidebar.classList.contains('active');
+        console.log('🔄 切换目录状态:', isActive ? '关闭' : '打开');
+        
+        if (isActive) {
+            hideNekoToc();
+        } else {
+            showNekoToc();
+        }
+    }
+    
+    // ==================== 事件绑定 ====================
+    
+    function bindEvents() {
+        console.log('🔗 绑定事件监听器...');
+        
+        // 汉堡菜单按钮事件
+        if (toggle) {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleNekoToc();
+            });
+        }
+        
+        // 关闭按钮事件
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                hideNekoToc();
+            });
+        }
+        
+        // 遮罩层点击事件
+        if (overlay) {
+            overlay.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideNekoToc();
+            });
+        }
+        
+        // 目录链接点击事件
+        var tocLinks = document.querySelectorAll('.neko-toc-link');
+        console.log('找到目录链接:', tocLinks.length);
+        
+        tocLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var targetId = this.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    hideNekoToc();
+                    // 平滑滚动到目标位置
+                    var targetElement = document.getElementById(targetId.substring(1));
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // ESC键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                console.log('ESC键按下，关闭目录');
+                hideNekoToc();
+            }
+        });
+        
+        console.log('✅ 事件绑定完成');
+    }
+    
+    // ==================== 初始化函数 ====================
+    
+    function initNekoToc() {
+        console.log('🚀 初始化目录侧边栏功能');
+        
+        // 修复关键：在初始化时强制设置隐藏状态
+        forceInitialHiddenState();
+        
+        // 绑定事件
+        bindEvents();
+        
+        console.log('🎉 目录侧边栏初始化完成');
+    }
+    
+    // ==================== 页面加载初始化 ====================
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            // 修复关键：延迟初始化，确保所有样式已加载
+            setTimeout(initNekoToc, 100);
+        });
+    } else {
+        // DOM已经加载完成
+        setTimeout(initNekoToc, 100);
+    }
+    
+    // 暴露函数到全局作用域
+    window.toggleNekoToc = toggleNekoToc;
+    window.hideNekoToc = hideNekoToc;
+    window.showNekoToc = showNekoToc;
+    
+})();
+</script>
+{% endif %}
