@@ -1,7 +1,17 @@
-{% comment %} 从公告历史数据获取最新公告喵~ {% endcomment %}
-{% assign latest_announcement = site.data.announcement-history.first %}
+{% comment %} 从公告历史数据获取最新已发布公告喵~ {% endcomment %}
+{% assign today = site.time | date: "%Y-%m-%d" %}
+{% assign published_announcements = site.data.announcement-history | where_exp: "item", "item.date <= today" %}
+{% assign sorted_published = published_announcements | sort: "date" | reverse %}
+{% assign latest_announcement = sorted_published.first %}
 
-{% if latest_announcement and site.data.announcement.popup_enabled %}
+{% comment %} 检查是否有弹窗配置文件，如果没有则默认为启用 {% endcomment %}
+{% if site.data.announcement %}
+  {% assign popup_enabled = site.data.announcement.popup_enabled %}
+{% else %}
+  {% assign popup_enabled = true %}
+{% endif %}
+
+{% if latest_announcement and popup_enabled %}
 <style>
 .modal-overlay {
   position: fixed;
@@ -226,10 +236,10 @@ document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('announcement-modal');
   
   if (modal && (TEST_MODE || shouldShowAnnouncement())) {
-    document.body.style.overflow = 'hidden';
-    
+    // 只有在弹窗确实存在且将要显示时才锁定滚动
     setTimeout(function() {
       modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
       
       if (!TEST_MODE) {
         recordAnnouncementShown();
@@ -241,6 +251,15 @@ document.addEventListener('DOMContentLoaded', function() {
 // ESC键关闭
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
+    closeModal();
+  }
+});
+
+// 点击弹窗外部关闭
+document.addEventListener('click', function(event) {
+  var modal = document.getElementById('announcement-modal');
+  var overlay = document.querySelector('.modal-overlay');
+  if (modal && modal.style.display === 'block' && event.target === overlay) {
     closeModal();
   }
 });
