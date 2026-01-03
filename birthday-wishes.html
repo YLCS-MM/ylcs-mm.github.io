@@ -26,7 +26,7 @@
             touch-action: manipulation;
         }
         
-        /* 🐾 猫爪背景特效 - 修复1：更明显的猫爪 */
+        /* 🐾 猫爪背景特效 */
         .cat-paw-bg {
             position: absolute;
             pointer-events: none;
@@ -73,7 +73,7 @@
             top: -5px;
         }
         
-        /* 主容器 - 修复2：手机适配 */
+        /* 主容器 */
         .main-container {
             background: rgba(255, 255, 255, 0.95);
             padding: clamp(1.5rem, 5vw, 2.5rem);
@@ -183,7 +183,7 @@
             animation: shake 0.5s ease;
         }
         
-        /* 🎂 豪华生日蛋糕 - 修复3：大幅美化 */
+        /* 🎂 生日祝福界面 */
         .birthday-screen {
             display: none;
             animation: fadeInUp 0.8s ease;
@@ -212,7 +212,7 @@
             z-index: 1;
         }
         
-        /* 三层蛋糕体（更精致的设计） */
+        /* 三层蛋糕体 */
         .cake-layer {
             position: absolute;
             border-radius: 15px 15px 8px 8px;
@@ -274,7 +274,7 @@
             z-index: 2;
         }
         
-        /* 奶油糖霜（更立体） */
+        /* 奶油糖霜 */
         .icing {
             position: absolute;
             background: linear-gradient(to bottom, #fff, #fffaf0);
@@ -313,7 +313,37 @@
             animation: sprinkleFloat 3s infinite ease-in-out;
         }
         
-        /* 19数字蜡烛（更美观的设计） */
+        /* 🎭 新增：表情包容器样式 */
+        .emoji-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .left-emoji, .right-emoji {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            animation: emojiFloat 3s ease-in-out infinite alternate;
+        }
+        
+        .left-emoji {
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .right-emoji {
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* 19数字蜡烛 */
         .number-candles {
             position: absolute;
             bottom: clamp(120px, 35vw, 145px);
@@ -359,7 +389,7 @@
             border-radius: 5px;
         }
         
-        /* 蜡烛火焰（更生动的动画） */
+        /* 蜡烛火焰 */
         .flame-group {
             position: absolute;
             bottom: clamp(155px, 45vw, 190px);
@@ -438,7 +468,7 @@
             margin-bottom: 1rem;
         }
         
-        /* 信封设计（保持原功能） */
+        /* 信封设计 */
         .envelope-container {
             margin: clamp(1.5rem, 5vw, 2rem) auto;
             position: relative;
@@ -465,7 +495,105 @@
             z-index: 2;
         }
         
-        /* 信封其他样式保持不变... */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 30px solid #ff8fa3;
+        }
+        
+        .envelope::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 200px;
+            height: 30px;
+            background: #ff6b9d;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 200px;
+            height: 30px;
+            background: #ff8fa3;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top;
+            transition: transform 0.5s ease;
+            z-index: 3;
+        }
+        
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+        
+        .envelope-heart {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            color: white;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .envelope.open .envelope-heart {
+            animation: heartFloat 1s ease forwards;
+        }
+        
+        .envelope-text {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.5s;
+        }
+        
+        .envelope.open .envelope-text {
+            opacity: 1;
+        }
+        
+        .letter {
+            position: absolute;
+            width: 180px;
+            height: 100px;
+            background: white;
+            top: 35px;
+            left: 10px;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(120px);
+            transition: all 0.5s ease 0.3s;
+            z-index: 1;
+            opacity: 0;
+        }
+        
+        .envelope.open .letter {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .letter-content {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #333;
+            text-align: center;
+        }
         
         /* 祝福内容 */
         .birthday-content {
@@ -483,6 +611,52 @@
         
         .birthday-content.show {
             display: block;
+        }
+        
+        .birthday-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .cat-list {
+            list-style: none;
+            padding: 0.5rem 0;
+        }
+        
+        .cat-list li {
+            padding: 6px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .cat-list li::before {
+            content: '🐾';
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #ffd1dc;
+        }
+        
+        .signature-name {
+            color: #e75480;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-style: italic;
+        }
+        
+        .heart {
+            color: #ff6b6b;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
         }
         
         /* 动画定义 */
@@ -517,6 +691,12 @@
                 transform: translateY(-100px) rotate(360deg) scale(1); 
                 opacity: 0; 
             }
+        }
+        
+        /* 表情包浮动动画 */
+        @keyframes emojiFloat {
+            0% { transform: translateY(-50%) rotate(-5deg); }
+            100% { transform: translateY(-50%) rotate(5deg) translateY(-10px); }
         }
         
         @keyframes flameFlicker {
@@ -584,6 +764,16 @@
             }
         }
         
+        @keyframes heartFloat {
+            0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            100% { transform: translateX(-50%) translateY(-50px); opacity: 0; }
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
         /* 响应式调整 */
         @media (max-width: 768px) {
             body {
@@ -611,6 +801,20 @@
             
             .flame-group {
                 gap: 14px;
+            }
+            
+            /* 表情包响应式 */
+            .left-emoji, .right-emoji {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .left-emoji {
+                left: -30px;
+            }
+            
+            .right-emoji {
+                right: -30px;
             }
             
             /* 手机端减少猫爪数量 */
@@ -642,6 +846,21 @@
             .cake-container {
                 width: 160px;
                 height: 140px;
+            }
+            
+            /* 手机端更小的表情包 */
+            .left-emoji, .right-emoji {
+                width: 50px;
+                height: 50px;
+                top: 40%;
+            }
+            
+            .left-emoji {
+                left: -25px;
+            }
+            
+            .right-emoji {
+                right: -25px;
             }
         }
         
@@ -688,6 +907,23 @@
         
         <!-- 豪华蛋糕 -->
         <div class="cake-container">
+            <!-- 🎭 新增：表情包容器 -->
+            <div class="emoji-container">
+                <!-- 左侧表情包 -->
+                <!-- 主人需要修改这里的src为你的图片URL -->
+                <img src="./left-cat.png" 
+                     alt="左侧猫猫表情" 
+                     class="left-emoji"
+                     id="leftEmoji">
+                
+                <!-- 右侧表情包 -->
+                <!-- 主人需要修改这里的src为你的图片URL -->
+                <img src="./right-cat.png" 
+                     alt="右侧猫猫表情" 
+                     class="right-emoji"
+                     id="rightEmoji">
+            </div>
+            
             <div class="cake-plate"></div>
             
             <!-- 三层蛋糕 -->
@@ -951,6 +1187,29 @@
                     number.style.filter = `brightness(${0.9 + Math.random() * 0.2})`;
                 }, 800);
             });
+            
+            // 🎭 表情包加载（如果有自定义表情包）
+            loadCustomEmojis();
+        }
+        
+        // 🎭 加载自定义表情包
+        function loadCustomEmojis() {
+            // 主人可以在这里修改为你的表情包URL
+            const leftEmoji = document.getElementById('leftEmoji');
+            const rightEmoji = document.getElementById('rightEmoji');
+            
+            // 示例：如果主人上传了自己的图片，可以取消注释并修改下面的URL
+            /*
+            if (leftEmoji) {
+                leftEmoji.src = "./images/my-left-cat.png"; // 修改为你的图片路径
+                leftEmoji.alt = "成霜·喵喵的表情包";
+            }
+            
+            if (rightEmoji) {
+                rightEmoji.src = "./images/my-right-cat.png"; // 修改为你的图片路径
+                rightEmoji.alt = "猫猫葉子的表情包";
+            }
+            */
         }
         
         // 📱 页面加载初始化
