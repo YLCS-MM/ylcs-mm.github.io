@@ -1,14 +1,24 @@
 # ---------------- #
 #   Main Configs   #
 # ---------------- #
+
+# 网站根路径，留空表示部署在域名根目录
 baseurl:
+# 网站完整URL
 url: https://ylcs-mm.github.io
+# 日期显示格式，"ordinal" 表示序数格式（如 "1st"）
 date_format: "ordinal"
+# 网站标题
 title: 成霜喵喵
+# 网站副标题
 subtitle: "成霜喵喵的小窝"
+# 网站描述，用于SEO和社交分享
 description: "成霜喵喵的小窝，然后就布吉岛喏喵"
+# 网站关键词，用于SEO
 keywords: 成霜喵喵, 甘城なつき，猫羽雫，喵星人
+# 网站时区
 timezone: Asia/Shanghai
+# 字符编码
 encoding: "utf-8"
 # 页面左下角显示的年份
 since: 2025
@@ -17,39 +27,53 @@ repository: ylcs-mm.github.io
 # 对 css 和 js 资源的 cdn 加速配置
 cdn:
     jsdelivr:
+        # 是否启用 jsdelivr CDN 加速
         enabled: false
 # 可选组件配置
 components:
     # 分享
-    # weibo,qq,wechat,douban,qzone,linkedin,facebook,twitter
+    # 支持的分享平台：weibo,qq,wechat,douban,qzone,linkedin,facebook,twitter
     share:
+        # 是否启用分享功能
         enabled: true
+        # 隐藏的分享平台列表
         hide-platforms: qq,facebook
     # 不蒜子访问统计
     busuanzi:
+        # 是否启用不蒜子统计
         enabled: true
+        # 统计开始日期
         start_date: 2025-06-19
-    # My Popular Repositories
+    # My Popular Repositories（热门仓库展示）
     side_bar_repo:
+        # 是否启用侧边栏热门仓库
         enabled: true
+        # 最多展示的仓库数量
         limit: 5
     # 文章字数统计
     word_count:
+        # 是否启文章字数统计
         enabled: false
     # 页面右上角，以及「关于」页面的二维码
     # 修改图片请替换 assets/images/qrcode.jpg
     qrcode:
+        # 是否启用二维码展示
         enabled: true
+        # 二维码图片的替代文本
         image_alt: 的程序
     # 维基索引页使用哪种视图，支持 列表（list）/分类（cate）
     wiki:
+        # 维基页面视图模式
         view: cate
     # 图片灯箱效果功能
     fancybox:
+        # 是否启用 fancybox 灯箱效果
         enabled: true
 # 压缩页面内容
 compress_html:
+  # 移除所有空白字符
   clippings: all
+  # 保留的HTML注释标记
   comments: ["<!--", "-->"]
 # 代码高亮风格，支持的 theme 列表见 https://github.com/mzlogin/rouge-themes
 highlight_theme: github
@@ -57,76 +81,121 @@ highlight_theme: github
 # ---------------- #
 #      Author      #
 # ---------------- #
+# 作者名
 author: 成霜·喵喵
+# 所属组织
 organization: 
+# 组织URL
 organization_url: 
+# GitHub 用户名
 github_username: ylcs-mm
+# 所在地
 location: 湖南，郴州
+# 电子邮箱
 email: 2992412549@qq.com
 
 # ---------------- #
 #      Jekyll      #
 # ---------------- #
+# Markdown 渲染引擎
 markdown: kramdown
+# kramdown 渲染器配置
 kramdown:
+    # 输入格式，GFM 表示 GitHub Flavored Markdown
     input: GFM
+# 代码高亮器
 highlighter: rouge
+# 分页：每页显示的文章数
 paginate: 10
+# 是否启用潜在语义索引（Latent Semantic Indexing）
 lsi: false
+# 是否启用详细输出模式
 quiet: false
+# 文章摘要分隔符
 excerpt_separator: "\n\n"
+# 文章永久链接格式
 permalink: /:year/:month/:day/:title/
+# Jekyll 插件列表
 plugins:
+    # 获取 GitHub 仓库元数据
     - jekyll-github-metadata
+    # 代码高亮（rouge）
     - rouge
 #     - jekyll-html-pipeline
+    # 分页插件
     - jekyll-paginate
+    # 生成站点地图
     - jekyll-sitemap
+    # 生成 RSS Feed
     - jekyll-feed
+    # Emoji 表情支持
     - jemoji
 #     - jekyll-mentions
+# 自定义集合（Collections）
 collections:
+    # Wiki 集合
     wiki:
+        # 是否为每个文档生成独立页面
         output: true
+        # Wiki 页面的永久链接格式
         permalink: /wiki/:path/
+    # 碎片/片段集合
     fragments:
+        # 是否为每个文档生成独立页面
         output: true
+        # 碎片页面的永久链接格式
         permalink: /fragment/:path/
 
 # ---------------- #
 #      Comments    #
 # ---------------- #
-# support provider: disqus, gitment, gitalk, utterances, beaudar, giscus
+# 支持的评论系统：disqus, gitment, gitalk, utterances, beaudar, giscus
 comments_provider: giscus
 # !!!重要!!! 请修改下面这些信息为你自己申请的
 # !!!Important!!! Please modify infos below to yours
 # disqus 配置参考：https://disqus.com
 disqus:
+    # Disqus 用户名（短名称）
     username: 
 # gitment 配置参考：https://imsun.net/posts/gitment-introduction/
 gitment:
+    # GitHub 仓库所有者
     owner: mzlogin
+    # 用于存放评论的 GitHub 仓库名
     repo: blog-comments
+    # GitHub OAuth 应用配置
     oauth:
+        # OAuth 应用的 Client ID
         client_id: d2e1cbbd298958076462
+        # OAuth 应用的 Client Secret
         client_secret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
 # gitalk 配置参考：https://github.com/gitalk/gitalk#install
 gitalk:
+    # GitHub 仓库所有者
     owner: mzlogin
+    # 用于存放评论的 GitHub 仓库名
     repo: blog-comments
+    # GitHub OAuth 应用的 Client ID
     clientID: d2e1cbbd298958076462
+    # GitHub OAuth 应用的 Client Secret
     clientSecret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
 # utterances 配置参考：https://utteranc.es/
 utterances:
+    # 用于存放评论的 GitHub 仓库（格式：owner/repo）
     repo: mzlogin/blog-comments
 # beaudar 配置参考：https://beaudar.lipk.org/
 beaudar:
+    # 用于存放评论的 GitHub 仓库（格式：owner/repo）
     repo: mzlogin/blog-comments
 # giscus 配置参考：https://giscus.app/zh-CN
 giscus:
+    # 用于存放评论的 GitHub 仓库（格式：owner/repo）
     repo: mzlogin/blog-comments
+    # GitHub 仓库 ID
     repo-id: MDEwOlJlcG9zaXRvcnk5MzEyNzkxNw==
+    # 讨论分类名称
     category: Announcements
+    # 讨论分类 ID
     category-id: DIC_kwDOBY0E7c4CRtg9
 # 在使用其它评论组件时可点击显示 Disqus
 lazy_load_disqus : false
@@ -134,6 +203,7 @@ lazy_load_disqus : false
 # ---------------- #
 #      Search      #
 # ---------------- #
+# 简易 Jekyll 搜索配置
 simple_jekyll_search:
     # 是否支持全文搜索
     fulltext: false
@@ -143,31 +213,41 @@ simple_jekyll_search:
 # ---------------- #
 #     导航栏配置    #
 # ---------------- #
+# 导航菜单项列表
 navs:
+# 首页导航项
 - label: 首页
+  # 链接地址
   href:  /
+  # 图标（Emoji）
   icon: 🏠
+# 分类导航项
 - label: 分类
   href: /categories/
   icon: 📁
+# 关于导航项
 - label: 关于
   href: /about/
   icon: 👤
+# 公告导航项
 - label: 公告
   href: /announcements/
   icon: 📢
+  # 是否显示角标
   badge: true
 
 # 访问统计配置
 components:
   busuanzi:
+    # 是否启用不蒜子访问统计
     enabled: true
+    # 统计起始日期（可选）
     start_date: "2026-01-04"  # 可选，统计开始日期
-
 
 # ------------------------------
 # 🎯 主题配置 - 添加以下内容
 # ------------------------------
+# 使用的 Jekyll 主题
 theme: jekyll-theme-cayman  # 或者尝试其他浅色主题
 # 可选主题：jekyll-theme-minimal, jekyll-theme-time-machine等
 
@@ -176,25 +256,36 @@ override_theme: true
 
 # 添加自定义样式覆盖
 stylesheets:
+  # 自定义 CSS 文件路径
   - "/assets/css/custom.css"
-
 
 # ---------------- #
 #      Google      #
 # ---------------- #
+# Google 相关服务配置
 google:
+    # Google AdSense 广告配置
     adsense:
+        # 是否启用 AdSense
         enabled: false
+        # 是否在页脚展示广告
         footer: false
+        # 是否在侧边栏展示广告
         sidebar: false
+        # 是否在侧边栏详情展示广告
         sidebar-detail: false
+        # 是否在内容头部展示广告
         content_header: false
+        # 是否在内容尾部展示广告
         content_footer: false
+        # 是否压缩广告HTML 【暂未明确】
         compress_html:
+        # Markdown 渲染引擎 【暂未明确】
         markdown: kramdown
+# kramdown 渲染器配置
 kramdown:
+  # 输入格式，GFM 表示 GitHub Flavored Markdown（含HTML解析）
   input: GFM  # 支持GitHub风格Markdown（含HTML解析）
-
 
   # ========================
 # 🐱 猫娘风格目录配置
@@ -202,43 +293,55 @@ kramdown:
 
 # 目录系统设置
 toc:
+  # 是否启用目录
   enabled: true
   # 目录显示的最小标题级别 (h2开始)
   min_level: 2
   # 目录显示的最大标题级别 (到h4)
   max_level: 4
-  # 是否在目录中显示序号
+  # 是否在目录中显示序号（ordered list）
   ordered: false
   # 目录标题
   title: "🐾 文章目录"
   # 目录位置 (sidebar-侧边栏, content-内容区上方)
   position: "sidebar"
-  # 是否自动为标题添加ID
+  # 是否自动为标题添加ID锚点
   auto_ids: true
 
 # Markdown 解析器设置
 markdown: kramdown
 kramdown:
+  # 输入格式
   input: GFM
+  # 是否自动为标题生成ID
   auto_ids: true
+  # 目录包含的标题级别范围
   toc_levels: 2..4
+  # 是否禁用硬换行转换
   hard_wrap: false
+  # 语法高亮器
   syntax_highlighter: rouge
+  # 语法高亮器选项
   syntax_highlighter_opts:
+    # 行内代码配置
     span:
+      # 行内代码是否显示行号
       line_numbers: false
+    # 代码块配置
     block:
+      # 代码块是否显示行号
       line_numbers: true
 
 # 额外的导航配置
 navigation:
-  # 目录滚动效果
+  # 目录滚动是否使用平滑效果
   scroll_smooth: true
-  # 目录高亮当前阅读部分
+  # 目录是否高亮当前阅读部分
   highlight_active: true
 
 # 自动为长文章添加目录
 auto_toc:
+  # 是否启用自动目录
   enabled: true
   # 当文章字数超过这个值时自动添加目录
   min_words: 800
