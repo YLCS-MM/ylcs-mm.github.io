@@ -103,6 +103,24 @@ markdown: kramdown
 kramdown:
     # 输入格式，GFM 表示 GitHub Flavored Markdown
     input: GFM
+    # 是否自动为标题生成ID
+    auto_ids: true
+    # 目录包含的标题级别范围
+    toc_levels: 2..4
+    # 是否禁用硬换行转换
+    hard_wrap: false
+    # 语法高亮器
+    syntax_highlighter: rouge
+    # 语法高亮器选项
+    syntax_highlighter_opts:
+        # 行内代码配置
+        span:
+            # 行内代码是否显示行号
+            line_numbers: false
+        # 代码块配置
+        block:
+            # 代码块是否显示行号
+            line_numbers: true
 # 代码高亮器
 highlighter: rouge
 # 分页：每页显示的文章数
@@ -149,54 +167,18 @@ collections:
 # ---------------- #
 #      Comments    #
 # ---------------- #
-# 支持的评论系统：disqus, gitment, gitalk, utterances, beaudar, giscus
+# 当前使用的评论系统：giscus（配置参考：https://giscus.app/zh-CN）
 comments_provider: giscus
-# !!!重要!!! 请修改下面这些信息为你自己申请的
-# !!!Important!!! Please modify infos below to yours
-# disqus 配置参考：https://disqus.com
-disqus:
-    # Disqus 用户名（短名称）
-    username: 
-# gitment 配置参考：https://imsun.net/posts/gitment-introduction/
-gitment:
-    # GitHub 仓库所有者
-    owner: mzlogin
-    # 用于存放评论的 GitHub 仓库名
-    repo: blog-comments
-    # GitHub OAuth 应用配置
-    oauth:
-        # OAuth 应用的 Client ID
-        client_id: d2e1cbbd298958076462
-        # OAuth 应用的 Client Secret
-        client_secret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
-# gitalk 配置参考：https://github.com/gitalk/gitalk#install
-gitalk:
-    # GitHub 仓库所有者
-    owner: mzlogin
-    # 用于存放评论的 GitHub 仓库名
-    repo: blog-comments
-    # GitHub OAuth 应用的 Client ID
-    clientID: d2e1cbbd298958076462
-    # GitHub OAuth 应用的 Client Secret
-    clientSecret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
-# utterances 配置参考：https://utteranc.es/
-utterances:
-    # 用于存放评论的 GitHub 仓库（格式：owner/repo）
-    repo: mzlogin/blog-comments
-# beaudar 配置参考：https://beaudar.lipk.org/
-beaudar:
-    # 用于存放评论的 GitHub 仓库（格式：owner/repo）
-    repo: mzlogin/blog-comments
-# giscus 配置参考：https://giscus.app/zh-CN
+# giscus 配置 - 请替换为你自己的仓库信息
 giscus:
-    # 用于存放评论的 GitHub 仓库（格式：owner/repo）
-    repo: mzlogin/blog-comments
-    # GitHub 仓库 ID
-    repo-id: MDEwOlJlcG9zaXRvcnk5MzEyNzkxNw==
+    # 你的 GitHub 仓库（格式：owner/repo）
+    repo: 
+    # 你的 GitHub 仓库 ID
+    repo-id: 
     # 讨论分类名称
     category: Announcements
     # 讨论分类 ID
-    category-id: DIC_kwDOBY0E7c4CRtg9
+    category-id: 
 # 在使用其它评论组件时可点击显示 Disqus
 lazy_load_disqus : false
 
@@ -236,20 +218,11 @@ navs:
   # 是否显示角标
   badge: true
 
-# 访问统计配置
-components:
-  busuanzi:
-    # 是否启用不蒜子访问统计
-    enabled: true
-    # 统计起始日期（可选）
-    start_date: "2026-01-04"  # 可选，统计开始日期
-
 # ------------------------------
-# 🎯 主题配置 - 添加以下内容
+# 🎯 主题配置
 # ------------------------------
 # 使用的 Jekyll 主题
-theme: jekyll-theme-cayman  # 或者尝试其他浅色主题
-# 可选主题：jekyll-theme-minimal, jekyll-theme-time-machine等
+theme: jekyll-theme-cayman
 
 # 禁用默认的 Primer 主题样式
 override_theme: true
@@ -278,16 +251,8 @@ google:
         content_header: false
         # 是否在内容尾部展示广告
         content_footer: false
-        # 是否压缩广告HTML 【暂未明确】
-        compress_html:
-        # Markdown 渲染引擎 【暂未明确】
-        markdown: kramdown
-# kramdown 渲染器配置
-kramdown:
-  # 输入格式，GFM 表示 GitHub Flavored Markdown（含HTML解析）
-  input: GFM  # 支持GitHub风格Markdown（含HTML解析）
 
-  # ========================
+# ========================
 # 🐱 猫娘风格目录配置
 # ========================
 
@@ -307,30 +272,6 @@ toc:
   position: "sidebar"
   # 是否自动为标题添加ID锚点
   auto_ids: true
-
-# Markdown 解析器设置
-markdown: kramdown
-kramdown:
-  # 输入格式
-  input: GFM
-  # 是否自动为标题生成ID
-  auto_ids: true
-  # 目录包含的标题级别范围
-  toc_levels: 2..4
-  # 是否禁用硬换行转换
-  hard_wrap: false
-  # 语法高亮器
-  syntax_highlighter: rouge
-  # 语法高亮器选项
-  syntax_highlighter_opts:
-    # 行内代码配置
-    span:
-      # 行内代码是否显示行号
-      line_numbers: false
-    # 代码块配置
-    block:
-      # 代码块是否显示行号
-      line_numbers: true
 
 # 额外的导航配置
 navigation:
