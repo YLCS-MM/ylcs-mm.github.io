@@ -75,7 +75,7 @@ compress_html:
   clippings: all
   # 保留的HTML注释标记
   comments: ["<!--", "-->"]
-# 代码高亮风格，支持的 theme 列表见 https://github.com/mzlogin/rouge-themes
+# 代码高亮风格，支持的 theme 列表见 https://github.com/rouge-ruby/rouge/wiki/List-of-tokens
 highlight_theme: github
 
 # ---------------- #
