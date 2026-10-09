@@ -58,7 +58,7 @@ components:
     # 修改图片请替换 assets/images/qrcode.jpg
     qrcode:
         # 是否启用二维码展示
-        enabled: true
+        enabled: false
         # 二维码图片的替代文本
         image_alt: 的程序
     # 维基索引页使用哪种视图，支持 列表（list）/分类（cate）

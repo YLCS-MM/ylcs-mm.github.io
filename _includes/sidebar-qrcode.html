@@ -1,6 +1,0 @@
-{% if site.components.qrcode.enabled %}
-<div class="sidebar-qrcode mobile-hidden" style="text-align:center;margin-bottom:15px;">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ site.url }}{{ page.url }}"
-        alt="{{ site.components.qrcode.image_alt | default: 'QR Code' }}">
-</div>
-{% endif %}
