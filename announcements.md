@@ -15,7 +15,8 @@ description: "甘城猫猫博客的更新公告和历史记录"
     {% assign today = site.time | date: "%Y-%m-%d" %}
     {% assign past_announcements = site.data.announcement-history | where_exp: "item", "item.date <= today" %}
     {% assign sorted_announcements = past_announcements | sort: "date" | reverse %}
-    
+    {% assign future_announcements = site.data.announcement-history | where_exp: "item", "item.date > today" %}
+
     <div class="announcements-stats">
       <div class="stat-item">
         <span class="stat-number">{{ site.data.announcement-history.size }}</span>
@@ -25,10 +26,17 @@ description: "甘城猫猫博客的更新公告和历史记录"
         <span class="stat-number">{{ sorted_announcements.size }}</span>
         <span class="stat-label">已发布公告</span>
       </div>
+      {% if sorted_announcements.size > 0 %}
       <div class="stat-item">
         <span class="stat-number">{{ sorted_announcements.first.date }}</span>
         <span class="stat-label">最新公告</span>
       </div>
+      {% else %}
+      <div class="stat-item">
+        <span class="stat-number">—</span>
+        <span class="stat-label">最新公告</span>
+      </div>
+      {% endif %}
     </div>
 
     {% if sorted_announcements.size > 0 %}
@@ -44,23 +52,25 @@ description: "甘城猫猫博客的更新公告和历史记录"
               </h2>
               <div class="announcement-meta">
                 <span class="announcement-date">📅 {{ announcement.date }}</span>
-                {% if announcement.date == today %}
-                <span class="today-badge">今天</span>
-                {% endif %}
-                {% if forloop.first %}
-                <span class="latest-badge">最新</span>
-                {% endif %}
+                <span class="announcement-badges">
+                  {% if announcement.date == today %}
+                  <span class="today-badge">今天</span>
+                  {% endif %}
+                  {% if forloop.first %}
+                  <span class="latest-badge">最新</span>
+                  {% endif %}
+                </span>
               </div>
             </header>
 
-            <div class="announcement-content">
+            <div class="announcement-content {% if forloop.first %}expanded{% endif %}">
               {{ announcement.content | markdownify }}
             </div>
 
             <footer class="announcement-footer">
-              <button class="read-more-btn" onclick="toggleAnnouncement({{ forloop.index0 }})">
-                <span class="btn-text">📖 展开详情</span>
-                <span class="btn-icon">▼</span>
+              <button class="read-more-btn" onclick="toggleAnnouncement(this)" data-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+                <span class="btn-text">{% if forloop.first %}📕 收起详情{% else %}📖 展开详情{% endif %}</span>
+                <span class="btn-icon {% if forloop.first %}rotated{% endif %}">▼</span>
               </button>
             </footer>
           </article>
@@ -75,14 +85,13 @@ description: "甘城猫猫博客的更新公告和历史记录"
         </div>
       </div>
     {% endif %}
-    
-    {% assign future_announcements = site.data.announcement-history | where_exp: "item", "item.date > today" %}
+
     {% if future_announcements.size > 0 %}
       <div class="future-announcements-info">
         <p>🎯 还有 <strong>{{ future_announcements.size }}</strong> 个公告将在未来发布喵～</p>
       </div>
     {% endif %}
-    
+
   {% else %}
     <div class="no-announcements">
       <div class="empty-state">
@@ -95,122 +104,136 @@ description: "甘城猫猫博客的更新公告和历史记录"
 </div>
 
 <style>
-/* 🐱 公告历史页面样式 */
 .announcements-page {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
-  min-height: 80vh;
+  padding: 10px 0;
 }
 
 .page-header {
   text-align: center;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 2px dashed #ffb6c1;
+  margin-bottom: 25px;
+  padding-bottom: 18px;
+  border-bottom: 2px dashed var(--neko-light-pink, #ffb6c1);
 }
 
 .page-header h1 {
-  color: #ff69b4;
-  font-size: 2.2em;
-  margin-bottom: 10px;
+  color: var(--neko-pink, #ff69b4);
+  font-size: 2em;
+  margin-bottom: 8px;
 }
 
 .page-description {
-  color: #87ceeb;
-  font-size: 1.1em;
+  color: var(--neko-blue, #87ceeb);
+  font-size: 1.05em;
 }
 
-/* 统计信息 */
 .announcements-stats {
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin: 25px 0;
-  padding: 15px;
+  margin: 20px 0;
+  padding: 18px;
   background: linear-gradient(135deg, #fff0f5, #fff9fd);
   border-radius: 12px;
-  border: 1px solid #ffb6c1;
+  border: 1px solid var(--neko-light-pink, #ffb6c1);
+  flex-wrap: wrap;
 }
 
 .stat-item {
   text-align: center;
+  min-width: 80px;
 }
 
 .stat-number {
   display: block;
-  font-size: 1.8em;
+  font-size: 1.6em;
   font-weight: bold;
-  color: #ff69b4;
+  color: var(--neko-pink, #ff69b4);
+  word-break: break-all;
 }
 
 .stat-label {
-  font-size: 0.9em;
-  color: #87ceeb;
+  font-size: 0.85em;
+  color: var(--neko-blue, #87ceeb);
 }
 
-/* 公告列表 */
 .announcement-list {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 }
 
 .announcement-item {
   background: linear-gradient(135deg, #fff9e6, #fff0f5);
-  border: 2px dashed #ffb6c1;
+  border: 2px dashed var(--neko-light-pink, #ffb6c1);
   border-radius: 15px;
-  padding: 0;
-  position: relative;
-  transition: all 0.3s ease;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .announcement-item.latest-announcement {
-  border: 2px solid #ff69b4;
-  box-shadow: 0 5px 20px rgba(255, 105, 180, 0.2);
+  border: 2px solid var(--neko-pink, #ff69b4);
+  box-shadow: 0 4px 20px rgba(255, 105, 180, 0.15);
 }
 
 .announcement-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
+  box-shadow: 0 8px 25px rgba(255, 182, 193, 0.25);
 }
 
 .announcement-header {
-  padding: 20px 20px 10px;
-  border-bottom: 1px solid #ffb6c1;
+  padding: 18px 20px 10px;
+  border-bottom: 1px solid var(--neko-light-pink, #ffb6c1);
 }
 
 .announcement-title {
-  color: #ff69b4;
-  font-size: 1.3em;
+  color: var(--neko-pink, #ff69b4);
+  font-size: 1.2em;
   margin: 0 0 8px 0;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .announcement-icon {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  flex-shrink: 0;
 }
 
 .announcement-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .announcement-date {
-  color: #87ceeb;
-  font-size: 0.9em;
+  color: var(--neko-blue, #87ceeb);
+  font-size: 0.88em;
+}
+
+.announcement-badges {
+  display: flex;
+  gap: 6px;
 }
 
 .latest-badge {
-  background: #ff69b4;
+  background: var(--neko-pink, #ff69b4);
   color: white;
-  padding: 2px 8px;
+  padding: 2px 10px;
   border-radius: 10px;
-  font-size: 0.8em;
+  font-size: 0.78em;
+  font-weight: bold;
+}
+
+.today-badge {
+  background: #4cd964;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 0.78em;
   font-weight: bold;
 }
 
@@ -218,16 +241,58 @@ description: "甘城猫猫博客的更新公告和历史记录"
   padding: 0 20px;
   max-height: 0;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  line-height: 1.7;
+  color: var(--neko-dark, #4a4a4a);
 }
 
 .announcement-content.expanded {
-  padding: 20px;
-  max-height: 1000px;
+  padding: 18px 20px;
+  max-height: 2000px;
+}
+
+.announcement-content h2 {
+  color: var(--neko-pink, #ff69b4);
+  font-size: 1.15em;
+  margin: 8px 0 6px;
+}
+
+.announcement-content h3 {
+  color: var(--neko-blue, #87ceeb);
+  font-size: 1.05em;
+  margin: 6px 0 4px;
+}
+
+.announcement-content ul, .announcement-content ol {
+  padding-left: 1.5em;
+  margin: 4px 0;
+}
+
+.announcement-content li {
+  margin-bottom: 3px;
+}
+
+.announcement-content a {
+  color: var(--neko-pink, #ff69b4);
+  text-decoration: underline;
+}
+
+.announcement-content a:hover {
+  color: var(--neko-blue, #87ceeb);
+}
+
+.announcement-content hr {
+  border: none;
+  border-top: 1px dashed var(--neko-light-pink, #ffb6c1);
+  margin: 12px 0;
+}
+
+.announcement-content p {
+  margin-bottom: 6px;
 }
 
 .announcement-footer {
-  padding: 0 20px 20px;
+  padding: 0 20px 16px;
   text-align: center;
 }
 
@@ -235,99 +300,57 @@ description: "甘城猫猫博客的更新公告和历史记录"
   background: linear-gradient(135deg, #ffa726, #fb8c00);
   color: white;
   border: none;
-  padding: 8px 20px;
+  padding: 8px 22px;
   border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
   font-size: 0.9em;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin: 0 auto;
+  transition: all 0.3s ease;
 }
 
 .read-more-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(255, 167, 38, 0.4);
+  box-shadow: 0 4px 15px rgba(255, 167, 38, 0.35);
 }
 
 .btn-icon {
+  display: inline-block;
   transition: transform 0.3s ease;
+  font-size: 0.75em;
 }
 
 .btn-icon.rotated {
   transform: rotate(180deg);
 }
 
-/* 空状态 */
 .no-announcements {
   text-align: center;
-  padding: 60px 20px;
+  padding: 50px 20px;
 }
 
 .empty-state {
-  color: #87ceeb;
+  color: var(--neko-blue, #87ceeb);
 }
 
 .empty-icon {
-  font-size: 4em;
+  font-size: 3.5em;
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .empty-state h3 {
-  color: #ff69b4;
-  margin-bottom: 10px;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .announcements-page {
-    padding: 15px 10px;
-  }
-  
-  .page-header h1 {
-    font-size: 1.8em;
-  }
-  
-  .announcements-stats {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .announcement-header {
-    padding: 15px 15px 8px;
-  }
-  
-  .announcement-title {
-    font-size: 1.1em;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-  
-  .announcement-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-}
-
-/* 🆕 新增样式（不影响原有样式） */
-.today-badge {
-  background: #4cd964;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 0.8em;
-  font-weight: bold;
+  color: var(--neko-pink, #ff69b4);
+  margin-bottom: 8px;
+  font-size: 1.1em;
 }
 
 .future-announcements-info {
-  margin-top: 20px;
-  padding: 10px 15px;
+  margin-top: 18px;
+  padding: 12px 16px;
   background: linear-gradient(135deg, #e6f7ff, #f0f9ff);
-  border: 1px solid #87ceeb;
+  border: 1px solid var(--neko-blue, #87ceeb);
   border-radius: 10px;
   text-align: center;
   color: #1e90ff;
@@ -335,40 +358,81 @@ description: "甘城猫猫博客的更新公告和历史记录"
 }
 
 .future-announcements-info strong {
-  color: #ff69b4;
+  color: var(--neko-pink, #ff69b4);
+}
+
+@media (max-width: 768px) {
+  .announcements-page {
+    padding: 5px 0;
+  }
+
+  .page-header h1 {
+    font-size: 1.6em;
+  }
+
+  .announcements-stats {
+    gap: 15px;
+    padding: 14px 10px;
+  }
+
+  .stat-number {
+    font-size: 1.3em;
+  }
+
+  .announcement-header {
+    padding: 15px 15px 8px;
+  }
+
+  .announcement-title {
+    font-size: 1.05em;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .announcement-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .announcement-content {
+    padding: 0 15px;
+  }
+
+  .announcement-content.expanded {
+    padding: 15px;
+  }
+
+  .announcement-footer {
+    padding: 0 15px 14px;
+  }
 }
 </style>
 
 <script>
-// 🐱 公告交互功能
-function toggleAnnouncement(index) {
-  const content = document.querySelectorAll('.announcement-content')[index];
-  const button = document.querySelectorAll('.read-more-btn')[index];
-  const icon = button.querySelector('.btn-icon');
-  const text = button.querySelector('.btn-text');
-  
-  if (content.classList.contains('expanded')) {
-    content.classList.remove('expanded');
-    icon.classList.remove('rotated');
-    text.textContent = '📖 展开详情';
-  } else {
-    content.classList.add('expanded');
-    icon.classList.add('rotated');
-    text.textContent = '📕 收起详情';
-  }
-}
+(function() {
+  var contents = document.querySelectorAll('.announcement-content');
+  var buttons = document.querySelectorAll('.read-more-btn');
 
-// 页面加载时默认展开第一个公告
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(() => {
-    const firstButton = document.querySelector('.read-more-btn');
-    if (firstButton) firstButton.click();
-  }, 500);
-});
+  window.toggleAnnouncement = function(btn) {
+    var item = btn.closest('.announcement-item');
+    var content = item.querySelector('.announcement-content');
+    var icon = btn.querySelector('.btn-icon');
+    var text = btn.querySelector('.btn-text');
+    var isExpanded = content.classList.contains('expanded');
 
-// 平滑滚动到公告
-function scrollToAnnouncement(index) {
-  const announcement = document.querySelectorAll('.announcement-item')[index];
-  announcement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+    if (isExpanded) {
+      content.classList.remove('expanded');
+      icon.classList.remove('rotated');
+      text.textContent = '📖 展开详情';
+      btn.setAttribute('data-expanded', 'false');
+    } else {
+      content.classList.add('expanded');
+      icon.classList.add('rotated');
+      text.textContent = '📕 收起详情';
+      btn.setAttribute('data-expanded', 'true');
+    }
+  };
+})();
 </script>

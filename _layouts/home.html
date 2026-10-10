@@ -1,333 +1,374 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
-    
+
     <!-- 🎀 浅蓝色主题样式 -->
     <style>
-    /* 🎯 颜色变量定义 - 浅蓝色为主，粉色为辅 */
-    :root {
-        --primary-blue: #87ceeb;      /* 主蓝色 - 天蓝色 */
-        --light-blue: #e1f5fe;        /* 浅蓝色背景 */
-        --accent-pink: #ffb6c1;       /* 强调粉色 */
-        --highlight-pink: #ff69b4;     /* 高亮粉色 */
-        --text-dark: #2c3e50;         /* 深色文字 */
-        --text-light: #666;           /* 浅色文字 */
-        --white: #ffffff;             /* 纯白色 */
-        --shadow: rgba(135, 206, 235, 0.3); /* 蓝色阴影 */
-    }
-    
-    /* 🎯 顶部头像区块背景 */
-    .neko-header-section {
-        background-image: url('https://raw.githubusercontent.com/YLCS-MM/ylcs-mm2.gthub.io/refs/heads/miao/84b1ade4028efc77b2dd33f136c7712c.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-        background-color: var(--light-blue); /* 添加浅蓝色背景层 */
-    }
-    
-    /* 🎯 调整顶部区块透明度 */
-    .neko-header-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(225, 245, 254, 0.1); /* 浅蓝色半透明遮罩 */
-        z-index: 0;
-        border-radius: 20px;
-    }
-        
-    /* 确保内容在遮罩上方 */
-    .neko-header-section > * {
-        position: relative;
-        z-index: 1;
-    }
-    
-    /* 顶部区块样式 */
-    .neko-header-section {
-        border-radius: 20px;
-        padding: 30px 0;
-        margin: 30px auto;
-        max-width: 90%;
-        text-align: center;
-        box-shadow: 0 10px 30px var(--shadow);
-        border: 2px solid var(--primary-blue); /* 蓝色边框 */
-    }
-
-    .neko-avatar {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        border: 3px solid var(--primary-blue); /* 蓝色边框 */
-        box-shadow: 0 0 20px rgba(135, 206, 235, 0.4); /* 蓝色阴影 */
-        margin: 0 auto 15px;
-    }
-
-    .neko-site-title {
-        color: var(--primary-blue); /* 改为蓝色标题 */
-        font-size: 2.2em;
-        font-weight: bold;
-        margin: 10px 0 5px 0;
-        text-shadow: 0 2px 4px rgba(135, 206, 235, 0.3);
-    }
-
-    .neko-site-location {
-        color: var(--primary-blue); /* 蓝色文字 */
-        font-size: 1.1em;
-        margin-bottom: 20px;
-        opacity: 0.8;
-    }
-
-    .neko-nav {
-        display: inline-flex;
-        gap: 15px;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 12px 25px;
-        border-radius: 25px;
-        margin-top: 15px;
-        border: 1px solid var(--primary-blue);
-    }
-
-    .neko-nav a {
-        color: var(--text-dark);
-        text-decoration: none;
-        padding: 8px 16px;
-        border-radius: 20px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-    }
-
-    .neko-nav a:hover {
-        color: var(--highlight-pink); /* 悬停时粉色 */
-        background: rgba(255, 182, 193, 0.15); /* 浅粉色背景 */
-        transform: translateY(-2px);
-    }
-
-    /* 布局基础 */
-    .container { 
-        max-width: 1020px; 
-        margin: 0 auto; 
-        padding: 0 20px; 
-    }
-    .columns { 
-        display: flex; 
-        flex-wrap: wrap; 
-        margin: 0 -10px; 
-    }
-    .column { 
-        padding: 0 10px; 
-    }
-    .two-thirds { 
-        width: 66.666%; 
-    }
-    .one-third { 
-        width: 33.333%; 
-    }
-    
-    /* 文章卡片 - 蓝色主题 */
-    .repo-list-item {
-        background: var(--white);
-        border: 2px solid var(--primary-blue); /* 蓝色边框 */
-        border-radius: 15px;
-        padding: 20px;
-        margin: 20px 0;
-        box-shadow: 0 4px 15px var(--shadow);
-        transition: all 0.3s ease;
-        position: relative;
-    }
-
-    .repo-list-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(135, 206, 235, 0.4);
-        border-color: var(--accent-pink); /* 悬停时粉色边框 */
-    }
-
-    .repo-list-name a {
-        color: var(--primary-blue); /* 蓝色标题 */
-        font-size: 1.3em;
-        font-weight: bold;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .repo-list-name a:hover {
-        color: var(--highlight-pink); /* 悬停粉色 */
-    }
-
-    .repo-list-description {
-        color: var(--text-light);
-        line-height: 1.5;
-        margin: 10px 0;
-        padding: 12px;
-        background: rgba(135, 206, 235, 0.05); /* 浅蓝色背景 */
-        border-left: 3px solid var(--primary-blue);
-        border-radius: 5px;
-    }
-
-    /* 元信息样式 */
-    .repo-list-meta {
-        margin-top: 15px;
-    }
-
-    .meta-info {
-        display: inline-block;
-        margin-right: 15px;
-        color: var(--primary-blue);
-        font-size: 0.9em;
-    }
-
-    .meta-info a {
-        color: var(--primary-blue);
-        text-decoration: none;
-    }
-
-    .meta-info a:hover {
-        color: var(--highlight-pink);
-    }
-
-    /* 侧边栏样式 */
-    .sidebar-search input {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid var(--primary-blue);
-        border-radius: 25px;
-        background: var(--light-blue);
-        color: var(--text-dark);
-        font-size: 14px;
-    }
-
-    .sidebar-search input:focus {
-        outline: none;
-        border-color: var(--accent-pink);
-        box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
-    }
-
-    .sidebar-categories h3,
-    .sidebar-popular h3 {
-        color: var(--highlight-pink); /* 改为粉色标题 */
-        margin-bottom: 15px;
-        font-size: 1.2em;
-    }
-
-    .tags a {
-        display: inline-block;
-        background: linear-gradient(45deg, var(--primary-blue), var(--accent-pink)); /* 蓝粉渐变 */
-        color: white;
-        padding: 6px 14px;
-        margin: 3px;
-        border-radius: 20px;
-        text-decoration: none;
-        font-size: 0.9em;
-        transition: all 0.3s ease;
-    }
-
-    .tags a:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4);
-    }
-
-    .sidebar-popular ul {
-        list-style: none;
-        padding-left: 0;
-    }
-
-    .sidebar-popular li {
-        margin: 8px 0;
-        padding: 8px;
-        border-radius: 8px;
-        transition: background 0.3s ease;
-    }
-
-    .sidebar-popular li:hover {
-        background: rgba(255, 182, 193, 0.2); /* 改为粉色悬停背景 */
-    }
-
-    .sidebar-popular a {
-        color: var(--highlight-pink); /* 改为粉色链接 */
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .sidebar-popular a:hover {
-        color: var(--accent-pink); /* 悬停时浅粉色 */
-    }
-
-    /* 移动端适配 */
-    @media (max-width: 768px) {
-        .column { width: 100% !important; }
-        .columns { flex-direction: column; }
-        .repo-list-item { 
-            margin: 15px 10px; 
-            padding: 15px; 
+        /* 🎯 颜色变量定义 - 浅蓝色为主，粉色为辅 */
+        :root {
+            --primary-blue: #87ceeb;
+            /* 主蓝色 - 天蓝色 */
+            --light-blue: #e1f5fe;
+            /* 浅蓝色背景 */
+            --accent-pink: #ffb6c1;
+            /* 强调粉色 */
+            --highlight-pink: #ff69b4;
+            /* 高亮粉色 */
+            --text-dark: #2c3e50;
+            /* 深色文字 */
+            --text-light: #666;
+            /* 浅色文字 */
+            --white: #ffffff;
+            /* 纯白色 */
+            --shadow: rgba(135, 206, 235, 0.3);
+            /* 蓝色阴影 */
         }
+
+        /* 🎯 顶部头像区块背景 */
         .neko-header-section {
-            padding: 20px 0;
-            margin: 20px auto;
+            background-image: url('https://raw.githubusercontent.com/YLCS-MM/ylcs-mm2.gthub.io/refs/heads/miao/84b1ade4028efc77b2dd33f136c7712c.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            background-color: var(--light-blue);
+            /* 添加浅蓝色背景层 */
         }
-        .neko-site-title {
-            font-size: 1.8em;
-        }
-        .neko-nav {
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 10px 15px;
-        }
-        
-        /* 移动端看板娘缩小 */
-        #waifu, .live2d-widget {
-            right: -15px !important;
-            bottom: -15px !important;
-            transform: scale(0.7) !important;
-        }
-    }
 
-    /* 小屏幕手机特别优化 */
-    @media (max-width: 480px) {
-        .neko-header-section {
-            margin: 15px auto;
-            padding: 15px 0;
+        /* 🎯 调整顶部区块透明度 */
+        .neko-header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(225, 245, 254, 0.1);
+            /* 浅蓝色半透明遮罩 */
+            z-index: 0;
+            border-radius: 20px;
         }
-        
+
+        /* 确保内容在遮罩上方 */
+        .neko-header-section>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 顶部区块样式 */
+        .neko-header-section {
+            border-radius: 20px;
+            padding: 30px 0;
+            margin: 30px auto;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 2px solid var(--primary-blue);
+            /* 蓝色边框 */
+        }
+
         .neko-avatar {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-blue);
+            /* 蓝色边框 */
+            box-shadow: 0 0 20px rgba(135, 206, 235, 0.4);
+            /* 蓝色阴影 */
+            margin: 0 auto 15px;
         }
-        
+
         .neko-site-title {
-            font-size: 1.6em;
+            color: var(--primary-blue);
+            /* 改为蓝色标题 */
+            font-size: 2.2em;
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+            text-shadow: 0 2px 4px rgba(135, 206, 235, 0.3);
         }
-        
-        /* 进一步缩小看板娘 */
-        #waifu, .live2d-widget {
-            transform: scale(0.6) !important;
-            right: -20px !important;
-            bottom: -20px !important;
+
+        .neko-site-location {
+            color: var(--primary-blue);
+            /* 蓝色文字 */
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
-    }
+
+        .neko-nav {
+            display: inline-flex;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 25px;
+            border-radius: 25px;
+            margin-top: 15px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .neko-nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .neko-nav a:hover {
+            color: var(--highlight-pink);
+            /* 悬停时粉色 */
+            background: rgba(255, 182, 193, 0.15);
+            /* 浅粉色背景 */
+            transform: translateY(-2px);
+        }
+
+        /* 布局基础 */
+        .container {
+            max-width: 1020px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .columns {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+
+        .column {
+            padding: 0 10px;
+        }
+
+        .two-thirds {
+            width: 66.666%;
+        }
+
+        .one-third {
+            width: 33.333%;
+        }
+
+        /* 文章卡片 - 蓝色主题 */
+        .repo-list-item {
+            background: var(--white);
+            border: 2px solid var(--primary-blue);
+            /* 蓝色边框 */
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .repo-list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(135, 206, 235, 0.4);
+            border-color: var(--accent-pink);
+            /* 悬停时粉色边框 */
+        }
+
+        .repo-list-name a {
+            color: var(--primary-blue);
+            /* 蓝色标题 */
+            font-size: 1.3em;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .repo-list-name a:hover {
+            color: var(--highlight-pink);
+            /* 悬停粉色 */
+        }
+
+        .repo-list-description {
+            color: var(--text-light);
+            line-height: 1.5;
+            margin: 10px 0;
+            padding: 12px;
+            background: rgba(135, 206, 235, 0.05);
+            /* 浅蓝色背景 */
+            border-left: 3px solid var(--primary-blue);
+            border-radius: 5px;
+        }
+
+        /* 元信息样式 */
+        .repo-list-meta {
+            margin-top: 15px;
+        }
+
+        .meta-info {
+            display: inline-block;
+            margin-right: 15px;
+            color: var(--primary-blue);
+            font-size: 0.9em;
+        }
+
+        .meta-info a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .meta-info a:hover {
+            color: var(--highlight-pink);
+        }
+
+        /* 侧边栏样式 */
+        .sidebar-search input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 25px;
+            background: var(--light-blue);
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        .sidebar-search input:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+        }
+
+        .sidebar-popular h3 {
+            color: var(--highlight-pink);
+            /* 改为粉色标题 */
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .tags a {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-pink));
+            /* 蓝粉渐变 */
+            color: white;
+            padding: 6px 14px;
+            margin: 3px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .tags a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4);
+        }
+
+        .sidebar-popular ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sidebar-popular li {
+            margin: 8px 0;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar-popular li:hover {
+            background: rgba(255, 182, 193, 0.2);
+            /* 改为粉色悬停背景 */
+        }
+
+        .sidebar-popular a {
+            color: var(--highlight-pink);
+            /* 改为粉色链接 */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-popular a:hover {
+            color: var(--accent-pink);
+            /* 悬停时浅粉色 */
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .column {
+                width: 100% !important;
+            }
+
+            .columns {
+                flex-direction: column;
+            }
+
+            .repo-list-item {
+                margin: 15px 10px;
+                padding: 15px;
+            }
+
+            .neko-header-section {
+                padding: 20px 0;
+                margin: 20px auto;
+            }
+
+            .neko-site-title {
+                font-size: 1.8em;
+            }
+
+            .neko-nav {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 10px 15px;
+            }
+
+            /* 移动端看板娘缩小 */
+            #waifu,
+            .live2d-widget {
+                right: -15px !important;
+                bottom: -15px !important;
+                transform: scale(0.7) !important;
+            }
+        }
+
+        /* 小屏幕手机特别优化 */
+        @media (max-width: 480px) {
+            .neko-header-section {
+                margin: 15px auto;
+                padding: 15px 0;
+            }
+
+            .neko-avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            .neko-site-title {
+                font-size: 1.6em;
+            }
+
+            /* 进一步缩小看板娘 */
+            #waifu,
+            .live2d-widget {
+                transform: scale(0.6) !important;
+                right: -20px !important;
+                bottom: -20px !important;
+            }
+        }
     </style>
-    
+
     <!-- 引入原有CSS -->
     <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
     <link rel="stylesheet" href="/assets/css/globals/common.css">
     <link rel="stylesheet" href="/assets/css/globals/responsive.css">
 </head>
+
 <body class="home">
     <!-- 🎯 顶部区块 -->
     <header class="neko-header-section">
-        <img src="https://avatars.githubusercontent.com/u/193340716?v=4" 
-             alt="成霜喵喵" class="neko-avatar">
-        
+        <img src="https://avatars.githubusercontent.com/u/193340716?v=4" alt="成霜喵喵" class="neko-avatar">
+
         <h1 class="neko-site-title">成霜·喵喵の小窝</h1>
         <p class="neko-site-location">湖南,郴州 · ylcs-mm</p>
-        
+
         <nav class="neko-nav">
             <a href="/">首页</a>
-            <a href="/categories/">分类</a>
             <a href="/about/">关于</a>
             <a href="/announcements/">公告</a>
         </nav>
@@ -339,171 +380,150 @@
             <!-- 左侧：最新喵文 -->
             <div class="column two-thirds">
                 <h2 style="color: var(--primary-blue); margin-bottom: 20px;">📝 最新喵文</h2>
-                
+
                 <ol class="repo-list">
-                  {% for post in site.posts %}
-                  <li class="repo-list-item">
-                    <h3 class="repo-list-name">
-                      <a href="{{ post.url }}">{{ post.title }}</a>
-                    </h3>
-                    <p class="repo-list-description">
-                      {{ post.excerpt | strip_html | strip }}
-                    </p>
-                    <p class="repo-list-meta">
-                      <span class="meta-info">
-                        <span class="octicon octicon-calendar"></span> 
-                        {{ post.date | date: "%Y/%m/%d" }}
-                      </span>
-                      {% for cat in post.categories %}
-                      <span class="meta-info">
-                        <span class="octicon octicon-file-directory"></span>
-                        <a href="/categories/#{{ cat }}">{{ cat }}</a>
-                      </span>
-                      {% endfor %}
-                    </p>
-                  </li>
-                  {% endfor %}
+                    {% for post in site.posts %}
+                    <li class="repo-list-item">
+                        <h3 class="repo-list-name">
+                            <a href="{{ post.url }}">{{ post.title }}</a>
+                        </h3>
+                        <p class="repo-list-description">
+                            {{ post.excerpt | strip_html | strip }}
+                        </p>
+                        <p class="repo-list-meta">
+                            <span class="meta-info">
+                                <span class="octicon octicon-calendar"></span>
+                                {{ post.date | date: "%Y/%m/%d" }}
+                            </span>
+                        </p>
+                    </li>
+                    {% endfor %}
                 </ol>
             </div>
-            
+
             <!-- 右侧：侧边栏 -->
             <div class="column one-third">
                 <div class="sidebar-search">
                     <input type="text" placeholder="搜搜看喵...">
                 </div>
-                
-                <div class="sidebar-categories">
-                    <h3>📁 分类云</h3>
-                    <div class="tags">
-                        {% for category in site.categories %}
-                        <a href="/categories/#{{ category[0] }}">
-                            {{ category[0] }}
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-                
-                <div class="sidebar-popular">
-                    <h3>🔥 热门喵文</h3>
-                    <ul>
-                        {% for post in site.posts limit:5 %}
-                        <li>
-                            <a href="{{ post.url }}">{{ post.title }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
-    
+
     <!-- 🐾 页脚 -->
     {% include footer.html %}
-    
+
     <!-- 🎯 确保公告弹窗和看板娘不丢失 -->
-    <!-- 公告弹窗脚本 -->
-    <script src="/assets/js/announcement.js"></script>
-    
     <!-- 看板娘脚本 -->
     <script>
-    // 看板娘加载代码 - 移动到右下角
-    (function() {
-        console.log('🚀 开始加载看板娘...');
-        
-        const live2d_path = 'https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.7/dist/';
-        
-        function loadExternalResource(url, type) {
-            return new Promise((resolve, reject) => {
-                let tag;
-                if (type === 'css') {
-                    tag = document.createElement('link');
-                    tag.rel = 'stylesheet';
-                    tag.href = url;
-                }
-                else if (type === 'js') {
-                    tag = document.createElement('script');
-                    tag.type = 'module';
-                    tag.src = url;
-                }
-                if (tag) {
-                    tag.onload = () => resolve(url);
-                    tag.onerror = () => reject(url);
-                    document.head.appendChild(tag);
-                }
-            });
-        }
+        // 看板娘加载代码 - 移动到右下角
+        (function () {
+            console.log('🚀 开始加载看板娘...');
 
-        (async () => {
-            try {
-                await Promise.all([
-                    loadExternalResource(live2d_path + 'waifu.css', 'css'),
-                    loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
-                ]);
-                
-                if (typeof initWidget !== 'undefined') {
-                    initWidget({
-                        waifuPath: live2d_path + 'waifu-tips.json',
-                        cubism2Path: live2d_path + 'live2d.min.js',
-                        cubism5Path: 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js',
-                        tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
-                        logLevel: 'warn',
-                        drag: false,
-                    });
-                    console.log('✅ 看板娘加载成功！');
-                }
-            } catch (e) {
-                console.log('❌ 看板娘加载失败:', e);
+            const live2d_path = 'https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.7/dist/';
+
+            function loadExternalResource(url, type) {
+                return new Promise((resolve, reject) => {
+                    let tag;
+                    if (type === 'css') {
+                        tag = document.createElement('link');
+                        tag.rel = 'stylesheet';
+                        tag.href = url;
+                    }
+                    else if (type === 'js') {
+                        tag = document.createElement('script');
+                        tag.type = 'module';
+                        tag.src = url;
+                    }
+                    if (tag) {
+                        tag.onload = () => resolve(url);
+                        tag.onerror = () => reject(url);
+                        document.head.appendChild(tag);
+                    }
+                });
             }
+
+            (async () => {
+                try {
+                    await Promise.all([
+                        loadExternalResource(live2d_path + 'waifu.css', 'css'),
+                        loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
+                    ]);
+
+                    if (typeof initWidget !== 'undefined') {
+                        initWidget({
+                            waifuPath: live2d_path + 'waifu-tips.json',
+                            cubism2Path: live2d_path + 'live2d.min.js',
+                            cubism5Path: 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js',
+                            tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
+                            logLevel: 'warn',
+                            drag: false,
+                        });
+                        console.log('✅ 看板娘加载成功！');
+                    }
+                } catch (e) {
+                    console.log('❌ 看板娘加载失败:', e);
+                }
+            })();
         })();
-    })();
     </script>
 
     <!-- 看板娘样式确保 - 右下角定位 -->
     <style>
-    #waifu, .live2d-widget {
-        position: fixed !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        z-index: 9999 !important;
-        pointer-events: auto !important;
-        transform-origin: bottom right !important;
-    }
-    
-    /* 桌面端看板娘大小 */
-    @media (min-width: 769px) {
-        #waifu, .live2d-widget {
-            transform: scale(0.9) !important;
-            right: -10px !important;
-            bottom: -10px !important;
+        #waifu,
+        .live2d-widget {
+            position: fixed !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            z-index: 9999 !important;
+            pointer-events: auto !important;
+            transform-origin: bottom right !important;
         }
-    }
-    
-    /* 平板设备看板娘 */
-    @media (max-width: 768px) and (min-width: 481px) {
-        #waifu, .live2d-widget {
-            transform: scale(0.7) !important;
-            right: -15px !important;
-            bottom: -15px !important;
+
+        /* 桌面端看板娘大小 */
+        @media (min-width: 769px) {
+
+            #waifu,
+            .live2d-widget {
+                transform: scale(0.9) !important;
+                right: -10px !important;
+                bottom: -10px !important;
+            }
         }
-    }
-    
-    /* 手机端看板娘进一步缩小 */
-    @media (max-width: 480px) {
-        #waifu, .live2d-widget {
-            transform: scale(0.6) !important;
-            right: -20px !important;
-            bottom: -20px !important;
+
+        /* 平板设备看板娘 */
+        @media (max-width: 768px) and (min-width: 481px) {
+
+            #waifu,
+            .live2d-widget {
+                transform: scale(0.7) !important;
+                right: -15px !important;
+                bottom: -15px !important;
+            }
         }
-    }
-    
-    /* 超小屏幕手机 */
-    @media (max-width: 320px) {
-        #waifu, .live2d-widget {
-            transform: scale(0.5) !important;
-            right: -25px !important;
-            bottom: -25px !important;
+
+        /* 手机端看板娘进一步缩小 */
+        @media (max-width: 480px) {
+
+            #waifu,
+            .live2d-widget {
+                transform: scale(0.6) !important;
+                right: -20px !important;
+                bottom: -20px !important;
+            }
         }
-    }
+
+        /* 超小屏幕手机 */
+        @media (max-width: 320px) {
+
+            #waifu,
+            .live2d-widget {
+                transform: scale(0.5) !important;
+                right: -25px !important;
+                bottom: -25px !important;
+            }
+        }
     </style>
 </body>
+
 </html>

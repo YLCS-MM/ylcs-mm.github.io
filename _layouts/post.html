@@ -1,19 +1,256 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     {% include head-base.html %}
+    <style>
+        :root {
+            --neko-pink: #ff69b4;
+            --neko-light-pink: #ffb6c1;
+            --neko-pastel-pink: #ffe4ec;
+            --neko-blue: #87ceeb;
+            --neko-dark: #4a4a4a;
+            --neko-gray: #888;
+            --neko-white: #fff;
+        }
+
+        body {
+            background: linear-gradient(180deg, #fef5f9 0%, #f0f8ff 50%, #fef5f9 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* 🎀 顶部导航栏 */
+        .post-nav {
+            text-align: center;
+            padding: 16px 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--neko-pastel-pink);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .post-nav a {
+            display: inline-block;
+            color: var(--neko-gray);
+            text-decoration: none;
+            padding: 8px 18px;
+            margin: 0 4px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .post-nav a:hover {
+            color: var(--neko-pink);
+            background: var(--neko-pastel-pink);
+            transform: translateY(-2px);
+        }
+
+        .post-nav a.active {
+            color: var(--neko-pink);
+            font-weight: 600;
+            background: var(--neko-pastel-pink);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: var(--neko-white);
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.08);
+            border: 1px solid var(--neko-pastel-pink);
+        }
+
+        /* 文章头部 */
+        .post-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed var(--neko-light-pink);
+        }
+
+        .post-title {
+            font-size: 1.8em;
+            color: var(--neko-pink);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            color: var(--neko-gray);
+            font-size: 0.9em;
+        }
+
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .post-tag {
+            display: inline-block;
+            background: var(--neko-pastel-pink);
+            color: var(--neko-pink);
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .post-tag:hover {
+            background: var(--neko-pink);
+            color: white;
+        }
+
+        /* 文章内容 */
+        .post-content {
+            line-height: 1.8;
+            color: var(--neko-dark);
+        }
+
+        .post-content h1,
+        .post-content h2,
+        .post-content h3 {
+            color: var(--neko-pink);
+            margin: 1.5em 0 0.5em;
+        }
+
+        .post-content h2 {
+            border-left: 3px solid var(--neko-pink);
+            padding-left: 12px;
+        }
+
+        .post-content a {
+            color: var(--neko-pink);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--neko-light-pink);
+        }
+
+        .post-content a:hover {
+            color: #ff1493;
+            border-bottom-style: solid;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-content blockquote {
+            border-left: 4px solid var(--neko-light-pink);
+            padding: 10px 20px;
+            margin: 16px 0;
+            background: linear-gradient(135deg, #fff0f5, #fff9e6);
+            border-radius: 0 10px 10px 0;
+            color: var(--neko-gray);
+        }
+
+        .post-content code {
+            background: var(--neko-pastel-pink);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .post-content pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 16px;
+            border-radius: 12px;
+            overflow-x: auto;
+            border: 1px solid var(--neko-pastel-pink);
+        }
+
+        .post-content pre code {
+            background: none;
+            color: inherit;
+        }
+
+        /* 文章尾部 */
+        .post-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed var(--neko-light-pink);
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .post-thanks {
+            color: var(--neko-gray);
+            font-size: 0.9em;
+        }
+
+        /* 页脚装饰 */
+        .bottom-decoration {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--neko-light-pink);
+            opacity: 0.5;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 20px;
+                margin: 16px 12px;
+                border-radius: 14px;
+            }
+
+            .post-title {
+                font-size: 1.4em;
+            }
+
+            .post-nav a {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <!-- 🎀 导航栏 -->
+    <nav class="post-nav">
+        <a href="/">🏠 首页</a>
+        <a href="/announcements/">📢 公告</a>
+        <a href="/about/">🐱 关于</a>
+    </nav>
+
     <div class="container">
         <article class="post">
             {% include post-header.html %}
-            
+
             <div class="post-content">
                 {{ content }}
             </div>
-            
+
             {% include post-footer.html %}
         </article>
     </div>
+
+    <div class="bottom-decoration">
+        🐾 ฅ(^•ω•^)ฅ 🐾
+    </div>
+
+    {% include footer.html %}
 </body>
+
 </html>

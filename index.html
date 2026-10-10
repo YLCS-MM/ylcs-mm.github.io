@@ -403,21 +403,6 @@ comments: false
     gap: 3px;
   }
 
-  .post-category {
-    font-size: 0.75em;
-    background: var(--neko-pastel-pink);
-    color: var(--neko-pink);
-    padding: 2px 10px;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .post-category:hover {
-    background: var(--neko-pink);
-    color: white;
-  }
-
   /* ==========================================
    📄 分页
    ========================================== */
@@ -551,9 +536,6 @@ comments: false
       </p>
       <div class="post-meta">
         <span class="post-date">📅 {{ post.date | date: "%Y/%m/%d" }}</span>
-        {% for cat in post.categories %}
-        <a class="post-category" href="{{ site.url }}/categories/#{{ cat }}">{{ cat }}</a>
-        {% endfor %}
       </div>
     </li>
     {% endfor %}

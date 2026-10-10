@@ -166,10 +166,6 @@ navs:
   href:  /
   # 图标（Emoji）
   icon: 🏠
-# 分类导航项
-- label: 分类
-  href: /categories/
-  icon: 📁
 # 关于导航项
 - label: 关于
   href: /about/
@@ -180,25 +176,3 @@ navs:
   icon: 📢
   # 是否显示角标
   badge: true
-
-
-
-# ---------------- #
-#      Google      #
-# ---------------- #
-# Google 相关服务配置
-google:
-    # Google AdSense 广告配置
-    adsense:
-        # 是否启用 AdSense
-        enabled: false
-        # 是否在页脚展示广告
-        footer: false
-        # 是否在侧边栏展示广告
-        sidebar: false
-        # 是否在侧边栏详情展示广告
-        sidebar-detail: false
-        # 是否在内容头部展示广告
-        content_header: false
-        # 是否在内容尾部展示广告
-        content_footer: false
