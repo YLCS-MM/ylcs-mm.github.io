@@ -61,22 +61,7 @@ components:
         enabled: false
         # 二维码图片的替代文本
         image_alt: 的程序
-    # 维基索引页使用哪种视图，支持 列表（list）/分类（cate）
-    wiki:
-        # 维基页面视图模式
-        view: cate
-    # 图片灯箱效果功能
-    fancybox:
-        # 是否启用 fancybox 灯箱效果
-        enabled: true
-# 压缩页面内容
-compress_html:
-  # 移除所有空白字符
-  clippings: all
-  # 保留的HTML注释标记
-  comments: ["<!--", "-->"]
-# 代码高亮风格，支持的 theme 列表见 https://github.com/rouge-ruby/rouge/wiki/List-of-tokens
-highlight_theme: github
+    
 
 # ---------------- #
 #      Author      #
@@ -149,20 +134,6 @@ plugins:
     # Emoji 表情支持
     - jemoji
 #     - jekyll-mentions
-# 自定义集合（Collections）
-collections:
-    # Wiki 集合
-    wiki:
-        # 是否为每个文档生成独立页面
-        output: true
-        # Wiki 页面的永久链接格式
-        permalink: /wiki/:path/
-    # 碎片/片段集合
-    fragments:
-        # 是否为每个文档生成独立页面
-        output: true
-        # 碎片页面的永久链接格式
-        permalink: /fragment/:path/
 
 # ---------------- #
 #      Comments    #
@@ -218,19 +189,7 @@ navs:
   # 是否显示角标
   badge: true
 
-# ------------------------------
-# 🎯 主题配置
-# ------------------------------
-# 使用的 Jekyll 主题
-theme: jekyll-theme-cayman
 
-# 禁用默认的 Primer 主题样式
-override_theme: true
-
-# 添加自定义样式覆盖
-stylesheets:
-  # 自定义 CSS 文件路径
-  - "/assets/css/custom.css"
 
 # ---------------- #
 #      Google      #
@@ -251,40 +210,3 @@ google:
         content_header: false
         # 是否在内容尾部展示广告
         content_footer: false
-
-# ========================
-# 🐱 猫娘风格目录配置
-# ========================
-
-# 目录系统设置
-toc:
-  # 是否启用目录
-  enabled: true
-  # 目录显示的最小标题级别 (h2开始)
-  min_level: 2
-  # 目录显示的最大标题级别 (到h4)
-  max_level: 4
-  # 是否在目录中显示序号（ordered list）
-  ordered: false
-  # 目录标题
-  title: "🐾 文章目录"
-  # 目录位置 (sidebar-侧边栏, content-内容区上方)
-  position: "sidebar"
-  # 是否自动为标题添加ID锚点
-  auto_ids: true
-
-# 额外的导航配置
-navigation:
-  # 目录滚动是否使用平滑效果
-  scroll_smooth: true
-  # 目录是否高亮当前阅读部分
-  highlight_active: true
-
-# 自动为长文章添加目录
-auto_toc:
-  # 是否启用自动目录
-  enabled: true
-  # 当文章字数超过这个值时自动添加目录
-  min_words: 800
-  # 当标题数量超过这个值时自动添加目录
-  min_headings: 3
