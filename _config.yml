@@ -44,12 +44,6 @@ components:
         enabled: true
         # 统计开始日期
         start_date: 2025-06-19
-    # My Popular Repositories（热门仓库展示）
-    side_bar_repo:
-        # 是否启用侧边栏热门仓库
-        enabled: true
-        # 最多展示的仓库数量
-        limit: 5
     # 文章字数统计
     word_count:
         # 是否启文章字数统计
@@ -120,8 +114,6 @@ excerpt_separator: "\n\n"
 permalink: /:year/:month/:day/:title/
 # Jekyll 插件列表
 plugins:
-    # 获取 GitHub 仓库元数据
-    - jekyll-github-metadata
     # 代码高亮（rouge）
     - rouge
 #     - jekyll-html-pipeline
