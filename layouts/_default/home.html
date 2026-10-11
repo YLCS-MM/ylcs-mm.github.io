@@ -1,884 +1,123 @@
 {{ define "main" }}
-<main>
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-decor">
-            <span class="hero-sparkle" style="top:10%;left:18%;animation-delay:0s">✦</span>
-            <span class="hero-sparkle" style="top:22%;right:15%;animation-delay:0.8s">✧</span>
-            <span class="hero-sparkle" style="top:60%;left:10%;animation-delay:1.6s">⋆</span>
-            <span class="hero-sparkle" style="top:55%;right:12%;animation-delay:2.4s">✦</span>
-            <span class="hero-sparkle" style="top:8%;left:55%;animation-delay:0.4s">·</span>
-            <span class="hero-sparkle" style="top:75%;left:70%;animation-delay:2.0s">✧</span>
-            <span class="hero-sparkle" style="top:32%;left:5%;animation-delay:1.2s">🐾</span>
-            <span class="hero-sparkle" style="top:18%;right:8%;animation-delay:2.8s">🌸</span>
-            <span class="hero-sparkle" style="top:68%;right:22%;animation-delay:0.6s">🐾</span>
-            <span class="hero-sparkle" style="top:82%;left:30%;animation-delay:3.2s">⋆</span>
-            <span class="hero-sparkle" style="top:42%;right:28%;animation-delay:1.8s">🌸</span>
-            <span class="hero-sparkle" style="top:5%;right:38%;animation-delay:2.2s">✧</span>
+<div style="max-width:800px;margin:0 auto;padding:0 20px;">
+    <!-- Hero -->
+    <div style="text-align:center;padding:50px 20px 40px;">
+        <div
+            style="width:110px;height:110px;margin:0 auto 18px;border-radius:50%;border:3px solid var(--pink-light);box-shadow:0 0 36px rgba(255,105,180,0.18);background:url('{{ .Site.Params.avatar }}') center/cover;">
         </div>
-        <div class="hero-avatar"></div>
-        <h1 class="hero-title">{{ .Site.Title }}</h1>
-        <p class="hero-subtitle">{{ .Site.Params.subtitle }}</p>
-        <p class="hero-location">📍 {{ .Site.Params.location }}</p>
+        <h1 style="font-size:2em;color:var(--pink);margin-bottom:4px;font-weight:700;">{{ .Site.Title }}</h1>
+        <p style="color:var(--gray);margin-bottom:4px;">{{ .Site.Params.subtitle }}</p>
+        <p style="color:var(--blue);font-size:0.9em;">📍 {{ .Site.Params.location }}</p>
+    </div>
 
-        <div class="hero-stats">
-            <div class="hero-stat-item">
-                <span class="hero-stat-num">{{ len (where .Site.RegularPages "Type" "posts") }}</span>
-                <span class="hero-stat-label">篇文章</span>
+    <!-- 文章列表 -->
+    <div style="margin-bottom:36px;">
+        <h2 style="color:var(--pink);font-size:1.2em;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
+            <span>📝</span> 最新文章
+        </h2>
+        {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
+        {{ range $paginator.Pages }}
+        <article
+            style="background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,182,193,0.2);padding:24px 28px;margin-bottom:16px;transition:all var(--trans);">
+            <div style="font-size:0.82em;color:var(--blue);margin-bottom:8px;">
+                📅 {{ .Date.Format "2006-01-02" }}
+                {{ if .Params.tags }}{{ range first 1 .Params.tags }}
+                <span
+                    style="display:inline-block;background:var(--pink-pastel);color:var(--pink);padding:2px 10px;border-radius:10px;margin-left:8px;font-size:0.9em;">{{
+                    . }}</span>
+                {{ end }}{{ end }}
+                {{ with .ReadingTime }}<span style="color:var(--gray-light);margin-left:8px;">☕ {{ . }} min</span>{{ end
+                }}
             </div>
-            <div class="hero-stat-item">
-                <span class="hero-stat-num">{{ len .Site.Taxonomies.tags }}</span>
-                <span class="hero-stat-label">个标签</span>
-            </div>
-            <div class="hero-stat-item">
-                <span class="hero-stat-num">{{ .Site.Params.since }}</span>
-                <span class="hero-stat-label">起始年</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="post-list-section">
-        <div class="section-header">
-            <span class="section-icon">📝</span>
-            <h2>最新文章</h2>
-            <span class="section-line"></span>
-        </div>
-
-        <div class="post-grid">
-            {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
-            {{ range $paginator.Pages }}
-            <article class="post-card">
-                <div class="post-card-accent"></div>
-                <div class="post-card-body">
-                    <div class="post-card-meta">
-                        <span class="post-date">📅 {{ .Date.Format "2006-01-02" }}</span>
-                        {{ if .Params.tags }}
-                        {{ range first 1 .Params.tags }}
-                        <span class="post-tag">{{ . }}</span>
-                        {{ end }}
-                        {{ end }}
-                        {{ with .ReadingTime }}
-                        <span class="post-reading">☕ {{ . }} min</span>
-                        {{ end }}
-                    </div>
-                    <h3 class="post-card-title">
-                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                    </h3>
-                    {{ if .Params.description }}
-                    <p class="post-card-desc">{{ .Params.description }}</p>
-                    {{ else }}
-                    <p class="post-card-desc">{{ .Summary | truncate 100 }}</p>
-                    {{ end }}
-                    <a href="{{ .RelPermalink }}" class="read-more">
-                        阅读全文
-                        <span class="read-more-arrow">→</span>
-                    </a>
-                </div>
-            </article>
+            <h3 style="font-size:1.12em;margin-bottom:6px;">
+                <a href="{{ .RelPermalink }}" style="color:var(--dark);text-decoration:none;transition:color 0.2s;"
+                    onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--dark)'">{{ .Title
+                    }}</a>
+            </h3>
+            {{ if .Params.description }}
+            <p style="font-size:0.9em;color:var(--gray);line-height:1.6;margin-bottom:8px;">{{ .Params.description }}
+            </p>
+            {{ else }}
+            <p style="font-size:0.9em;color:var(--gray);line-height:1.6;margin-bottom:8px;">{{ .Summary | truncate 100
+                }}</p>
             {{ end }}
-        </div>
+            <a href="{{ .RelPermalink }}"
+                style="color:var(--pink);font-size:0.88em;text-decoration:none;font-weight:500;transition:all 0.2s;"
+                onmouseover="this.style.color='var(--pink-deep)';this.style.paddingLeft='4px';"
+                onmouseout="this.style.color='var(--pink)';this.style.paddingLeft='0';">阅读全文 →</a>
+        </article>
+        {{ end }}
 
         {{ if gt $paginator.TotalPages 1 }}
-        <nav class="pagination">
+        <div style="text-align:center;padding:20px 0;display:flex;justify-content:center;align-items:center;gap:16px;">
             {{ if $paginator.HasPrev }}
-            <a href="{{ $paginator.Prev.URL }}" class="page-btn page-btn-prev">← 上一页</a>
+            <a href="{{ $paginator.Prev.URL }}"
+                style="padding:8px 20px;background:rgba(255,255,255,0.8);border:1px solid rgba(255,182,193,0.3);border-radius:20px;color:var(--pink);text-decoration:none;font-size:0.9em;transition:all 0.2s;">←
+                上一页</a>
             {{ else }}
-            <span class="page-btn page-btn-disabled">← 上一页</span>
+            <span style="padding:8px 20px;color:var(--gray-light);font-size:0.9em;opacity:0.5;">← 上一页</span>
             {{ end }}
-            <span class="page-info">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
+            <span style="color:var(--gray);font-size:0.9em;">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages
+                }}</span>
             {{ if $paginator.HasNext }}
-            <a href="{{ $paginator.Next.URL }}" class="page-btn page-btn-next">下一页 →</a>
+            <a href="{{ $paginator.Next.URL }}"
+                style="padding:8px 20px;background:rgba(255,255,255,0.8);border:1px solid rgba(255,182,193,0.3);border-radius:20px;color:var(--pink);text-decoration:none;font-size:0.9em;transition:all 0.2s;">下一页
+                →</a>
             {{ else }}
-            <span class="page-btn page-btn-disabled">下一页 →</span>
+            <span style="padding:8px 20px;color:var(--gray-light);font-size:0.9em;opacity:0.5;">下一页 →</span>
             {{ end }}
-        </nav>
-        {{ end }}
-    </section>
-
-    {{ $announcementData := .Site.Data.announcement_history }}
-    {{ if $announcementData }}
-    {{ $sortedAnn := sort $announcementData "date" "desc" }}
-    {{ $latestAnn := index $sortedAnn 0 }}
-    <section class="ann-teaser-section">
-        <div class="section-header">
-            <span class="section-icon">📢</span>
-            <h2>最新公告</h2>
-            <span class="section-line"></span>
-            <a href="/announcements/" class="section-more">查看全部 →</a>
         </div>
-        <a href="/announcements/" class="ann-teaser-card">
-            <div class="ann-teaser-date">{{ $latestAnn.date }}</div>
-            <h3 class="ann-teaser-title">{{ $latestAnn.title }}</h3>
-            <p class="ann-teaser-desc">{{ $latestAnn.content | plainify | truncate 120 }}</p>
+        {{ end }}
+    </div>
+
+    <!-- 最新公告 -->
+    {{ $annData := .Site.Data.announcement_history }}
+    {{ if $annData }}
+    {{ $sorted := sort $annData "date" "desc" }}
+    {{ $latest := index $sorted 0 }}
+    <div style="margin-bottom:36px;">
+        <h2 style="color:var(--pink);font-size:1.2em;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
+            <span>📢</span> 最新公告
+            <a href="/announcements/"
+                style="font-size:0.76em;color:var(--blue);text-decoration:none;margin-left:auto;transition:color 0.2s;"
+                onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--blue)'">查看全部 →</a>
+        </h2>
+        <a href="/announcements/"
+            style="display:block;padding:22px 28px;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);border-radius:var(--radius);border:1px solid rgba(255,182,193,0.2);text-decoration:none;box-shadow:var(--shadow);transition:all var(--trans);"
+            onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 30px rgba(0,0,0,0.07)';"
+            onmouseout="this.style.transform='none';this.style.boxShadow='var(--shadow)';">
+            <div style="font-size:0.78em;color:var(--blue);margin-bottom:6px;">📅 {{ $latest.date }}</div>
+            <h3 style="color:var(--pink);font-size:1.06em;margin-bottom:6px;">{{ $latest.title }}</h3>
+            <p style="font-size:0.88em;color:var(--gray);line-height:1.6;">{{ $latest.content | plainify | truncate 120
+                }}</p>
         </a>
-    </section>
+    </div>
     {{ end }}
 
-    <section class="intro-section">
-        <div class="section-header">
-            <span class="section-icon">🐱</span>
-            <h2>关于本站</h2>
-            <span class="section-line"></span>
-        </div>
-        <div class="intro-card">
-            <div class="intro-card-avatar" style="background-image:url({{ .Site.Params.avatar }})"></div>
-            <div class="intro-card-body">
-                <h3>{{ .Site.Title }}</h3>
-                <p>{{ .Site.Params.description }}</p>
-                <div class="intro-card-links">
-                    <a href="/about/" class="intro-link">🐱 了解更多</a>
-                    <a href="/posts/" class="intro-link">📝 所有文章</a>
-                    {{ if .Site.Params.github }}
-                    <a href="https://github.com/{{ .Site.Params.github }}" target="_blank" rel="noopener"
-                        class="intro-link">🐈 GitHub</a>
-                    {{ end }}
+    <!-- 关于本站 -->
+    <div style="margin-bottom:36px;">
+        <h2 style="color:var(--pink);font-size:1.2em;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
+            <span>🐱</span> 关于本站
+        </h2>
+        <div
+            style="display:flex;align-items:center;gap:20px;padding:22px 28px;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);border-radius:var(--radius);border:1px solid rgba(255,182,193,0.2);box-shadow:var(--shadow);">
+            <div
+                style="width:64px;height:64px;border-radius:50%;border:2px solid var(--pink-light);box-shadow:0 0 20px rgba(255,105,180,0.15);background:url('{{ .Site.Params.avatar }}') center/cover;flex-shrink:0;">
+            </div>
+            <div style="flex:1;min-width:0;">
+                <h3 style="color:var(--pink);font-size:1.04em;margin-bottom:4px;">{{ .Site.Title }}</h3>
+                <p style="font-size:0.86em;color:var(--gray);line-height:1.6;margin-bottom:8px;">{{
+                    .Site.Params.description }}</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                    <a href="/about/"
+                        style="font-size:0.82em;color:var(--pink);text-decoration:none;padding:4px 12px;border:1px solid rgba(255,182,193,0.3);border-radius:14px;background:rgba(255,255,255,0.5);transition:all 0.2s;">🐱
+                        了解更多</a>
+                    <a href="/posts/"
+                        style="font-size:0.82em;color:var(--pink);text-decoration:none;padding:4px 12px;border:1px solid rgba(255,182,193,0.3);border-radius:14px;background:rgba(255,255,255,0.5);transition:all 0.2s;">📝
+                        所有文章</a>
                 </div>
             </div>
         </div>
-    </section>
-</main>
-{{ end }}
-
-{{ define "extra_head" }}
-<style>
-    .hero {
-        position: relative;
-        text-align: center;
-        padding: 54px 24px 44px;
-        overflow: hidden;
-        margin-bottom: 8px;
-    }
-
-    .hero-bg {
-        position: absolute;
-        top: -120px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 700px;
-        height: 700px;
-        background:
-            radial-gradient(circle at 45% 40%, rgba(255, 182, 193, 0.16) 0%, transparent 55%),
-            radial-gradient(circle at 55% 45%, rgba(135, 206, 235, 0.1) 0%, transparent 55%);
-        border-radius: 50%;
-        z-index: 0;
-        animation: heroPulse 8s infinite ease-in-out;
-    }
-
-    @keyframes heroPulse {
-
-        0%,
-        100% {
-            transform: translateX(-50%) scale(1);
-            opacity: 0.7;
-        }
-
-        50% {
-            transform: translateX(-50%) scale(1.06);
-            opacity: 1;
-        }
-    }
-
-    .hero-decor {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    .hero-sparkle {
-        position: absolute;
-        color: var(--neko-light-pink);
-        font-size: 1.2em;
-        opacity: 0;
-        animation: sparkleFloat 3.5s infinite ease-in-out;
-    }
-
-    @keyframes sparkleFloat {
-
-        0%,
-        100% {
-            opacity: 0;
-            transform: translateY(0) rotate(0deg);
-        }
-
-        30% {
-            opacity: 0.7;
-        }
-
-        70% {
-            opacity: 0.3;
-            transform: translateY(-14px) rotate(20deg);
-        }
-    }
-
-    .hero-avatar {
-        position: relative;
-        z-index: 1;
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 20px;
-        border-radius: 50%;
-        border: 3px solid var(--neko-light-pink);
-        box-shadow: 0 0 50px var(--neko-pink-glow), 0 0 0 12px rgba(255, 182, 193, 0.06);
-        background: url("{{ .Site.Params.avatar }}") center/cover;
-        animation: avatarFloat 3.4s ease-in-out infinite;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .hero-avatar:hover {
-        transform: scale(1.06);
-        box-shadow: 0 0 60px rgba(255, 105, 180, 0.35), 0 0 0 16px rgba(255, 182, 193, 0.1);
-    }
-
-    @keyframes avatarFloat {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-9px);
-        }
-    }
-
-    .hero-title {
-        position: relative;
-        z-index: 1;
-        font-size: 2.3em;
-        color: var(--neko-pink);
-        font-weight: 700;
-        margin-bottom: 4px;
-        letter-spacing: 3px;
-        background: linear-gradient(135deg, var(--neko-pink), var(--neko-blue));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .hero-subtitle {
-        position: relative;
-        z-index: 1;
-        font-size: 1em;
-        color: var(--neko-gray);
-        margin-bottom: 4px;
-    }
-
-    .hero-location {
-        position: relative;
-        z-index: 1;
-        font-size: 0.88em;
-        color: var(--neko-blue);
-        margin-bottom: 24px;
-        font-weight: 500;
-    }
-
-    .hero-stats {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        flex-wrap: wrap;
-    }
-
-    .hero-stat-item {
-        text-align: center;
-        padding: 16px 28px;
-        background: rgba(255, 255, 255, 0.78);
-        backdrop-filter: blur(10px);
-        border-radius: var(--radius-md);
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        min-width: 100px;
-        transition: all var(--transition-smooth);
-        box-shadow: var(--shadow-sm);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hero-stat-item::before {
-        content: '';
-        position: absolute;
-        top: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 50px;
-        height: 50px;
-        background: radial-gradient(circle, rgba(255, 182, 193, 0.2), transparent);
-        border-radius: 50%;
-        transition: all var(--transition-smooth);
-    }
-
-    .hero-stat-item:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-glow);
-        border-color: var(--neko-light-pink);
-    }
-
-    .hero-stat-item:hover::before {
-        width: 70px;
-        height: 70px;
-        top: -40px;
-    }
-
-    .hero-stat-num {
-        display: block;
-        font-size: 1.6em;
-        font-weight: 700;
-        color: var(--neko-pink);
-    }
-
-    .hero-stat-label {
-        font-size: 0.8em;
-        color: var(--neko-gray);
-        margin-top: 2px;
-    }
-
-    .post-list-section {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 0 4px;
-    }
-
-    .section-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 24px;
-        padding-left: 4px;
-    }
-
-    .section-icon {
-        font-size: 1.4em;
-        flex-shrink: 0;
-        animation: iconBounce 2s infinite ease-in-out;
-    }
-
-    @keyframes iconBounce {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-4px);
-        }
-    }
-
-    .section-header h2 {
-        font-size: 1.3em;
-        color: var(--neko-pink);
-        font-weight: 600;
-        white-space: nowrap;
-    }
-
-    .section-line {
-        flex: 1;
-        height: 2px;
-        background: linear-gradient(90deg, var(--neko-light-pink) 0%, rgba(255, 182, 193, 0.2) 50%, transparent 100%);
-        border-radius: 1px;
-    }
-
-    .post-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-    }
-
-    .post-card {
-        background: rgba(255, 255, 255, 0.82);
-        backdrop-filter: blur(8px);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-sm);
-        border: 1px solid rgba(255, 182, 193, 0.2);
-        transition: all var(--transition-smooth);
-        position: relative;
-        z-index: 1;
-        overflow: hidden;
-    }
-
-    .post-card::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle at center, rgba(255, 182, 193, 0.04) 0%, transparent 70%);
-        opacity: 0;
-        transition: opacity var(--transition-smooth);
-    }
-
-    .post-card:hover::after {
-        opacity: 1;
-    }
-
-    .post-card-accent {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 4px;
-        background: linear-gradient(180deg, var(--neko-pink), var(--neko-blue), var(--neko-orange), var(--neko-pink));
-        border-radius: 0 2px 2px 0;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-    }
-
-    .post-card:hover {
-        transform: translateY(-5px) scale(1.005);
-        box-shadow: 0 12px 40px rgba(255, 105, 180, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
-        border-color: rgba(255, 105, 180, 0.28);
-    }
-
-    .post-card:hover .post-card-accent {
-        opacity: 1;
-    }
-
-    .post-card-body {
-        padding: 26px 32px;
-    }
-
-    .post-card-meta {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 10px;
-        flex-wrap: wrap;
-    }
-
-    .post-date {
-        font-size: 0.82em;
-        color: var(--neko-blue);
-    }
-
-    .post-tag {
-        display: inline-block;
-        background: var(--neko-pastel-pink);
-        color: var(--neko-pink);
-        padding: 3px 12px;
-        border-radius: 12px;
-        font-size: 0.76em;
-        font-weight: 500;
-        transition: all 0.2s;
-    }
-
-    .post-tag:hover {
-        background: var(--neko-pink);
-        color: #fff;
-    }
-
-    .post-reading {
-        font-size: 0.8em;
-        color: var(--neko-gray-light);
-    }
-
-    .post-card-title {
-        font-size: 1.18em;
-        margin-bottom: 6px;
-        line-height: 1.4;
-    }
-
-    .post-card-title a {
-        color: var(--neko-dark);
-        text-decoration: none;
-        transition: color var(--transition-fast);
-    }
-
-    .post-card-title a:hover {
-        color: var(--neko-pink);
-    }
-
-    .post-card-desc {
-        font-size: 0.9em;
-        color: var(--neko-gray);
-        line-height: 1.65;
-        margin-bottom: 10px;
-    }
-
-    .read-more {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        color: var(--neko-pink);
-        font-size: 0.88em;
-        text-decoration: none;
-        font-weight: 500;
-        transition: all var(--transition-fast);
-    }
-
-    .read-more-arrow {
-        display: inline-block;
-        transition: transform var(--transition-fast);
-    }
-
-    .read-more:hover .read-more-arrow {
-        transform: translateX(5px);
-    }
-
-    .read-more:hover {
-        color: var(--neko-pink-deep);
-    }
-
-    .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 18px;
-        margin: 34px 0 20px;
-        padding: 20px;
-    }
-
-    .page-btn {
-        display: inline-block;
-        padding: 9px 22px;
-        background: rgba(255, 255, 255, 0.85);
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        border-radius: 22px;
-        color: var(--neko-pink);
-        text-decoration: none;
-        font-size: 0.9em;
-        font-weight: 500;
-        transition: all var(--transition-fast);
-    }
-
-    .page-btn:hover {
-        background: var(--neko-pastel-pink);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .page-btn-disabled {
-        color: var(--neko-gray-light);
-        cursor: default;
-        opacity: 0.5;
-    }
-
-    .page-info {
-        color: var(--neko-gray);
-        font-size: 0.9em;
-        font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-        .hero {
-            padding: 36px 16px 32px;
-        }
-
-        .hero-avatar {
-            width: 95px;
-            height: 95px;
-        }
-
-        .hero-title {
-            font-size: 1.7em;
-            letter-spacing: 1px;
-        }
-
-        .hero-stats {
-            gap: 12px;
-        }
-
-        .hero-stat-item {
-            min-width: 75px;
-            padding: 10px 16px;
-        }
-
-        .hero-stat-num {
-            font-size: 1.3em;
-        }
-
-        .post-card-body {
-            padding: 20px 20px;
-        }
-
-        .post-card-title {
-            font-size: 1.06em;
-        }
-
-        .post-list-section {
-            padding: 0 2px;
-        }
-
-        .pagination {
-            gap: 10px;
-            padding: 16px 4px;
-        }
-
-        .page-btn {
-            padding: 7px 16px;
-            font-size: 0.82em;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .hero {
-            padding: 28px 10px 24px;
-        }
-
-        .hero-avatar {
-            width: 78px;
-            height: 78px;
-        }
-
-        .hero-title {
-            font-size: 1.4em;
-        }
-
-        .hero-subtitle {
-            font-size: 0.85em;
-        }
-
-        .hero-stats {
-            gap: 8px;
-        }
-
-        .hero-stat-item {
-            min-width: 65px;
-            padding: 8px 12px;
-            border-radius: 12px;
-        }
-
-        .hero-stat-num {
-            font-size: 1.1em;
-        }
-
-        .hero-stat-label {
-            font-size: 0.7em;
-        }
-
-        .post-card-body {
-            padding: 16px 16px;
-        }
-
-        .post-card-title {
-            font-size: 0.98em;
-        }
-
-        .post-card-meta {
-            gap: 8px;
-        }
-
-        .section-header h2 {
-            font-size: 1.05em;
-        }
-
-        .post-grid {
-            gap: 12px;
-        }
-
-        .hero-sparkle {
-            font-size: 0.9em;
-        }
-    }
-
-    @media (min-width: 1600px) {
-        .hero {
-            padding: 66px 24px 52px;
-        }
-
-        .hero-avatar {
-            width: 140px;
-            height: 140px;
-        }
-
-        .hero-title {
-            font-size: 2.8em;
-        }
-
-        .post-card-body {
-            padding: 30px 40px;
-        }
-    }
-
-    .ann-teaser-section,
-    .intro-section {
-        max-width: 800px;
-        margin: 30px auto 0;
-        padding: 0 4px;
-    }
-
-    .section-more {
-        font-size: 0.82em;
-        color: var(--neko-blue);
-        text-decoration: none;
-        white-space: nowrap;
-        transition: color var(--transition-fast);
-        flex-shrink: 0;
-    }
-
-    .section-more:hover {
-        color: var(--neko-pink);
-    }
-
-    .ann-teaser-card {
-        display: block;
-        padding: 22px 28px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(6px);
-        border-radius: var(--radius-lg);
-        border: 1px solid rgba(255, 182, 193, 0.25);
-        text-decoration: none;
-        transition: all var(--transition-smooth);
-        box-shadow: var(--shadow-sm);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .ann-teaser-card::after {
-        content: '→';
-        position: absolute;
-        right: 24px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 1.4em;
-        color: var(--neko-light-pink);
-        transition: all var(--transition-fast);
-    }
-
-    .ann-teaser-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-        border-color: rgba(255, 105, 180, 0.28);
-    }
-
-    .ann-teaser-card:hover::after {
-        right: 18px;
-    }
-
-    .ann-teaser-date {
-        font-size: 0.78em;
-        color: var(--neko-blue);
-        margin-bottom: 6px;
-        font-weight: 500;
-    }
-
-    .ann-teaser-title {
-        color: var(--neko-pink);
-        font-size: 1.1em;
-        margin-bottom: 6px;
-        font-weight: 600;
-        padding-right: 30px;
-    }
-
-    .ann-teaser-desc {
-        font-size: 0.88em;
-        color: var(--neko-gray);
-        line-height: 1.6;
-        padding-right: 30px;
-    }
-
-    .intro-card {
-        display: flex;
-        align-items: center;
-        gap: 22px;
-        padding: 24px 28px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(6px);
-        border-radius: var(--radius-lg);
-        border: 1px solid rgba(255, 182, 193, 0.25);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .intro-card-avatar {
-        width: 72px;
-        height: 72px;
-        border-radius: 50%;
-        background-size: cover;
-        background-position: center;
-        flex-shrink: 0;
-        border: 2px solid var(--neko-light-pink);
-        box-shadow: 0 0 20px var(--neko-pink-glow);
-    }
-
-    .intro-card-body {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .intro-card-body h3 {
-        color: var(--neko-pink);
-        font-size: 1.08em;
-        margin-bottom: 4px;
-        font-weight: 600;
-    }
-
-    .intro-card-body p {
-        font-size: 0.88em;
-        color: var(--neko-gray);
-        line-height: 1.6;
-        margin-bottom: 10px;
-    }
-
-    .intro-card-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .intro-link {
-        font-size: 0.84em;
-        color: var(--neko-pink);
-        text-decoration: none;
-        padding: 5px 14px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        background: rgba(255, 255, 255, 0.5);
-        transition: all var(--transition-fast);
-        font-weight: 500;
-    }
-
-    .intro-link:hover {
-        background: var(--neko-pastel-pink);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
-    }
-
-    @media (max-width: 768px) {
-        .intro-card {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .intro-card-links {
-            justify-content: center;
-        }
-
-        .ann-teaser-card {
-            padding: 16px 20px;
-        }
-
-        .ann-teaser-card::after {
-            right: 16px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .intro-card {
-            padding: 16px;
-        }
-
-        .intro-card-avatar {
-            width: 56px;
-            height: 56px;
-        }
-
-        .intro-card-body h3 {
-            font-size: 1em;
-        }
-
-        .intro-card-body p {
-            font-size: 0.82em;
-        }
-
-        .ann-teaser-title {
-            font-size: 0.98em;
-        }
-
-        .ann-teaser-desc {
-            font-size: 0.82em;
-        }
-    }
-</style>
+    </div>
+</div>
 {{ end }}

@@ -3,48 +3,39 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes">
-    <title>{{ if .Title }}{{ .Title }} &mdash; {{ end }}{{ .Site.Title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ if .Title }}{{ .Title }} — {{ end }}{{ .Site.Title }}</title>
     {{ if .Params.description }}
-    <meta name="description" content="{{ .Params.description }}">{{ else }}
-    <meta name="description" content="{{ .Site.Params.description }}">{{ end }}
+    <meta name="description" content="{{ .Params.description }}">
+    {{ else }}
+    <meta name="description" content="{{ .Site.Params.description }}">
+    {{ end }}
     <meta name="keywords" content="{{ .Site.Params.keywords }}">
     <meta name="author" content="{{ .Site.Params.author }}">
     <meta name="theme-color" content="#ff69b4">
-
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
-
     {{ partial "visit-stat.html" . }}
-
     <style>
         :root {
-            --neko-pink: #ff69b4;
-            --neko-pink-deep: #e85595;
-            --neko-pink-glow: rgba(255, 105, 180, 0.25);
-            --neko-light-pink: #ffb6c1;
-            --neko-pastel-pink: #ffe4ec;
-            --neko-blue: #87ceeb;
-            --neko-blue-deep: #5ba4cf;
-            --neko-light-blue: #e0f0ff;
-            --neko-cream: #fff9e6;
-            --neko-dark: #4a4a4a;
-            --neko-gray: #999;
-            --neko-gray-light: #bbb;
-            --neko-white: #fff;
-            --neko-orange: #ffa726;
-            --shadow-sm: 0 2px 14px rgba(255, 105, 180, 0.07);
-            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.07);
-            --shadow-lg: 0 14px 44px rgba(255, 105, 180, 0.11);
-            --shadow-glow: 0 0 36px rgba(255, 105, 180, 0.14);
-            --radius-sm: 10px;
-            --radius-md: 18px;
-            --radius-lg: 24px;
-            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --pink: #ff69b4;
+            --pink-deep: #e85595;
+            --pink-light: #ffb6c1;
+            --pink-pastel: #ffe4ec;
+            --blue: #87ceeb;
+            --blue-deep: #5ba4cf;
+            --dark: #4a4a4a;
+            --gray: #999;
+            --gray-light: #bbb;
+            --shadow: 0 2px 14px rgba(255, 105, 180, 0.07);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.07);
+            --radius: 18px;
+            --trans: 0.3s ease;
         }
 
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -55,51 +46,17 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-            background:
-                radial-gradient(ellipse 900px 600px at 15% 0%, rgba(255, 182, 193, 0.12) 0%, transparent 60%),
-                radial-gradient(ellipse 700px 500px at 85% 20%, rgba(135, 206, 235, 0.1) 0%, transparent 55%),
-                radial-gradient(ellipse 500px 350px at 30% 50%, rgba(255, 182, 193, 0.06) 0%, transparent 55%),
-                radial-gradient(ellipse 600px 400px at 65% 75%, rgba(135, 206, 235, 0.07) 0%, transparent 55%),
-                radial-gradient(ellipse 400px 300px at 50% 90%, rgba(255, 182, 193, 0.05) 0%, transparent 55%),
-                linear-gradient(175deg, #fef5f9 0%, #faf6fc 25%, #f2f7ff 50%, #f8f4fc 75%, #fef5f9 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(175deg, #fef5f9 0%, #faf6fc 25%, #f2f7ff 50%, #f8f4fc 75%, #fef5f9 100%);
             background-attachment: fixed;
             min-height: 100vh;
-            color: var(--neko-dark);
+            color: var(--dark);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: -200px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 182, 193, 0.04) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: -150px;
-            left: -80px;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(135, 206, 235, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
         }
 
         ::selection {
-            background: var(--neko-light-pink);
+            background: var(--pink-light);
             color: #fff;
         }
 
@@ -108,202 +65,55 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--neko-pastel-pink);
+            background: var(--pink-pastel);
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--neko-light-pink);
+            background: var(--pink-light);
             border-radius: 4px;
-            transition: background 0.3s;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--neko-pink);
-        }
-
-        .site-nav {
+        .nav {
             text-align: center;
             padding: 12px 0;
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 182, 193, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 1px 8px rgba(255, 105, 180, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            flex-wrap: wrap;
         }
 
-        .site-nav::before {
-            content: '🐱';
-            font-size: 1.1em;
-            margin-right: 2px;
-            display: none;
-        }
-
-        @media (min-width: 640px) {
-            .site-nav::before {
-                display: inline;
-            }
-        }
-
-        .site-nav a {
+        .nav a {
             display: inline-block;
-            color: var(--neko-gray);
+            color: var(--gray);
             text-decoration: none;
             padding: 7px 20px;
             margin: 0 4px;
             border-radius: 22px;
             font-size: 0.94em;
             font-weight: 500;
-            transition: all var(--transition-smooth);
-            position: relative;
+            transition: all var(--trans);
         }
 
-        .site-nav a:hover {
-            color: var(--neko-pink);
-            background: var(--neko-pastel-pink);
-            transform: translateY(-1px);
+        .nav a:hover {
+            color: var(--pink);
+            background: var(--pink-pastel);
         }
 
-        .site-nav a.active {
+        .nav a.active {
             color: #fff;
             font-weight: 600;
-            background: linear-gradient(135deg, var(--neko-pink), var(--neko-pink-deep));
-            box-shadow: 0 4px 14px var(--neko-pink-glow);
+            background: linear-gradient(135deg, var(--pink), var(--pink-deep));
         }
 
-        .main-container {
-            max-width: 880px;
-            margin: 28px auto 0;
-            padding: 0 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(8px);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(255, 182, 193, 0.25);
-            overflow: hidden;
-            transition: all var(--transition-smooth);
-            position: relative;
-            z-index: 1;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(255, 105, 180, 0.22);
-        }
-
-        .bottom-decoration {
-            text-align: center;
-            padding: 40px 20px 30px;
-            color: var(--neko-light-pink);
-            font-size: 0.92em;
-            user-select: none;
-        }
-
-        .bottom-decoration span {
-            display: inline-block;
-            animation: pawHop 2.4s infinite ease-in-out;
-        }
-
-        .bottom-decoration span:nth-child(2) {
-            animation-delay: 0.35s;
-        }
-
-        .bottom-decoration span:nth-child(3) {
-            animation-delay: 0.7s;
-        }
-
-        .bottom-decoration span:nth-child(4) {
-            animation-delay: 1.05s;
-        }
-
-        .bottom-decoration span:nth-child(5) {
-            animation-delay: 1.4s;
-        }
-
-        .bottom-decoration span:nth-child(6) {
-            animation-delay: 1.75s;
-        }
-
-        @keyframes pawHop {
-
-            0%,
-            100% {
-                transform: translateY(0) scale(1);
-            }
-
-            25% {
-                transform: translateY(-7px) scale(1.08);
-            }
-
-            50% {
-                transform: translateY(0) scale(1);
-            }
-
-            75% {
-                transform: translateY(-3px) scale(1.04);
-            }
-        }
-
-        .site-footer {
-            text-align: center;
-            padding: 22px 20px 28px;
-            color: var(--neko-gray);
-            font-size: 0.84em;
-            background: rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 182, 193, 0.25);
-            margin-top: 6px;
-        }
-
-        .site-footer a {
-            color: var(--neko-pink);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .site-footer a:hover {
-            color: var(--neko-pink-deep);
-        }
-
-        .site-footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            list-style: none;
-            padding: 8px 0 4px;
-        }
-
-        .site-footer-links a {
-            color: var(--neko-gray);
-            font-size: 0.9em;
-        }
-
-        .footer-links-secondary {
-            margin-top: 2px;
-            font-size: 0.88em;
-        }
-
-        .tools-wrapper {
+        .gotop {
             position: fixed;
             bottom: 28px;
             right: 26px;
             z-index: 99;
-        }
-
-        .gotop {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -314,165 +124,85 @@
             border-radius: 50%;
             box-shadow: 0 3px 14px rgba(255, 105, 180, 0.18);
             text-decoration: none;
-            color: var(--neko-pink);
+            color: var(--pink);
             font-size: 1.1em;
-            transition: all var(--transition-smooth);
+            transition: all var(--trans);
             border: 1px solid rgba(255, 182, 193, 0.35);
         }
 
         .gotop:hover {
             transform: translateY(-4px);
-            box-shadow: 0 6px 22px var(--neko-pink-glow);
-            background: var(--neko-pastel-pink);
-        }
-
-        @media (max-width: 1024px) {
-            .main-container {
-                max-width: 740px;
-                padding: 0 20px;
-            }
+            box-shadow: 0 6px 22px rgba(255, 105, 180, 0.25);
+            background: var(--pink-pastel);
         }
 
         @media (max-width: 768px) {
-            .site-nav a {
+            .nav a {
                 padding: 6px 14px;
                 font-size: 0.84em;
                 margin: 0 2px;
-                border-radius: 18px;
-            }
-
-            .main-container {
-                padding: 0 12px;
-                margin: 16px auto 0;
-            }
-
-            .tools-wrapper {
-                bottom: 16px;
-                right: 12px;
             }
 
             .gotop {
+                bottom: 16px;
+                right: 12px;
                 width: 36px;
                 height: 36px;
                 font-size: 1em;
             }
-
-            .bottom-decoration {
-                padding: 28px 16px 22px;
-                font-size: 0.82em;
-            }
-
-            .site-footer {
-                padding: 16px 12px 24px;
-                font-size: 0.78em;
-            }
-
-            .site-footer-links {
-                gap: 12px;
-            }
         }
 
         @media (max-width: 480px) {
-            .site-nav {
+            .nav {
                 padding: 8px 0;
             }
 
-            .site-nav a {
+            .nav a {
                 padding: 5px 10px;
                 font-size: 0.78em;
-                margin: 0 1px;
                 border-radius: 16px;
             }
 
-            .main-container {
-                padding: 0 8px;
-                margin: 10px auto 0;
-            }
-
-            .tools-wrapper {
+            .gotop {
                 bottom: 10px;
                 right: 8px;
-            }
-
-            .gotop {
                 width: 32px;
                 height: 32px;
                 font-size: 0.9em;
             }
-
-            .bottom-decoration {
-                font-size: 0.72em;
-                padding: 22px 10px 18px;
-            }
-        }
-
-        @media (min-width: 1600px) {
-            .main-container {
-                max-width: 960px;
-            }
         }
     </style>
-
     {{ block "extra_head" . }}{{ end }}
 </head>
 
 <body>
-    <nav class="site-nav">
+    <nav class="nav">
         <a href="/" class="{{ if .IsHome }}active{{ end }}">🏠 首页</a>
         <a href="/announcements/" class="{{ if hasPrefix .RelPermalink " /announcements/" }}active{{ end }}">📢 公告</a>
         <a href="/about/" class="{{ if hasPrefix .RelPermalink " /about/" }}active{{ end }}">🐱 关于</a>
+        {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}" class="{{ if hasPrefix $.RelPermalink .URL }}active{{ end }}">{{ .Name }}</a>
+        {{ end }}
     </nav>
 
-    <div class="main-container">
-        {{ block "main" . }}{{ end }}
-    </div>
+    {{ block "main" . }}{{ end }}
 
-    <div class="bottom-decoration">
-        <span>🐾</span> <span>ฅ</span><span>(^</span>&bull;<span>ω</span>&bull;<span>^)ฅ</span> <span>🐾</span>
-    </div>
+    <footer
+        style="text-align:center;padding:28px 20px;color:var(--gray);font-size:0.84em;border-top:1px solid rgba(255,182,193,0.2);margin-top:24px;">
+        <p>&copy; {{ .Site.Params.since }}-{{ now.Format "2006" }} {{ .Site.Params.author }}</p>
+        <p style="margin-top:6px;">
+            <a href="/" style="color:var(--pink);text-decoration:none;">首页</a> &nbsp;·&nbsp;
+            <a href="/announcements/" style="color:var(--pink);text-decoration:none;">公告</a> &nbsp;·&nbsp;
+            <a href="/about/" style="color:var(--pink);text-decoration:none;">关于</a> &nbsp;·&nbsp;
+            <a href="https://github.com/{{ .Site.Params.github }}" style="color:var(--pink);text-decoration:none;"
+                target="_blank" rel="noopener">GitHub</a>
+        </p>
+    </footer>
+
+    <a class="gotop" href="#" title="回到顶部" aria-label="回到顶部">▲</a>
 
     {{ partial "footer.html" . }}
-
-    <div class="tools-wrapper">
-        <a class="gotop" href="#" title="回到顶部" aria-label="回到顶部">▲</a>
-    </div>
-
     {{ block "extra_scripts" . }}{{ end }}
-
-    <canvas id="bg-canvas"
-        style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
-    <script>
-        (function () {
-            var c = document.getElementById("bg-canvas"), x = c.getContext("2d"), p = [], w, h, t = 0;
-            function R(n) {
-                c.width = w = window.innerWidth; c.height = h = document.documentElement.scrollHeight; p = [];
-                for (var i = 0; i < n; i++)p.push({
-                    x: Math.random() * w, y: Math.random() * h, s: 0.4 + Math.random() * 0.9,
-                    vx: (Math.random() - 0.5) * 0.4, vy: -0.2 - Math.random() * 0.6, r: Math.random() * 0.15 + 0.85, o: Math.random(),
-                    ty: Math.floor(Math.random() * 3)
-                });
-            } R(window.innerWidth < 640 ? 9 : 20);
-            window.addEventListener("resize", function () { R(window.innerWidth < 640 ? 9 : 20); });
-            function D() {
-                t++; x.clearRect(0, 0, w, h);
-                for (var i = 0; i < p.length; i++) {
-                    var a = p[i]; a.x += a.vx; a.y += a.vy; a.o += 0.005;
-                    if (a.y < -40 || a.x < -40 || a.x > w + 40) { a.x = Math.random() * w; a.y = h + 40; a.o = 0; }
-                    var al = 0.35 + 0.3 * Math.sin(a.o * 3);
-                    if (a.ty === 0) {
-                        x.save(); x.translate(a.x, a.y); x.rotate(Math.sin(t * 0.02 + a.o) * 0.3);
-                        x.font = (12 * a.s) + "px serif"; x.fillStyle = "rgba(255,182,193," + al + ")"; x.fillText("🌸", -8 * a.s, -8 * a.s); x.restore();
-                    }
-                    else if (a.ty === 1) { x.font = (14 * a.s) + "px serif"; x.fillStyle = "rgba(255,182,193," + (al * 0.7) + ")"; x.fillText("🐾", a.x, a.y); }
-                    else {
-                        x.beginPath(); x.arc(a.x, a.y, 3 * a.s, 0, Math.PI * 2); x.fillStyle = "rgba(135,206,235," + (al * 0.5) + ")";
-                        x.fill(); x.beginPath(); x.arc(a.x, a.y, 5 * a.s, 0, Math.PI * 2); x.fillStyle = "rgba(135,206,235," + (al * 0.15) + ")"; x.fill();
-                    }
-                }
-                requestAnimationFrame(D);
-            } D();
-        })();
-    </script>
 </body>
 
 </html>
