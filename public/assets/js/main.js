@@ -7,28 +7,27 @@ function toggleMenu() {
   }
 }
 
-jQuery(function() {
-  // 回到顶部
-  function toTop () {
-    var $toTop = $(".gotop");
+(function () {
+  var gotop = document.querySelector('.gotop');
+  if (!gotop) return;
 
-    $(window).on("scroll", function () {
-      if ($(window).scrollTop() >= $(window).height()) {
-        $toTop.css("display", "block").fadeIn();
-      } else {
-        $toTop.fadeOut();
-      }
-    });
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        if (window.scrollY > window.innerHeight) {
+          gotop.classList.add('visible');
+        } else {
+          gotop.classList.remove('visible');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
 
-    $toTop.on("click", function (evt) {
-      var $obj = $("body,html");
-      $obj.animate({
-        scrollTop: 0
-      }, 240);
-
-      evt.preventDefault();
-    });
-  }
-
-  toTop();
-});
+  gotop.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();

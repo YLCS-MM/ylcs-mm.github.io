@@ -230,33 +230,12 @@
             overlay.classList.remove('show');
             document.body.style.overflow = 'auto';
         };
-        function shouldShow() {
-            try {
-                var d = localStorage.getItem('nekoAnnouncementData');
-                if (!d) return true;
-                var data = JSON.parse(d);
-                var today = new Date().toDateString();
-                return data.date !== today || data.title !== "{{ $latest.title }}";
-            } catch (e) { return true; }
-        }
-        function recordShown() {
-            try {
-                localStorage.setItem('nekoAnnouncementData', JSON.stringify({
-                    date: new Date().toDateString(),
-                    title: "{{ $latest.title }}",
-                    timestamp: Date.now()
-                }));
-            } catch (e) { }
-        }
-        if (shouldShow()) {
-            setTimeout(function () {
-                overlay.classList.add('show');
-                document.body.style.overflow = 'hidden';
-                recordShown();
-            }, {{ $.Site.Params.announcement.autoShowDelay | default 1000 }});
-    }
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+        setTimeout(function () {
+            overlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }, {{ $.Site.Params.announcement.autoShowDelay | default 1000 }});
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
     overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
-}) ();
+    }) ();
 </script>
 {{ end }}

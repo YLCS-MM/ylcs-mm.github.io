@@ -2,51 +2,43 @@
 <html lang="zh-CN">
 
 <head>
-	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta name="generator" content="Hugo 0.167.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=50797&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes">
-    <title>成霜喵喵 &mdash; 成霜喵喵</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>成霜喵喵 — 成霜喵喵</title>
     
     <meta name="description" content="成霜喵喵的小窝，然后就布吉岛喏喵">
+    
     <meta name="keywords" content="成霜喵喵, 甘城なつき, 猫羽雫, 喵星人">
     <meta name="author" content="成霜·喵喵">
     <meta name="theme-color" content="#ff69b4">
-
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
-
+    <link rel="stylesheet" href="/assets/css/globals/common.css">
+    <link rel="stylesheet" href="/assets/css/globals/responsive.css">
     
 <script defer src="https://cloud.umami.is/script.js" data-website-id="2e750e8f-4c50-4337-8367-c30946e971bc"></script>
 
-
     <style>
         :root {
-            --neko-pink: #ff69b4;
-            --neko-pink-deep: #e85595;
-            --neko-pink-glow: rgba(255, 105, 180, 0.25);
-            --neko-light-pink: #ffb6c1;
-            --neko-pastel-pink: #ffe4ec;
-            --neko-blue: #87ceeb;
-            --neko-blue-deep: #5ba4cf;
-            --neko-light-blue: #e0f0ff;
-            --neko-cream: #fff9e6;
-            --neko-dark: #4a4a4a;
-            --neko-gray: #999;
-            --neko-gray-light: #bbb;
-            --neko-white: #fff;
-            --neko-orange: #ffa726;
-            --shadow-sm: 0 2px 14px rgba(255, 105, 180, 0.07);
-            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.07);
-            --shadow-lg: 0 14px 44px rgba(255, 105, 180, 0.11);
-            --shadow-glow: 0 0 36px rgba(255, 105, 180, 0.14);
-            --radius-sm: 10px;
-            --radius-md: 18px;
-            --radius-lg: 24px;
-            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --pink: #ff69b4;
+            --pink-deep: #e85595;
+            --pink-light: #ffb6c1;
+            --pink-pastel: #ffe4ec;
+            --blue: #87ceeb;
+            --blue-deep: #5ba4cf;
+            --dark: #4a4a4a;
+            --gray: #999;
+            --gray-light: #bbb;
+            --shadow: 0 2px 14px rgba(255, 105, 180, 0.07);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.07);
+            --radius: 18px;
+            --trans: 0.3s ease;
         }
 
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -57,51 +49,17 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-            background:
-                radial-gradient(ellipse 900px 600px at 15% 0%, rgba(255, 182, 193, 0.12) 0%, transparent 60%),
-                radial-gradient(ellipse 700px 500px at 85% 20%, rgba(135, 206, 235, 0.1) 0%, transparent 55%),
-                radial-gradient(ellipse 500px 350px at 30% 50%, rgba(255, 182, 193, 0.06) 0%, transparent 55%),
-                radial-gradient(ellipse 600px 400px at 65% 75%, rgba(135, 206, 235, 0.07) 0%, transparent 55%),
-                radial-gradient(ellipse 400px 300px at 50% 90%, rgba(255, 182, 193, 0.05) 0%, transparent 55%),
-                linear-gradient(175deg, #fef5f9 0%, #faf6fc 25%, #f2f7ff 50%, #f8f4fc 75%, #fef5f9 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(175deg, #fef5f9 0%, #faf6fc 25%, #f2f7ff 50%, #f8f4fc 75%, #fef5f9 100%);
             background-attachment: fixed;
             min-height: 100vh;
-            color: var(--neko-dark);
+            color: var(--dark);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: -200px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 182, 193, 0.04) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: -150px;
-            left: -80px;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(135, 206, 235, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
         }
 
         ::selection {
-            background: var(--neko-light-pink);
+            background: var(--pink-light);
             color: #fff;
         }
 
@@ -110,202 +68,55 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--neko-pastel-pink);
+            background: var(--pink-pastel);
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--neko-light-pink);
+            background: var(--pink-light);
             border-radius: 4px;
-            transition: background 0.3s;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--neko-pink);
-        }
-
-        .site-nav {
+        .nav {
             text-align: center;
             padding: 12px 0;
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 182, 193, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 1px 8px rgba(255, 105, 180, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            flex-wrap: wrap;
         }
 
-        .site-nav::before {
-            content: '🐱';
-            font-size: 1.1em;
-            margin-right: 2px;
-            display: none;
-        }
-
-        @media (min-width: 640px) {
-            .site-nav::before {
-                display: inline;
-            }
-        }
-
-        .site-nav a {
+        .nav a {
             display: inline-block;
-            color: var(--neko-gray);
+            color: var(--gray);
             text-decoration: none;
             padding: 7px 20px;
             margin: 0 4px;
             border-radius: 22px;
             font-size: 0.94em;
             font-weight: 500;
-            transition: all var(--transition-smooth);
-            position: relative;
+            transition: all var(--trans);
         }
 
-        .site-nav a:hover {
-            color: var(--neko-pink);
-            background: var(--neko-pastel-pink);
-            transform: translateY(-1px);
+        .nav a:hover {
+            color: var(--pink);
+            background: var(--pink-pastel);
         }
 
-        .site-nav a.active {
+        .nav a.active {
             color: #fff;
             font-weight: 600;
-            background: linear-gradient(135deg, var(--neko-pink), var(--neko-pink-deep));
-            box-shadow: 0 4px 14px var(--neko-pink-glow);
-        }
-
-        .main-container {
-            max-width: 880px;
-            margin: 28px auto 0;
-            padding: 0 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(8px);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(255, 182, 193, 0.25);
-            overflow: hidden;
-            transition: all var(--transition-smooth);
-            position: relative;
-            z-index: 1;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(255, 105, 180, 0.22);
-        }
-
-        .bottom-decoration {
-            text-align: center;
-            padding: 40px 20px 30px;
-            color: var(--neko-light-pink);
-            font-size: 0.92em;
-            user-select: none;
-        }
-
-        .bottom-decoration span {
-            display: inline-block;
-            animation: pawHop 2.4s infinite ease-in-out;
-        }
-
-        .bottom-decoration span:nth-child(2) {
-            animation-delay: 0.35s;
-        }
-
-        .bottom-decoration span:nth-child(3) {
-            animation-delay: 0.7s;
-        }
-
-        .bottom-decoration span:nth-child(4) {
-            animation-delay: 1.05s;
-        }
-
-        .bottom-decoration span:nth-child(5) {
-            animation-delay: 1.4s;
-        }
-
-        .bottom-decoration span:nth-child(6) {
-            animation-delay: 1.75s;
-        }
-
-        @keyframes pawHop {
-
-            0%,
-            100% {
-                transform: translateY(0) scale(1);
-            }
-
-            25% {
-                transform: translateY(-7px) scale(1.08);
-            }
-
-            50% {
-                transform: translateY(0) scale(1);
-            }
-
-            75% {
-                transform: translateY(-3px) scale(1.04);
-            }
-        }
-
-        .site-footer {
-            text-align: center;
-            padding: 22px 20px 28px;
-            color: var(--neko-gray);
-            font-size: 0.84em;
-            background: rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 182, 193, 0.25);
-            margin-top: 6px;
-        }
-
-        .site-footer a {
-            color: var(--neko-pink);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .site-footer a:hover {
-            color: var(--neko-pink-deep);
-        }
-
-        .site-footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            list-style: none;
-            padding: 8px 0 4px;
-        }
-
-        .site-footer-links a {
-            color: var(--neko-gray);
-            font-size: 0.9em;
-        }
-
-        .footer-links-secondary {
-            margin-top: 2px;
-            font-size: 0.88em;
-        }
-
-        .tools-wrapper {
-            position: fixed;
-            bottom: 28px;
-            right: 26px;
-            z-index: 99;
+            background: linear-gradient(135deg, var(--pink), var(--pink-deep));
         }
 
         .gotop {
+            position: fixed;
+            bottom: 28px;
+            right: 26px;
+            z-index: 98;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -316,1136 +127,216 @@
             border-radius: 50%;
             box-shadow: 0 3px 14px rgba(255, 105, 180, 0.18);
             text-decoration: none;
-            color: var(--neko-pink);
+            color: var(--pink);
             font-size: 1.1em;
-            transition: all var(--transition-smooth);
+            transition: opacity 0.3s ease, transform 0.3s ease;
             border: 1px solid rgba(255, 182, 193, 0.35);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .gotop.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
         .gotop:hover {
             transform: translateY(-4px);
-            box-shadow: 0 6px 22px var(--neko-pink-glow);
-            background: var(--neko-pastel-pink);
-        }
-
-        @media (max-width: 1024px) {
-            .main-container {
-                max-width: 740px;
-                padding: 0 20px;
-            }
+            box-shadow: 0 6px 22px rgba(255, 105, 180, 0.25);
+            background: var(--pink-pastel);
         }
 
         @media (max-width: 768px) {
-            .site-nav a {
+            .nav a {
                 padding: 6px 14px;
                 font-size: 0.84em;
                 margin: 0 2px;
-                border-radius: 18px;
-            }
-
-            .main-container {
-                padding: 0 12px;
-                margin: 16px auto 0;
-            }
-
-            .tools-wrapper {
-                bottom: 16px;
-                right: 12px;
             }
 
             .gotop {
+                bottom: 16px;
+                right: 12px;
                 width: 36px;
                 height: 36px;
                 font-size: 1em;
             }
-
-            .bottom-decoration {
-                padding: 28px 16px 22px;
-                font-size: 0.82em;
-            }
-
-            .site-footer {
-                padding: 16px 12px 24px;
-                font-size: 0.78em;
-            }
-
-            .site-footer-links {
-                gap: 12px;
-            }
         }
 
         @media (max-width: 480px) {
-            .site-nav {
+            .nav {
                 padding: 8px 0;
             }
 
-            .site-nav a {
+            .nav a {
                 padding: 5px 10px;
                 font-size: 0.78em;
-                margin: 0 1px;
                 border-radius: 16px;
             }
 
-            .main-container {
-                padding: 0 8px;
-                margin: 10px auto 0;
-            }
-
-            .tools-wrapper {
+            .gotop {
                 bottom: 10px;
                 right: 8px;
-            }
-
-            .gotop {
                 width: 32px;
                 height: 32px;
                 font-size: 0.9em;
             }
-
-            .bottom-decoration {
-                font-size: 0.72em;
-                padding: 22px 10px 18px;
-            }
-        }
-
-        @media (min-width: 1600px) {
-            .main-container {
-                max-width: 960px;
-            }
         }
     </style>
-
     
-<style>
-    .hero {
-        position: relative;
-        text-align: center;
-        padding: 54px 24px 44px;
-        overflow: hidden;
-        margin-bottom: 8px;
-    }
-
-    .hero-bg {
-        position: absolute;
-        top: -120px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 700px;
-        height: 700px;
-        background:
-            radial-gradient(circle at 45% 40%, rgba(255, 182, 193, 0.16) 0%, transparent 55%),
-            radial-gradient(circle at 55% 45%, rgba(135, 206, 235, 0.1) 0%, transparent 55%);
-        border-radius: 50%;
-        z-index: 0;
-        animation: heroPulse 8s infinite ease-in-out;
-    }
-
-    @keyframes heroPulse {
-
-        0%,
-        100% {
-            transform: translateX(-50%) scale(1);
-            opacity: 0.7;
-        }
-
-        50% {
-            transform: translateX(-50%) scale(1.06);
-            opacity: 1;
-        }
-    }
-
-    .hero-decor {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    .hero-sparkle {
-        position: absolute;
-        color: var(--neko-light-pink);
-        font-size: 1.2em;
-        opacity: 0;
-        animation: sparkleFloat 3.5s infinite ease-in-out;
-    }
-
-    @keyframes sparkleFloat {
-
-        0%,
-        100% {
-            opacity: 0;
-            transform: translateY(0) rotate(0deg);
-        }
-
-        30% {
-            opacity: 0.7;
-        }
-
-        70% {
-            opacity: 0.3;
-            transform: translateY(-14px) rotate(20deg);
-        }
-    }
-
-    .hero-avatar {
-        position: relative;
-        z-index: 1;
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 20px;
-        border-radius: 50%;
-        border: 3px solid var(--neko-light-pink);
-        box-shadow: 0 0 50px var(--neko-pink-glow), 0 0 0 12px rgba(255, 182, 193, 0.06);
-        background: url("https://avatars.githubusercontent.com/u/193340716?v=4") center/cover;
-        animation: avatarFloat 3.4s ease-in-out infinite;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .hero-avatar:hover {
-        transform: scale(1.06);
-        box-shadow: 0 0 60px rgba(255, 105, 180, 0.35), 0 0 0 16px rgba(255, 182, 193, 0.1);
-    }
-
-    @keyframes avatarFloat {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-9px);
-        }
-    }
-
-    .hero-title {
-        position: relative;
-        z-index: 1;
-        font-size: 2.3em;
-        color: var(--neko-pink);
-        font-weight: 700;
-        margin-bottom: 4px;
-        letter-spacing: 3px;
-        background: linear-gradient(135deg, var(--neko-pink), var(--neko-blue));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .hero-subtitle {
-        position: relative;
-        z-index: 1;
-        font-size: 1em;
-        color: var(--neko-gray);
-        margin-bottom: 4px;
-    }
-
-    .hero-location {
-        position: relative;
-        z-index: 1;
-        font-size: 0.88em;
-        color: var(--neko-blue);
-        margin-bottom: 24px;
-        font-weight: 500;
-    }
-
-    .hero-stats {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        flex-wrap: wrap;
-    }
-
-    .hero-stat-item {
-        text-align: center;
-        padding: 16px 28px;
-        background: rgba(255, 255, 255, 0.78);
-        backdrop-filter: blur(10px);
-        border-radius: var(--radius-md);
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        min-width: 100px;
-        transition: all var(--transition-smooth);
-        box-shadow: var(--shadow-sm);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hero-stat-item::before {
-        content: '';
-        position: absolute;
-        top: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 50px;
-        height: 50px;
-        background: radial-gradient(circle, rgba(255, 182, 193, 0.2), transparent);
-        border-radius: 50%;
-        transition: all var(--transition-smooth);
-    }
-
-    .hero-stat-item:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-glow);
-        border-color: var(--neko-light-pink);
-    }
-
-    .hero-stat-item:hover::before {
-        width: 70px;
-        height: 70px;
-        top: -40px;
-    }
-
-    .hero-stat-num {
-        display: block;
-        font-size: 1.6em;
-        font-weight: 700;
-        color: var(--neko-pink);
-    }
-
-    .hero-stat-label {
-        font-size: 0.8em;
-        color: var(--neko-gray);
-        margin-top: 2px;
-    }
-
-    .post-list-section {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 0 4px;
-    }
-
-    .section-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 24px;
-        padding-left: 4px;
-    }
-
-    .section-icon {
-        font-size: 1.4em;
-        flex-shrink: 0;
-        animation: iconBounce 2s infinite ease-in-out;
-    }
-
-    @keyframes iconBounce {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-4px);
-        }
-    }
-
-    .section-header h2 {
-        font-size: 1.3em;
-        color: var(--neko-pink);
-        font-weight: 600;
-        white-space: nowrap;
-    }
-
-    .section-line {
-        flex: 1;
-        height: 2px;
-        background: linear-gradient(90deg, var(--neko-light-pink) 0%, rgba(255, 182, 193, 0.2) 50%, transparent 100%);
-        border-radius: 1px;
-    }
-
-    .post-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-    }
-
-    .post-card {
-        background: rgba(255, 255, 255, 0.82);
-        backdrop-filter: blur(8px);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-sm);
-        border: 1px solid rgba(255, 182, 193, 0.2);
-        transition: all var(--transition-smooth);
-        position: relative;
-        z-index: 1;
-        overflow: hidden;
-    }
-
-    .post-card::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle at center, rgba(255, 182, 193, 0.04) 0%, transparent 70%);
-        opacity: 0;
-        transition: opacity var(--transition-smooth);
-    }
-
-    .post-card:hover::after {
-        opacity: 1;
-    }
-
-    .post-card-accent {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 4px;
-        background: linear-gradient(180deg, var(--neko-pink), var(--neko-blue), var(--neko-orange), var(--neko-pink));
-        border-radius: 0 2px 2px 0;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-    }
-
-    .post-card:hover {
-        transform: translateY(-5px) scale(1.005);
-        box-shadow: 0 12px 40px rgba(255, 105, 180, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
-        border-color: rgba(255, 105, 180, 0.28);
-    }
-
-    .post-card:hover .post-card-accent {
-        opacity: 1;
-    }
-
-    .post-card-body {
-        padding: 26px 32px;
-    }
-
-    .post-card-meta {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 10px;
-        flex-wrap: wrap;
-    }
-
-    .post-date {
-        font-size: 0.82em;
-        color: var(--neko-blue);
-    }
-
-    .post-tag {
-        display: inline-block;
-        background: var(--neko-pastel-pink);
-        color: var(--neko-pink);
-        padding: 3px 12px;
-        border-radius: 12px;
-        font-size: 0.76em;
-        font-weight: 500;
-        transition: all 0.2s;
-    }
-
-    .post-tag:hover {
-        background: var(--neko-pink);
-        color: #fff;
-    }
-
-    .post-reading {
-        font-size: 0.8em;
-        color: var(--neko-gray-light);
-    }
-
-    .post-card-title {
-        font-size: 1.18em;
-        margin-bottom: 6px;
-        line-height: 1.4;
-    }
-
-    .post-card-title a {
-        color: var(--neko-dark);
-        text-decoration: none;
-        transition: color var(--transition-fast);
-    }
-
-    .post-card-title a:hover {
-        color: var(--neko-pink);
-    }
-
-    .post-card-desc {
-        font-size: 0.9em;
-        color: var(--neko-gray);
-        line-height: 1.65;
-        margin-bottom: 10px;
-    }
-
-    .read-more {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        color: var(--neko-pink);
-        font-size: 0.88em;
-        text-decoration: none;
-        font-weight: 500;
-        transition: all var(--transition-fast);
-    }
-
-    .read-more-arrow {
-        display: inline-block;
-        transition: transform var(--transition-fast);
-    }
-
-    .read-more:hover .read-more-arrow {
-        transform: translateX(5px);
-    }
-
-    .read-more:hover {
-        color: var(--neko-pink-deep);
-    }
-
-    .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 18px;
-        margin: 34px 0 20px;
-        padding: 20px;
-    }
-
-    .page-btn {
-        display: inline-block;
-        padding: 9px 22px;
-        background: rgba(255, 255, 255, 0.85);
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        border-radius: 22px;
-        color: var(--neko-pink);
-        text-decoration: none;
-        font-size: 0.9em;
-        font-weight: 500;
-        transition: all var(--transition-fast);
-    }
-
-    .page-btn:hover {
-        background: var(--neko-pastel-pink);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .page-btn-disabled {
-        color: var(--neko-gray-light);
-        cursor: default;
-        opacity: 0.5;
-    }
-
-    .page-info {
-        color: var(--neko-gray);
-        font-size: 0.9em;
-        font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-        .hero {
-            padding: 36px 16px 32px;
-        }
-
-        .hero-avatar {
-            width: 95px;
-            height: 95px;
-        }
-
-        .hero-title {
-            font-size: 1.7em;
-            letter-spacing: 1px;
-        }
-
-        .hero-stats {
-            gap: 12px;
-        }
-
-        .hero-stat-item {
-            min-width: 75px;
-            padding: 10px 16px;
-        }
-
-        .hero-stat-num {
-            font-size: 1.3em;
-        }
-
-        .post-card-body {
-            padding: 20px 20px;
-        }
-
-        .post-card-title {
-            font-size: 1.06em;
-        }
-
-        .post-list-section {
-            padding: 0 2px;
-        }
-
-        .pagination {
-            gap: 10px;
-            padding: 16px 4px;
-        }
-
-        .page-btn {
-            padding: 7px 16px;
-            font-size: 0.82em;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .hero {
-            padding: 28px 10px 24px;
-        }
-
-        .hero-avatar {
-            width: 78px;
-            height: 78px;
-        }
-
-        .hero-title {
-            font-size: 1.4em;
-        }
-
-        .hero-subtitle {
-            font-size: 0.85em;
-        }
-
-        .hero-stats {
-            gap: 8px;
-        }
-
-        .hero-stat-item {
-            min-width: 65px;
-            padding: 8px 12px;
-            border-radius: 12px;
-        }
-
-        .hero-stat-num {
-            font-size: 1.1em;
-        }
-
-        .hero-stat-label {
-            font-size: 0.7em;
-        }
-
-        .post-card-body {
-            padding: 16px 16px;
-        }
-
-        .post-card-title {
-            font-size: 0.98em;
-        }
-
-        .post-card-meta {
-            gap: 8px;
-        }
-
-        .section-header h2 {
-            font-size: 1.05em;
-        }
-
-        .post-grid {
-            gap: 12px;
-        }
-
-        .hero-sparkle {
-            font-size: 0.9em;
-        }
-    }
-
-    @media (min-width: 1600px) {
-        .hero {
-            padding: 66px 24px 52px;
-        }
-
-        .hero-avatar {
-            width: 140px;
-            height: 140px;
-        }
-
-        .hero-title {
-            font-size: 2.8em;
-        }
-
-        .post-card-body {
-            padding: 30px 40px;
-        }
-    }
-
-    .ann-teaser-section,
-    .intro-section {
-        max-width: 800px;
-        margin: 30px auto 0;
-        padding: 0 4px;
-    }
-
-    .section-more {
-        font-size: 0.82em;
-        color: var(--neko-blue);
-        text-decoration: none;
-        white-space: nowrap;
-        transition: color var(--transition-fast);
-        flex-shrink: 0;
-    }
-
-    .section-more:hover {
-        color: var(--neko-pink);
-    }
-
-    .ann-teaser-card {
-        display: block;
-        padding: 22px 28px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(6px);
-        border-radius: var(--radius-lg);
-        border: 1px solid rgba(255, 182, 193, 0.25);
-        text-decoration: none;
-        transition: all var(--transition-smooth);
-        box-shadow: var(--shadow-sm);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .ann-teaser-card::after {
-        content: '→';
-        position: absolute;
-        right: 24px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 1.4em;
-        color: var(--neko-light-pink);
-        transition: all var(--transition-fast);
-    }
-
-    .ann-teaser-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-        border-color: rgba(255, 105, 180, 0.28);
-    }
-
-    .ann-teaser-card:hover::after {
-        right: 18px;
-    }
-
-    .ann-teaser-date {
-        font-size: 0.78em;
-        color: var(--neko-blue);
-        margin-bottom: 6px;
-        font-weight: 500;
-    }
-
-    .ann-teaser-title {
-        color: var(--neko-pink);
-        font-size: 1.1em;
-        margin-bottom: 6px;
-        font-weight: 600;
-        padding-right: 30px;
-    }
-
-    .ann-teaser-desc {
-        font-size: 0.88em;
-        color: var(--neko-gray);
-        line-height: 1.6;
-        padding-right: 30px;
-    }
-
-    .intro-card {
-        display: flex;
-        align-items: center;
-        gap: 22px;
-        padding: 24px 28px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(6px);
-        border-radius: var(--radius-lg);
-        border: 1px solid rgba(255, 182, 193, 0.25);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .intro-card-avatar {
-        width: 72px;
-        height: 72px;
-        border-radius: 50%;
-        background-size: cover;
-        background-position: center;
-        flex-shrink: 0;
-        border: 2px solid var(--neko-light-pink);
-        box-shadow: 0 0 20px var(--neko-pink-glow);
-    }
-
-    .intro-card-body {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .intro-card-body h3 {
-        color: var(--neko-pink);
-        font-size: 1.08em;
-        margin-bottom: 4px;
-        font-weight: 600;
-    }
-
-    .intro-card-body p {
-        font-size: 0.88em;
-        color: var(--neko-gray);
-        line-height: 1.6;
-        margin-bottom: 10px;
-    }
-
-    .intro-card-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .intro-link {
-        font-size: 0.84em;
-        color: var(--neko-pink);
-        text-decoration: none;
-        padding: 5px 14px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        background: rgba(255, 255, 255, 0.5);
-        transition: all var(--transition-fast);
-        font-weight: 500;
-    }
-
-    .intro-link:hover {
-        background: var(--neko-pastel-pink);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
-    }
-
-    @media (max-width: 768px) {
-        .intro-card {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .intro-card-links {
-            justify-content: center;
-        }
-
-        .ann-teaser-card {
-            padding: 16px 20px;
-        }
-
-        .ann-teaser-card::after {
-            right: 16px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .intro-card {
-            padding: 16px;
-        }
-
-        .intro-card-avatar {
-            width: 56px;
-            height: 56px;
-        }
-
-        .intro-card-body h3 {
-            font-size: 1em;
-        }
-
-        .intro-card-body p {
-            font-size: 0.82em;
-        }
-
-        .ann-teaser-title {
-            font-size: 0.98em;
-        }
-
-        .ann-teaser-desc {
-            font-size: 0.82em;
-        }
-    }
-</style>
-
 </head>
 
 <body>
-    <nav class="site-nav">
+    <nav class="nav">
         <a href="/" class="active">🏠 首页</a>
         <a href="/announcements/" class="">📢 公告</a>
         <a href="/about/" class="">🐱 关于</a>
+        
     </nav>
 
-    <div class="main-container">
-        
-<main>
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-decor">
-            <span class="hero-sparkle" style="top:10%;left:18%;animation-delay:0s">✦</span>
-            <span class="hero-sparkle" style="top:22%;right:15%;animation-delay:0.8s">✧</span>
-            <span class="hero-sparkle" style="top:60%;left:10%;animation-delay:1.6s">⋆</span>
-            <span class="hero-sparkle" style="top:55%;right:12%;animation-delay:2.4s">✦</span>
-            <span class="hero-sparkle" style="top:8%;left:55%;animation-delay:0.4s">·</span>
-            <span class="hero-sparkle" style="top:75%;left:70%;animation-delay:2.0s">✧</span>
-            <span class="hero-sparkle" style="top:32%;left:5%;animation-delay:1.2s">🐾</span>
-            <span class="hero-sparkle" style="top:18%;right:8%;animation-delay:2.8s">🌸</span>
-            <span class="hero-sparkle" style="top:68%;right:22%;animation-delay:0.6s">🐾</span>
-            <span class="hero-sparkle" style="top:82%;left:30%;animation-delay:3.2s">⋆</span>
-            <span class="hero-sparkle" style="top:42%;right:28%;animation-delay:1.8s">🌸</span>
-            <span class="hero-sparkle" style="top:5%;right:38%;animation-delay:2.2s">✧</span>
+    
+<div class="home-area">
+    
+    <div class="hero-section">
+        <div class="sparkle-bg" aria-hidden="true">
+            <div class="sparkle-dot" style="top:10%;left:10%;animation-delay:0s"></div>
+            <div class="sparkle-dot" style="top:20%;right:15%;animation-delay:1s"></div>
+            <div class="sparkle-dot" style="top:50%;left:8%;animation-delay:2s"></div>
+            <div class="sparkle-dot" style="top:60%;right:10%;animation-delay:0.5s"></div>
+            <div class="sparkle-dot" style="top:80%;left:20%;animation-delay:1.5s"></div>
+            <div class="sparkle-dot" style="top:15%;left:80%;animation-delay:2.5s"></div>
         </div>
-        <div class="hero-avatar"></div>
+        <div class="hero-avatar" style="background-image:url('https://avatars.githubusercontent.com/u/193340716?v=4')"></div>
         <h1 class="hero-title">成霜喵喵</h1>
         <p class="hero-subtitle">成霜喵喵的小窝</p>
         <p class="hero-location">📍 湖南，郴州</p>
+    </div>
 
-        <div class="hero-stats">
-            <div class="hero-stat-item">
-                <span class="hero-stat-num">3</span>
-                <span class="hero-stat-label">篇文章</span>
+    
+    <div style="margin-bottom:36px;">
+        <h2 class="section-title"><span>📝</span> 最新文章</h2>
+        
+        
+        <article class="card post-card">
+            <div class="post-meta">
+                <span>📅 2025-11-03</span>
+                
+                <span class="post-tag">实用网站</span>
+                
+                <span style="color:var(--gray-light);">☕ 1 min</span>
             </div>
-            <div class="hero-stat-item">
-                <span class="hero-stat-num">9</span>
-                <span class="hero-stat-label">个标签</span>
+            <h3 style="font-size:1.12em;margin-bottom:6px;">
+                <a href="/posts/2025-11-03-%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/" class="post-title-link">🐾 边rua猫边挖宝实用网站资源导航</a>
+            </h3>
+            <p class="post-desc">
+                Neko私藏的资源宝藏库，包含效率工具、音乐、二次元、美化、AI助手等各类实用网站导航
+            </p>
+            <a href="/posts/2025-11-03-%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/" class="post-readmore">阅读全文 →</a>
+        </article>
+        
+        <article class="card post-card">
+            <div class="post-meta">
+                <span>📅 2025-06-20</span>
+                
+                <span class="post-tag">Neko助教</span>
+                
+                <span style="color:var(--gray-light);">☕ 1 min</span>
             </div>
-            <div class="hero-stat-item">
-                <span class="hero-stat-num">2025</span>
-                <span class="hero-stat-label">起始年</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="post-list-section">
-        <div class="section-header">
-            <span class="section-icon">📝</span>
-            <h2>最新文章</h2>
-            <span class="section-line"></span>
-        </div>
-
-        <div class="post-grid">
-            
-            
-            <article class="post-card">
-                <div class="post-card-accent"></div>
-                <div class="post-card-body">
-                    <div class="post-card-meta">
-                        <span class="post-date">📅 2025-11-03</span>
-                        
-                        
-                        <span class="post-tag">实用网站</span>
-                        
-                        
-                        
-                        <span class="post-reading">☕ 1 min</span>
-                        
-                    </div>
-                    <h3 class="post-card-title">
-                        <a href="/posts/2025-11-03-%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/">🐾 边rua猫边挖宝实用网站资源导航</a>
-                    </h3>
-                    
-                    <p class="post-card-desc">Neko私藏的资源宝藏库，包含效率工具、音乐、二次元、美化、AI助手等各类实用网站导航</p>
-                    
-                    <a href="/posts/2025-11-03-%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/" class="read-more">
-                        阅读全文
-                        <span class="read-more-arrow">→</span>
-                    </a>
-                </div>
-            </article>
-            
-            <article class="post-card">
-                <div class="post-card-accent"></div>
-                <div class="post-card-body">
-                    <div class="post-card-meta">
-                        <span class="post-date">📅 2025-06-20</span>
-                        
-                        
-                        <span class="post-tag">Neko助教</span>
-                        
-                        
-                        
-                        <span class="post-reading">☕ 1 min</span>
-                        
-                    </div>
-                    <h3 class="post-card-title">
-                        <a href="/posts/2025-06-20-%E6%B5%8B%E8%AF%95/">和Neko的超全测试-排版&#43;图片&#43;链接&#43;代码全解锁</a>
-                    </h3>
-                    
-                    <p class="post-card-desc"><h1 id="和neko的超全测试排版图片链接代码全解锁">和Neko的超全测试！排版+图片+链接+代码全解锁</h1>
+            <h3 style="font-size:1.12em;margin-bottom:6px;">
+                <a href="/posts/2025-06-20-%E6%B5%8B%E8%AF%95/" class="post-title-link">和Neko的超全测试-排版&#43;图片&#43;链接&#43;代码全解锁</a>
+            </h3>
+            <p class="post-desc">
+                <h1 id="和neko的超全测试排版图片链接代码全解锁">和Neko的超全测试！排版+图片+链接+代码全解锁</h1>
 <p>(肉垫拍键盘冒粉色火花) 主人主人~Neko把测试文章塞得满满当当啦！</p>
 <h2 id="-测试目标给博客体检">🎯 测试目标：给博客&quot;体检&quot;</h2>
-<p>像给小猫做健康检查一样~这 …</p></p>
-                    
-                    <a href="/posts/2025-06-20-%E6%B5%8B%E8%AF%95/" class="read-more">
-                        阅读全文
-                        <span class="read-more-arrow">→</span>
-                    </a>
-                </div>
-            </article>
-            
-            <article class="post-card">
-                <div class="post-card-accent"></div>
-                <div class="post-card-body">
-                    <div class="post-card-meta">
-                        <span class="post-date">📅 2025-06-19</span>
-                        
-                        
-                        <span class="post-tag">甘城なつき</span>
-                        
-                        
-                        
-                        <span class="post-reading">☕ 1 min</span>
-                        
-                    </div>
-                    <h3 class="post-card-title">
-                        <a href="/posts/2025-06-19-%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/">甘城なつき官网探访</a>
-                    </h3>
-                    
-                    <p class="post-card-desc">探访甘城猫猫官网的真实体验</p>
-                    
-                    <a href="/posts/2025-06-19-%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/" class="read-more">
-                        阅读全文
-                        <span class="read-more-arrow">→</span>
-                    </a>
-                </div>
-            </article>
-            
-        </div>
+<p>像给小猫做健康检查一样~这 …</p>
+            </p>
+            <a href="/posts/2025-06-20-%E6%B5%8B%E8%AF%95/" class="post-readmore">阅读全文 →</a>
+        </article>
+        
+        <article class="card post-card">
+            <div class="post-meta">
+                <span>📅 2025-06-19</span>
+                
+                <span class="post-tag">甘城なつき</span>
+                
+                <span style="color:var(--gray-light);">☕ 1 min</span>
+            </div>
+            <h3 style="font-size:1.12em;margin-bottom:6px;">
+                <a href="/posts/2025-06-19-%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/" class="post-title-link">甘城なつき官网探访</a>
+            </h3>
+            <p class="post-desc">
+                探访甘城猫猫官网的真实体验
+            </p>
+            <a href="/posts/2025-06-19-%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/" class="post-readmore">阅读全文 →</a>
+        </article>
+        
 
         
-    </section>
+    </div>
 
     
     
     
     
-    <section class="ann-teaser-section">
-        <div class="section-header">
-            <span class="section-icon">📢</span>
-            <h2>最新公告</h2>
-            <span class="section-line"></span>
-            <a href="/announcements/" class="section-more">查看全部 →</a>
-        </div>
-        <a href="/announcements/" class="ann-teaser-card">
-            <div class="ann-teaser-date">2026-10-11</div>
-            <h3 class="ann-teaser-title">🌸 博客全面焕新升级喵！</h3>
-            <p class="ann-teaser-desc">## 窝们换引擎啦！从 Jekyll 到 Hugo 喵～ 🚀 经过一段时间的努力，博客完成了自上线以来**最大规模的一次重写**喵！ --- ### 🏗️ 底层重构 - **Jekyll → Hugo**：静态站点生成器全面迁移，构建速度从 …</p>
+    
+    <div style="margin-bottom:36px;">
+        <h2 class="section-title">
+            <span>📢</span> 最新公告
+            <a href="/announcements/" class="section-link">查看全部 →</a>
+        </h2>
+        <a href="/announcements/" class="card" style="display:block;padding:22px 28px;text-decoration:none;">
+            <div style="font-size:0.78em;color:var(--blue);margin-bottom:6px;">📅 2026-10-11</div>
+            <h3 style="color:var(--pink);font-size:1.06em;margin-bottom:6px;">🧪 测试公告</h3>
+            <p style="font-size:0.88em;color:var(--gray);line-height:1.6;">## 这是一条测试公告喵～
+
+如果你看到这条公告，说明弹窗功能正常运作！
+
+- ✅ 弹窗正常显示
+- ✅ 关闭按钮可用
+- ✅ ESC / 点击遮罩可关闭
+</p>
         </a>
-    </section>
+    </div>
     
 
-    <section class="intro-section">
-        <div class="section-header">
-            <span class="section-icon">🐱</span>
-            <h2>关于本站</h2>
-            <span class="section-line"></span>
-        </div>
-        <div class="intro-card">
-            <div class="intro-card-avatar" style="background-image:url(https://avatars.githubusercontent.com/u/193340716?v=4)"></div>
-            <div class="intro-card-body">
-                <h3>成霜喵喵</h3>
-                <p>成霜喵喵的小窝，然后就布吉岛喏喵</p>
-                <div class="intro-card-links">
-                    <a href="/about/" class="intro-link">🐱 了解更多</a>
-                    <a href="/posts/" class="intro-link">📝 所有文章</a>
-                    
-                    <a href="https://github.com/ylcs-mm" target="_blank" rel="noopener"
-                        class="intro-link">🐈 GitHub</a>
-                    
+    
+    <div style="margin-bottom:36px;">
+        <h2 class="section-title"><span>🐱</span> 关于本站</h2>
+        <div class="card" style="display:flex;align-items:center;gap:20px;padding:22px 28px;">
+            <div
+                style="width:64px;height:64px;border-radius:50%;border:2px solid var(--pink-light);box-shadow:0 0 20px rgba(255,105,180,0.15);background:url('https://avatars.githubusercontent.com/u/193340716?v=4') center/cover;flex-shrink:0;">
+            </div>
+            <div style="flex:1;min-width:0;">
+                <h3 style="color:var(--pink);font-size:1.04em;margin-bottom:4px;">成霜喵喵</h3>
+                <p style="font-size:0.86em;color:var(--gray);line-height:1.6;margin-bottom:8px;">成霜喵喵的小窝，然后就布吉岛喏喵</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                    <a href="/about/" class="tag-link">🐱 了解更多</a>
+                    <a href="/posts/" class="tag-link">📝 所有文章</a>
                 </div>
             </div>
         </div>
-    </section>
-</main>
-
     </div>
-
-    <div class="bottom-decoration">
-        <span>🐾</span> <span>ฅ</span><span>(^</span>&bull;<span>ω</span>&bull;<span>^)ฅ</span> <span>🐾</span>
-    </div>
-
-    <footer class="site-footer">
-    <div class="copyright">
-        &copy; 2025&ndash;2026 <span title="成霜·喵喵">成霜·喵喵</span>
-    </div>
-
-    <ul class="site-footer-links">
-        <li><a href="/">首页</a></li>
-        <li><a href="/announcements/">公告</a></li>
-        <li><a href="/about/">关于</a></li>
-    </ul>
-
-    <p class="footer-links-secondary">
-        <a href="https://github.com/ylcs-mm" target="_blank" rel="noopener">GitHub</a>
-        &nbsp;·&nbsp;
-        <a href="mailto:2992412549@qq.com">Email</a>
-    </p>
-</footer>
+</div>
 
 
-<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+    <footer
+        style="text-align:center;padding:28px 20px;color:var(--gray);font-size:0.84em;border-top:1px solid rgba(255,182,193,0.2);margin-top:24px;">
+        <p>&copy; 2025-2026 成霜·喵喵</p>
+        <p style="margin-top:6px;">
+            <a href="/" style="color:var(--pink);text-decoration:none;">首页</a> &nbsp;·&nbsp;
+            <a href="/announcements/" style="color:var(--pink);text-decoration:none;">公告</a> &nbsp;·&nbsp;
+            <a href="/about/" style="color:var(--pink);text-decoration:none;">关于</a> &nbsp;·&nbsp;
+            <a href="https://github.com/ylcs-mm" style="color:var(--pink);text-decoration:none;"
+                target="_blank" rel="noopener">GitHub</a>
+        </p>
+    </footer>
 
+    <a href="#" class="gotop" title="回到顶部">↑</a>
 
-<style>
-    #waifu,
-    #live2d-widget,
-    #live2d,
-    .waifu {
-        position: fixed !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        left: auto !important;
-        top: auto !important;
-        z-index: 99999 !important;
-        pointer-events: none !important;
-    }
-
-    @media (max-width: 640px) {
-
-        #waifu,
-        #live2d-widget,
-        #live2d,
-        .waifu {
-            transform: scale(0.55) !important;
-            transform-origin: bottom right !important;
-        }
-    }
-</style>
-
-<script>
+    <script src="/assets/js/main.js"></script>
     
-
-    window.live2d_widgets = {
-        modelPath: "/live2d/tororo/",
-        display: {
-            position: "right",
-            width: 155,
-            height: 300,
-        },
-        mobile: {
-            show: true,
-        },
-    };
-</script>
-<script async src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
-
-<script>
-    (function forcePosition() {
-        var n = 0;
-        var t = setInterval(function () {
-            n++;
-            var el = document.getElementById("waifu") || document.querySelector("#live2d-widget") || document.querySelector("[class*='live2d']");
-            if (!el && n >= 30) { clearInterval(t); return; }
-            if (!el) return;
-            clearInterval(t);
-            ["position", "right", "bottom", "left", "top", "zIndex", "pointerEvents"].forEach(function (p) {
-                el.style.removeProperty(p);
-            });
-            el.style.setProperty("position", "fixed", "important");
-            el.style.setProperty("right", "0", "important");
-            el.style.setProperty("bottom", "0", "important");
-            el.style.setProperty("left", "auto", "important");
-            el.style.setProperty("top", "auto", "important");
-            el.style.setProperty("z-index", "99999", "important");
-            el.style.setProperty("pointer-events", "none", "important");
-            if (window.innerWidth < 640) {
-                el.style.setProperty("transform", "scale(0.55)", "important");
-                el.style.setProperty("transform-origin", "bottom right", "important");
-            }
-        }, 300);
-    })();
-</script>
 
 
 
@@ -1662,54 +553,20 @@
     <div class="modal-overlay" id="announcement-overlay">
         <div class="modal-container">
             <div class="modal-header">
-                <div class="modal-title">🐾 🌸 博客全面焕新升级喵！ 🐾</div>
+                <div class="modal-title">🐾 🧪 测试公告 🐾</div>
             </div>
             
             <div class="update-date">【2026-10-11】</div>
             
             <div class="modal-scrollable">
                 <div class="modal-content">
-                    <h2 id="窝们换引擎啦从-jekyll-到-hugo-喵-">窝们换引擎啦！从 Jekyll 到 Hugo 喵～ 🚀</h2>
-<p>经过一段时间的努力，博客完成了自上线以来<strong>最大规模的一次重写</strong>喵！</p>
-<hr>
-<h3 id="-底层重构">🏗️ 底层重构</h3>
+                    <h2 id="这是一条测试公告喵">这是一条测试公告喵～</h2>
+<p>如果你看到这条公告，说明弹窗功能正常运作！</p>
 <ul>
-<li><strong>Jekyll → Hugo</strong>：静态站点生成器全面迁移，构建速度从秒级进化到毫秒级（77ms 完成构建！）</li>
-<li>模板体系从 Liquid 迁移到 Go Templates，代码结构更清晰喵</li>
+<li>✅ 弹窗正常显示</li>
+<li>✅ 关闭按钮可用</li>
+<li>✅ ESC / 点击遮罩可关闭</li>
 </ul>
-<h3 id="-界面全面焕新">🎨 界面全面焕新</h3>
-<ul>
-<li>全新的<strong>甘城猫猫风格配色系统</strong>：粉蓝渐变 + 半透明毛玻璃效果，像棉花糖一样柔软</li>
-<li>统一的 CSS 变量设计体系，全站视觉一致性大幅提升</li>
-<li>所有页面独立重写美化：首页、文章页、公告页、关于页、列表页</li>
-<li>英雄区星光漂浮动画、头像悬停发光、卡片毛玻璃 hover…</li>
-<li>引用块引号装饰、代码块渐变顶部条、表格斑马纹…细节满满喵！</li>
-</ul>
-<h3 id="-全端响应式适配">📱 全端响应式适配</h3>
-<ul>
-<li>覆盖 5 个断点：手机（320px+）、平板、桌面、宽屏、超宽屏</li>
-<li>手机端和桌面端都能获得最佳浏览体验</li>
-</ul>
-<h3 id="-看板娘搬家">🐾 看板娘搬家</h3>
-<ul>
-<li>猫猫看板娘从中间移到了<strong>右下角</strong>固定显示</li>
-<li>桌面端 160×320，手机端自动缩小为 110×220</li>
-<li>不再遮挡正文内容，随时可rua！</li>
-</ul>
-<h3 id="-统计系统升级">📊 统计系统升级</h3>
-<ul>
-<li>从「不蒜子」更换为 <strong>Umami Cloud</strong>，统计更稳定精准喵～</li>
-</ul>
-<h3 id="-其他优化">🧹 其他优化</h3>
-<ul>
-<li>移除了评论组件，页面更清爽</li>
-<li>代码整体瘦身，加载速度更快</li>
-<li>键盘导航优化，无障碍访问体验提升</li>
-</ul>
-<hr>
-<blockquote>
-<p>希望你喜欢这个全新的猫窝喵～有问题随时找窝反馈！(ฅ^•ω•^ฅ) 💖</p></blockquote>
-
                 </div>
                 <div class="footer-note">喵喵喵~ (A·ω·A)</div>
             </div>
@@ -1728,78 +585,17 @@
             overlay.classList.remove('show');
             document.body.style.overflow = 'auto';
         };
-        function shouldShow() {
-            try {
-                var d = localStorage.getItem('nekoAnnouncementData');
-                if (!d) return true;
-                var data = JSON.parse(d);
-                var today = new Date().toDateString();
-                return data.date !== today || data.title !== "🌸 博客全面焕新升级喵！";
-            } catch (e) { return true; }
-        }
-        function recordShown() {
-            try {
-                localStorage.setItem('nekoAnnouncementData', JSON.stringify({
-                    date: new Date().toDateString(),
-                    title: "🌸 博客全面焕新升级喵！",
-                    timestamp: Date.now()
-                }));
-            } catch (e) { }
-        }
-        if (shouldShow()) {
-            setTimeout(function () {
-                overlay.classList.add('show');
-                document.body.style.overflow = 'hidden';
-                recordShown();
-            },  1000 );
-    }
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+        setTimeout(function () {
+            overlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        },  1000 );
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
     overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
-}) ();
+    }) ();
 </script>
 
 
-
-    <div class="tools-wrapper">
-        <a class="gotop" href="#" title="回到顶部" aria-label="回到顶部">▲</a>
-    </div>
-
     
-
-    <canvas id="bg-canvas"
-        style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
-    <script>
-        (function () {
-            var c = document.getElementById("bg-canvas"), x = c.getContext("2d"), p = [], w, h, t = 0;
-            function R(n) {
-                c.width = w = window.innerWidth; c.height = h = document.documentElement.scrollHeight; p = [];
-                for (var i = 0; i < n; i++)p.push({
-                    x: Math.random() * w, y: Math.random() * h, s: 0.4 + Math.random() * 0.9,
-                    vx: (Math.random() - 0.5) * 0.4, vy: -0.2 - Math.random() * 0.6, r: Math.random() * 0.15 + 0.85, o: Math.random(),
-                    ty: Math.floor(Math.random() * 3)
-                });
-            } R(window.innerWidth < 640 ? 9 : 20);
-            window.addEventListener("resize", function () { R(window.innerWidth < 640 ? 9 : 20); });
-            function D() {
-                t++; x.clearRect(0, 0, w, h);
-                for (var i = 0; i < p.length; i++) {
-                    var a = p[i]; a.x += a.vx; a.y += a.vy; a.o += 0.005;
-                    if (a.y < -40 || a.x < -40 || a.x > w + 40) { a.x = Math.random() * w; a.y = h + 40; a.o = 0; }
-                    var al = 0.35 + 0.3 * Math.sin(a.o * 3);
-                    if (a.ty === 0) {
-                        x.save(); x.translate(a.x, a.y); x.rotate(Math.sin(t * 0.02 + a.o) * 0.3);
-                        x.font = (12 * a.s) + "px serif"; x.fillStyle = "rgba(255,182,193," + al + ")"; x.fillText("🌸", -8 * a.s, -8 * a.s); x.restore();
-                    }
-                    else if (a.ty === 1) { x.font = (14 * a.s) + "px serif"; x.fillStyle = "rgba(255,182,193," + (al * 0.7) + ")"; x.fillText("🐾", a.x, a.y); }
-                    else {
-                        x.beginPath(); x.arc(a.x, a.y, 3 * a.s, 0, Math.PI * 2); x.fillStyle = "rgba(135,206,235," + (al * 0.5) + ")";
-                        x.fill(); x.beginPath(); x.arc(a.x, a.y, 5 * a.s, 0, Math.PI * 2); x.fillStyle = "rgba(135,206,235," + (al * 0.15) + ")"; x.fill();
-                    }
-                }
-                requestAnimationFrame(D);
-            } D();
-        })();
-    </script>
 </body>
 
 </html>

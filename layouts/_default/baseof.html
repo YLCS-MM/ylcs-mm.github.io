@@ -116,7 +116,7 @@
             bottom: 28px;
             right: 26px;
             z-index: 98;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
             width: 42px;
@@ -128,8 +128,17 @@
             text-decoration: none;
             color: var(--pink);
             font-size: 1.1em;
-            transition: all var(--trans);
+            transition: opacity 0.3s ease, transform 0.3s ease;
             border: 1px solid rgba(255, 182, 193, 0.35);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .gotop.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
         .gotop:hover {
@@ -203,7 +212,6 @@
 
     <a href="#" class="gotop" title="回到顶部">↑</a>
 
-    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/assets/js/main.js"></script>
     {{ partial "footer.html" . }}
     {{ block "extra_scripts" . }}{{ end }}

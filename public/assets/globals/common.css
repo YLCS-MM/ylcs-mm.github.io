@@ -4,15 +4,15 @@
     background: transparent !important;
     background-color: transparent !important;
     background-image: none !important;
-    
+
     /* 移除边框和阴影 */
     border: none !important;
     border-bottom: none !important;
     box-shadow: none !important;
-    
+
     /* 确保透明效果 */
     backdrop-filter: blur(5px) !important;
-    
+
     /* 高度优化 */
     min-height: 40px !important;
     padding: 8px 0 !important;
@@ -22,7 +22,7 @@
 .site-header-nav-item,
 .site-header h1 a {
     color: #333 !important;
-    text-shadow: 0 1px 2px rgba(255,255,255,0.8) !important;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
 }
 
 .site-header-nav-item:hover,
@@ -38,20 +38,20 @@
         background: transparent !important;
         background-color: transparent !important;
         background-image: none !important;
-        
+
         /* 调整尺寸 */
         min-height: 35px !important;
         padding: 5px 0 !important;
     }
-    
+
     /* 确保移动端导航链接可见 */
     .site-header-nav-item {
-        background: rgba(255,255,255,0.8) !important;
+        background: rgba(255, 255, 255, 0.8) !important;
         padding: 3px 6px !important;
         border-radius: 6px !important;
         margin: 2px !important;
     }
-    
+
     /* 汉堡菜单图标颜色 */
     .collapsed .icon-bar {
         background-color: #333 !important;
@@ -59,11 +59,13 @@
 }
 
 /* ===== 以下是原始样式保持不变 ===== */
-.site-header,.site-header-actions .select-menu {
+.site-header,
+.site-header-actions .select-menu {
     position: relative
 }
 
-.markdown-body,body {
+.markdown-body,
+body {
     font-family: -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 16px;
     line-height: 1.6;
@@ -74,7 +76,10 @@
 }
 
 @font-face {
-    font-family:octicons;src:font-url(../fonts/octicons.eot?#iefix) format("embedded-opentype"),font-url(../fonts/octicons.woff) format("woff"),font-url(../fonts/octicons.ttf) format("truetype"),font-url(../fonts/octicons.svg#octicons) format("svg");font-weight:400;font-style:normal
+    font-family: octicons;
+    src: font-url(../fonts/octicons.eot?#iefix) format("embedded-opentype"), font-url(../fonts/octicons.woff) format("woff"), font-url(../fonts/octicons.ttf) format("truetype"), font-url(../fonts/octicons.svg#octicons) format("svg");
+    font-weight: 400;
+    font-style: normal
 }
 
 .pagination {
@@ -103,7 +108,7 @@
     border-radius: 50%;
     margin-right: 12px;
     vertical-align: middle;
-    box-shadow: 0 0 8px rgba(255,255,255,0.8);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 .site-header-avatar:hover {
@@ -118,7 +123,8 @@
     margin-bottom: -6px
 }
 
-.site-header-actions .select-menu:after,.site-header-actions .select-menu:before {
+.site-header-actions .select-menu:after,
+.site-header-actions .select-menu:before {
     display: table;
     content: ""
 }
@@ -141,7 +147,8 @@
     float: left
 }
 
-.site-header h1,.site-header h1 .octicon {
+.site-header h1,
+.site-header h1 .octicon {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 32px;
@@ -150,7 +157,15 @@
     vertical-align: top
 }
 
-.markdown-body dl dt,.markdown-body table th,.pl-mb,.pl-mdr,.pl-mh,.pl-mh .pl-en,.pl-ms,.pl-sr .pl-cce,.site-header h1 strong {
+.markdown-body dl dt,
+.markdown-body table th,
+.pl-mb,
+.pl-mdr,
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms,
+.pl-sr .pl-cce,
+.site-header h1 strong {
     font-weight: 700
 }
 
@@ -206,7 +221,8 @@
     color: #777
 }
 
-.site-footer:after,.site-footer:before {
+.site-footer:after,
+.site-footer:before {
     display: table;
     content: ""
 }
@@ -238,7 +254,8 @@
     border-top: 1px solid #eee
 }
 
-.markdown-body h1,.markdown-body h2 {
+.markdown-body h1,
+.markdown-body h2 {
     padding-bottom: .3em;
     border-bottom: 1px solid #eee
 }
@@ -289,11 +306,11 @@
 }
 
 .markdown-body>:first-child {
-    margin-top: 0!important
+    margin-top: 0 !important
 }
 
 .markdown-body>:last-child {
-    margin-bottom: 0!important
+    margin-bottom: 0 !important
 }
 
 .markdown-body a:not([href]) {
@@ -319,7 +336,12 @@
     outline: 0
 }
 
-.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6 {
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
     position: relative;
     margin-top: 1em;
     margin-bottom: 16px;
@@ -327,23 +349,49 @@
     line-height: 1.4
 }
 
-.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link {
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
     display: none;
     color: #000;
     vertical-align: middle
 }
 
-.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor {
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
     padding-left: 8px;
     margin-left: -30px;
     text-decoration: none
 }
 
-.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link {
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
     display: inline-block
 }
 
-.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt {
+.markdown-body h1 code,
+.markdown-body h1 tt,
+.markdown-body h2 code,
+.markdown-body h2 tt,
+.markdown-body h3 code,
+.markdown-body h3 tt,
+.markdown-body h4 code,
+.markdown-body h4 tt,
+.markdown-body h5 code,
+.markdown-body h5 tt,
+.markdown-body h6 code,
+.markdown-body h6 tt {
     font-size: inherit
 }
 
@@ -370,7 +418,8 @@
     line-height: 1.43
 }
 
-.markdown-body h3 .anchor,.markdown-body h4 .anchor {
+.markdown-body h3 .anchor,
+.markdown-body h4 .anchor {
     line-height: 1.2
 }
 
@@ -378,7 +427,8 @@
     font-size: 1.25em
 }
 
-.markdown-body h5 .anchor,.markdown-body h6 .anchor {
+.markdown-body h5 .anchor,
+.markdown-body h6 .anchor {
     line-height: 1.1
 }
 
@@ -391,7 +441,13 @@
     color: #777
 }
 
-.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul {
+.markdown-body blockquote,
+.markdown-body dl,
+.markdown-body ol,
+.markdown-body p,
+.markdown-body pre,
+.markdown-body table,
+.markdown-body ul {
     margin-top: 0;
     margin-bottom: 16px
 }
@@ -404,16 +460,21 @@
     border: 0
 }
 
-.markdown-body ol,.markdown-body ul {
+.markdown-body ol,
+.markdown-body ul {
     padding-left: 2em
 }
 
-.markdown-body ol.no-list,.markdown-body ul.no-list {
+.markdown-body ol.no-list,
+.markdown-body ul.no-list {
     padding: 0;
     list-style-type: none
 }
 
-.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul {
+.markdown-body ol ol,
+.markdown-body ol ul,
+.markdown-body ul ol,
+.markdown-body ul ul {
     margin-top: 0;
     margin-bottom: 0
 }
@@ -460,7 +521,8 @@
     word-break: keep-all
 }
 
-.markdown-body table td,.markdown-body table th {
+.markdown-body table td,
+.markdown-body table th {
     padding: 6px 13px;
     border: 1px solid #ddd
 }
@@ -573,7 +635,8 @@
     text-align: right
 }
 
-.markdown-body code,.markdown-body tt {
+.markdown-body code,
+.markdown-body tt {
     font-family: monospace, Consolas, "Liberation Mono", Menlo, Courier;
     padding: 0 2px 0 2px;
     margin: 0;
@@ -585,7 +648,8 @@
     border: solid 1px #dddddd;
 }
 
-.markdown-body code br,.markdown-body tt br {
+.markdown-body code br,
+.markdown-body tt br {
     display: none
 }
 
@@ -607,7 +671,8 @@
     margin-bottom: 16px
 }
 
-.markdown-body .highlight pre,.markdown-body pre {
+.markdown-body .highlight pre,
+.markdown-body pre {
     padding: 16px;
     overflow: auto;
     font-size: 85%;
@@ -625,7 +690,8 @@
     word-wrap: normal
 }
 
-.markdown-body pre code,.markdown-body pre tt {
+.markdown-body pre code,
+.markdown-body pre tt {
     display: inline;
     max-width: initial;
     padding: 0;
@@ -637,7 +703,10 @@
     border: 0
 }
 
-.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before {
+.markdown-body pre code:after,
+.markdown-body pre code:before,
+.markdown-body pre tt:after,
+.markdown-body pre tt:before {
     content: normal
 }
 
@@ -660,15 +729,18 @@
     color: #969896
 }
 
-.pl-c1,.pl-s .pl-v {
+.pl-c1,
+.pl-s .pl-v {
     color: #0086b3
 }
 
-.pl-e,.pl-en {
+.pl-e,
+.pl-en {
     color: #795da3
 }
 
-.pl-s .pl-s1,.pl-smi {
+.pl-s .pl-s1,
+.pl-smi {
     color: #333
 }
 
@@ -680,7 +752,13 @@
     color: #a71d5d
 }
 
-.pl-pds,.pl-s,.pl-s .pl-pse .pl-s1,.pl-sr,.pl-sr .pl-cce,.pl-sr .pl-sra,.pl-sr .pl-sre {
+.pl-pds,
+.pl-s,
+.pl-s .pl-pse .pl-s1,
+.pl-sr,
+.pl-sr .pl-cce,
+.pl-sr .pl-sra,
+.pl-sr .pl-sre {
     color: #183691
 }
 
@@ -705,7 +783,9 @@
     color: #693a17
 }
 
-.pl-mh,.pl-mh .pl-en,.pl-ms {
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms {
     color: #1d3e81
 }
 
@@ -745,30 +825,26 @@ pre {
 }
 
 .tools-wrapper {
-  position: fixed;
-  right: 1em;
-  bottom: 3.4375em;
-  z-index: 9;
-  width: 2.5em;
+    position: fixed;
+    right: 1em;
+    bottom: 3.4375em;
+    z-index: 9;
+    width: 2.5em;
 }
 
 .tools-wrapper a {
-  color: #999;
-  text-align: center;
-  margin-bottom: -1px;
-  background: rgba(255, 255, 255, 32);
+    color: #999;
+    text-align: center;
+    margin-bottom: -1px;
+    background: rgba(255, 255, 255, 32);
 }
 
 .tools-wrapper span.octicon {
-  font-size: 1.5em;
-}
-
-.tools-wrapper .gotop {
-  display: none;
+    font-size: 1.5em;
 }
 
 .top-most-flag {
-  color: red;
+    color: red;
 }
 
 a.footnote:hover {
@@ -803,32 +879,41 @@ div.footnotes::before {
     width: 20%
 }
 
-img + em {
-  color: grey;
-  display: block;
+img+em {
+    color: grey;
+    display: block;
 }
 
-.content-header-ad { display:inline-block; width: 320px; height: 50px; }
-@media (max-width: 400px) { .content-header-ad { display: none; } }
-@media (min-width:500px) { .content-header-ad { width: 468px; height: 60px; } }
-@media (min-width:800px) { .content-header-ad { width: 728px; height: 90px; } }
+.content-header-ad {
+    display: inline-block;
+    width: 320px;
+    height: 50px;
+}
 
-/* 看板娘固定右下角（正确写法） */
-#live2dcanvas,
-.live2d-widget,
-#waifu {
-  position: fixed !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: auto !important;
-  top: auto !important;
-  z-index: 9998; /* 确保在弹窗之下 */
-  pointer-events: auto;
+@media (max-width: 400px) {
+    .content-header-ad {
+        display: none;
+    }
+}
+
+@media (min-width:500px) {
+    .content-header-ad {
+        width: 468px;
+        height: 60px;
+    }
+}
+
+@media (min-width:800px) {
+    .content-header-ad {
+        width: 728px;
+        height: 90px;
+    }
 }
 
 /* 导航链接基础样式 */
 .nav-link {
-    display: inline-flex !important; /* 改为inline-flex保持横向 */
+    display: inline-flex !important;
+    /* 改为inline-flex保持横向 */
     align-items: center;
     gap: 5px;
     position: relative;
@@ -836,8 +921,10 @@ img + em {
     padding: 8px 12px;
     border-radius: 6px;
     transition: all 0.3s ease;
-    white-space: nowrap; /* 防止文字换行 */
-    margin: 0 5px !important; /* 添加水平间距 */
+    white-space: nowrap;
+    /* 防止文字换行 */
+    margin: 0 5px !important;
+    /* 添加水平间距 */
 }
 
 .nav-link:hover {
@@ -864,9 +951,17 @@ img + em {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .site-header-nav-item.selected {
@@ -885,7 +980,8 @@ img + em {
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center;
-    justify-content: flex-end; /* 右对齐 */
+    justify-content: flex-end;
+    /* 右对齐 */
     gap: 10px;
 }
 
@@ -894,7 +990,7 @@ img + em {
     .mobile-hidden {
         display: flex;
     }
-    
+
     .site-header nav {
         gap: 15px;
     }
@@ -903,164 +999,188 @@ img + em {
 /* 手机端横向排列适配 */
 @media (max-width: 767px) {
     .site-header nav {
-        justify-content: center !important; /* 手机端居中 */
-        flex-wrap: wrap !important; /* 允许换行 */
+        justify-content: center !important;
+        /* 手机端居中 */
+        flex-wrap: wrap !important;
+        /* 允许换行 */
         gap: 8px;
     }
-    
+
     .nav-link {
         padding: 6px 10px;
         font-size: 0.9em;
     }
-    
+
     /* 如果导航项太多，缩小间距 */
     .site-header nav:has(> :nth-child(5)) {
         gap: 5px;
     }
-    
+
     .site-header nav:has(> :nth-child(6)) {
         gap: 3px;
     }
 }
 
 .container {
-  width: auto;
-  max-width: 1020px;
-  padding-left: 20px;
-  padding-right: 20px
+    width: auto;
+    max-width: 1020px;
+    padding-left: 20px;
+    padding-right: 20px
 }
 
 .mobile-visible {
-  display: none
+    display: none
 }
 
 @media (max-width:60em) {
-  .collection-card {
-    width: 45%;
-    height: 225px
-  }
+    .collection-card {
+        width: 45%;
+        height: 225px
+    }
 }
 
 @media (max-width:35em) {
-  .collection-card {
-    width: 100%;
-    max-width: 350px;
-    margin: 10px auto
-  }
+    .collection-card {
+        width: 100%;
+        max-width: 350px;
+        margin: 10px auto
+    }
 }
 
 @media (max-width:50em) {
-  .mobile-block {
-    display: block;
-    float: none
-  }
-  .mobile-hidden {
-    display: none
-  }
-  .mobile-visible {
-    display: inline-block
-  }
-  .mobile-md-section {
-    padding: 10px 0
-  }
-  .column,
-  .one-third-column {
-    width: 100%!important;
-    float: none;
-  }
-  .home .banner .collection-head {
-    padding: 1rem 1rem 1rem 0;
-  }
-  .home .collection-head .collection-title {
-    padding: 0;
-  }
-  .collection-head .collection-header {
-    line-height: 1;
-  }
-  .collection-head.small .collection-title h1.collection-header {
-    font-size: 1.25em;
-  }
-  .collection-head .collection-info .meta-info,
-  .collection-head .collection-info .meta-info .octicon {
-    font-size: 0.75em;
-  }
-  .site-header {
-    padding-bottom: 0;
-    padding-top: 5px;
-  }
-  .site-header h1, .site-header h1 .octicon {
-    font-size: 1em;
-  }
-  .site-header .site-header-nav {
-    float: right;
-    display: none;
-    margin-bottom: 0;
-  }
-  .site-header .site-header-nav .site-header-nav-item {
-    padding: 0 .5rem;
-    margin-left: 0;
-    font-size: 1rem;
-    text-align: right;
-  }
-  .collapsed {
-    float: right;
-    display: block;
-    width: 22px;
-    height: 2em;
-    background-color: transparent;
-    background-image: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    outline: none;
-  }
-  .collapsed:active {
-    border: 1px solid transparent;
-  }
+    .mobile-block {
+        display: block;
+        float: none
+    }
 
-  .collapsed .icon-bar {
-    display: block;
-    width: 22px;
-    height: 2px;
-    border-radius: 1px;
-    background-color: #563d7c;
-  }
+    .mobile-hidden {
+        display: none
+    }
 
-  .collapsed .icon-bar + .icon-bar {
-    margin-top: 4px;
-  }
+    .mobile-visible {
+        display: inline-block
+    }
 
-  .mini-repo-list-item .owner.css-truncate-target,
-  .mini-repo-list-item .repo-and-owner.css-truncate-target {
-    max-width: 300px
-  }
-  .markdown-body h1 {
-    font-size: 2rem
-  }
-  .markdown-body h2 {
-    font-size: 1.4rem
-  }
-  .markdown-body h3 {
-    font-size: 1.2rem
-  }
-  .markdown-body h4 {
-    font-size: 1.1em
-  }
-  .markdown-body h5 {
-    font-size: 1em
-  }
+    .mobile-md-section {
+        padding: 10px 0
+    }
 
-  .tools-wrapper {
-    bottom: 1em;
-  }
+    .column,
+    .one-third-column {
+        width: 100% !important;
+        float: none;
+    }
+
+    .home .banner .collection-head {
+        padding: 1rem 1rem 1rem 0;
+    }
+
+    .home .collection-head .collection-title {
+        padding: 0;
+    }
+
+    .collection-head .collection-header {
+        line-height: 1;
+    }
+
+    .collection-head.small .collection-title h1.collection-header {
+        font-size: 1.25em;
+    }
+
+    .collection-head .collection-info .meta-info,
+    .collection-head .collection-info .meta-info .octicon {
+        font-size: 0.75em;
+    }
+
+    .site-header {
+        padding-bottom: 0;
+        padding-top: 5px;
+    }
+
+    .site-header h1,
+    .site-header h1 .octicon {
+        font-size: 1em;
+    }
+
+    .site-header .site-header-nav {
+        float: right;
+        display: none;
+        margin-bottom: 0;
+    }
+
+    .site-header .site-header-nav .site-header-nav-item {
+        padding: 0 .5rem;
+        margin-left: 0;
+        font-size: 1rem;
+        text-align: right;
+    }
+
+    .collapsed {
+        float: right;
+        display: block;
+        width: 22px;
+        height: 2em;
+        background-color: transparent;
+        background-image: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .collapsed:active {
+        border: 1px solid transparent;
+    }
+
+    .collapsed .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+        background-color: #563d7c;
+    }
+
+    .collapsed .icon-bar+.icon-bar {
+        margin-top: 4px;
+    }
+
+    .mini-repo-list-item .owner.css-truncate-target,
+    .mini-repo-list-item .repo-and-owner.css-truncate-target {
+        max-width: 300px
+    }
+
+    .markdown-body h1 {
+        font-size: 2rem
+    }
+
+    .markdown-body h2 {
+        font-size: 1.4rem
+    }
+
+    .markdown-body h3 {
+        font-size: 1.2rem
+    }
+
+    .markdown-body h4 {
+        font-size: 1.1em
+    }
+
+    .markdown-body h5 {
+        font-size: 1em
+    }
+
+    .tools-wrapper {
+        bottom: 1em;
+    }
 }
 
 @media (max-width:20em) {
-  .site-header-nav .site-header-nav-item {
-    min-width: 20%
-  }
-  .collection-head .collection-info .meta-info {
-    display: block;
-    margin-top: 15px
-  }
+    .site-header-nav .site-header-nav-item {
+        min-width: 20%
+    }
+
+    .collection-head .collection-info .meta-info {
+        display: block;
+        margin-top: 15px
+    }
 }

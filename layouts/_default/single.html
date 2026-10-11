@@ -17,6 +17,7 @@
             {{ .Content }}
         </div>
 
+        {{ if not (hasPrefix .RelPermalink "/about/") }}
         {{ if .Params.tags }}
         <footer class="single-footer-bar">
             {{ range .Params.tags }}
@@ -26,6 +27,7 @@
         {{ end }}
 
         <div class="single-ending">🐾 感谢阅读喵～ (ฅ^•ω•^ฅ) 🐾</div>
+        {{ end }}
     </article>
 </div>
 {{ end }}
