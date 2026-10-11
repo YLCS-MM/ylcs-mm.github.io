@@ -187,6 +187,20 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        position: relative;
+        padding-left: 32px;
+    }
+
+    .ann-list::before {
+        content: '';
+        position: absolute;
+        left: 14px;
+        top: 12px;
+        bottom: 12px;
+        width: 2px;
+        background: linear-gradient(180deg, var(--neko-pink), var(--neko-blue), var(--neko-light-pink));
+        border-radius: 1px;
+        opacity: 0.35;
     }
 
     .ann-item {
@@ -197,6 +211,38 @@
         overflow: hidden;
         transition: all var(--transition-smooth);
         box-shadow: var(--shadow-sm);
+        position: relative;
+    }
+
+    .ann-item::before {
+        content: '';
+        position: absolute;
+        left: -22px;
+        top: 24px;
+        width: 10px;
+        height: 10px;
+        background: var(--neko-pink);
+        border-radius: 50%;
+        box-shadow: 0 0 8px var(--neko-pink-glow);
+        z-index: 2;
+    }
+
+    .ann-item.ann-latest::before {
+        background: var(--neko-orange);
+        box-shadow: 0 0 14px rgba(255, 167, 38, 0.4);
+        animation: dotPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes dotPulse {
+
+        0%,
+        100% {
+            box-shadow: 0 0 8px var(--neko-pink-glow);
+        }
+
+        50% {
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+        }
     }
 
     .ann-item.ann-latest {
@@ -442,6 +488,17 @@
 
         .ann-stat-num {
             font-size: 1.2em;
+        }
+
+        .ann-list {
+            padding-left: 24px;
+        }
+
+        .ann-item::before {
+            left: -16px;
+            width: 8px;
+            height: 8px;
+            top: 20px;
         }
 
         .ann-item-header {

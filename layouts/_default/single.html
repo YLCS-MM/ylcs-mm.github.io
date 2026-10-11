@@ -1,4 +1,5 @@
 {{ define "main" }}
+<div class="reading-progress" id="reading-progress"></div>
 <div class="main-container">
     <article class="single-article card">
         <header class="single-header">
@@ -41,9 +42,35 @@
 
 {{ define "extra_head" }}
 <style>
+    .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--neko-pink), var(--neko-orange), var(--neko-pink));
+        z-index: 9999;
+        border-radius: 0 2px 2px 0;
+        transition: width 0.1s linear;
+        box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+    }
+
     .single-article {
         padding: 42px 52px;
         margin-bottom: 24px;
+        position: relative;
+    }
+
+    .single-article::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--neko-pink), var(--neko-blue), transparent);
+        border-radius: 2px;
+        opacity: 0.6;
     }
 
     .single-header {
@@ -54,15 +81,25 @@
         position: relative;
     }
 
+    .single-header::before {
+        content: '🐾';
+        position: absolute;
+        left: 8px;
+        top: -6px;
+        font-size: 1.1em;
+        opacity: 0.35;
+    }
+
     .single-header::after {
         content: '';
         position: absolute;
         bottom: -2px;
         left: 50%;
         transform: translateX(-50%);
-        width: 60px;
+        width: 80px;
         height: 2px;
         background: linear-gradient(90deg, transparent, var(--neko-pink), transparent);
+        border-radius: 1px;
     }
 
     .single-title {
@@ -406,4 +443,8 @@
         }
     }
 </style>
+{{ end }}
+
+{{ define "extra_scripts" }}
+<script>(function () { var b = document.getElementById("reading-progress"); if (!b) return; window.addEventListener("scroll", function () { var s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight; b.style.width = d > 0 ? (s / d * 100) + "%" : "0%"; }, { passive: true }); })();</script>
 {{ end }}

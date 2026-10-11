@@ -57,10 +57,12 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
             background:
-                radial-gradient(ellipse 900px 600px at 15% 0%, rgba(255, 182, 193, 0.1) 0%, transparent 60%),
-                radial-gradient(ellipse 700px 500px at 85% 25%, rgba(135, 206, 235, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 600px 400px at 50% 80%, rgba(255, 182, 193, 0.06) 0%, transparent 55%),
-                linear-gradient(180deg, #fef5f9 0%, #f8f4fc 30%, #f0f6ff 60%, #fef5f9 100%);
+                radial-gradient(ellipse 900px 600px at 15% 0%, rgba(255, 182, 193, 0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 700px 500px at 85% 20%, rgba(135, 206, 235, 0.1) 0%, transparent 55%),
+                radial-gradient(ellipse 500px 350px at 30% 50%, rgba(255, 182, 193, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse 600px 400px at 65% 75%, rgba(135, 206, 235, 0.07) 0%, transparent 55%),
+                radial-gradient(ellipse 400px 300px at 50% 90%, rgba(255, 182, 193, 0.05) 0%, transparent 55%),
+                linear-gradient(175deg, #fef5f9 0%, #faf6fc 25%, #f2f7ff 50%, #f8f4fc 75%, #fef5f9 100%);
             background-attachment: fixed;
             min-height: 100vh;
             color: var(--neko-dark);
@@ -68,6 +70,32 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -200px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -150px;
+            left: -80px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(135, 206, 235, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
         }
 
         ::selection {
@@ -105,6 +133,24 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 1px 8px rgba(255, 105, 180, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .site-nav::before {
+            content: '🐱';
+            font-size: 1.1em;
+            margin-right: 2px;
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .site-nav::before {
+                display: inline;
+            }
         }
 
         .site-nav a {
@@ -386,6 +432,41 @@
     </div>
 
     {{ block "extra_scripts" . }}{{ end }}
+
+    <canvas id="bg-canvas"
+        style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+    <script>
+        (function () {
+            var c = document.getElementById("bg-canvas"), x = c.getContext("2d"), p = [], w, h, t = 0;
+            function R(n) {
+                c.width = w = window.innerWidth; c.height = h = document.documentElement.scrollHeight; p = [];
+                for (var i = 0; i < n; i++)p.push({
+                    x: Math.random() * w, y: Math.random() * h, s: 0.4 + Math.random() * 0.9,
+                    vx: (Math.random() - 0.5) * 0.4, vy: -0.2 - Math.random() * 0.6, r: Math.random() * 0.15 + 0.85, o: Math.random(),
+                    ty: Math.floor(Math.random() * 3)
+                });
+            } R(window.innerWidth < 640 ? 9 : 20);
+            window.addEventListener("resize", function () { R(window.innerWidth < 640 ? 9 : 20); });
+            function D() {
+                t++; x.clearRect(0, 0, w, h);
+                for (var i = 0; i < p.length; i++) {
+                    var a = p[i]; a.x += a.vx; a.y += a.vy; a.o += 0.005;
+                    if (a.y < -40 || a.x < -40 || a.x > w + 40) { a.x = Math.random() * w; a.y = h + 40; a.o = 0; }
+                    var al = 0.35 + 0.3 * Math.sin(a.o * 3);
+                    if (a.ty === 0) {
+                        x.save(); x.translate(a.x, a.y); x.rotate(Math.sin(t * 0.02 + a.o) * 0.3);
+                        x.font = (12 * a.s) + "px serif"; x.fillStyle = "rgba(255,182,193," + al + ")"; x.fillText("🌸", -8 * a.s, -8 * a.s); x.restore();
+                    }
+                    else if (a.ty === 1) { x.font = (14 * a.s) + "px serif"; x.fillStyle = "rgba(255,182,193," + (al * 0.7) + ")"; x.fillText("🐾", a.x, a.y); }
+                    else {
+                        x.beginPath(); x.arc(a.x, a.y, 3 * a.s, 0, Math.PI * 2); x.fillStyle = "rgba(135,206,235," + (al * 0.5) + ")";
+                        x.fill(); x.beginPath(); x.arc(a.x, a.y, 5 * a.s, 0, Math.PI * 2); x.fillStyle = "rgba(135,206,235," + (al * 0.15) + ")"; x.fill();
+                    }
+                }
+                requestAnimationFrame(D);
+            } D();
+        })();
+    </script>
 </body>
 
 </html>

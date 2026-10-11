@@ -9,6 +9,12 @@
             <span class="hero-sparkle" style="top:55%;right:12%;animation-delay:2.4s">✦</span>
             <span class="hero-sparkle" style="top:8%;left:55%;animation-delay:0.4s">·</span>
             <span class="hero-sparkle" style="top:75%;left:70%;animation-delay:2.0s">✧</span>
+            <span class="hero-sparkle" style="top:32%;left:5%;animation-delay:1.2s">🐾</span>
+            <span class="hero-sparkle" style="top:18%;right:8%;animation-delay:2.8s">🌸</span>
+            <span class="hero-sparkle" style="top:68%;right:22%;animation-delay:0.6s">🐾</span>
+            <span class="hero-sparkle" style="top:82%;left:30%;animation-delay:3.2s">⋆</span>
+            <span class="hero-sparkle" style="top:42%;right:28%;animation-delay:1.8s">🌸</span>
+            <span class="hero-sparkle" style="top:5%;right:38%;animation-delay:2.2s">✧</span>
         </div>
         <div class="hero-avatar"></div>
         <h1 class="hero-title">{{ .Site.Title }}</h1>
@@ -236,20 +242,41 @@
 
     .hero-stat-item {
         text-align: center;
-        padding: 14px 24px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(8px);
+        padding: 16px 28px;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(10px);
         border-radius: var(--radius-md);
-        border: 1px solid rgba(255, 182, 193, 0.25);
-        min-width: 95px;
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        min-width: 100px;
         transition: all var(--transition-smooth);
         box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-stat-item::before {
+        content: '';
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 50px;
+        background: radial-gradient(circle, rgba(255, 182, 193, 0.2), transparent);
+        border-radius: 50%;
+        transition: all var(--transition-smooth);
     }
 
     .hero-stat-item:hover {
-        transform: translateY(-4px);
+        transform: translateY(-5px);
         box-shadow: var(--shadow-glow);
         border-color: var(--neko-light-pink);
+    }
+
+    .hero-stat-item:hover::before {
+        width: 70px;
+        height: 70px;
+        top: -40px;
     }
 
     .hero-stat-num {
@@ -275,17 +302,30 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        margin-bottom: 22px;
+        margin-bottom: 24px;
         padding-left: 4px;
     }
 
     .section-icon {
-        font-size: 1.3em;
+        font-size: 1.4em;
         flex-shrink: 0;
+        animation: iconBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes iconBounce {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-4px);
+        }
     }
 
     .section-header h2 {
-        font-size: 1.25em;
+        font-size: 1.3em;
         color: var(--neko-pink);
         font-weight: 600;
         white-space: nowrap;
@@ -294,7 +334,7 @@
     .section-line {
         flex: 1;
         height: 2px;
-        background: linear-gradient(90deg, var(--neko-light-pink), transparent);
+        background: linear-gradient(90deg, var(--neko-light-pink) 0%, rgba(255, 182, 193, 0.2) 50%, transparent 100%);
         border-radius: 1px;
     }
 
@@ -305,8 +345,8 @@
     }
 
     .post-card {
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(6px);
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(8px);
         border-radius: var(--radius-lg);
         box-shadow: var(--shadow-sm);
         border: 1px solid rgba(255, 182, 193, 0.2);
@@ -315,22 +355,38 @@
         overflow: hidden;
     }
 
+    .post-card::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, rgba(255, 182, 193, 0.04) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity var(--transition-smooth);
+    }
+
+    .post-card:hover::after {
+        opacity: 1;
+    }
+
     .post-card-accent {
         position: absolute;
         left: 0;
         top: 0;
         bottom: 0;
         width: 4px;
-        background: linear-gradient(180deg, var(--neko-pink), var(--neko-blue), var(--neko-pink));
+        background: linear-gradient(180deg, var(--neko-pink), var(--neko-blue), var(--neko-orange), var(--neko-pink));
         border-radius: 0 2px 2px 0;
         opacity: 0;
-        transition: opacity var(--transition-smooth);
+        transition: opacity 0.5s ease;
     }
 
     .post-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-        border-color: rgba(255, 105, 180, 0.22);
+        transform: translateY(-5px) scale(1.005);
+        box-shadow: 0 12px 40px rgba(255, 105, 180, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
+        border-color: rgba(255, 105, 180, 0.28);
     }
 
     .post-card:hover .post-card-accent {
