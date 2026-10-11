@@ -19,9 +19,11 @@ description: "关于成霜·喵喵"
   </div>
 
   <div class="about-avatar-section">
-    <div class="about-avatar-ring"></div>
-    <div class="about-avatar">
-      <img src="https://avatars.githubusercontent.com/u/193340716?v=4" alt="成霜·喵喵的头像">
+    <div class="about-avatar-wrap">
+      <div class="about-avatar-ring"></div>
+      <div class="about-avatar">
+        <img src="https://avatars.githubusercontent.com/u/193340716?v=4" alt="成霜·喵喵的头像">
+      </div>
     </div>
     <h1 class="about-name">成霜·喵喵</h1>
     <p class="about-title">高考奋斗中の成霜·喵喵 🐾</p>
@@ -104,20 +106,26 @@ description: "关于成霜·喵喵"
   position: relative;
   z-index: 1;
 }
+.about-avatar-wrap {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 18px;
+}
 .about-avatar-ring {
   width: 148px; height: 148px;
   border-radius: 50%;
   border: 2px dashed var(--neko-light-pink);
   position: absolute;
-  top: calc(50% - 74px);
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   animation: ringSpin 20s linear infinite;
   opacity: 0.5;
 }
 @keyframes ringSpin {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to { transform: translateX(-50%) rotate(360deg); }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 .about-avatar {
   width: 130px;
@@ -125,15 +133,17 @@ description: "关于成霜·喵喵"
   border-radius: 50%;
   border: 3px solid var(--neko-light-pink);
   box-shadow: 0 0 40px var(--neko-pink-glow), 0 0 0 10px rgba(255, 182, 193, 0.05);
-  margin: 0 auto 18px;
   overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   animation: aboutFloat 3s ease-in-out infinite;
-  position: relative;
   z-index: 1;
 }
 @keyframes aboutFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-7px); }
 }
 .about-avatar img {
   width: 100%;
@@ -268,13 +278,15 @@ description: "关于成霜·喵喵"
   .about-decor { inset: -10px -20px -20px; }
   .about-paw { font-size: 1.1em; }
   .about-star { font-size: 0.8em; }
-  .about-avatar { width: 105px; height: 105px; }
-  .about-avatar-ring { width: 120px; height: 120px; top: calc(50% - 60px); }
+  .about-avatar-wrap { width: 130px; height: 130px; }
+  .about-avatar { width: 110px; height: 110px; }
+  .about-avatar-ring { width: 126px; height: 126px; }
   .about-name { font-size: 1.45em; }
   .about-bio { padding: 18px 20px; }
 }
 
 @media (max-width: 480px) {
+  .about-avatar-wrap { width: 100px; height: 100px; }
   .about-avatar { width: 88px; height: 88px; }
   .about-avatar-ring { display: none; }
   .about-name { font-size: 1.25em; }

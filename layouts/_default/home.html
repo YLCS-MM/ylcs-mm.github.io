@@ -94,6 +94,66 @@
         </nav>
         {{ end }}
     </section>
+
+    {{ if .Site.Taxonomies.tags }}
+    <section class="tag-cloud-section">
+        <div class="section-header">
+            <span class="section-icon">🏷️</span>
+            <h2>标签云</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="tag-cloud">
+            {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+            {{ $count := len $taxonomy }}
+            {{ $size := add 0.75 (mul 0.25 (math.Min $count 5)) }}
+            <a href="/tags/{{ $name | urlize }}/" class="tag-cloud-item" style="font-size:{{ $size }}em">{{ $name
+                }}<span class="tag-count">{{ $count }}</span></a>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    {{ $announcementData := .Site.Data.announcement_history }}
+    {{ if $announcementData }}
+    {{ $sortedAnn := sort $announcementData "date" "desc" }}
+    {{ $latestAnn := index $sortedAnn 0 }}
+    <section class="ann-teaser-section">
+        <div class="section-header">
+            <span class="section-icon">📢</span>
+            <h2>最新公告</h2>
+            <span class="section-line"></span>
+            <a href="/announcements/" class="section-more">查看全部 →</a>
+        </div>
+        <a href="/announcements/" class="ann-teaser-card">
+            <div class="ann-teaser-date">{{ $latestAnn.date }}</div>
+            <h3 class="ann-teaser-title">{{ $latestAnn.title }}</h3>
+            <p class="ann-teaser-desc">{{ $latestAnn.content | plainify | truncate 120 }}</p>
+        </a>
+    </section>
+    {{ end }}
+
+    <section class="intro-section">
+        <div class="section-header">
+            <span class="section-icon">🐱</span>
+            <h2>关于本站</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="intro-card">
+            <div class="intro-card-avatar" style="background-image:url({{ .Site.Params.avatar }})"></div>
+            <div class="intro-card-body">
+                <h3>{{ .Site.Title }}</h3>
+                <p>{{ .Site.Params.description }}</p>
+                <div class="intro-card-links">
+                    <a href="/about/" class="intro-link">🐱 了解更多</a>
+                    <a href="/posts/" class="intro-link">📝 所有文章</a>
+                    {{ if .Site.Params.github }}
+                    <a href="https://github.com/{{ .Site.Params.github }}" target="_blank" rel="noopener"
+                        class="intro-link">🐈 GitHub</a>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 {{ end }}
 
@@ -646,6 +706,252 @@
 
         .post-card-body {
             padding: 30px 40px;
+        }
+    }
+
+    .tag-cloud-section,
+    .ann-teaser-section,
+    .intro-section {
+        max-width: 800px;
+        margin: 30px auto 0;
+        padding: 0 4px;
+    }
+
+    .section-more {
+        font-size: 0.82em;
+        color: var(--neko-blue);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color var(--transition-fast);
+        flex-shrink: 0;
+    }
+
+    .section-more:hover {
+        color: var(--neko-pink);
+    }
+
+    .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 18px 24px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 182, 193, 0.25);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .tag-cloud-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 14px;
+        background: linear-gradient(135deg, var(--neko-pastel-pink), rgba(255, 240, 245, 0.5));
+        color: var(--neko-pink);
+        border-radius: 20px;
+        text-decoration: none;
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        transition: all var(--transition-fast);
+        font-weight: 500;
+    }
+
+    .tag-cloud-item:hover {
+        background: var(--neko-pink);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px var(--neko-pink-glow);
+    }
+
+    .tag-count {
+        font-size: 0.7em;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        padding: 1px 7px;
+        color: var(--neko-gray);
+    }
+
+    .tag-cloud-item:hover .tag-count {
+        background: rgba(255, 255, 255, 0.25);
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .ann-teaser-card {
+        display: block;
+        padding: 22px 28px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 182, 193, 0.25);
+        text-decoration: none;
+        transition: all var(--transition-smooth);
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ann-teaser-card::after {
+        content: '→';
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.4em;
+        color: var(--neko-light-pink);
+        transition: all var(--transition-fast);
+    }
+
+    .ann-teaser-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(255, 105, 180, 0.28);
+    }
+
+    .ann-teaser-card:hover::after {
+        right: 18px;
+    }
+
+    .ann-teaser-date {
+        font-size: 0.78em;
+        color: var(--neko-blue);
+        margin-bottom: 6px;
+        font-weight: 500;
+    }
+
+    .ann-teaser-title {
+        color: var(--neko-pink);
+        font-size: 1.1em;
+        margin-bottom: 6px;
+        font-weight: 600;
+        padding-right: 30px;
+    }
+
+    .ann-teaser-desc {
+        font-size: 0.88em;
+        color: var(--neko-gray);
+        line-height: 1.6;
+        padding-right: 30px;
+    }
+
+    .intro-card {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        padding: 24px 28px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 182, 193, 0.25);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .intro-card-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        flex-shrink: 0;
+        border: 2px solid var(--neko-light-pink);
+        box-shadow: 0 0 20px var(--neko-pink-glow);
+    }
+
+    .intro-card-body {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .intro-card-body h3 {
+        color: var(--neko-pink);
+        font-size: 1.08em;
+        margin-bottom: 4px;
+        font-weight: 600;
+    }
+
+    .intro-card-body p {
+        font-size: 0.88em;
+        color: var(--neko-gray);
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    .intro-card-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .intro-link {
+        font-size: 0.84em;
+        color: var(--neko-pink);
+        text-decoration: none;
+        padding: 5px 14px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        background: rgba(255, 255, 255, 0.5);
+        transition: all var(--transition-fast);
+        font-weight: 500;
+    }
+
+    .intro-link:hover {
+        background: var(--neko-pastel-pink);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 768px) {
+        .intro-card {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .intro-card-links {
+            justify-content: center;
+        }
+
+        .ann-teaser-card {
+            padding: 16px 20px;
+        }
+
+        .ann-teaser-card::after {
+            right: 16px;
+        }
+
+        .tag-cloud {
+            padding: 14px 16px;
+            gap: 8px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .tag-cloud-item {
+            padding: 4px 10px;
+            font-size: 0.75em !important;
+        }
+
+        .intro-card {
+            padding: 16px;
+        }
+
+        .intro-card-avatar {
+            width: 56px;
+            height: 56px;
+        }
+
+        .intro-card-body h3 {
+            font-size: 1em;
+        }
+
+        .intro-card-body p {
+            font-size: 0.82em;
+        }
+
+        .ann-teaser-title {
+            font-size: 0.98em;
+        }
+
+        .ann-teaser-desc {
+            font-size: 0.82em;
         }
     }
 </style>

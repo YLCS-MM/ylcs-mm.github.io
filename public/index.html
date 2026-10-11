@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
 <head>
-	<meta name="generator" content="Hugo 0.145.0">
+	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes">
     <title>成霜喵喵 &mdash; 成霜喵喵</title>
@@ -185,6 +185,8 @@
             max-width: 880px;
             margin: 28px auto 0;
             padding: 0 24px;
+            position: relative;
+            z-index: 1;
         }
 
         .card {
@@ -195,6 +197,8 @@
             border: 1px solid rgba(255, 182, 193, 0.25);
             overflow: hidden;
             transition: all var(--transition-smooth);
+            position: relative;
+            z-index: 1;
         }
 
         .card:hover {
@@ -962,6 +966,252 @@
             padding: 30px 40px;
         }
     }
+
+    .tag-cloud-section,
+    .ann-teaser-section,
+    .intro-section {
+        max-width: 800px;
+        margin: 30px auto 0;
+        padding: 0 4px;
+    }
+
+    .section-more {
+        font-size: 0.82em;
+        color: var(--neko-blue);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color var(--transition-fast);
+        flex-shrink: 0;
+    }
+
+    .section-more:hover {
+        color: var(--neko-pink);
+    }
+
+    .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 18px 24px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 182, 193, 0.25);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .tag-cloud-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 14px;
+        background: linear-gradient(135deg, var(--neko-pastel-pink), rgba(255, 240, 245, 0.5));
+        color: var(--neko-pink);
+        border-radius: 20px;
+        text-decoration: none;
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        transition: all var(--transition-fast);
+        font-weight: 500;
+    }
+
+    .tag-cloud-item:hover {
+        background: var(--neko-pink);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px var(--neko-pink-glow);
+    }
+
+    .tag-count {
+        font-size: 0.7em;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        padding: 1px 7px;
+        color: var(--neko-gray);
+    }
+
+    .tag-cloud-item:hover .tag-count {
+        background: rgba(255, 255, 255, 0.25);
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .ann-teaser-card {
+        display: block;
+        padding: 22px 28px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 182, 193, 0.25);
+        text-decoration: none;
+        transition: all var(--transition-smooth);
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ann-teaser-card::after {
+        content: '→';
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.4em;
+        color: var(--neko-light-pink);
+        transition: all var(--transition-fast);
+    }
+
+    .ann-teaser-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(255, 105, 180, 0.28);
+    }
+
+    .ann-teaser-card:hover::after {
+        right: 18px;
+    }
+
+    .ann-teaser-date {
+        font-size: 0.78em;
+        color: var(--neko-blue);
+        margin-bottom: 6px;
+        font-weight: 500;
+    }
+
+    .ann-teaser-title {
+        color: var(--neko-pink);
+        font-size: 1.1em;
+        margin-bottom: 6px;
+        font-weight: 600;
+        padding-right: 30px;
+    }
+
+    .ann-teaser-desc {
+        font-size: 0.88em;
+        color: var(--neko-gray);
+        line-height: 1.6;
+        padding-right: 30px;
+    }
+
+    .intro-card {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        padding: 24px 28px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 182, 193, 0.25);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .intro-card-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        flex-shrink: 0;
+        border: 2px solid var(--neko-light-pink);
+        box-shadow: 0 0 20px var(--neko-pink-glow);
+    }
+
+    .intro-card-body {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .intro-card-body h3 {
+        color: var(--neko-pink);
+        font-size: 1.08em;
+        margin-bottom: 4px;
+        font-weight: 600;
+    }
+
+    .intro-card-body p {
+        font-size: 0.88em;
+        color: var(--neko-gray);
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    .intro-card-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .intro-link {
+        font-size: 0.84em;
+        color: var(--neko-pink);
+        text-decoration: none;
+        padding: 5px 14px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        background: rgba(255, 255, 255, 0.5);
+        transition: all var(--transition-fast);
+        font-weight: 500;
+    }
+
+    .intro-link:hover {
+        background: var(--neko-pastel-pink);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 768px) {
+        .intro-card {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .intro-card-links {
+            justify-content: center;
+        }
+
+        .ann-teaser-card {
+            padding: 16px 20px;
+        }
+
+        .ann-teaser-card::after {
+            right: 16px;
+        }
+
+        .tag-cloud {
+            padding: 14px 16px;
+            gap: 8px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .tag-cloud-item {
+            padding: 4px 10px;
+            font-size: 0.75em !important;
+        }
+
+        .intro-card {
+            padding: 16px;
+        }
+
+        .intro-card-avatar {
+            width: 56px;
+            height: 56px;
+        }
+
+        .intro-card-body h3 {
+            font-size: 1em;
+        }
+
+        .intro-card-body p {
+            font-size: 0.82em;
+        }
+
+        .ann-teaser-title {
+            font-size: 0.98em;
+        }
+
+        .ann-teaser-desc {
+            font-size: 0.82em;
+        }
+    }
 </style>
 
 </head>
@@ -1110,6 +1360,97 @@
 
         
     </section>
+
+    
+    <section class="tag-cloud-section">
+        <div class="section-header">
+            <span class="section-icon">🏷️</span>
+            <h2>标签云</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="tag-cloud">
+            
+            
+            
+            <a href="/tags/jekyll%E6%B5%8B%E8%AF%95/" class="tag-cloud-item" style="font-size:1em">jekyll测试<span class="tag-count">1</span></a>
+            
+            
+            
+            <a href="/tags/neko%E5%8A%A9%E6%95%99/" class="tag-cloud-item" style="font-size:1em">neko助教<span class="tag-count">1</span></a>
+            
+            
+            
+            <a href="/tags/%E5%8A%9F%E8%83%BD%E5%85%A8%E6%A3%80/" class="tag-cloud-item" style="font-size:1em">功能全检<span class="tag-count">1</span></a>
+            
+            
+            
+            <a href="/tags/%E5%AE%98%E7%BD%91/" class="tag-cloud-item" style="font-size:1em">官网<span class="tag-count">1</span></a>
+            
+            
+            
+            <a href="/tags/%E5%AE%9E%E7%94%A8%E7%BD%91%E7%AB%99/" class="tag-cloud-item" style="font-size:1em">实用网站<span class="tag-count">1</span></a>
+            
+            
+            
+            <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" class="tag-cloud-item" style="font-size:1em">效率工具<span class="tag-count">1</span></a>
+            
+            
+            
+            <a href="/tags/%E7%8C%AB%E5%A8%98%E9%A3%8E%E6%A0%BC/" class="tag-cloud-item" style="font-size:1em">猫娘风格<span class="tag-count">1</span></a>
+            
+            
+            
+            <a href="/tags/%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/" class="tag-cloud-item" style="font-size:1em">甘城なつき<span class="tag-count">1</span></a>
+            
+            
+            
+            <a href="/tags/%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/" class="tag-cloud-item" style="font-size:1em">资源导航<span class="tag-count">1</span></a>
+            
+        </div>
+    </section>
+    
+
+    
+    
+    
+    
+    <section class="ann-teaser-section">
+        <div class="section-header">
+            <span class="section-icon">📢</span>
+            <h2>最新公告</h2>
+            <span class="section-line"></span>
+            <a href="/announcements/" class="section-more">查看全部 →</a>
+        </div>
+        <a href="/announcements/" class="ann-teaser-card">
+            <div class="ann-teaser-date">2026-10-11</div>
+            <h3 class="ann-teaser-title">🌸 博客全面焕新升级喵！</h3>
+            <p class="ann-teaser-desc">## 窝们换引擎啦！从 Jekyll 到 Hugo 喵～ 🚀 经过一段时间的努力，博客完成了自上线以来**最大规模的一次重写**喵！ --- ### 🏗️ 底层重构 - **Jekyll → Hugo**：静态站点生成器全面迁移，构建速度从 …</p>
+        </a>
+    </section>
+    
+
+    <section class="intro-section">
+        <div class="section-header">
+            <span class="section-icon">🐱</span>
+            <h2>关于本站</h2>
+            <span class="section-line"></span>
+        </div>
+        <div class="intro-card">
+            <div class="intro-card-avatar" style="background-image:url(https://avatars.githubusercontent.com/u/193340716?v=4)"></div>
+            <div class="intro-card-body">
+                <h3>成霜喵喵</h3>
+                <p>成霜喵喵的小窝，然后就布吉岛喏喵</p>
+                <div class="intro-card-links">
+                    <a href="/about/" class="intro-link">🐱 了解更多</a>
+                    <a href="/posts/" class="intro-link">📝 所有文章</a>
+                    
+                    <a href="https://github.com/ylcs-mm" target="_blank" rel="noopener"
+                        class="intro-link">🐈 GitHub</a>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
 
@@ -1169,7 +1510,7 @@
     
 
     window.live2d_widgets = {
-        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widget-model-tororo@1.0.5/assets/",
+        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
         display: {
             position: "right",
             width: 155,

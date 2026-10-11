@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes">
     <title>🐱 关于 &mdash; 成霜喵喵</title>
@@ -184,6 +184,8 @@
             max-width: 880px;
             margin: 28px auto 0;
             padding: 0 24px;
+            position: relative;
+            z-index: 1;
         }
 
         .card {
@@ -194,6 +196,8 @@
             border: 1px solid rgba(255, 182, 193, 0.25);
             overflow: hidden;
             transition: all var(--transition-smooth);
+            position: relative;
+            z-index: 1;
         }
 
         .card:hover {
@@ -420,8 +424,8 @@
         background: linear-gradient(90deg, var(--neko-pink), var(--neko-orange), var(--neko-pink));
         z-index: 9999;
         border-radius: 0 2px 2px 0;
-        transition: width 0.1s linear;
         box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+        pointer-events: none;
     }
 
     .single-article {
@@ -848,9 +852,11 @@
     <span class="about-star" style="top:70%;left:20%;animation-delay:2.1s">⋆</span>
   </div>
   <div class="about-avatar-section">
-    <div class="about-avatar-ring"></div>
-    <div class="about-avatar">
-      <img src="https://avatars.githubusercontent.com/u/193340716?v=4" alt="成霜·喵喵的头像">
+    <div class="about-avatar-wrap">
+      <div class="about-avatar-ring"></div>
+      <div class="about-avatar">
+        <img src="https://avatars.githubusercontent.com/u/193340716?v=4" alt="成霜·喵喵的头像">
+      </div>
     </div>
     <h1 class="about-name">成霜·喵喵</h1>
     <p class="about-title">高考奋斗中の成霜·喵喵 🐾</p>
@@ -928,20 +934,26 @@
   position: relative;
   z-index: 1;
 }
+.about-avatar-wrap {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 18px;
+}
 .about-avatar-ring {
   width: 148px; height: 148px;
   border-radius: 50%;
   border: 2px dashed var(--neko-light-pink);
   position: absolute;
-  top: calc(50% - 74px);
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   animation: ringSpin 20s linear infinite;
   opacity: 0.5;
 }
 @keyframes ringSpin {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to { transform: translateX(-50%) rotate(360deg); }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 .about-avatar {
   width: 130px;
@@ -949,15 +961,17 @@
   border-radius: 50%;
   border: 3px solid var(--neko-light-pink);
   box-shadow: 0 0 40px var(--neko-pink-glow), 0 0 0 10px rgba(255, 182, 193, 0.05);
-  margin: 0 auto 18px;
   overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   animation: aboutFloat 3s ease-in-out infinite;
-  position: relative;
   z-index: 1;
 }
 @keyframes aboutFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-7px); }
 }
 .about-avatar img {
   width: 100%;
@@ -1092,13 +1106,15 @@
   .about-decor { inset: -10px -20px -20px; }
   .about-paw { font-size: 1.1em; }
   .about-star { font-size: 0.8em; }
-  .about-avatar { width: 105px; height: 105px; }
-  .about-avatar-ring { width: 120px; height: 120px; top: calc(50% - 60px); }
+  .about-avatar-wrap { width: 130px; height: 130px; }
+  .about-avatar { width: 110px; height: 110px; }
+  .about-avatar-ring { width: 126px; height: 126px; }
   .about-name { font-size: 1.45em; }
   .about-bio { padding: 18px 20px; }
 }
 
 @media (max-width: 480px) {
+  .about-avatar-wrap { width: 100px; height: 100px; }
   .about-avatar { width: 88px; height: 88px; }
   .about-avatar-ring { display: none; }
   .about-name { font-size: 1.25em; }
@@ -1180,7 +1196,7 @@
     
 
     window.live2d_widgets = {
-        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widget-model-tororo@1.0.5/assets/",
+        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
         display: {
             position: "right",
             width: 155,

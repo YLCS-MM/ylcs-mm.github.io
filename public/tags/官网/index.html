@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes">
     <title>官网 &mdash; 成霜喵喵</title>
@@ -184,6 +184,8 @@
             max-width: 880px;
             margin: 28px auto 0;
             padding: 0 24px;
+            position: relative;
+            z-index: 1;
         }
 
         .card {
@@ -194,6 +196,8 @@
             border: 1px solid rgba(255, 182, 193, 0.25);
             overflow: hidden;
             transition: all var(--transition-smooth);
+            position: relative;
+            z-index: 1;
         }
 
         .card:hover {
@@ -661,7 +665,7 @@
     
 
     window.live2d_widgets = {
-        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widget-model-tororo@1.0.5/assets/",
+        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
         display: {
             position: "right",
             width: 155,
