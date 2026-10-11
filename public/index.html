@@ -1102,6 +1102,8 @@
 
 
 
+
+
 <style>
     .modal-overlay {
         position: fixed;
@@ -1297,23 +1299,53 @@
     <div class="modal-overlay" id="announcement-overlay">
         <div class="modal-container">
             <div class="modal-header">
-                <div class="modal-title">🐾 🎂 猫猫葉子的19岁生日祝福！ 🐾</div>
+                <div class="modal-title">🐾 🌸 博客全面焕新升级喵！ 🐾</div>
             </div>
             
-            <div class="update-date">【2026-01-22】</div>
+            <div class="update-date">【2026-10-11】</div>
             
             <div class="modal-scrollable">
                 <div class="modal-content">
-                    <h2 id="秘密生日祝福已上线喵">秘密生日祝福已上线喵～</h2>
-<p>今天是我的好朋友<strong>猫猫葉子</strong>的19岁生日喵！</p>
-<p>🎁 窝准备了一个特别的生日祝福页面喵～</p>
-<p>🔐 密码提示：八位数字，就像六月廿四日是06241490那样的格式</p>
-<p>🔗 秘密链接：<a href="https://ylcs-mm.github.io/mmyz.html">点击这里进入生日祝福页面</a></p>
+                    <h2 id="窝们换引擎啦从-jekyll-到-hugo-喵-">窝们换引擎啦！从 Jekyll 到 Hugo 喵～ 🚀</h2>
+<p>经过一段时间的努力，博客完成了自上线以来<strong>最大规模的一次重写</strong>喵！</p>
 <hr>
-<h3 id="给访问者的话">给访问者的话：</h3>
-<p>如果你看到了这个公告，说明已经是2026年1月22日或之后了喵～
-希望猫猫葉子能喜欢喵！</p>
-<p><em>成霜·喵喵 于 2025年制作</em></p>
+<h3 id="-底层重构">🏗️ 底层重构</h3>
+<ul>
+<li><strong>Jekyll → Hugo</strong>：静态站点生成器全面迁移，构建速度从秒级进化到毫秒级（77ms 完成构建！）</li>
+<li>模板体系从 Liquid 迁移到 Go Templates，代码结构更清晰喵</li>
+</ul>
+<h3 id="-界面全面焕新">🎨 界面全面焕新</h3>
+<ul>
+<li>全新的<strong>甘城猫猫风格配色系统</strong>：粉蓝渐变 + 半透明毛玻璃效果，像棉花糖一样柔软</li>
+<li>统一的 CSS 变量设计体系，全站视觉一致性大幅提升</li>
+<li>所有页面独立重写美化：首页、文章页、公告页、关于页、列表页</li>
+<li>英雄区星光漂浮动画、头像悬停发光、卡片毛玻璃 hover…</li>
+<li>引用块引号装饰、代码块渐变顶部条、表格斑马纹…细节满满喵！</li>
+</ul>
+<h3 id="-全端响应式适配">📱 全端响应式适配</h3>
+<ul>
+<li>覆盖 5 个断点：手机（320px+）、平板、桌面、宽屏、超宽屏</li>
+<li>手机端和桌面端都能获得最佳浏览体验</li>
+</ul>
+<h3 id="-看板娘搬家">🐾 看板娘搬家</h3>
+<ul>
+<li>猫猫看板娘从中间移到了<strong>右下角</strong>固定显示</li>
+<li>桌面端 160×320，手机端自动缩小为 110×220</li>
+<li>不再遮挡正文内容，随时可rua！</li>
+</ul>
+<h3 id="-统计系统升级">📊 统计系统升级</h3>
+<ul>
+<li>从「不蒜子」更换为 <strong>Umami Cloud</strong>，统计更稳定精准喵～</li>
+</ul>
+<h3 id="-其他优化">🧹 其他优化</h3>
+<ul>
+<li>移除了评论组件，页面更清爽</li>
+<li>代码整体瘦身，加载速度更快</li>
+<li>键盘导航优化，无障碍访问体验提升</li>
+</ul>
+<hr>
+<blockquote>
+<p>希望你喜欢这个全新的猫窝喵～有问题随时找窝反馈！(ฅ^•ω•^ฅ) 💖</p></blockquote>
 
                 </div>
                 <div class="footer-note">喵喵喵~ (A·ω·A)</div>
@@ -1339,14 +1371,14 @@
                 if (!d) return true;
                 var data = JSON.parse(d);
                 var today = new Date().toDateString();
-                return data.date !== today || data.title !== "🎂 猫猫葉子的19岁生日祝福！";
+                return data.date !== today || data.title !== "🌸 博客全面焕新升级喵！";
             } catch (e) { return true; }
         }
         function recordShown() {
             try {
                 localStorage.setItem('nekoAnnouncementData', JSON.stringify({
                     date: new Date().toDateString(),
-                    title: "🎂 猫猫葉子的19岁生日祝福！",
+                    title: "🌸 博客全面焕新升级喵！",
                     timestamp: Date.now()
                 }));
             } catch (e) { }
