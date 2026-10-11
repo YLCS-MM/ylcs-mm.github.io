@@ -1,70 +1,56 @@
 {{ define "main" }}
-<div style="max-width:800px;margin:0 auto;padding:0 20px;">
+<div class="home-area">
     <!-- Hero -->
-    <div style="text-align:center;padding:50px 20px 40px;">
-        <div
-            style="width:110px;height:110px;margin:0 auto 18px;border-radius:50%;border:3px solid var(--pink-light);box-shadow:0 0 36px rgba(255,105,180,0.18);background:url('{{ .Site.Params.avatar }}') center/cover;">
+    <div class="hero-section">
+        <div class="sparkle-bg" aria-hidden="true">
+            <div class="sparkle-dot" style="top:10%;left:10%;animation-delay:0s"></div>
+            <div class="sparkle-dot" style="top:20%;right:15%;animation-delay:1s"></div>
+            <div class="sparkle-dot" style="top:50%;left:8%;animation-delay:2s"></div>
+            <div class="sparkle-dot" style="top:60%;right:10%;animation-delay:0.5s"></div>
+            <div class="sparkle-dot" style="top:80%;left:20%;animation-delay:1.5s"></div>
+            <div class="sparkle-dot" style="top:15%;left:80%;animation-delay:2.5s"></div>
         </div>
-        <h1 style="font-size:2em;color:var(--pink);margin-bottom:4px;font-weight:700;">{{ .Site.Title }}</h1>
-        <p style="color:var(--gray);margin-bottom:4px;">{{ .Site.Params.subtitle }}</p>
-        <p style="color:var(--blue);font-size:0.9em;">📍 {{ .Site.Params.location }}</p>
+        <div class="hero-avatar" style="background-image:url('{{ .Site.Params.avatar }}')"></div>
+        <h1 class="hero-title">{{ .Site.Title }}</h1>
+        <p class="hero-subtitle">{{ .Site.Params.subtitle }}</p>
+        <p class="hero-location">📍 {{ .Site.Params.location }}</p>
     </div>
 
     <!-- 文章列表 -->
     <div style="margin-bottom:36px;">
-        <h2 style="color:var(--pink);font-size:1.2em;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
-            <span>📝</span> 最新文章
-        </h2>
+        <h2 class="section-title"><span>📝</span> 最新文章</h2>
         {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
         {{ range $paginator.Pages }}
-        <article
-            style="background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,182,193,0.2);padding:24px 28px;margin-bottom:16px;transition:all var(--trans);">
-            <div style="font-size:0.82em;color:var(--blue);margin-bottom:8px;">
-                📅 {{ .Date.Format "2006-01-02" }}
+        <article class="card post-card">
+            <div class="post-meta">
+                <span>📅 {{ .Date.Format "2006-01-02" }}</span>
                 {{ if .Params.tags }}{{ range first 1 .Params.tags }}
-                <span
-                    style="display:inline-block;background:var(--pink-pastel);color:var(--pink);padding:2px 10px;border-radius:10px;margin-left:8px;font-size:0.9em;">{{
-                    . }}</span>
+                <span class="post-tag">{{ . }}</span>
                 {{ end }}{{ end }}
-                {{ with .ReadingTime }}<span style="color:var(--gray-light);margin-left:8px;">☕ {{ . }} min</span>{{ end
-                }}
+                {{ with .ReadingTime }}<span style="color:var(--gray-light);">☕ {{ . }} min</span>{{ end }}
             </div>
             <h3 style="font-size:1.12em;margin-bottom:6px;">
-                <a href="{{ .RelPermalink }}" style="color:var(--dark);text-decoration:none;transition:color 0.2s;"
-                    onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--dark)'">{{ .Title
-                    }}</a>
+                <a href="{{ .RelPermalink }}" class="post-title-link">{{ .Title }}</a>
             </h3>
-            {{ if .Params.description }}
-            <p style="font-size:0.9em;color:var(--gray);line-height:1.6;margin-bottom:8px;">{{ .Params.description }}
+            <p class="post-desc">
+                {{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Summary | truncate 100 }}{{ end }}
             </p>
-            {{ else }}
-            <p style="font-size:0.9em;color:var(--gray);line-height:1.6;margin-bottom:8px;">{{ .Summary | truncate 100
-                }}</p>
-            {{ end }}
-            <a href="{{ .RelPermalink }}"
-                style="color:var(--pink);font-size:0.88em;text-decoration:none;font-weight:500;transition:all 0.2s;"
-                onmouseover="this.style.color='var(--pink-deep)';this.style.paddingLeft='4px';"
-                onmouseout="this.style.color='var(--pink)';this.style.paddingLeft='0';">阅读全文 →</a>
+            <a href="{{ .RelPermalink }}" class="post-readmore">阅读全文 →</a>
         </article>
         {{ end }}
 
         {{ if gt $paginator.TotalPages 1 }}
-        <div style="text-align:center;padding:20px 0;display:flex;justify-content:center;align-items:center;gap:16px;">
+        <div class="pagination-nav">
             {{ if $paginator.HasPrev }}
-            <a href="{{ $paginator.Prev.URL }}"
-                style="padding:8px 20px;background:rgba(255,255,255,0.8);border:1px solid rgba(255,182,193,0.3);border-radius:20px;color:var(--pink);text-decoration:none;font-size:0.9em;transition:all 0.2s;">←
-                上一页</a>
+            <a href="{{ $paginator.Prev.URL }}" class="pagination-btn">← 上一页</a>
             {{ else }}
-            <span style="padding:8px 20px;color:var(--gray-light);font-size:0.9em;opacity:0.5;">← 上一页</span>
+            <span class="pagination-btn disabled">← 上一页</span>
             {{ end }}
-            <span style="color:var(--gray);font-size:0.9em;">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages
-                }}</span>
+            <span class="pagination-info">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
             {{ if $paginator.HasNext }}
-            <a href="{{ $paginator.Next.URL }}"
-                style="padding:8px 20px;background:rgba(255,255,255,0.8);border:1px solid rgba(255,182,193,0.3);border-radius:20px;color:var(--pink);text-decoration:none;font-size:0.9em;transition:all 0.2s;">下一页
-                →</a>
+            <a href="{{ $paginator.Next.URL }}" class="pagination-btn">下一页 →</a>
             {{ else }}
-            <span style="padding:8px 20px;color:var(--gray-light);font-size:0.9em;opacity:0.5;">下一页 →</span>
+            <span class="pagination-btn disabled">下一页 →</span>
             {{ end }}
         </div>
         {{ end }}
@@ -76,16 +62,11 @@
     {{ $sorted := sort $annData "date" "desc" }}
     {{ $latest := index $sorted 0 }}
     <div style="margin-bottom:36px;">
-        <h2 style="color:var(--pink);font-size:1.2em;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
+        <h2 class="section-title">
             <span>📢</span> 最新公告
-            <a href="/announcements/"
-                style="font-size:0.76em;color:var(--blue);text-decoration:none;margin-left:auto;transition:color 0.2s;"
-                onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--blue)'">查看全部 →</a>
+            <a href="/announcements/" class="section-link">查看全部 →</a>
         </h2>
-        <a href="/announcements/"
-            style="display:block;padding:22px 28px;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);border-radius:var(--radius);border:1px solid rgba(255,182,193,0.2);text-decoration:none;box-shadow:var(--shadow);transition:all var(--trans);"
-            onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 30px rgba(0,0,0,0.07)';"
-            onmouseout="this.style.transform='none';this.style.boxShadow='var(--shadow)';">
+        <a href="/announcements/" class="card" style="display:block;padding:22px 28px;text-decoration:none;">
             <div style="font-size:0.78em;color:var(--blue);margin-bottom:6px;">📅 {{ $latest.date }}</div>
             <h3 style="color:var(--pink);font-size:1.06em;margin-bottom:6px;">{{ $latest.title }}</h3>
             <p style="font-size:0.88em;color:var(--gray);line-height:1.6;">{{ $latest.content | plainify | truncate 120
@@ -96,11 +77,8 @@
 
     <!-- 关于本站 -->
     <div style="margin-bottom:36px;">
-        <h2 style="color:var(--pink);font-size:1.2em;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
-            <span>🐱</span> 关于本站
-        </h2>
-        <div
-            style="display:flex;align-items:center;gap:20px;padding:22px 28px;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);border-radius:var(--radius);border:1px solid rgba(255,182,193,0.2);box-shadow:var(--shadow);">
+        <h2 class="section-title"><span>🐱</span> 关于本站</h2>
+        <div class="card" style="display:flex;align-items:center;gap:20px;padding:22px 28px;">
             <div
                 style="width:64px;height:64px;border-radius:50%;border:2px solid var(--pink-light);box-shadow:0 0 20px rgba(255,105,180,0.15);background:url('{{ .Site.Params.avatar }}') center/cover;flex-shrink:0;">
             </div>
@@ -109,12 +87,8 @@
                 <p style="font-size:0.86em;color:var(--gray);line-height:1.6;margin-bottom:8px;">{{
                     .Site.Params.description }}</p>
                 <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                    <a href="/about/"
-                        style="font-size:0.82em;color:var(--pink);text-decoration:none;padding:4px 12px;border:1px solid rgba(255,182,193,0.3);border-radius:14px;background:rgba(255,255,255,0.5);transition:all 0.2s;">🐱
-                        了解更多</a>
-                    <a href="/posts/"
-                        style="font-size:0.82em;color:var(--pink);text-decoration:none;padding:4px 12px;border:1px solid rgba(255,182,193,0.3);border-radius:14px;background:rgba(255,255,255,0.5);transition:all 0.2s;">📝
-                        所有文章</a>
+                    <a href="/about/" class="tag-link">🐱 了解更多</a>
+                    <a href="/posts/" class="tag-link">📝 所有文章</a>
                 </div>
             </div>
         </div>

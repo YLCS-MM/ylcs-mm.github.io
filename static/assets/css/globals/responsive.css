@@ -1,141 +1,198 @@
-.container {
-  width: auto;
-  max-width: 1020px;
-  padding-left: 20px;
-  padding-right: 20px
-}
+/* 🐱 成霜喵喵 - 响应式适配 */
 
-.mobile-visible {
-  display: none
-}
-
-@media (max-width:60em) {
-  .collection-card {
-    width: 45%;
-    height: 225px
+/* ===== 平板 (≤1024px) ===== */
+@media (max-width: 1024px) {
+  .single-article {
+    padding: 28px 24px;
   }
-}
 
-@media (max-width:35em) {
-  .collection-card {
-    width: 100%;
-    max-width: 350px;
-    margin: 10px auto
+  .hero-section {
+    padding: 40px 16px 30px;
+  }
+
+  .hero-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .hero-title {
+    font-size: 1.6em;
   }
 }
 
-@media (max-width:50em) {
-  .mobile-block {
-    display: block;
-    float: none
+/* ===== 小平板/大手机 (≤768px) ===== */
+@media (max-width: 768px) {
+  .content-area {
+    padding: 16px 14px;
   }
-  .mobile-hidden {
-    display: none
+
+  .home-area {
+    padding: 0 14px;
   }
-  .mobile-visible {
-    display: inline-block
+
+  .single-article {
+    padding: 20px 16px;
   }
-  .mobile-md-section {
-    padding: 10px 0
+
+  .single-title {
+    font-size: 1.4em;
   }
-  .column,
-  .one-third-column {
-    width: 100%!important;
-    float: none;
+
+  .single-meta {
+    gap: 10px;
+    font-size: 0.8em;
   }
-  .home .banner .collection-head {
-    padding: 1rem 1rem 1rem 0;
+
+  .post-card {
+    padding: 18px;
   }
-  .home .collection-head .collection-title {
-    padding: 0;
+
+  .card {
+    border-radius: 14px;
   }
-  .collection-head .collection-header {
-    line-height: 1;
+
+  .hero-section {
+    padding: 30px 14px 24px;
   }
-  .collection-head.small .collection-title h1.collection-header {
+
+  .hero-title {
+    font-size: 1.4em;
+  }
+
+  .hero-avatar {
+    width: 76px;
+    height: 76px;
+  }
+
+  .pagination-btn {
+    padding: 6px 14px;
+    font-size: 0.82em;
+  }
+
+  .ann-stats {
+    gap: 16px;
+    padding: 12px;
+  }
+
+  .ann-header {
+    padding: 14px 18px;
+  }
+
+  .ann-content {
+    padding: 0 18px 14px;
+  }
+
+  .about-avatar-wrap {
+    width: 100px;
+    height: 100px;
+  }
+
+  .about-name {
+    font-size: 1.3em;
+  }
+}
+
+/* ===== 手机横屏 / 小手机 (≤480px) ===== */
+@media (max-width: 480px) {
+  .content-area {
+    padding: 12px 10px;
+  }
+
+  .home-area {
+    padding: 0 10px;
+  }
+
+  .single-article {
+    padding: 16px 12px;
+    border-radius: 12px;
+  }
+
+  .single-title {
     font-size: 1.25em;
   }
-  .collection-head .collection-info .meta-info,
-  .collection-head .collection-info .meta-info .octicon {
-    font-size: 0.75em;
-  }
-  .site-header {
-    padding-bottom: 0;
-    padding-top: 5px;
-  }
-  .site-header h1, .site-header h1 .octicon {
-    font-size: 1em;
-  }
-  .site-header .site-header-nav {
-    float: right;
-    display: none;
-    margin-bottom: 0;
-  }
-  .site-header .site-header-nav .site-header-nav-item {
-    padding: 0 .5rem;
-    margin-left: 0;
-    font-size: 1rem;
-    text-align: right;
-  }
-  .collapsed {
-    float: right;
-    display: block;
-    width: 22px;
-    height: 2em;
-    background-color: transparent;
-    background-image: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    outline: none;
-  }
-  .collapsed:active {
-    border: 1px solid transparent;
+
+  .single-meta {
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
   }
 
-  .collapsed .icon-bar {
-    display: block;
-    width: 22px;
-    height: 2px;
-    border-radius: 1px;
-    background-color: #563d7c;
+  .single-footer-bar {
+    justify-content: center;
   }
 
-  .collapsed .icon-bar + .icon-bar {
-    margin-top: 4px;
+  .hero-section {
+    padding: 24px 10px 20px;
   }
 
-  .mini-repo-list-item .owner.css-truncate-target,
-  .mini-repo-list-item .repo-and-owner.css-truncate-target {
-    max-width: 300px
-  }
-  .markdown-body h1 {
-    font-size: 2rem
-  }
-  .markdown-body h2 {
-    font-size: 1.4rem
-  }
-  .markdown-body h3 {
-    font-size: 1.2rem
-  }
-  .markdown-body h4 {
-    font-size: 1.1em
-  }
-  .markdown-body h5 {
-    font-size: 1em
+  .hero-avatar {
+    width: 66px;
+    height: 66px;
   }
 
-  .tools-wrapper {
-    bottom: 1em;
+  .hero-title {
+    font-size: 1.25em;
   }
-}
 
-@media (max-width:20em) {
-  .site-header-nav .site-header-nav-item {
-    min-width: 20%
+  .hero-subtitle {
+    font-size: 0.85em;
   }
-  .collection-head .collection-info .meta-info {
-    display: block;
-    margin-top: 15px
+
+  .hero-location {
+    font-size: 0.78em;
+  }
+
+  .post-card {
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+
+  .post-meta {
+    font-size: 0.76em;
+    gap: 4px;
+  }
+
+  .pagination-nav {
+    gap: 8px;
+  }
+
+  .pagination-btn {
+    padding: 5px 10px;
+    font-size: 0.78em;
+  }
+
+  .ann-stats {
+    gap: 12px;
+    flex-direction: column;
+  }
+
+  .ann-header {
+    padding: 12px 14px;
+  }
+
+  .ann-content {
+    padding: 0 14px 12px;
+    font-size: 0.88em;
+  }
+
+  .card {
+    border-radius: 12px;
+  }
+
+  .about-avatar-wrap {
+    width: 86px;
+    height: 86px;
+  }
+
+  .about-name {
+    font-size: 1.15em;
+  }
+
+  .about-bio {
+    padding: 14px 16px;
+  }
+
+  .list-title {
+    font-size: 1.4em;
   }
 }

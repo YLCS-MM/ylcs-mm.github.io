@@ -7,28 +7,29 @@
 {{ if le .date $now }}{{ $pastList = $pastList | append . }}{{ end }}
 {{ end }}
 
-<div style="max-width:800px;margin:0 auto;padding:24px 20px;">
-    <div
-        style="text-align:center;margin-bottom:28px;padding-bottom:18px;border-bottom:2px dashed rgba(255,182,193,0.4);">
+<div class="content-area">
+    <header class="list-header">
         <div style="font-size:2em;margin-bottom:8px;">📢</div>
-        <h1 style="font-size:1.8em;color:var(--pink);margin-bottom:4px;font-weight:700;">公告历史</h1>
-        <p style="color:var(--blue);font-size:0.95em;">记录博客的每一次成长和更新喵～</p>
-    </div>
+        <h1 class="list-title">公告历史</h1>
+        <p class="list-desc">记录博客的每一次成长和更新喵～</p>
+    </header>
 
     {{ if $annData }}
-    <div
-        style="display:flex;justify-content:center;gap:24px;margin-bottom:24px;padding:16px;background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);border-radius:var(--radius);border:1px solid rgba(255,182,193,0.2);flex-wrap:wrap;">
-        <div style="text-align:center;"><span
-                style="display:block;font-size:1.4em;font-weight:700;color:var(--pink);">{{ len $annData }}</span><span
-                style="font-size:0.8em;color:var(--blue);">总公告数</span></div>
-        <div style="text-align:center;"><span
-                style="display:block;font-size:1.4em;font-weight:700;color:var(--pink);">{{ len $pastList }}</span><span
-                style="font-size:0.8em;color:var(--blue);">已发布公告</span></div>
+    <div class="ann-stats">
+        <div class="ann-stat-item">
+            <span class="ann-stat-num">{{ len $annData }}</span>
+            <span class="ann-stat-label">总公告数</span>
+        </div>
+        <div class="ann-stat-item">
+            <span class="ann-stat-num">{{ len $pastList }}</span>
+            <span class="ann-stat-label">已发布公告</span>
+        </div>
         {{ if gt (len $pastList) 0 }}
         {{ $sorted := sort $pastList "date" "desc" }}
-        <div style="text-align:center;"><span
-                style="display:block;font-size:1.4em;font-weight:700;color:var(--pink);">{{ (index $sorted 0).date
-                }}</span><span style="font-size:0.8em;color:var(--blue);">最新公告</span></div>
+        <div class="ann-stat-item">
+            <span class="ann-stat-num">{{ (index $sorted 0).date }}</span>
+            <span class="ann-stat-label">最新公告</span>
+        </div>
         {{ end }}
     </div>
 
@@ -36,11 +37,9 @@
     {{ $sorted := sort $pastList "date" "desc" }}
     <div style="display:flex;flex-direction:column;gap:16px;">
         {{ range $index, $ann := $sorted }}
-        <div
-            style="background:rgba(255,255,255,0.82);backdrop-filter:blur(8px);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,182,193,0.2);overflow:hidden;{{ if eq $index 0 }}border-color:var(--pink);box-shadow:0 4px 24px rgba(255,105,180,0.1);{{ end }}">
-            <div onclick="var p=this.parentElement;var c=p.querySelector('.ann-content');var b=p.querySelector('.ann-btn');var t=p.querySelector('.ann-btn-text');var i=p.querySelector('.ann-btn-icon');if(c.style.display==='none'||!c.style.display){c.style.display='block';t.textContent='收起详情';i.textContent='▴';}else{c.style.display='none';t.textContent='展开详情';i.textContent='▾';}"
-                style="padding:20px 28px;cursor:pointer;transition:background 0.2s;"
-                onmouseover="this.style.background='rgba(255,182,193,0.05)'" onmouseout="this.style.background='none'">
+        <div class="ann-card">
+            <div class="ann-header"
+                onclick="var p=this.parentElement;var c=p.querySelector('.ann-content');var t=p.querySelector('.ann-btn-text');var i=p.querySelector('.ann-btn-icon');if(c.style.display==='none'||!c.style.display){c.style.display='block';t.textContent='收起详情';i.textContent='▴';}else{c.style.display='none';t.textContent='展开详情';i.textContent='▾';}">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
                     <h2 style="font-size:1.06em;color:var(--dark);font-weight:600;flex:1;">
                         {{ if eq $index 0 }}🎉 {{ else }}📌 {{ end }}{{ $ann.title }}
@@ -48,23 +47,22 @@
                 </div>
                 <div style="font-size:0.8em;color:var(--blue);">
                     📅 {{ $ann.date }}
-                    {{ if eq $ann.date $now }}<span
-                        style="display:inline-block;background:var(--pink);color:#fff;padding:1px 8px;border-radius:10px;margin-left:8px;font-size:0.85em;">今天</span>{{
-                    end }}
-                    {{ if eq $index 0 }}<span
-                        style="display:inline-block;background:var(--pink-pastel);color:var(--pink);padding:1px 8px;border-radius:10px;margin-left:4px;font-size:0.85em;">最新</span>{{
-                    end }}
+                    {{ if eq $ann.date $now }}
+                    <span
+                        style="display:inline-block;background:var(--pink);color:#fff;padding:1px 8px;border-radius:10px;margin-left:8px;font-size:0.85em;">今天</span>
+                    {{ end }}
+                    {{ if eq $index 0 }}
+                    <span
+                        style="display:inline-block;background:var(--pink-pastel);color:var(--pink);padding:1px 8px;border-radius:10px;margin-left:4px;font-size:0.85em;">最新</span>
+                    {{ end }}
                 </div>
             </div>
-            <div class="ann-content"
-                style="display:{{ if eq $index 0 }}block{{ else }}none{{ end }};padding:0 28px 20px;line-height:1.8;color:var(--dark);font-size:0.95em;">
+            <div class="ann-content">
                 {{ $ann.content | markdownify }}
             </div>
-            <div style="text-align:center;padding:0 28px 16px;">
-                <button class="ann-btn"
-                    onclick="var p=this.closest('.ann-content');var t=this.querySelector('.ann-btn-text');var i=this.querySelector('.ann-btn-icon');if(p.style.display==='none'||!p.style.display){p.style.display='block';t.textContent='收起详情';i.textContent='▴';}else{p.style.display='none';t.textContent='展开详情';i.textContent='▾';}"
-                    style="background:none;border:1px solid rgba(255,182,193,0.3);color:var(--pink);padding:6px 18px;border-radius:16px;cursor:pointer;font-size:0.84em;transition:all 0.2s;"
-                    onmouseover="this.style.background='var(--pink-pastel)'" onmouseout="this.style.background='none'">
+            <div class="ann-btn-row">
+                <button class="ann-toggle-btn"
+                    onclick="var p=this.parentElement.previousElementSibling;var t=this.querySelector('.ann-btn-text');var i=this.querySelector('.ann-btn-icon');if(p.style.display==='none'||!p.style.display){p.style.display='block';t.textContent='收起详情';i.textContent='▴';}else{p.style.display='none';t.textContent='展开详情';i.textContent='▾';}">
                     <span class="ann-btn-text">{{ if eq $index 0 }}收起详情{{ else }}展开详情{{ end }}</span>
                     <span class="ann-btn-icon">{{ if eq $index 0 }}▴{{ else }}▾{{ end }}</span>
                 </button>
@@ -73,16 +71,14 @@
         {{ end }}
     </div>
     {{ else }}
-    <div
-        style="text-align:center;padding:60px 20px;background:rgba(255,255,255,0.6);border-radius:var(--radius);color:var(--gray);">
+    <div class="list-empty">
         <span style="font-size:2em;display:block;margin-bottom:8px;">📅</span>
         <h3>暂无已发布公告喵～</h3>
     </div>
     {{ end }}
 
     {{ else }}
-    <div
-        style="text-align:center;padding:60px 20px;background:rgba(255,255,255,0.6);border-radius:var(--radius);color:var(--gray);">
+    <div class="list-empty">
         <span style="font-size:2em;display:block;margin-bottom:8px;">😴</span>
         <h3>还没有公告喵～</h3>
     </div>

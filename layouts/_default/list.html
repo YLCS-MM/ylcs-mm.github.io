@@ -1,40 +1,31 @@
 {{ define "main" }}
-<div style="max-width:800px;margin:0 auto;padding:24px 20px;">
-    <header
-        style="text-align:center;margin-bottom:28px;padding-bottom:18px;border-bottom:2px dashed rgba(255,182,193,0.4);">
-        <h1 style="font-size:1.8em;color:var(--pink);margin-bottom:4px;font-weight:700;">{{ .Title }}</h1>
+<div class="content-area">
+    <header class="list-header">
+        <h1 class="list-title">{{ .Title }}</h1>
         {{ with .Description }}
-        <p style="color:var(--gray);font-size:0.95em;">{{ . }}</p>
+        <p class="list-desc">{{ . }}</p>
         {{ end }}
     </header>
 
     {{ if .Pages }}
     <div style="display:flex;flex-direction:column;gap:14px;">
         {{ range .Pages }}
-        <article
-            style="background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,182,193,0.2);padding:22px 28px;transition:all var(--trans);">
-            <div style="font-size:0.8em;color:var(--blue);margin-bottom:8px;">
-                📅 {{ .Date.Format "2006-01-02" }}
-                {{ if .Params.author }}<span style="margin-left:12px;">✍️ {{ .Params.author }}</span>{{ end }}
-                {{ with .ReadingTime }}<span style="margin-left:12px;">☕ {{ . }} min</span>{{ end }}
+        <article class="card post-card">
+            <div class="post-meta">
+                <span>📅 {{ .Date.Format "2006-01-02" }}</span>
+                {{ if .Params.author }}<span>✍️ {{ .Params.author }}</span>{{ end }}
+                {{ with .ReadingTime }}<span>☕ {{ . }} min</span>{{ end }}
             </div>
             <h2 style="font-size:1.1em;margin-bottom:6px;">
-                <a href="{{ .RelPermalink }}" style="color:var(--dark);text-decoration:none;transition:color 0.2s;"
-                    onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--dark)'">{{ .Title
-                    }}</a>
+                <a href="{{ .RelPermalink }}" class="post-title-link">{{ .Title }}</a>
             </h2>
-            <p style="font-size:0.9em;color:var(--gray);line-height:1.6;margin-bottom:8px;">{{ .Summary | truncate 180
-                }}</p>
-            <a href="{{ .RelPermalink }}"
-                style="color:var(--pink);font-size:0.86em;text-decoration:none;font-weight:500;transition:all 0.2s;"
-                onmouseover="this.style.color='var(--pink-deep)';this.style.paddingLeft='4px';"
-                onmouseout="this.style.color='var(--pink)';this.style.paddingLeft='0';">继续阅读 →</a>
+            <p class="post-desc">{{ .Summary | truncate 180 }}</p>
+            <a href="{{ .RelPermalink }}" class="post-readmore">继续阅读 →</a>
         </article>
         {{ end }}
     </div>
     {{ else }}
-    <div
-        style="text-align:center;padding:60px 20px;background:rgba(255,255,255,0.6);border-radius:var(--radius);color:var(--gray);font-size:1.1em;">
+    <div class="list-empty">
         <p>暂无内容喵～ 🐱</p>
     </div>
     {{ end }}

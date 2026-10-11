@@ -1,15 +1,10 @@
 {{ define "main" }}
-<div style="max-width:800px;margin:0 auto;padding:24px 20px;">
-    <article
-        style="background:rgba(255,255,255,0.82);backdrop-filter:blur(8px);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,182,193,0.2);padding:36px 40px;">
-
-        <header
-            style="text-align:center;margin-bottom:28px;padding-bottom:22px;border-bottom:2px dashed rgba(255,182,193,0.4);">
-            <h1 style="font-size:1.8em;color:var(--pink);margin-bottom:12px;font-weight:700;line-height:1.35;">{{ .Title
-                }}</h1>
+<div class="content-area">
+    <article class="single-article">
+        <header class="single-header">
+            <h1 class="single-title">{{ .Title }}</h1>
             {{ if not (hasPrefix .RelPermalink "/about/") }}
-            <div
-                style="display:flex;justify-content:center;flex-wrap:wrap;gap:16px;color:var(--gray);font-size:0.88em;">
+            <div class="single-meta">
                 <span>📅 {{ .Date.Format "2006年01月02日" }}</span>
                 {{ if .Params.author }}<span>✍️ {{ .Params.author }}</span>{{ end }}
                 {{ with .ReadingTime }}<span>☕ {{ . }} 分钟</span>{{ end }}
@@ -23,20 +18,14 @@
         </div>
 
         {{ if .Params.tags }}
-        <footer style="margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,182,193,0.2);">
-            <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                {{ range .Params.tags }}
-                <a href="/tags/{{ . | urlize }}/"
-                    style="display:inline-block;background:var(--pink-pastel);color:var(--pink);padding:4px 14px;border-radius:14px;font-size:0.82em;text-decoration:none;transition:all 0.2s;">{{
-                    . }}</a>
-                {{ end }}
-            </div>
+        <footer class="single-footer-bar">
+            {{ range .Params.tags }}
+            <a href="/tags/{{ . | urlize }}/" class="tag-link">{{ . }}</a>
+            {{ end }}
         </footer>
         {{ end }}
 
-        <div style="text-align:center;margin-top:28px;color:var(--pink-light);font-size:0.9em;">
-            🐾 感谢阅读喵～ (ฅ^•ω•^ฅ) 🐾
-        </div>
+        <div class="single-ending">🐾 感谢阅读喵～ (ฅ^•ω•^ฅ) 🐾</div>
     </article>
 </div>
 {{ end }}
@@ -76,6 +65,7 @@
         height: auto;
         border-radius: 12px;
         margin: 12px 0;
+        box-shadow: 0 3px 12px rgba(255, 105, 180, 0.12);
     }
 
     .single-content blockquote {
@@ -105,6 +95,7 @@
         font-size: 0.88em;
         line-height: 1.55;
         margin: 16px 0;
+        border-top: 3px solid var(--pink-light);
     }
 
     .single-content ul,
@@ -115,6 +106,28 @@
 
     .single-content li {
         margin-bottom: 6px;
+    }
+
+    .single-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .single-content th {
+        background: var(--pink-pastel);
+        color: var(--pink);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .single-content td {
+        padding: 8px 14px;
+        border-bottom: 1px solid rgba(255, 182, 193, 0.2);
+    }
+
+    .single-content tr:nth-child(even) td {
+        background: rgba(255, 240, 245, 0.3);
     }
 </style>
 {{ end }}
