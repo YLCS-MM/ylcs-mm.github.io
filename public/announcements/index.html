@@ -1,33 +1,48 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes">
     <title>📢 公告历史 &mdash; 成霜喵喵</title>
     
     <meta name="description" content="甘城猫猫博客的更新公告和历史记录">
     <meta name="keywords" content="成霜喵喵, 甘城なつき, 猫羽雫, 喵星人">
     <meta name="author" content="成霜·喵喵">
+    <meta name="theme-color" content="#ff69b4">
 
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
 
+    
+<script defer src="https://cloud.umami.is/script.js" data-website-id="2e750e8f-4c50-4337-8367-c30946e971bc"></script>
+
+
     <style>
         :root {
             --neko-pink: #ff69b4;
+            --neko-pink-deep: #e85595;
+            --neko-pink-glow: rgba(255, 105, 180, 0.25);
             --neko-light-pink: #ffb6c1;
             --neko-pastel-pink: #ffe4ec;
             --neko-blue: #87ceeb;
+            --neko-blue-deep: #5ba4cf;
             --neko-light-blue: #e0f0ff;
             --neko-cream: #fff9e6;
             --neko-dark: #4a4a4a;
             --neko-gray: #999;
+            --neko-gray-light: #bbb;
             --neko-white: #fff;
             --neko-orange: #ffa726;
-            --shadow-sm: 0 4px 20px rgba(255, 105, 180, 0.08);
-            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 12px 40px rgba(255, 105, 180, 0.12);
+            --shadow-sm: 0 2px 14px rgba(255, 105, 180, 0.07);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 14px 44px rgba(255, 105, 180, 0.11);
+            --shadow-glow: 0 0 36px rgba(255, 105, 180, 0.14);
+            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -36,22 +51,33 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(180deg, #fef5f9 0%, #f0f8ff 50%, #fef5f9 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+            background:
+                radial-gradient(ellipse 900px 600px at 15% 0%, rgba(255, 182, 193, 0.1) 0%, transparent 60%),
+                radial-gradient(ellipse 700px 500px at 85% 25%, rgba(135, 206, 235, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 600px 400px at 50% 80%, rgba(255, 182, 193, 0.06) 0%, transparent 55%),
+                linear-gradient(180deg, #fef5f9 0%, #f8f4fc 30%, #f0f6ff 60%, #fef5f9 100%);
             background-attachment: fixed;
             min-height: 100vh;
             color: var(--neko-dark);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
         ::selection {
             background: var(--neko-light-pink);
-            color: white;
+            color: #fff;
         }
 
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 7px;
         }
 
         ::-webkit-scrollbar-track {
@@ -62,160 +88,169 @@
         ::-webkit-scrollbar-thumb {
             background: var(--neko-light-pink);
             border-radius: 4px;
+            transition: background 0.3s;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: var(--neko-pink);
         }
 
-         
         .site-nav {
             text-align: center;
-            padding: 14px 0;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--neko-pastel-pink);
+            padding: 12px 0;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border-bottom: 1px solid rgba(255, 182, 193, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 1px 10px rgba(255, 105, 180, 0.06);
+            box-shadow: 0 1px 8px rgba(255, 105, 180, 0.05);
         }
 
         .site-nav a {
             display: inline-block;
             color: var(--neko-gray);
             text-decoration: none;
-            padding: 6px 18px;
-            margin: 0 3px;
-            border-radius: 20px;
-            font-size: 0.95em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 7px 20px;
+            margin: 0 4px;
+            border-radius: 22px;
+            font-size: 0.94em;
+            font-weight: 500;
+            transition: all var(--transition-smooth);
             position: relative;
         }
 
         .site-nav a:hover {
             color: var(--neko-pink);
             background: var(--neko-pastel-pink);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         .site-nav a.active {
-            color: var(--neko-pink);
+            color: #fff;
             font-weight: 600;
-            background: var(--neko-pastel-pink);
+            background: linear-gradient(135deg, var(--neko-pink), var(--neko-pink-deep));
+            box-shadow: 0 4px 14px var(--neko-pink-glow);
         }
 
-        .site-nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 3px;
-            background: var(--neko-pink);
-            border-radius: 2px;
-        }
-
-         
         .main-container {
             max-width: 880px;
-            margin: 24px auto 0;
-            padding: 0 20px;
+            margin: 28px auto 0;
+            padding: 0 24px;
         }
 
-         
         .card {
-            background: var(--neko-white);
-            border-radius: 20px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--neko-pastel-pink);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255, 182, 193, 0.25);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all var(--transition-smooth);
         }
 
         .card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
+            border-color: rgba(255, 105, 180, 0.22);
         }
 
-         
         .bottom-decoration {
             text-align: center;
-            padding: 36px 20px;
+            padding: 40px 20px 30px;
             color: var(--neko-light-pink);
-            opacity: 0.45;
-            font-size: 0.95em;
+            font-size: 0.92em;
+            user-select: none;
         }
 
         .bottom-decoration span {
             display: inline-block;
-            animation: pawBounce 2s infinite ease-in-out;
+            animation: pawHop 2.4s infinite ease-in-out;
         }
 
         .bottom-decoration span:nth-child(2) {
-            animation-delay: 0.4s;
+            animation-delay: 0.35s;
         }
 
         .bottom-decoration span:nth-child(3) {
-            animation-delay: 0.8s;
+            animation-delay: 0.7s;
         }
 
-        @keyframes pawBounce {
+        .bottom-decoration span:nth-child(4) {
+            animation-delay: 1.05s;
+        }
+
+        .bottom-decoration span:nth-child(5) {
+            animation-delay: 1.4s;
+        }
+
+        .bottom-decoration span:nth-child(6) {
+            animation-delay: 1.75s;
+        }
+
+        @keyframes pawHop {
 
             0%,
             100% {
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
+            }
+
+            25% {
+                transform: translateY(-7px) scale(1.08);
             }
 
             50% {
-                transform: translateY(-4px);
+                transform: translateY(0) scale(1);
+            }
+
+            75% {
+                transform: translateY(-3px) scale(1.04);
             }
         }
 
-         
         .site-footer {
             text-align: center;
-            padding: 20px;
+            padding: 22px 20px 28px;
             color: var(--neko-gray);
-            font-size: 0.85em;
-            background: rgba(255, 255, 255, 0.6);
-            border-top: 1px solid var(--neko-pastel-pink);
-            margin-top: 10px;
+            font-size: 0.84em;
+            background: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 182, 193, 0.25);
+            margin-top: 6px;
         }
 
         .site-footer a {
             color: var(--neko-pink);
             text-decoration: none;
+            transition: color 0.2s;
         }
 
         .site-footer a:hover {
-            text-decoration: underline;
+            color: var(--neko-pink-deep);
         }
 
         .site-footer-links {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 18px;
             list-style: none;
-            padding: 8px 0;
+            padding: 8px 0 4px;
         }
 
         .site-footer-links a {
             color: var(--neko-gray);
             font-size: 0.9em;
-            transition: color 0.3s;
         }
 
-        .site-footer-links a:hover {
-            color: var(--neko-pink);
+        .footer-links-secondary {
+            margin-top: 2px;
+            font-size: 0.88em;
         }
 
         .tools-wrapper {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 28px;
+            right: 26px;
             z-index: 99;
         }
 
@@ -223,45 +258,108 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: var(--neko-white);
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
             border-radius: 50%;
-            box-shadow: 0 2px 12px rgba(255, 105, 180, 0.2);
+            box-shadow: 0 3px 14px rgba(255, 105, 180, 0.18);
             text-decoration: none;
             color: var(--neko-pink);
-            font-size: 1.2em;
-            transition: all 0.3s;
-            border: 1px solid var(--neko-pastel-pink);
+            font-size: 1.1em;
+            transition: all var(--transition-smooth);
+            border: 1px solid rgba(255, 182, 193, 0.35);
         }
 
         .gotop:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 22px var(--neko-pink-glow);
             background: var(--neko-pastel-pink);
         }
 
-         
+        @media (max-width: 1024px) {
+            .main-container {
+                max-width: 740px;
+                padding: 0 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .site-nav a {
-                padding: 5px 12px;
-                font-size: 0.85em;
-                margin: 0 1px;
+                padding: 6px 14px;
+                font-size: 0.84em;
+                margin: 0 2px;
+                border-radius: 18px;
             }
 
             .main-container {
-                padding: 0 10px;
-                margin: 14px auto 0;
+                padding: 0 12px;
+                margin: 16px auto 0;
             }
 
             .tools-wrapper {
-                bottom: 20px;
-                right: 16px;
+                bottom: 16px;
+                right: 12px;
             }
 
             .gotop {
-                width: 38px;
-                height: 38px;
+                width: 36px;
+                height: 36px;
+                font-size: 1em;
+            }
+
+            .bottom-decoration {
+                padding: 28px 16px 22px;
+                font-size: 0.82em;
+            }
+
+            .site-footer {
+                padding: 16px 12px 24px;
+                font-size: 0.78em;
+            }
+
+            .site-footer-links {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-nav {
+                padding: 8px 0;
+            }
+
+            .site-nav a {
+                padding: 5px 10px;
+                font-size: 0.78em;
+                margin: 0 1px;
+                border-radius: 16px;
+            }
+
+            .main-container {
+                padding: 0 8px;
+                margin: 10px auto 0;
+            }
+
+            .tools-wrapper {
+                bottom: 10px;
+                right: 8px;
+            }
+
+            .gotop {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9em;
+            }
+
+            .bottom-decoration {
+                font-size: 0.72em;
+                padding: 22px 10px 18px;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .main-container {
+                max-width: 960px;
             }
         }
     </style>
@@ -275,43 +373,64 @@
 
     .ann-page-header {
         text-align: center;
-        margin-bottom: 22px;
-        padding-bottom: 16px;
-        border-bottom: 2px dashed var(--neko-light-pink);
+        margin-bottom: 28px;
+        padding-bottom: 22px;
+        border-bottom: 2px dashed rgba(255, 182, 193, 0.5);
+    }
+
+    .ann-page-icon {
+        font-size: 2.4em;
+        margin-bottom: 8px;
+        animation: annIconBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes annIconBounce {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
     }
 
     .ann-page-header h1 {
         color: var(--neko-pink);
-        font-size: 1.9em;
+        font-size: 2em;
         margin-bottom: 6px;
+        font-weight: 700;
     }
 
     .ann-page-desc {
         color: var(--neko-blue);
-        font-size: 1em;
+        font-size: 0.98em;
     }
 
     .ann-stats {
         display: flex;
         justify-content: center;
-        gap: 24px;
-        margin: 18px 0;
-        padding: 16px;
-        background: linear-gradient(135deg, #fff0f5, #fff9fd);
-        border-radius: 14px;
-        border: 1px solid var(--neko-light-pink);
+        gap: 28px;
+        margin: 22px 0 28px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(8px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 182, 193, 0.25);
         flex-wrap: wrap;
+        box-shadow: var(--shadow-sm);
     }
 
     .ann-stat-item {
         text-align: center;
-        min-width: 75px;
+        min-width: 80px;
     }
 
     .ann-stat-num {
         display: block;
         font-size: 1.5em;
-        font-weight: bold;
+        font-weight: 700;
         color: var(--neko-pink);
         word-break: break-all;
     }
@@ -319,44 +438,70 @@
     .ann-stat-label {
         font-size: 0.82em;
         color: var(--neko-blue);
+        margin-top: 2px;
     }
 
     .ann-list {
         display: flex;
         flex-direction: column;
-        gap: 18px;
+        gap: 20px;
     }
 
     .ann-item {
-        background: linear-gradient(135deg, #fff9e6, #fff0f5);
-        border: 2px dashed var(--neko-light-pink);
-        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 182, 193, 0.25);
+        border-radius: var(--radius-lg);
         overflow: hidden;
-        transition: all 0.3s ease;
+        transition: all var(--transition-smooth);
+        box-shadow: var(--shadow-sm);
     }
 
-    .ann-item.latest {
-        border: 2px solid var(--neko-pink);
-        box-shadow: 0 4px 20px rgba(255, 105, 180, 0.12);
+    .ann-item.ann-latest {
+        border-color: var(--neko-pink);
+        box-shadow: 0 4px 24px rgba(255, 105, 180, 0.12);
+    }
+
+    .ann-item.ann-latest::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--neko-pink), var(--neko-orange), var(--neko-pink));
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
 
     .ann-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 24px rgba(255, 182, 193, 0.2);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(255, 105, 180, 0.28);
     }
 
     .ann-item-header {
-        padding: 16px 20px 10px;
-        border-bottom: 1px solid var(--neko-light-pink);
+        padding: 20px 24px 12px;
+        border-bottom: 1px solid rgba(255, 182, 193, 0.2);
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .ann-item-header:hover {
+        background: rgba(255, 182, 193, 0.04);
     }
 
     .ann-item-title {
         color: var(--neko-pink);
-        font-size: 1.15em;
-        margin: 0 0 6px 0;
+        font-size: 1.18em;
+        margin: 0 0 8px 0;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
+        font-weight: 600;
+    }
+
+    .ann-item-title-text {
+        flex: 1;
     }
 
     .ann-item-icon {
@@ -369,120 +514,132 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 4px;
+        gap: 6px;
     }
 
     .ann-item-date {
         color: var(--neko-blue);
-        font-size: 0.85em;
+        font-size: 0.86em;
+        font-weight: 500;
     }
 
     .ann-item-badges {
         display: flex;
-        gap: 5px;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    .badge {
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.74em;
+        font-weight: 600;
     }
 
     .badge-latest {
         background: var(--neko-pink);
-        color: white;
-        padding: 2px 9px;
-        border-radius: 10px;
-        font-size: 0.75em;
-        font-weight: bold;
+        color: #fff;
     }
 
     .badge-today {
         background: #4cd964;
-        color: white;
-        padding: 2px 9px;
-        border-radius: 10px;
-        font-size: 0.75em;
-        font-weight: bold;
+        color: #fff;
     }
 
     .ann-item-content {
-        padding: 0 20px;
+        padding: 0 24px;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.4s ease, padding 0.4s ease;
-        line-height: 1.7;
+        transition: max-height 0.45s ease, padding 0.45s ease;
+        line-height: 1.75;
         color: var(--neko-dark);
     }
 
     .ann-item-content.expanded {
-        padding: 16px 20px;
-        max-height: 2000px;
+        max-height: 3000px;
+    }
+
+    .ann-item-content-inner {
+        padding: 18px 0;
     }
 
     .ann-item-content h2 {
         color: var(--neko-pink);
         font-size: 1.1em;
-        margin: 6px 0 4px;
+        margin: 8px 0 5px;
     }
 
     .ann-item-content h3 {
-        color: var(--neko-blue);
+        color: var(--neko-blue-deep);
         font-size: 1em;
-        margin: 4px 0 3px;
+        margin: 6px 0 4px;
     }
 
     .ann-item-content ul,
     .ann-item-content ol {
-        padding-left: 1.5em;
-        margin: 3px 0;
+        padding-left: 1.6em;
+        margin: 6px 0;
     }
 
     .ann-item-content li {
-        margin-bottom: 2px;
+        margin-bottom: 3px;
+    }
+
+    .ann-item-content li::marker {
+        color: var(--neko-pink);
     }
 
     .ann-item-content a {
         color: var(--neko-pink);
-        text-decoration: underline;
+        text-decoration: none;
+        border-bottom: 1px dotted var(--neko-light-pink);
     }
 
     .ann-item-content a:hover {
-        color: var(--neko-blue);
+        color: var(--neko-pink-deep);
+        border-bottom-style: solid;
     }
 
     .ann-item-content hr {
         border: none;
         border-top: 1px dashed var(--neko-light-pink);
-        margin: 10px 0;
+        margin: 12px 0;
+        opacity: 0.5;
     }
 
     .ann-item-content p {
-        margin-bottom: 5px;
+        margin-bottom: 6px;
     }
 
     .ann-item-footer {
-        padding: 0 20px 14px;
+        padding: 0 24px 16px;
         text-align: center;
     }
 
     .ann-read-more {
         background: linear-gradient(135deg, #ffa726, #fb8c00);
-        color: white;
+        color: #fff;
         border: none;
-        padding: 7px 20px;
+        padding: 8px 24px;
         border-radius: 20px;
         cursor: pointer;
         font-size: 0.88em;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        transition: all 0.3s ease;
+        transition: all var(--transition-fast);
+        font-weight: 500;
     }
 
     .ann-read-more:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 14px rgba(255, 167, 38, 0.3);
+        transform: scale(1.06);
+        box-shadow: 0 4px 16px rgba(255, 167, 38, 0.35);
     }
 
     .btn-icon {
         display: inline-block;
         transition: transform 0.3s ease;
-        font-size: 0.7em;
+        font-size: 0.75em;
     }
 
     .btn-icon.rotated {
@@ -491,31 +648,40 @@
 
     .ann-empty {
         text-align: center;
-        padding: 40px 20px;
+        padding: 48px 20px;
     }
 
     .ann-empty-icon {
-        font-size: 3em;
+        font-size: 3.5em;
         display: block;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
         color: var(--neko-blue);
     }
 
     .ann-empty h3 {
         color: var(--neko-pink);
         margin-bottom: 6px;
-        font-size: 1.05em;
+        font-size: 1.08em;
+        font-weight: 600;
     }
 
     .ann-future-info {
-        margin-top: 16px;
-        padding: 10px 14px;
-        background: linear-gradient(135deg, #e6f7ff, #f0f9ff);
-        border: 1px solid var(--neko-blue);
-        border-radius: 10px;
+        margin-top: 20px;
+        padding: 14px 20px;
+        background: rgba(224, 240, 255, 0.6);
+        border: 1px solid rgba(135, 206, 235, 0.3);
+        border-radius: var(--radius-md);
         text-align: center;
-        color: #1e90ff;
+        color: var(--neko-blue-deep);
         font-size: 0.88em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .ann-future-icon {
+        font-size: 1.2em;
     }
 
     .ann-future-info strong {
@@ -524,12 +690,12 @@
 
     @media (max-width: 768px) {
         .ann-page-header h1 {
-            font-size: 1.5em;
+            font-size: 1.55em;
         }
 
         .ann-stats {
-            gap: 14px;
-            padding: 12px 8px;
+            gap: 16px;
+            padding: 14px 10px;
         }
 
         .ann-stat-num {
@@ -537,32 +703,84 @@
         }
 
         .ann-item-header {
-            padding: 14px 14px 8px;
+            padding: 16px 16px 10px;
         }
 
         .ann-item-title {
-            font-size: 1em;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 3px;
+            font-size: 1.04em;
+            flex-wrap: wrap;
         }
 
         .ann-item-meta {
             flex-direction: column;
             align-items: flex-start;
-            gap: 3px;
+            gap: 4px;
+        }
+
+        .ann-item-content {
+            padding: 0 16px;
+        }
+
+        .ann-item-content-inner {
+            padding: 14px 0;
+        }
+
+        .ann-item-footer {
+            padding: 0 16px 14px;
+        }
+
+        .ann-list {
+            gap: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .ann-page-header h1 {
+            font-size: 1.3em;
+        }
+
+        .ann-page-icon {
+            font-size: 1.8em;
+        }
+
+        .ann-stats {
+            gap: 10px;
+            padding: 10px 6px;
+            border-radius: var(--radius-md);
+        }
+
+        .ann-stat-num {
+            font-size: 1.05em;
+        }
+
+        .ann-stat-label {
+            font-size: 0.72em;
+        }
+
+        .ann-item-header {
+            padding: 14px 14px 8px;
+        }
+
+        .ann-item-title {
+            font-size: 0.94em;
         }
 
         .ann-item-content {
             padding: 0 14px;
+            font-size: 0.9em;
         }
 
-        .ann-item-content.expanded {
-            padding: 14px;
+        .ann-item-content-inner {
+            padding: 12px 0;
         }
 
         .ann-item-footer {
             padding: 0 14px 12px;
+        }
+
+        .ann-read-more {
+            padding: 6px 18px;
+            font-size: 0.8em;
         }
     }
 </style>
@@ -570,6 +788,7 @@
     (function () {
         window.toggleAnn = function (btn) {
             var item = btn.closest('.ann-item');
+            if (!item) return;
             var content = item.querySelector('.ann-item-content');
             var icon = btn.querySelector('.btn-icon');
             var text = btn.querySelector('.btn-text');
@@ -577,12 +796,12 @@
             if (isExpanded) {
                 content.classList.remove('expanded');
                 icon.classList.remove('rotated');
-                text.textContent = '📖 展开详情';
+                text.textContent = '展开详情';
                 btn.setAttribute('data-expanded', 'false');
             } else {
                 content.classList.add('expanded');
                 icon.classList.add('rotated');
-                text.textContent = '📕 收起详情';
+                text.textContent = '收起详情';
                 btn.setAttribute('data-expanded', 'true');
             }
         };
@@ -592,7 +811,6 @@
 </head>
 
 <body>
-    
     <nav class="site-nav">
         <a href="/" class="">🏠 首页</a>
         <a href="/announcements/" class="">📢 公告</a>
@@ -630,7 +848,8 @@
 <div class="main-container">
     <section class="announcements-page">
         <header class="ann-page-header">
-            <h1>📢 公告历史</h1>
+            <div class="ann-page-icon">📢</div>
+            <h1>公告历史</h1>
             <p class="ann-page-desc">记录博客的每一次成长和更新喵～</p>
         </header>
 
@@ -657,23 +876,25 @@
         
         <div class="ann-list">
             
-            <article class="ann-item latest">
-                <header class="ann-item-header">
+            <article class="ann-item ann-latest">
+                <header class="ann-item-header"
+                    onclick="toggleAnn(this.closest('.ann-item').querySelector('.ann-read-more'))">
                     <h2 class="ann-item-title">
                         <span class="ann-item-icon">🎉</span>
-                        🎂 猫猫葉子的19岁生日祝福！
+                        <span class="ann-item-title-text">🎂 猫猫葉子的19岁生日祝福！</span>
                     </h2>
                     <div class="ann-item-meta">
                         <span class="ann-item-date">📅 2026-01-22</span>
                         <span class="ann-item-badges">
                             
-                            <span class="badge-latest">最新</span>
+                            <span class="badge badge-latest">最新</span>
                         </span>
                     </div>
                 </header>
 
                 <div class="ann-item-content expanded">
-                    <h2 id="秘密生日祝福已上线喵">秘密生日祝福已上线喵～</h2>
+                    <div class="ann-item-content-inner">
+                        <h2 id="秘密生日祝福已上线喵">秘密生日祝福已上线喵～</h2>
 <p>今天是我的好朋友<strong>猫猫葉子</strong>的19岁生日喵！</p>
 <p>🎁 窝准备了一个特别的生日祝福页面喵～</p>
 <p>🔐 密码提示：八位数字，就像六月廿四日是06241490那样的格式</p>
@@ -684,22 +905,24 @@
 希望猫猫葉子能喜欢喵！</p>
 <p><em>成霜·喵喵 于 2025年制作</em></p>
 
+                    </div>
                 </div>
 
                 <footer class="ann-item-footer">
                     <button class="ann-read-more" onclick="toggleAnn(this)"
                         data-expanded="true">
-                        <span class="btn-text">📕 收起详情</span>
-                        <span class="btn-icon rotated">▼</span>
+                        <span class="btn-text">收起详情</span>
+                        <span class="btn-icon rotated">▾</span>
                     </button>
                 </footer>
             </article>
             
             <article class="ann-item">
-                <header class="ann-item-header">
+                <header class="ann-item-header"
+                    onclick="toggleAnn(this.closest('.ann-item').querySelector('.ann-read-more'))">
                     <h2 class="ann-item-title">
                         <span class="ann-item-icon">📌</span>
-                        修复
+                        <span class="ann-item-title-text">修复</span>
                     </h2>
                     <div class="ann-item-meta">
                         <span class="ann-item-date">📅 2026-01-04</span>
@@ -711,25 +934,28 @@
                 </header>
 
                 <div class="ann-item-content">
-                    <h2 id="修复了已知问题喵">🐾修复了已知问题喵～🐾</h2>
+                    <div class="ann-item-content-inner">
+                        <h2 id="修复了已知问题喵">🐾修复了已知问题喵～🐾</h2>
 <h2 id="添加惹不蒜子访问统计">🐾添加惹不蒜子访问统计🐾</h2>
 
+                    </div>
                 </div>
 
                 <footer class="ann-item-footer">
                     <button class="ann-read-more" onclick="toggleAnn(this)"
                         data-expanded="false">
-                        <span class="btn-text">📖 展开详情</span>
-                        <span class="btn-icon">▼</span>
+                        <span class="btn-text">展开详情</span>
+                        <span class="btn-icon">▾</span>
                     </button>
                 </footer>
             </article>
             
             <article class="ann-item">
-                <header class="ann-item-header">
+                <header class="ann-item-header"
+                    onclick="toggleAnn(this.closest('.ann-item').querySelector('.ann-read-more'))">
                     <h2 class="ann-item-title">
                         <span class="ann-item-icon">📌</span>
-                        🎉 博客大更新完成喵！
+                        <span class="ann-item-title-text">🎉 博客大更新完成喵！</span>
                     </h2>
                     <div class="ann-item-meta">
                         <span class="ann-item-date">📅 2025-11-04</span>
@@ -741,7 +967,8 @@
                 </header>
 
                 <div class="ann-item-content">
-                    <h2 id="-重大更新内容喵喵喵-">🐾 重大更新内容喵喵喵 🐾</h2>
+                    <div class="ann-item-content-inner">
+                        <h2 id="-重大更新内容喵喵喵-">🐾 重大更新内容喵喵喵 🐾</h2>
 <ul>
 <li>自博客上线以来第二次重大更新完成喏喵~</li>
 </ul>
@@ -775,22 +1002,24 @@
 <ul>
 <li>代码结构还有优化空间，后续会继续改进喵~</li>
 </ul>
+                    </div>
                 </div>
 
                 <footer class="ann-item-footer">
                     <button class="ann-read-more" onclick="toggleAnn(this)"
                         data-expanded="false">
-                        <span class="btn-text">📖 展开详情</span>
-                        <span class="btn-icon">▼</span>
+                        <span class="btn-text">展开详情</span>
+                        <span class="btn-icon">▾</span>
                     </button>
                 </footer>
             </article>
             
             <article class="ann-item">
-                <header class="ann-item-header">
+                <header class="ann-item-header"
+                    onclick="toggleAnn(this.closest('.ann-item').querySelector('.ann-read-more'))">
                     <h2 class="ann-item-title">
                         <span class="ann-item-icon">📌</span>
-                        🎀 公告系统初始化完成喵！
+                        <span class="ann-item-title-text">🎀 公告系统初始化完成喵！</span>
                     </h2>
                     <div class="ann-item-meta">
                         <span class="ann-item-date">📅 2025-11-02</span>
@@ -802,7 +1031,8 @@
                 </header>
 
                 <div class="ann-item-content">
-                    <h2 id="可爱猫猫公告系统正式上线喵">可爱猫猫公告系统正式上线喵！</h2>
+                    <div class="ann-item-content-inner">
+                        <h2 id="可爱猫猫公告系统正式上线喵">可爱猫猫公告系统正式上线喵！</h2>
 <h3 id="-开发日志">📅 开发日志</h3>
 <ul>
 <li><strong>2025-10-15</strong>：公告系统基础框架搭建完成</li>
@@ -823,22 +1053,24 @@
 </ul>
 <blockquote>
 <p>欢迎提出宝贵建议喵！让博客变得更好～ 🐾</p></blockquote>
+                    </div>
                 </div>
 
                 <footer class="ann-item-footer">
                     <button class="ann-read-more" onclick="toggleAnn(this)"
                         data-expanded="false">
-                        <span class="btn-text">📖 展开详情</span>
-                        <span class="btn-icon">▼</span>
+                        <span class="btn-text">展开详情</span>
+                        <span class="btn-icon">▾</span>
                     </button>
                 </footer>
             </article>
             
             <article class="ann-item">
-                <header class="ann-item-header">
+                <header class="ann-item-header"
+                    onclick="toggleAnn(this.closest('.ann-item').querySelector('.ann-read-more'))">
                     <h2 class="ann-item-title">
                         <span class="ann-item-icon">📌</span>
-                        🚧 网站施工公告喵
+                        <span class="ann-item-title-text">🚧 网站施工公告喵</span>
                     </h2>
                     <div class="ann-item-meta">
                         <span class="ann-item-date">📅 2025-11-01</span>
@@ -850,7 +1082,8 @@
                 </header>
 
                 <div class="ann-item-content">
-                    <h2 id="-施工通知喵">🛠️ 施工通知喵</h2>
+                    <div class="ann-item-content-inner">
+                        <h2 id="-施工通知喵">🛠️ 施工通知喵</h2>
 <p>亲爱的访客们喵~</p>
 <p>博客正在进行技术升级和界面优化，施工期间可能会出现：</p>
 <ul>
@@ -867,13 +1100,14 @@
 <blockquote>
 <p>给您带来的不便敬请谅解喵～施工完成后将带来更好的浏览体验！(≧∇≦)ﾉ</p></blockquote>
 
+                    </div>
                 </div>
 
                 <footer class="ann-item-footer">
                     <button class="ann-read-more" onclick="toggleAnn(this)"
                         data-expanded="false">
-                        <span class="btn-text">📖 展开详情</span>
-                        <span class="btn-icon">▼</span>
+                        <span class="btn-text">展开详情</span>
+                        <span class="btn-icon">▾</span>
                     </button>
                 </footer>
             </article>
@@ -888,12 +1122,10 @@
 </div>
 
 
-    
     <div class="bottom-decoration">
         <span>🐾</span> <span>ฅ</span><span>(^</span>&bull;<span>ω</span>&bull;<span>^)ฅ</span> <span>🐾</span>
     </div>
 
-    
     <footer class="site-footer">
     <div class="copyright">
         © 2025 <span title="成霜·喵喵">成霜·喵喵</span>
@@ -905,54 +1137,36 @@
         <li><a href="/about/">关于</a></li>
     </ul>
 
-    <p style="margin-top:4px;">
+    <p class="footer-links-secondary">
         <a href="https://github.com/ylcs-mm" target="_blank" rel="noopener">GitHub</a>
         &nbsp;·&nbsp;
         <a href="mailto:2992412549@qq.com">Email</a>
     </p>
-
-    
-<div style="text-align:center; padding: 10px 0; font-size: 0.8em; color: var(--neko-gray);">
-    <span id="busuanzi_container_site_pv">
-        👀 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    &nbsp;|&nbsp;
-    <span id="busuanzi_container_site_uv">
-        🐱 访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-</div>
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
 </footer>
 
 
 <script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
 
 
-
 <script>
-    window.live2d_widgets = {
-        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
-        display: {
-            position: "fixed",
-            right: 15,
-            bottom: 25,
-            left: "auto",
-            width: 160,
-            height: 320,
-            zIndex: 999999,
-            transform: "none",
-        },
-        mobile: {
-            show: true,
-            scale: 0.75,
-            position: "fixed",
-            right: 10,
-            bottom: 15,
-        },
-    };
+    (function () {
+        var d = document, w = window.innerWidth;
+        window.live2d_widgets = {
+            modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
+            display: {
+                position: "fixed",
+                right: w < 640 ? 2 : 12,
+                bottom: w < 640 ? 8 : 20,
+                left: "auto",
+                width: w < 640 ? 110 : 160,
+                height: w < 640 ? 220 : 320,
+                zIndex: 999998,
+            },
+            mobile: { show: true, scale: 0.65 },
+        };
+    })();
 </script>
-<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
+<script async src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
 
 
 
@@ -1235,9 +1449,8 @@
 
 
 
-    
     <div class="tools-wrapper">
-        <a class="gotop" href="#" title="回到顶部">▲</a>
+        <a class="gotop" href="#" title="回到顶部" aria-label="回到顶部">▲</a>
     </div>
 
     

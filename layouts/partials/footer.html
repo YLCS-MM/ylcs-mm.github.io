@@ -9,43 +9,36 @@
         <li><a href="/about/">关于</a></li>
     </ul>
 
-    <p style="margin-top:4px;">
+    <p class="footer-links-secondary">
         <a href="https://github.com/{{ .Site.Params.github }}" target="_blank" rel="noopener">GitHub</a>
         &nbsp;·&nbsp;
         <a href="mailto:{{ .Site.Params.email }}">Email</a>
     </p>
-
-    {{ partial "visit-stat.html" . }}
 </footer>
 
 {{ if .Site.Params.share.enabled }}
 <script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
 {{ end }}
 
-<!-- Live2D 看板娘 -->
 <script>
-    window.live2d_widgets = {
-        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
-        display: {
-            position: "fixed",
-            right: 15,
-            bottom: 25,
-            left: "auto",
-            width: 160,
-            height: 320,
-            zIndex: 999999,
-            transform: "none",
-        },
-        mobile: {
-            show: true,
-            scale: 0.75,
-            position: "fixed",
-            right: 10,
-            bottom: 15,
-        },
-    };
+    (function () {
+        var d = document, w = window.innerWidth;
+        window.live2d_widgets = {
+            modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
+            display: {
+                position: "fixed",
+                right: w < 640 ? 2 : 12,
+                bottom: w < 640 ? 8 : 20,
+                left: "auto",
+                width: w < 640 ? 110 : 160,
+                height: w < 640 ? 220 : 320,
+                zIndex: 999998,
+            },
+            mobile: { show: true, scale: 0.65 },
+        };
+    })();
 </script>
-<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
+<script async src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
 
 {{ if .Site.Params.announcement.popupEnabled }}
 {{ partial "announcement-popup.html" . }}

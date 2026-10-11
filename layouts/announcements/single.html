@@ -15,7 +15,8 @@
 <div class="main-container">
     <section class="announcements-page">
         <header class="ann-page-header">
-            <h1>📢 公告历史</h1>
+            <div class="ann-page-icon">📢</div>
+            <h1>公告历史</h1>
             <p class="ann-page-desc">记录博客的每一次成长和更新喵～</p>
         </header>
 
@@ -47,30 +48,33 @@
         {{ $sorted := sort $pastList "date" "desc" }}
         <div class="ann-list">
             {{ range $index, $ann := $sorted }}
-            <article class="ann-item{{ if eq $index 0 }} latest{{ end }}">
-                <header class="ann-item-header">
+            <article class="ann-item{{ if eq $index 0 }} ann-latest{{ end }}">
+                <header class="ann-item-header"
+                    onclick="toggleAnn(this.closest('.ann-item').querySelector('.ann-read-more'))">
                     <h2 class="ann-item-title">
                         <span class="ann-item-icon">{{ if eq $index 0 }}🎉{{ else }}📌{{ end }}</span>
-                        {{ $ann.title }}
+                        <span class="ann-item-title-text">{{ $ann.title }}</span>
                     </h2>
                     <div class="ann-item-meta">
                         <span class="ann-item-date">📅 {{ $ann.date }}</span>
                         <span class="ann-item-badges">
-                            {{ if eq $ann.date $now }}<span class="badge-today">今天</span>{{ end }}
-                            {{ if eq $index 0 }}<span class="badge-latest">最新</span>{{ end }}
+                            {{ if eq $ann.date $now }}<span class="badge badge-today">今天</span>{{ end }}
+                            {{ if eq $index 0 }}<span class="badge badge-latest">最新</span>{{ end }}
                         </span>
                     </div>
                 </header>
 
                 <div class="ann-item-content{{ if eq $index 0 }} expanded{{ end }}">
-                    {{ $ann.content | markdownify }}
+                    <div class="ann-item-content-inner">
+                        {{ $ann.content | markdownify }}
+                    </div>
                 </div>
 
                 <footer class="ann-item-footer">
                     <button class="ann-read-more" onclick="toggleAnn(this)"
                         data-expanded="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
-                        <span class="btn-text">{{ if eq $index 0 }}📕 收起详情{{ else }}📖 展开详情{{ end }}</span>
-                        <span class="btn-icon{{ if eq $index 0 }} rotated{{ end }}">▼</span>
+                        <span class="btn-text">{{ if eq $index 0 }}收起详情{{ else }}展开详情{{ end }}</span>
+                        <span class="btn-icon{{ if eq $index 0 }} rotated{{ end }}">▾</span>
                     </button>
                 </footer>
             </article>
@@ -86,7 +90,8 @@
 
         {{ if gt $futureCount 0 }}
         <div class="ann-future-info">
-            <p>🎯 还有 <strong>{{ $futureCount }}</strong> 个公告将在未来发布喵～</p>
+            <span class="ann-future-icon">🎯</span>
+            <p>还有 <strong>{{ $futureCount }}</strong> 个公告将在未来发布喵～</p>
         </div>
         {{ end }}
 
@@ -110,43 +115,64 @@
 
     .ann-page-header {
         text-align: center;
-        margin-bottom: 22px;
-        padding-bottom: 16px;
-        border-bottom: 2px dashed var(--neko-light-pink);
+        margin-bottom: 28px;
+        padding-bottom: 22px;
+        border-bottom: 2px dashed rgba(255, 182, 193, 0.5);
+    }
+
+    .ann-page-icon {
+        font-size: 2.4em;
+        margin-bottom: 8px;
+        animation: annIconBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes annIconBounce {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
     }
 
     .ann-page-header h1 {
         color: var(--neko-pink);
-        font-size: 1.9em;
+        font-size: 2em;
         margin-bottom: 6px;
+        font-weight: 700;
     }
 
     .ann-page-desc {
         color: var(--neko-blue);
-        font-size: 1em;
+        font-size: 0.98em;
     }
 
     .ann-stats {
         display: flex;
         justify-content: center;
-        gap: 24px;
-        margin: 18px 0;
-        padding: 16px;
-        background: linear-gradient(135deg, #fff0f5, #fff9fd);
-        border-radius: 14px;
-        border: 1px solid var(--neko-light-pink);
+        gap: 28px;
+        margin: 22px 0 28px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(8px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 182, 193, 0.25);
         flex-wrap: wrap;
+        box-shadow: var(--shadow-sm);
     }
 
     .ann-stat-item {
         text-align: center;
-        min-width: 75px;
+        min-width: 80px;
     }
 
     .ann-stat-num {
         display: block;
         font-size: 1.5em;
-        font-weight: bold;
+        font-weight: 700;
         color: var(--neko-pink);
         word-break: break-all;
     }
@@ -154,44 +180,70 @@
     .ann-stat-label {
         font-size: 0.82em;
         color: var(--neko-blue);
+        margin-top: 2px;
     }
 
     .ann-list {
         display: flex;
         flex-direction: column;
-        gap: 18px;
+        gap: 20px;
     }
 
     .ann-item {
-        background: linear-gradient(135deg, #fff9e6, #fff0f5);
-        border: 2px dashed var(--neko-light-pink);
-        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 182, 193, 0.25);
+        border-radius: var(--radius-lg);
         overflow: hidden;
-        transition: all 0.3s ease;
+        transition: all var(--transition-smooth);
+        box-shadow: var(--shadow-sm);
     }
 
-    .ann-item.latest {
-        border: 2px solid var(--neko-pink);
-        box-shadow: 0 4px 20px rgba(255, 105, 180, 0.12);
+    .ann-item.ann-latest {
+        border-color: var(--neko-pink);
+        box-shadow: 0 4px 24px rgba(255, 105, 180, 0.12);
+    }
+
+    .ann-item.ann-latest::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--neko-pink), var(--neko-orange), var(--neko-pink));
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
 
     .ann-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 24px rgba(255, 182, 193, 0.2);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(255, 105, 180, 0.28);
     }
 
     .ann-item-header {
-        padding: 16px 20px 10px;
-        border-bottom: 1px solid var(--neko-light-pink);
+        padding: 20px 24px 12px;
+        border-bottom: 1px solid rgba(255, 182, 193, 0.2);
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .ann-item-header:hover {
+        background: rgba(255, 182, 193, 0.04);
     }
 
     .ann-item-title {
         color: var(--neko-pink);
-        font-size: 1.15em;
-        margin: 0 0 6px 0;
+        font-size: 1.18em;
+        margin: 0 0 8px 0;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
+        font-weight: 600;
+    }
+
+    .ann-item-title-text {
+        flex: 1;
     }
 
     .ann-item-icon {
@@ -204,120 +256,132 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 4px;
+        gap: 6px;
     }
 
     .ann-item-date {
         color: var(--neko-blue);
-        font-size: 0.85em;
+        font-size: 0.86em;
+        font-weight: 500;
     }
 
     .ann-item-badges {
         display: flex;
-        gap: 5px;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    .badge {
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.74em;
+        font-weight: 600;
     }
 
     .badge-latest {
         background: var(--neko-pink);
-        color: white;
-        padding: 2px 9px;
-        border-radius: 10px;
-        font-size: 0.75em;
-        font-weight: bold;
+        color: #fff;
     }
 
     .badge-today {
         background: #4cd964;
-        color: white;
-        padding: 2px 9px;
-        border-radius: 10px;
-        font-size: 0.75em;
-        font-weight: bold;
+        color: #fff;
     }
 
     .ann-item-content {
-        padding: 0 20px;
+        padding: 0 24px;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.4s ease, padding 0.4s ease;
-        line-height: 1.7;
+        transition: max-height 0.45s ease, padding 0.45s ease;
+        line-height: 1.75;
         color: var(--neko-dark);
     }
 
     .ann-item-content.expanded {
-        padding: 16px 20px;
-        max-height: 2000px;
+        max-height: 3000px;
+    }
+
+    .ann-item-content-inner {
+        padding: 18px 0;
     }
 
     .ann-item-content h2 {
         color: var(--neko-pink);
         font-size: 1.1em;
-        margin: 6px 0 4px;
+        margin: 8px 0 5px;
     }
 
     .ann-item-content h3 {
-        color: var(--neko-blue);
+        color: var(--neko-blue-deep);
         font-size: 1em;
-        margin: 4px 0 3px;
+        margin: 6px 0 4px;
     }
 
     .ann-item-content ul,
     .ann-item-content ol {
-        padding-left: 1.5em;
-        margin: 3px 0;
+        padding-left: 1.6em;
+        margin: 6px 0;
     }
 
     .ann-item-content li {
-        margin-bottom: 2px;
+        margin-bottom: 3px;
+    }
+
+    .ann-item-content li::marker {
+        color: var(--neko-pink);
     }
 
     .ann-item-content a {
         color: var(--neko-pink);
-        text-decoration: underline;
+        text-decoration: none;
+        border-bottom: 1px dotted var(--neko-light-pink);
     }
 
     .ann-item-content a:hover {
-        color: var(--neko-blue);
+        color: var(--neko-pink-deep);
+        border-bottom-style: solid;
     }
 
     .ann-item-content hr {
         border: none;
         border-top: 1px dashed var(--neko-light-pink);
-        margin: 10px 0;
+        margin: 12px 0;
+        opacity: 0.5;
     }
 
     .ann-item-content p {
-        margin-bottom: 5px;
+        margin-bottom: 6px;
     }
 
     .ann-item-footer {
-        padding: 0 20px 14px;
+        padding: 0 24px 16px;
         text-align: center;
     }
 
     .ann-read-more {
         background: linear-gradient(135deg, #ffa726, #fb8c00);
-        color: white;
+        color: #fff;
         border: none;
-        padding: 7px 20px;
+        padding: 8px 24px;
         border-radius: 20px;
         cursor: pointer;
         font-size: 0.88em;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        transition: all 0.3s ease;
+        transition: all var(--transition-fast);
+        font-weight: 500;
     }
 
     .ann-read-more:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 14px rgba(255, 167, 38, 0.3);
+        transform: scale(1.06);
+        box-shadow: 0 4px 16px rgba(255, 167, 38, 0.35);
     }
 
     .btn-icon {
         display: inline-block;
         transition: transform 0.3s ease;
-        font-size: 0.7em;
+        font-size: 0.75em;
     }
 
     .btn-icon.rotated {
@@ -326,31 +390,40 @@
 
     .ann-empty {
         text-align: center;
-        padding: 40px 20px;
+        padding: 48px 20px;
     }
 
     .ann-empty-icon {
-        font-size: 3em;
+        font-size: 3.5em;
         display: block;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
         color: var(--neko-blue);
     }
 
     .ann-empty h3 {
         color: var(--neko-pink);
         margin-bottom: 6px;
-        font-size: 1.05em;
+        font-size: 1.08em;
+        font-weight: 600;
     }
 
     .ann-future-info {
-        margin-top: 16px;
-        padding: 10px 14px;
-        background: linear-gradient(135deg, #e6f7ff, #f0f9ff);
-        border: 1px solid var(--neko-blue);
-        border-radius: 10px;
+        margin-top: 20px;
+        padding: 14px 20px;
+        background: rgba(224, 240, 255, 0.6);
+        border: 1px solid rgba(135, 206, 235, 0.3);
+        border-radius: var(--radius-md);
         text-align: center;
-        color: #1e90ff;
+        color: var(--neko-blue-deep);
         font-size: 0.88em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .ann-future-icon {
+        font-size: 1.2em;
     }
 
     .ann-future-info strong {
@@ -359,12 +432,12 @@
 
     @media (max-width: 768px) {
         .ann-page-header h1 {
-            font-size: 1.5em;
+            font-size: 1.55em;
         }
 
         .ann-stats {
-            gap: 14px;
-            padding: 12px 8px;
+            gap: 16px;
+            padding: 14px 10px;
         }
 
         .ann-stat-num {
@@ -372,32 +445,84 @@
         }
 
         .ann-item-header {
-            padding: 14px 14px 8px;
+            padding: 16px 16px 10px;
         }
 
         .ann-item-title {
-            font-size: 1em;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 3px;
+            font-size: 1.04em;
+            flex-wrap: wrap;
         }
 
         .ann-item-meta {
             flex-direction: column;
             align-items: flex-start;
-            gap: 3px;
+            gap: 4px;
+        }
+
+        .ann-item-content {
+            padding: 0 16px;
+        }
+
+        .ann-item-content-inner {
+            padding: 14px 0;
+        }
+
+        .ann-item-footer {
+            padding: 0 16px 14px;
+        }
+
+        .ann-list {
+            gap: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .ann-page-header h1 {
+            font-size: 1.3em;
+        }
+
+        .ann-page-icon {
+            font-size: 1.8em;
+        }
+
+        .ann-stats {
+            gap: 10px;
+            padding: 10px 6px;
+            border-radius: var(--radius-md);
+        }
+
+        .ann-stat-num {
+            font-size: 1.05em;
+        }
+
+        .ann-stat-label {
+            font-size: 0.72em;
+        }
+
+        .ann-item-header {
+            padding: 14px 14px 8px;
+        }
+
+        .ann-item-title {
+            font-size: 0.94em;
         }
 
         .ann-item-content {
             padding: 0 14px;
+            font-size: 0.9em;
         }
 
-        .ann-item-content.expanded {
-            padding: 14px;
+        .ann-item-content-inner {
+            padding: 12px 0;
         }
 
         .ann-item-footer {
             padding: 0 14px 12px;
+        }
+
+        .ann-read-more {
+            padding: 6px 18px;
+            font-size: 0.8em;
         }
     }
 </style>
@@ -405,6 +530,7 @@
     (function () {
         window.toggleAnn = function (btn) {
             var item = btn.closest('.ann-item');
+            if (!item) return;
             var content = item.querySelector('.ann-item-content');
             var icon = btn.querySelector('.btn-icon');
             var text = btn.querySelector('.btn-text');
@@ -412,12 +538,12 @@
             if (isExpanded) {
                 content.classList.remove('expanded');
                 icon.classList.remove('rotated');
-                text.textContent = '📖 展开详情';
+                text.textContent = '展开详情';
                 btn.setAttribute('data-expanded', 'false');
             } else {
                 content.classList.add('expanded');
                 icon.classList.add('rotated');
-                text.textContent = '📕 收起详情';
+                text.textContent = '收起详情';
                 btn.setAttribute('data-expanded', 'true');
             }
         };

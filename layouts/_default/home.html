@@ -1,45 +1,58 @@
 {{ define "main" }}
 <main>
-    <!-- 🌸 英雄区 -->
     <section class="hero">
         <div class="hero-bg"></div>
+        <div class="hero-decor">
+            <span class="hero-sparkle" style="top:10%;left:18%;animation-delay:0s">✦</span>
+            <span class="hero-sparkle" style="top:22%;right:15%;animation-delay:0.8s">✧</span>
+            <span class="hero-sparkle" style="top:60%;left:10%;animation-delay:1.6s">⋆</span>
+            <span class="hero-sparkle" style="top:55%;right:12%;animation-delay:2.4s">✦</span>
+            <span class="hero-sparkle" style="top:8%;left:55%;animation-delay:0.4s">·</span>
+            <span class="hero-sparkle" style="top:75%;left:70%;animation-delay:2.0s">✧</span>
+        </div>
         <div class="hero-avatar"></div>
         <h1 class="hero-title">{{ .Site.Title }}</h1>
         <p class="hero-subtitle">{{ .Site.Params.subtitle }}</p>
         <p class="hero-location">📍 {{ .Site.Params.location }}</p>
 
         <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-num">{{ len (where .Site.RegularPages "Type" "posts") }}</span>
-                <span class="stat-label">篇文章</span>
+            <div class="hero-stat-item">
+                <span class="hero-stat-num">{{ len (where .Site.RegularPages "Type" "posts") }}</span>
+                <span class="hero-stat-label">篇文章</span>
             </div>
-            <div class="stat">
-                <span class="stat-num">{{ len .Site.Taxonomies.tags }}</span>
-                <span class="stat-label">个标签</span>
+            <div class="hero-stat-item">
+                <span class="hero-stat-num">{{ len .Site.Taxonomies.tags }}</span>
+                <span class="hero-stat-label">个标签</span>
             </div>
-            <div class="stat">
-                <span class="stat-num">{{ .Site.Params.since }}</span>
-                <span class="stat-label">起始年</span>
+            <div class="hero-stat-item">
+                <span class="hero-stat-num">{{ .Site.Params.since }}</span>
+                <span class="hero-stat-label">起始年</span>
             </div>
         </div>
     </section>
 
-    <!-- 📝 文章列表 -->
     <section class="post-list-section">
         <div class="section-header">
-            <h2>📝 最新文章</h2>
+            <span class="section-icon">📝</span>
+            <h2>最新文章</h2>
             <span class="section-line"></span>
         </div>
 
         <div class="post-grid">
             {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
             {{ range $paginator.Pages }}
-            <article class="post-card card">
+            <article class="post-card">
+                <div class="post-card-accent"></div>
                 <div class="post-card-body">
                     <div class="post-card-meta">
-                        <span class="post-date">📅 {{ .Date.Format "2006年01月02日" }}</span>
+                        <span class="post-date">📅 {{ .Date.Format "2006-01-02" }}</span>
                         {{ if .Params.tags }}
-                        <span class="post-tag">{{ index .Params.tags 0 }}</span>
+                        {{ range first 1 .Params.tags }}
+                        <span class="post-tag">{{ . }}</span>
+                        {{ end }}
+                        {{ end }}
+                        {{ with .ReadingTime }}
+                        <span class="post-reading">☕ {{ . }} min</span>
                         {{ end }}
                     </div>
                     <h3 class="post-card-title">
@@ -50,21 +63,27 @@
                     {{ else }}
                     <p class="post-card-desc">{{ .Summary | truncate 100 }}</p>
                     {{ end }}
-                    <a href="{{ .RelPermalink }}" class="read-more">阅读全文 →</a>
+                    <a href="{{ .RelPermalink }}" class="read-more">
+                        阅读全文
+                        <span class="read-more-arrow">→</span>
+                    </a>
                 </div>
             </article>
             {{ end }}
         </div>
 
-        <!-- 📖 分页 -->
         {{ if gt $paginator.TotalPages 1 }}
         <nav class="pagination">
             {{ if $paginator.HasPrev }}
-            <a href="{{ $paginator.Prev.URL }}" class="page-btn">&laquo; 上一页</a>
+            <a href="{{ $paginator.Prev.URL }}" class="page-btn page-btn-prev">← 上一页</a>
+            {{ else }}
+            <span class="page-btn page-btn-disabled">← 上一页</span>
             {{ end }}
             <span class="page-info">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
             {{ if $paginator.HasNext }}
-            <a href="{{ $paginator.Next.URL }}" class="page-btn">下一页 &raquo;</a>
+            <a href="{{ $paginator.Next.URL }}" class="page-btn page-btn-next">下一页 →</a>
+            {{ else }}
+            <span class="page-btn page-btn-disabled">下一页 →</span>
             {{ end }}
         </nav>
         {{ end }}
@@ -74,25 +93,27 @@
 
 {{ define "extra_head" }}
 <style>
-    /* 🌸 英雄区 */
     .hero {
         position: relative;
         text-align: center;
-        padding: 50px 20px 40px;
+        padding: 54px 24px 44px;
         overflow: hidden;
+        margin-bottom: 8px;
     }
 
     .hero-bg {
         position: absolute;
-        top: -100px;
+        top: -120px;
         left: 50%;
         transform: translateX(-50%);
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(255, 182, 193, 0.15) 0%, rgba(135, 206, 235, 0.08) 50%, transparent 70%);
+        width: 700px;
+        height: 700px;
+        background:
+            radial-gradient(circle at 45% 40%, rgba(255, 182, 193, 0.16) 0%, transparent 55%),
+            radial-gradient(circle at 55% 45%, rgba(135, 206, 235, 0.1) 0%, transparent 55%);
         border-radius: 50%;
         z-index: 0;
-        animation: heroPulse 6s infinite ease-in-out;
+        animation: heroPulse 8s infinite ease-in-out;
     }
 
     @keyframes heroPulse {
@@ -100,12 +121,45 @@
         0%,
         100% {
             transform: translateX(-50%) scale(1);
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
         50% {
-            transform: translateX(-50%) scale(1.08);
+            transform: translateX(-50%) scale(1.06);
             opacity: 1;
+        }
+    }
+
+    .hero-decor {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .hero-sparkle {
+        position: absolute;
+        color: var(--neko-light-pink);
+        font-size: 1.2em;
+        opacity: 0;
+        animation: sparkleFloat 3.5s infinite ease-in-out;
+    }
+
+    @keyframes sparkleFloat {
+
+        0%,
+        100% {
+            opacity: 0;
+            transform: translateY(0) rotate(0deg);
+        }
+
+        30% {
+            opacity: 0.7;
+        }
+
+        70% {
+            opacity: 0.3;
+            transform: translateY(-14px) rotate(20deg);
         }
     }
 
@@ -114,12 +168,18 @@
         z-index: 1;
         width: 120px;
         height: 120px;
-        margin: 0 auto 18px;
+        margin: 0 auto 20px;
         border-radius: 50%;
         border: 3px solid var(--neko-light-pink);
-        box-shadow: 0 0 40px rgba(255, 105, 180, 0.28), 0 0 0 10px rgba(255, 182, 193, 0.08);
+        box-shadow: 0 0 50px var(--neko-pink-glow), 0 0 0 12px rgba(255, 182, 193, 0.06);
         background: url("{{ .Site.Params.avatar }}") center/cover;
-        animation: avatarFloat 3s ease-in-out infinite;
+        animation: avatarFloat 3.4s ease-in-out infinite;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .hero-avatar:hover {
+        transform: scale(1.06);
+        box-shadow: 0 0 60px rgba(255, 105, 180, 0.35), 0 0 0 16px rgba(255, 182, 193, 0.1);
     }
 
     @keyframes avatarFloat {
@@ -130,19 +190,22 @@
         }
 
         50% {
-            transform: translateY(-8px);
+            transform: translateY(-9px);
         }
     }
 
     .hero-title {
         position: relative;
         z-index: 1;
-        font-size: 2.2em;
+        font-size: 2.3em;
         color: var(--neko-pink);
         font-weight: 700;
         margin-bottom: 4px;
         letter-spacing: 3px;
-        text-shadow: 0 2px 8px rgba(255, 105, 180, 0.15);
+        background: linear-gradient(135deg, var(--neko-pink), var(--neko-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .hero-subtitle {
@@ -156,65 +219,75 @@
     .hero-location {
         position: relative;
         z-index: 1;
-        font-size: 0.9em;
+        font-size: 0.88em;
         color: var(--neko-blue);
-        margin-bottom: 20px;
+        margin-bottom: 24px;
+        font-weight: 500;
     }
 
-    /* 统计 */
     .hero-stats {
         position: relative;
         z-index: 1;
         display: flex;
         justify-content: center;
-        gap: 30px;
+        gap: 24px;
         flex-wrap: wrap;
     }
 
-    .stat {
+    .hero-stat-item {
         text-align: center;
-        padding: 10px 20px;
-        background: rgba(255, 255, 255, 0.7);
-        border-radius: 14px;
-        border: 1px solid var(--neko-pastel-pink);
-        min-width: 90px;
-        transition: transform 0.3s;
+        padding: 14px 24px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        border-radius: var(--radius-md);
+        border: 1px solid rgba(255, 182, 193, 0.25);
+        min-width: 95px;
+        transition: all var(--transition-smooth);
+        box-shadow: var(--shadow-sm);
     }
 
-    .stat:hover {
-        transform: translateY(-3px);
+    .hero-stat-item:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-glow);
+        border-color: var(--neko-light-pink);
     }
 
-    .stat-num {
+    .hero-stat-num {
         display: block;
-        font-size: 1.5em;
+        font-size: 1.6em;
         font-weight: 700;
         color: var(--neko-pink);
     }
 
-    .stat-label {
+    .hero-stat-label {
         font-size: 0.8em;
         color: var(--neko-gray);
+        margin-top: 2px;
     }
 
-    /* 文章列表 */
     .post-list-section {
         max-width: 800px;
         margin: 0 auto;
-        padding: 0 20px;
+        padding: 0 4px;
     }
 
     .section-header {
         display: flex;
         align-items: center;
         gap: 12px;
-        margin-bottom: 20px;
+        margin-bottom: 22px;
         padding-left: 4px;
     }
 
-    .section-header h2 {
+    .section-icon {
         font-size: 1.3em;
+        flex-shrink: 0;
+    }
+
+    .section-header h2 {
+        font-size: 1.25em;
         color: var(--neko-pink);
+        font-weight: 600;
         white-space: nowrap;
     }
 
@@ -228,50 +301,51 @@
     .post-grid {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 18px;
     }
 
     .post-card {
-        background: var(--neko-white);
-        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(6px);
+        border-radius: var(--radius-lg);
         box-shadow: var(--shadow-sm);
-        border: 1px solid var(--neko-pastel-pink);
-        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(255, 182, 193, 0.2);
+        transition: all var(--transition-smooth);
         position: relative;
         overflow: hidden;
     }
 
-    .post-card::before {
-        content: '';
+    .post-card-accent {
         position: absolute;
         left: 0;
         top: 0;
         bottom: 0;
         width: 4px;
-        background: linear-gradient(180deg, var(--neko-pink), var(--neko-blue));
+        background: linear-gradient(180deg, var(--neko-pink), var(--neko-blue), var(--neko-pink));
         border-radius: 0 2px 2px 0;
         opacity: 0;
-        transition: opacity 0.3s;
+        transition: opacity var(--transition-smooth);
     }
 
     .post-card:hover {
-        transform: translateY(-3px);
+        transform: translateY(-4px);
         box-shadow: var(--shadow-lg);
+        border-color: rgba(255, 105, 180, 0.22);
     }
 
-    .post-card:hover::before {
+    .post-card:hover .post-card-accent {
         opacity: 1;
     }
 
     .post-card-body {
-        padding: 22px 28px;
+        padding: 26px 32px;
     }
 
     .post-card-meta {
         display: flex;
         align-items: center;
         gap: 12px;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         flex-wrap: wrap;
     }
 
@@ -284,19 +358,25 @@
         display: inline-block;
         background: var(--neko-pastel-pink);
         color: var(--neko-pink);
-        padding: 2px 10px;
-        border-radius: 10px;
-        font-size: 0.75em;
+        padding: 3px 12px;
+        border-radius: 12px;
+        font-size: 0.76em;
+        font-weight: 500;
         transition: all 0.2s;
     }
 
     .post-tag:hover {
         background: var(--neko-pink);
-        color: white;
+        color: #fff;
+    }
+
+    .post-reading {
+        font-size: 0.8em;
+        color: var(--neko-gray-light);
     }
 
     .post-card-title {
-        font-size: 1.15em;
+        font-size: 1.18em;
         margin-bottom: 6px;
         line-height: 1.4;
     }
@@ -304,7 +384,7 @@
     .post-card-title a {
         color: var(--neko-dark);
         text-decoration: none;
-        transition: color 0.3s;
+        transition: color var(--transition-fast);
     }
 
     .post-card-title a:hover {
@@ -312,61 +392,79 @@
     }
 
     .post-card-desc {
-        font-size: 0.88em;
+        font-size: 0.9em;
         color: var(--neko-gray);
-        line-height: 1.6;
-        margin-bottom: 8px;
+        line-height: 1.65;
+        margin-bottom: 10px;
     }
 
     .read-more {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
         color: var(--neko-pink);
         font-size: 0.88em;
         text-decoration: none;
         font-weight: 500;
-        transition: all 0.3s;
+        transition: all var(--transition-fast);
+    }
+
+    .read-more-arrow {
+        display: inline-block;
+        transition: transform var(--transition-fast);
+    }
+
+    .read-more:hover .read-more-arrow {
+        transform: translateX(5px);
     }
 
     .read-more:hover {
-        transform: translateX(4px);
-        color: #ff1493;
+        color: var(--neko-pink-deep);
     }
 
-    /* 分页 */
     .pagination {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 16px;
-        margin: 30px 0;
+        gap: 18px;
+        margin: 34px 0 20px;
         padding: 20px;
     }
 
     .page-btn {
         display: inline-block;
-        padding: 8px 20px;
-        background: var(--neko-white);
-        border: 1px solid var(--neko-pastel-pink);
-        border-radius: 20px;
+        padding: 9px 22px;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        border-radius: 22px;
         color: var(--neko-pink);
         text-decoration: none;
         font-size: 0.9em;
-        transition: all 0.3s;
+        font-weight: 500;
+        transition: all var(--transition-fast);
     }
 
     .page-btn:hover {
         background: var(--neko-pastel-pink);
         transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .page-btn-disabled {
+        color: var(--neko-gray-light);
+        cursor: default;
+        opacity: 0.5;
     }
 
     .page-info {
         color: var(--neko-gray);
         font-size: 0.9em;
+        font-weight: 500;
     }
 
     @media (max-width: 768px) {
         .hero {
-            padding: 35px 16px 30px;
+            padding: 36px 16px 32px;
         }
 
         .hero-avatar {
@@ -375,32 +473,123 @@
         }
 
         .hero-title {
-            font-size: 1.6em;
+            font-size: 1.7em;
+            letter-spacing: 1px;
         }
 
         .hero-stats {
-            gap: 14px;
+            gap: 12px;
         }
 
-        .stat {
-            min-width: 70px;
-            padding: 8px 14px;
+        .hero-stat-item {
+            min-width: 75px;
+            padding: 10px 16px;
         }
 
-        .stat-num {
-            font-size: 1.2em;
+        .hero-stat-num {
+            font-size: 1.3em;
         }
 
         .post-card-body {
-            padding: 18px 20px;
+            padding: 20px 20px;
         }
 
         .post-card-title {
-            font-size: 1.05em;
+            font-size: 1.06em;
         }
 
         .post-list-section {
-            padding: 0 10px;
+            padding: 0 2px;
+        }
+
+        .pagination {
+            gap: 10px;
+            padding: 16px 4px;
+        }
+
+        .page-btn {
+            padding: 7px 16px;
+            font-size: 0.82em;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero {
+            padding: 28px 10px 24px;
+        }
+
+        .hero-avatar {
+            width: 78px;
+            height: 78px;
+        }
+
+        .hero-title {
+            font-size: 1.4em;
+        }
+
+        .hero-subtitle {
+            font-size: 0.85em;
+        }
+
+        .hero-stats {
+            gap: 8px;
+        }
+
+        .hero-stat-item {
+            min-width: 65px;
+            padding: 8px 12px;
+            border-radius: 12px;
+        }
+
+        .hero-stat-num {
+            font-size: 1.1em;
+        }
+
+        .hero-stat-label {
+            font-size: 0.7em;
+        }
+
+        .post-card-body {
+            padding: 16px 16px;
+        }
+
+        .post-card-title {
+            font-size: 0.98em;
+        }
+
+        .post-card-meta {
+            gap: 8px;
+        }
+
+        .section-header h2 {
+            font-size: 1.05em;
+        }
+
+        .post-grid {
+            gap: 12px;
+        }
+
+        .hero-sparkle {
+            font-size: 0.9em;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        .hero {
+            padding: 66px 24px 52px;
+        }
+
+        .hero-avatar {
+            width: 140px;
+            height: 140px;
+        }
+
+        .hero-title {
+            font-size: 2.8em;
+        }
+
+        .post-card-body {
+            padding: 30px 40px;
         }
     }
 </style>

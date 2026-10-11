@@ -1,12 +1,3 @@
-{{ if .Site.Params.busuanzi.enabled }}
-<div style="text-align:center; padding: 10px 0; font-size: 0.8em; color: var(--neko-gray);">
-    <span id="busuanzi_container_site_pv">
-        👀 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    &nbsp;|&nbsp;
-    <span id="busuanzi_container_site_uv">
-        🐱 访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-</div>
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+{{ if .Site.Params.umami.enabled }}
+<script defer src="{{ .Site.Params.umami.src }}" data-website-id="{{ .Site.Params.umami.websiteId }}"></script>
 {{ end }}

@@ -13,19 +13,14 @@ title = '成霜喵喵'
   location = '湖南，郴州'
   avatar = 'https://avatars.githubusercontent.com/u/193340716?v=4'
 
-[params.busuanzi]
+[params.umami]
   enabled = true
-  startDate = '2025-06-19'
+  websiteId = '2e750e8f-4c50-4337-8367-c30946e971bc'
+  src = 'https://cloud.umami.is/script.js'
 
 [params.share]
   enabled = true
   hidePlatforms = ['qq', 'facebook']
-
-[params.giscus]
-  repo = ''
-  repoId = ''
-  category = 'Announcements'
-  categoryId = ''
 
 [params.announcement]
   popupEnabled = true
