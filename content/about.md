@@ -122,9 +122,8 @@ description: "关于成霜·喵喵"
   --nn-shadow:       0 2px 14px rgba(126,184,218,0.08);
   --nn-shadow-lg:    0 8px 28px rgba(126,184,218,0.12);
 
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 32px 24px 56px;
+  width: 100%;
+  padding: 32px 40px 56px;
   text-align: center;
   position: relative;
 }
@@ -235,7 +234,7 @@ description: "关于成霜·喵喵"
 }
 .status-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
 }
 .status-item {
@@ -435,29 +434,33 @@ description: "关于成霜·喵喵"
 .about-link-value { font-size: 0.8em; color: #8899b0; word-break: break-all; }
 
 /* ====== Responsive ====== */
-@media (max-width: 600px) {
-  .about-page { padding: 18px 16px 40px; }
-  .about-decor { inset: -6px -16px -16px; }
-  .decor-paw { font-size: 1.05em; }
-  .about-avatar-frame { width: 120px; height: 120px; }
-  .about-avatar-inner { width: 102px; height: 102px; }
-  .about-cat-ear {
-    border-left-width: 8px;
-    border-right-width: 8px;
-    border-bottom-width: 14px;
-  }
-  .about-cat-ear-left { left: 16px; top: -6px; }
-  .about-cat-ear-right { right: 16px; top: -6px; }
-  .about-name { font-size: 1.35em; }
-  .status-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .about-intro-card { padding: 20px 20px; font-size: 0.9em; }
-  .about-motto-card { padding: 18px 20px 18px 34px; }
-  .about-pill { padding: 5px 14px; font-size: 0.77em; }
-  .about-link-card { min-width: 140px; padding: 16px 24px; }
+@media (max-width: 1024px) {
+  .about-page { padding: 24px 28px 44px; }
 }
 
-@media (max-width: 400px) {
-  .about-page { padding: 12px 8px 28px; }
+@media (max-width: 768px) {
+  .about-page { padding: 20px 20px 40px; }
+  .about-decor { inset: -6px -18px -18px; }
+  .decor-paw { font-size: 1.05em; }
+  .about-avatar-frame { width: 130px; height: 130px; }
+  .about-avatar-inner { width: 112px; height: 112px; }
+  .about-cat-ear {
+    border-left-width: 9px;
+    border-right-width: 9px;
+    border-bottom-width: 16px;
+  }
+  .about-cat-ear-left { left: 20px; top: -7px; }
+  .about-cat-ear-right { right: 20px; top: -7px; }
+  .about-name { font-size: 1.5em; }
+  .status-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .about-intro-card { padding: 24px 28px; font-size: 0.93em; }
+  .about-motto-card { padding: 18px 20px 18px 34px; }
+  .about-pill { padding: 5px 14px; font-size: 0.77em; }
+  .about-link-card { min-width: 140px; padding: 18px 28px; }
+}
+
+@media (max-width: 480px) {
+  .about-page { padding: 12px 12px 28px; }
   .about-avatar-frame { width: 96px; height: 96px; }
   .about-avatar-inner { width: 82px; height: 82px; }
   .about-avatar-ring { display: none; }
@@ -468,7 +471,7 @@ description: "关于成霜·喵喵"
   .status-item { padding: 12px 6px; }
   .about-intro-card { padding: 16px 16px; font-size: 0.87em; }
   .about-intro-card p { text-indent: 1.5em; }
-  .about-link-card { min-width: 0; flex: 1 1 100%; }
+  .about-link-card { min-width: 0; flex: 1 1 100%; padding: 14px 20px; }
   .section-line { max-width: 40px; }
 }
 </style>

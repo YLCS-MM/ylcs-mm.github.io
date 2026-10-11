@@ -1,9 +1,17 @@
-/* 🐱 成霜喵喵 - 响应式适配 */
+/* nachoneko 猫娘风格 — 响应式适配 */
 
 /* ===== 平板 (≤1024px) ===== */
 @media (max-width: 1024px) {
   .single-article {
     padding: 28px 24px;
+  }
+
+  .content-area {
+    padding: 20px 24px 40px;
+  }
+
+  .home-area {
+    padding: 0 24px 40px;
   }
 
   .hero-section {
@@ -23,11 +31,11 @@
 /* ===== 小平板/大手机 (≤768px) ===== */
 @media (max-width: 768px) {
   .content-area {
-    padding: 16px 14px;
+    padding: 16px 16px 36px;
   }
 
   .home-area {
-    padding: 0 14px;
+    padding: 0 16px 36px;
   }
 
   .single-article {
@@ -81,25 +89,16 @@
   .ann-content {
     padding: 0 18px 14px;
   }
-
-  .about-avatar-wrap {
-    width: 100px;
-    height: 100px;
-  }
-
-  .about-name {
-    font-size: 1.3em;
-  }
 }
 
 /* ===== 手机横屏 / 小手机 (≤480px) ===== */
 @media (max-width: 480px) {
   .content-area {
-    padding: 12px 10px;
+    padding: 12px 12px 28px;
   }
 
   .home-area {
-    padding: 0 10px;
+    padding: 0 12px 28px;
   }
 
   .single-article {
@@ -177,19 +176,6 @@
 
   .card {
     border-radius: 12px;
-  }
-
-  .about-avatar-wrap {
-    width: 86px;
-    height: 86px;
-  }
-
-  .about-name {
-    font-size: 1.15em;
-  }
-
-  .about-bio {
-    padding: 14px 16px;
   }
 
   .list-title {
