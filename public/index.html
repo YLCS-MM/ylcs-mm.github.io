@@ -670,6 +670,7 @@
         border: 1px solid rgba(255, 182, 193, 0.2);
         transition: all var(--transition-smooth);
         position: relative;
+        z-index: 1;
         overflow: hidden;
     }
 
@@ -967,7 +968,6 @@
         }
     }
 
-    .tag-cloud-section,
     .ann-teaser-section,
     .intro-section {
         max-width: 800px;
@@ -986,52 +986,6 @@
 
     .section-more:hover {
         color: var(--neko-pink);
-    }
-
-    .tag-cloud {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 18px 24px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(6px);
-        border-radius: var(--radius-lg);
-        border: 1px solid rgba(255, 182, 193, 0.25);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .tag-cloud-item {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        padding: 5px 14px;
-        background: linear-gradient(135deg, var(--neko-pastel-pink), rgba(255, 240, 245, 0.5));
-        color: var(--neko-pink);
-        border-radius: 20px;
-        text-decoration: none;
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        transition: all var(--transition-fast);
-        font-weight: 500;
-    }
-
-    .tag-cloud-item:hover {
-        background: var(--neko-pink);
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 14px var(--neko-pink-glow);
-    }
-
-    .tag-count {
-        font-size: 0.7em;
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 10px;
-        padding: 1px 7px;
-        color: var(--neko-gray);
-    }
-
-    .tag-cloud-item:hover .tag-count {
-        background: rgba(255, 255, 255, 0.25);
-        color: rgba(255, 255, 255, 0.8);
     }
 
     .ann-teaser-card {
@@ -1174,19 +1128,9 @@
         .ann-teaser-card::after {
             right: 16px;
         }
-
-        .tag-cloud {
-            padding: 14px 16px;
-            gap: 8px;
-        }
     }
 
     @media (max-width: 480px) {
-        .tag-cloud-item {
-            padding: 4px 10px;
-            font-size: 0.75em !important;
-        }
-
         .intro-card {
             padding: 16px;
         }
@@ -1223,7 +1167,8 @@
         <a href="/about/" class="">🐱 关于</a>
     </nav>
 
-    
+    <div class="main-container">
+        
 <main>
     <section class="hero">
         <div class="hero-bg"></div>
@@ -1362,55 +1307,6 @@
     </section>
 
     
-    <section class="tag-cloud-section">
-        <div class="section-header">
-            <span class="section-icon">🏷️</span>
-            <h2>标签云</h2>
-            <span class="section-line"></span>
-        </div>
-        <div class="tag-cloud">
-            
-            
-            
-            <a href="/tags/jekyll%E6%B5%8B%E8%AF%95/" class="tag-cloud-item" style="font-size:1em">jekyll测试<span class="tag-count">1</span></a>
-            
-            
-            
-            <a href="/tags/neko%E5%8A%A9%E6%95%99/" class="tag-cloud-item" style="font-size:1em">neko助教<span class="tag-count">1</span></a>
-            
-            
-            
-            <a href="/tags/%E5%8A%9F%E8%83%BD%E5%85%A8%E6%A3%80/" class="tag-cloud-item" style="font-size:1em">功能全检<span class="tag-count">1</span></a>
-            
-            
-            
-            <a href="/tags/%E5%AE%98%E7%BD%91/" class="tag-cloud-item" style="font-size:1em">官网<span class="tag-count">1</span></a>
-            
-            
-            
-            <a href="/tags/%E5%AE%9E%E7%94%A8%E7%BD%91%E7%AB%99/" class="tag-cloud-item" style="font-size:1em">实用网站<span class="tag-count">1</span></a>
-            
-            
-            
-            <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" class="tag-cloud-item" style="font-size:1em">效率工具<span class="tag-count">1</span></a>
-            
-            
-            
-            <a href="/tags/%E7%8C%AB%E5%A8%98%E9%A3%8E%E6%A0%BC/" class="tag-cloud-item" style="font-size:1em">猫娘风格<span class="tag-count">1</span></a>
-            
-            
-            
-            <a href="/tags/%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/" class="tag-cloud-item" style="font-size:1em">甘城なつき<span class="tag-count">1</span></a>
-            
-            
-            
-            <a href="/tags/%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/" class="tag-cloud-item" style="font-size:1em">资源导航<span class="tag-count">1</span></a>
-            
-        </div>
-    </section>
-    
-
-    
     
     
     
@@ -1453,6 +1349,7 @@
     </section>
 </main>
 
+    </div>
 
     <div class="bottom-decoration">
         <span>🐾</span> <span>ฅ</span><span>(^</span>&bull;<span>ω</span>&bull;<span>^)ฅ</span> <span>🐾</span>
@@ -1510,7 +1407,7 @@
     
 
     window.live2d_widgets = {
-        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
+        modelPath: "/live2d/tororo/",
         display: {
             position: "right",
             width: 155,

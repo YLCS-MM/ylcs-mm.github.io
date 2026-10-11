@@ -95,24 +95,6 @@
         {{ end }}
     </section>
 
-    {{ if .Site.Taxonomies.tags }}
-    <section class="tag-cloud-section">
-        <div class="section-header">
-            <span class="section-icon">🏷️</span>
-            <h2>标签云</h2>
-            <span class="section-line"></span>
-        </div>
-        <div class="tag-cloud">
-            {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-            {{ $count := len $taxonomy }}
-            {{ $size := add 0.75 (mul 0.25 (math.Min $count 5)) }}
-            <a href="/tags/{{ $name | urlize }}/" class="tag-cloud-item" style="font-size:{{ $size }}em">{{ $name
-                }}<span class="tag-count">{{ $count }}</span></a>
-            {{ end }}
-        </div>
-    </section>
-    {{ end }}
-
     {{ $announcementData := .Site.Data.announcement_history }}
     {{ if $announcementData }}
     {{ $sortedAnn := sort $announcementData "date" "desc" }}
@@ -412,6 +394,7 @@
         border: 1px solid rgba(255, 182, 193, 0.2);
         transition: all var(--transition-smooth);
         position: relative;
+        z-index: 1;
         overflow: hidden;
     }
 
@@ -709,7 +692,6 @@
         }
     }
 
-    .tag-cloud-section,
     .ann-teaser-section,
     .intro-section {
         max-width: 800px;
@@ -728,52 +710,6 @@
 
     .section-more:hover {
         color: var(--neko-pink);
-    }
-
-    .tag-cloud {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 18px 24px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(6px);
-        border-radius: var(--radius-lg);
-        border: 1px solid rgba(255, 182, 193, 0.25);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .tag-cloud-item {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        padding: 5px 14px;
-        background: linear-gradient(135deg, var(--neko-pastel-pink), rgba(255, 240, 245, 0.5));
-        color: var(--neko-pink);
-        border-radius: 20px;
-        text-decoration: none;
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        transition: all var(--transition-fast);
-        font-weight: 500;
-    }
-
-    .tag-cloud-item:hover {
-        background: var(--neko-pink);
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 14px var(--neko-pink-glow);
-    }
-
-    .tag-count {
-        font-size: 0.7em;
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 10px;
-        padding: 1px 7px;
-        color: var(--neko-gray);
-    }
-
-    .tag-cloud-item:hover .tag-count {
-        background: rgba(255, 255, 255, 0.25);
-        color: rgba(255, 255, 255, 0.8);
     }
 
     .ann-teaser-card {
@@ -916,19 +852,9 @@
         .ann-teaser-card::after {
             right: 16px;
         }
-
-        .tag-cloud {
-            padding: 14px 16px;
-            gap: 8px;
-        }
     }
 
     @media (max-width: 480px) {
-        .tag-cloud-item {
-            padding: 4px 10px;
-            font-size: 0.75em !important;
-        }
-
         .intro-card {
             padding: 16px;
         }

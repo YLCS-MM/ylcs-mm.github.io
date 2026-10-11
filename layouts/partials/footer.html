@@ -48,18 +48,12 @@
 </style>
 
 <script>
-    /* ---- 看板娘模型选择 ----
-       当前 : neko  (库内置猫娘，稳定可用)
-       候选 : 以下需解注释并注释当前行来切换
-       tororo   https://fastly.jsdelivr.net/npm/live2d-widget-model-tororo@1.0.5/assets/
-       chitose  https://fastly.jsdelivr.net/npm/live2d-widget-model-chitose@1.0.5/assets/
-       shizuku  https://fastly.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/
-       haru     https://fastly.jsdelivr.net/npm/live2d-widget-model-haru@1.0.5/assets/
-       miku     https://fastly.jsdelivr.net/npm/live2d-widget-model-miku@1.0.5/assets/
-       注意: 外部 npm 模型需路径末段为模型名(如 /tororo/)，当前 assets/ 末段不匹配，已回退至内置模型
+    /* ---- 看板娘模型 ----
+       当前 : tororo (猫耳猫尾少女，本地模型，✅)
+       其他备选可在 jsdelivr npm 下载后放到 static/live2d/ 目录
     */
     window.live2d_widgets = {
-        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
+        modelPath: "/live2d/tororo/",
         display: {
             position: "right",
             width: 155,

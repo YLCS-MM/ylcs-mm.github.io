@@ -423,7 +423,9 @@
         <a href="/about/" class="{{ if hasPrefix .RelPermalink " /about/" }}active{{ end }}">🐱 关于</a>
     </nav>
 
-    {{ block "main" . }}{{ end }}
+    <div class="main-container">
+        {{ block "main" . }}{{ end }}
+    </div>
 
     <div class="bottom-decoration">
         <span>🐾</span> <span>ฅ</span><span>(^</span>&bull;<span>ω</span>&bull;<span>^)ฅ</span> <span>🐾</span>
