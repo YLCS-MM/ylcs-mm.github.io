@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes">
     <title>Tags &mdash; 成霜喵喵</title>
@@ -687,7 +687,7 @@
 
     <footer class="site-footer">
     <div class="copyright">
-        © 2025 <span title="成霜·喵喵">成霜·喵喵</span>
+        &copy; 2025&ndash;2026 <span title="成霜·喵喵">成霜·喵喵</span>
     </div>
 
     <ul class="site-footer-links">
@@ -707,21 +707,53 @@
 <script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
 
 
+<style>
+    #live2d-widget {
+        position: fixed !important;
+        right: 10px !important;
+        bottom: 12px !important;
+        left: auto !important;
+        top: auto !important;
+        width: 150px !important;
+        height: 300px !important;
+        z-index: 99999 !important;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    #live2d-widget canvas {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 640px) {
+        #live2d-widget {
+            right: 2px !important;
+            bottom: 4px !important;
+            width: 80px !important;
+            height: 160px !important;
+        }
+    }
+</style>
+
 <script>
     (function () {
-        var d = document, w = window.innerWidth;
+        var w = window.innerWidth;
         window.live2d_widgets = {
             modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
             display: {
                 position: "fixed",
-                right: w < 640 ? 2 : 12,
-                bottom: w < 640 ? 8 : 20,
+                right: "10px",
+                bottom: "12px",
                 left: "auto",
-                width: w < 640 ? 110 : 160,
-                height: w < 640 ? 220 : 320,
-                zIndex: 999998,
+                width: 150,
+                height: 300,
+                zIndex: 99999,
             },
-            mobile: { show: true, scale: 0.65 },
+            mobile: {
+                show: true,
+                scale: w < 640 ? 0.5 : 1,
+            },
         };
     })();
 </script>

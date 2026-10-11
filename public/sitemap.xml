@@ -2,55 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/2025-11-03-%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/</loc>
+    <loc>https://ylcs-mm.github.io/posts/2025-11-03-%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/</loc>
     <lastmod>2025-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://ylcs-mm.github.io/posts/</loc>
     <lastmod>2025-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://ylcs-mm.github.io/tags/</loc>
     <lastmod>2025-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E5%AE%9E%E7%94%A8%E7%BD%91%E7%AB%99/</loc>
+    <loc>https://ylcs-mm.github.io/tags/%E5%AE%9E%E7%94%A8%E7%BD%91%E7%AB%99/</loc>
     <lastmod>2025-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://ylcs-mm.github.io/</loc>
     <lastmod>2025-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://ylcs-mm.github.io/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2025-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E7%8C%AB%E5%A8%98%E9%A3%8E%E6%A0%BC/</loc>
+    <loc>https://ylcs-mm.github.io/tags/%E7%8C%AB%E5%A8%98%E9%A3%8E%E6%A0%BC/</loc>
     <lastmod>2025-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/</loc>
+    <loc>https://ylcs-mm.github.io/tags/%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/</loc>
     <lastmod>2025-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/jekyll%E6%B5%8B%E8%AF%95/</loc>
+    <loc>https://ylcs-mm.github.io/tags/jekyll%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2025-06-20T08:14:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/neko%E5%8A%A9%E6%95%99/</loc>
+    <loc>https://ylcs-mm.github.io/tags/neko%E5%8A%A9%E6%95%99/</loc>
     <lastmod>2025-06-20T08:14:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E5%8A%9F%E8%83%BD%E5%85%A8%E6%A3%80/</loc>
+    <loc>https://ylcs-mm.github.io/tags/%E5%8A%9F%E8%83%BD%E5%85%A8%E6%A3%80/</loc>
     <lastmod>2025-06-20T08:14:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2025-06-20-%E6%B5%8B%E8%AF%95/</loc>
+    <loc>https://ylcs-mm.github.io/posts/2025-06-20-%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2025-06-20T08:14:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://ylcs-mm.github.io/about/</loc>
     <lastmod>2025-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/announcements/</loc>
+    <loc>https://ylcs-mm.github.io/announcements/</loc>
     <lastmod>2025-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E5%AE%98%E7%BD%91/</loc>
+    <loc>https://ylcs-mm.github.io/tags/%E5%AE%98%E7%BD%91/</loc>
     <lastmod>2025-06-19T08:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/</loc>
+    <loc>https://ylcs-mm.github.io/tags/%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/</loc>
     <lastmod>2025-06-19T08:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2025-06-19-%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/</loc>
+    <loc>https://ylcs-mm.github.io/posts/2025-06-19-%E7%94%98%E5%9F%8E%E3%81%AA%E3%81%A4%E3%81%8D/</loc>
     <lastmod>2025-06-19T08:00:00+08:00</lastmod>
   </url>
 </urlset>

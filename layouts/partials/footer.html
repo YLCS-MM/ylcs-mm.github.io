@@ -1,6 +1,7 @@
 <footer class="site-footer">
     <div class="copyright">
-        © {{ .Site.Params.since }} <span title="{{ .Site.Params.author }}">{{ .Site.Params.author }}</span>
+        {{ with .Site.Params.since }}{{ if ne . (now.Format "2006") }}&copy; {{ . }}&ndash;{{ now.Format "2006" }} {{
+        else }}&copy; {{ . }} {{ end }}{{ end }}<span title="{{ .Site.Params.author }}">{{ .Site.Params.author }}</span>
     </div>
 
     <ul class="site-footer-links">
@@ -20,21 +21,53 @@
 <script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
 {{ end }}
 
+<style>
+    #live2d-widget {
+        position: fixed !important;
+        right: 10px !important;
+        bottom: 12px !important;
+        left: auto !important;
+        top: auto !important;
+        width: 150px !important;
+        height: 300px !important;
+        z-index: 99999 !important;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    #live2d-widget canvas {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 640px) {
+        #live2d-widget {
+            right: 2px !important;
+            bottom: 4px !important;
+            width: 80px !important;
+            height: 160px !important;
+        }
+    }
+</style>
+
 <script>
     (function () {
-        var d = document, w = window.innerWidth;
+        var w = window.innerWidth;
         window.live2d_widgets = {
             modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
             display: {
                 position: "fixed",
-                right: w < 640 ? 2 : 12,
-                bottom: w < 640 ? 8 : 20,
+                right: "10px",
+                bottom: "12px",
                 left: "auto",
-                width: w < 640 ? 110 : 160,
-                height: w < 640 ? 220 : 320,
-                zIndex: 999998,
+                width: 150,
+                height: 300,
+                zIndex: 99999,
             },
-            mobile: { show: true, scale: 0.65 },
+            mobile: {
+                show: true,
+                scale: w < 640 ? 0.5 : 1,
+            },
         };
     })();
 </script>
