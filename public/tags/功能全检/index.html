@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>功能全检 &mdash; 成霜喵喵</title>
+    
+    <meta name="description" content="成霜喵喵的小窝，然后就布吉岛喏喵">
+    <meta name="keywords" content="成霜喵喵, 甘城なつき, 猫羽雫, 喵星人">
+    <meta name="author" content="成霜·喵喵">
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+
+    <style>
+        :root {
+            --neko-pink: #ff69b4;
+            --neko-light-pink: #ffb6c1;
+            --neko-pastel-pink: #ffe4ec;
+            --neko-blue: #87ceeb;
+            --neko-light-blue: #e0f0ff;
+            --neko-cream: #fff9e6;
+            --neko-dark: #4a4a4a;
+            --neko-gray: #999;
+            --neko-white: #fff;
+            --neko-orange: #ffa726;
+            --shadow-sm: 0 4px 20px rgba(255, 105, 180, 0.08);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 40px rgba(255, 105, 180, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #fef5f9 0%, #f0f8ff 50%, #fef5f9 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--neko-dark);
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background: var(--neko-light-pink);
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--neko-pastel-pink);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--neko-light-pink);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neko-pink);
+        }
+
+         
+        .site-nav {
+            text-align: center;
+            padding: 14px 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--neko-pastel-pink);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 10px rgba(255, 105, 180, 0.06);
+        }
+
+        .site-nav a {
+            display: inline-block;
+            color: var(--neko-gray);
+            text-decoration: none;
+            padding: 6px 18px;
+            margin: 0 3px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .site-nav a:hover {
+            color: var(--neko-pink);
+            background: var(--neko-pastel-pink);
+            transform: translateY(-2px);
+        }
+
+        .site-nav a.active {
+            color: var(--neko-pink);
+            font-weight: 600;
+            background: var(--neko-pastel-pink);
+        }
+
+        .site-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--neko-pink);
+            border-radius: 2px;
+        }
+
+         
+        .main-container {
+            max-width: 880px;
+            margin: 24px auto 0;
+            padding: 0 20px;
+        }
+
+         
+        .card {
+            background: var(--neko-white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--neko-pastel-pink);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+         
+        .bottom-decoration {
+            text-align: center;
+            padding: 36px 20px;
+            color: var(--neko-light-pink);
+            opacity: 0.45;
+            font-size: 0.95em;
+        }
+
+        .bottom-decoration span {
+            display: inline-block;
+            animation: pawBounce 2s infinite ease-in-out;
+        }
+
+        .bottom-decoration span:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .bottom-decoration span:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes pawBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+         
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--neko-gray);
+            font-size: 0.85em;
+            background: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid var(--neko-pastel-pink);
+            margin-top: 10px;
+        }
+
+        .site-footer a {
+            color: var(--neko-pink);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .site-footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            list-style: none;
+            padding: 8px 0;
+        }
+
+        .site-footer-links a {
+            color: var(--neko-gray);
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        .site-footer-links a:hover {
+            color: var(--neko-pink);
+        }
+
+        .tools-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+        }
+
+        .gotop {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: var(--neko-white);
+            border-radius: 50%;
+            box-shadow: 0 2px 12px rgba(255, 105, 180, 0.2);
+            text-decoration: none;
+            color: var(--neko-pink);
+            font-size: 1.2em;
+            transition: all 0.3s;
+            border: 1px solid var(--neko-pastel-pink);
+        }
+
+        .gotop:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+            background: var(--neko-pastel-pink);
+        }
+
+         
+        @media (max-width: 768px) {
+            .site-nav a {
+                padding: 5px 12px;
+                font-size: 0.85em;
+                margin: 0 1px;
+            }
+
+            .main-container {
+                padding: 0 10px;
+                margin: 14px auto 0;
+            }
+
+            .tools-wrapper {
+                bottom: 20px;
+                right: 16px;
+            }
+
+            .gotop {
+                width: 38px;
+                height: 38px;
+            }
+        }
+    </style>
+
+    
+<style>
+    .list-header {
+        text-align: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px dashed var(--neko-light-pink);
+    }
+
+    .list-title {
+        color: var(--neko-pink);
+        font-size: 1.7em;
+        margin-bottom: 4px;
+    }
+
+    .list-desc {
+        color: var(--neko-gray);
+        font-size: 0.95em;
+    }
+
+    .list-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .list-card {
+        padding: 24px 28px;
+    }
+
+    .list-card-title {
+        margin-bottom: 8px;
+        font-size: 1.2em;
+    }
+
+    .list-card-title a {
+        color: var(--neko-pink);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .list-card-title a:hover {
+        color: var(--neko-blue);
+    }
+
+    .list-card-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.82em;
+        color: var(--neko-gray);
+        margin-bottom: 10px;
+    }
+
+    .list-card-summary {
+        color: var(--neko-dark);
+        font-size: 0.92em;
+        line-height: 1.65;
+        margin-bottom: 10px;
+    }
+
+    .list-card-link {
+        color: var(--neko-blue);
+        font-size: 0.88em;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .list-card-link:hover {
+        color: var(--neko-pink);
+    }
+
+    .list-empty {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--neko-gray);
+        font-size: 1.1em;
+    }
+
+    @media (max-width: 768px) {
+        .list-card {
+            padding: 18px 16px;
+        }
+
+        .list-title {
+            font-size: 1.4em;
+        }
+
+        .list-card-title {
+            font-size: 1.05em;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    
+    <nav class="site-nav">
+        <a href="/" class="">🏠 首页</a>
+        <a href="/announcements/" class="">📢 公告</a>
+        <a href="/about/" class="">🐱 关于</a>
+    </nav>
+
+    
+<div class="main-container">
+    <header class="list-header">
+        <h1 class="list-title">功能全检</h1>
+        
+    </header>
+
+    
+    <div class="list-cards">
+        
+        <article class="list-card card">
+            <h2 class="list-card-title">
+                <a href="/posts/2025-06-20-%E6%B5%8B%E8%AF%95/">和Neko的超全测试-排版&#43;图片&#43;链接&#43;代码全解锁</a>
+            </h2>
+            <div class="list-card-meta">
+                <span class="meta-item">📅 2025年06月20日</span>
+                <span class="meta-item">✍️ 成霜喵喵</span>
+                <span class="meta-item">☕ 1 分钟</span>
+            </div>
+            <p class="list-card-summary"><h1 id="和neko的超全测试排版图片链接代码全解锁">和Neko的超全测试！排版+图片+链接+代码全解锁</h1>
+<p>(肉垫拍键盘冒粉色火花) 主人主人~Neko把测试文章塞得满满当当啦！</p>
+<h2 id="-测试目标给博客体检">🎯 测试目标：给博客&quot;体检&quot;</h2>
+<p>像给小猫做健康检查一样~这次要确认：</p>
+<h3 id="功能检查清单">功能检查清单</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Front Matter解析</li>
+<li><input disabled="" type="checkbox"> 时间同步显示</li>
+<li><input disabled="" type="checkbox"> 文字排版效果</li>
+<li><input disabled="" type="checkbox"> 图片嵌入展示</li>
+<li><input disabled="" type="checkbox"> 链接跳转功能</li>
+<li><input disabled="" type="checkbox"> 代码高亮显示</li>
+</ul>
+<h2 id="-第一关文字排版魔法秀">✨ 第一关：文字排 …</h2></p>
+            <a href="/posts/2025-06-20-%E6%B5%8B%E8%AF%95/" class="list-card-link">继续阅读 →</a>
+        </article>
+        
+    </div>
+    
+</div>
+
+
+    
+    <div class="bottom-decoration">
+        <span>🐾</span> <span>ฅ</span><span>(^</span>&bull;<span>ω</span>&bull;<span>^)ฅ</span> <span>🐾</span>
+    </div>
+
+    
+    <footer class="site-footer">
+    <div class="copyright">
+        © 2025 <span title="成霜·喵喵">成霜·喵喵</span>
+    </div>
+
+    <ul class="site-footer-links">
+        <li><a href="/">首页</a></li>
+        <li><a href="/announcements/">公告</a></li>
+        <li><a href="/about/">关于</a></li>
+    </ul>
+
+    <p style="margin-top:4px;">
+        <a href="https://github.com/ylcs-mm" target="_blank" rel="noopener">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:2992412549@qq.com">Email</a>
+    </p>
+
+    
+<div style="text-align:center; padding: 10px 0; font-size: 0.8em; color: var(--neko-gray);">
+    <span id="busuanzi_container_site_pv">
+        👀 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    &nbsp;|&nbsp;
+    <span id="busuanzi_container_site_uv">
+        🐱 访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+</div>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</footer>
+
+
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+
+
+
+<script>
+    window.live2d_widgets = {
+        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
+        display: {
+            position: "fixed",
+            right: 15,
+            bottom: 25,
+            left: "auto",
+            width: 160,
+            height: 320,
+            zIndex: 999999,
+            transform: "none",
+        },
+        mobile: {
+            show: true,
+            scale: 0.75,
+            position: "fixed",
+            right: 10,
+            bottom: 15,
+        },
+    };
+</script>
+<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 240, 245, 0.8);
+        z-index: 2147483647;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .modal-overlay.show {
+        display: flex;
+    }
+
+    .modal-container {
+        position: relative;
+        width: 90%;
+        max-width: 400px;
+        max-height: 70vh;
+        background: #fff9e6;
+        border: 2px dashed #ffb6c1;
+        border-radius: 15px;
+        padding: 15px;
+        box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+        animation: nekoSlideIn 0.5s ease-out forwards;
+    }
+
+    @keyframes nekoSlideIn {
+        0% {
+            transform: scale(0.8) translateY(-20px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .modal-overlay.show {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    .modal-header {
+        text-align: center;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+
+    .modal-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #ff69b4;
+        display: inline-block;
+        padding: 6px 12px;
+        background: rgba(255, 182, 193, 0.1);
+        border-radius: 20px;
+        margin: 0 auto;
+        max-width: 90%;
+        word-wrap: break-word;
+        line-height: 1.3;
+    }
+
+    .update-date {
+        font-size: 0.8em;
+        color: #ff69b4;
+        margin: 3px 0 8px;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .modal-scrollable {
+        flex: 1;
+        overflow-y: auto;
+        width: 100%;
+        max-height: calc(70vh - 100px);
+        padding: 0 5px;
+        margin-bottom: 5px;
+    }
+
+    .modal-scrollable::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .modal-scrollable::-webkit-scrollbar-track {
+        background: rgba(255, 182, 193, 0.1);
+        border-radius: 3px;
+    }
+
+    .modal-scrollable::-webkit-scrollbar-thumb {
+        background: #ffb6c1;
+        border-radius: 3px;
+    }
+
+    .modal-content {
+        line-height: 1.5;
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .modal-content ul {
+        margin: 8px auto;
+        padding-left: 0;
+        list-style-position: inside;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .modal-content li {
+        margin: 4px 0;
+        font-size: 0.85em;
+        line-height: 1.4;
+    }
+
+    .footer-note {
+        font-size: 0.8em;
+        color: #999;
+        text-align: center;
+        margin: 8px 0 10px;
+        line-height: 1.3;
+    }
+
+    .modal-footer {
+        width: 100%;
+        padding-top: 8px;
+        border-top: 1px dashed #ffb6c1;
+    }
+
+    .modal-button {
+        display: block;
+        margin: 0 auto;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 20px;
+        background: #ffa500;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 0.9em;
+        min-width: 100px;
+    }
+
+    @media (max-width: 768px) {
+        .modal-overlay {
+            padding: 15px;
+        }
+
+        .modal-container {
+            width: 95%;
+            max-width: 350px;
+            max-height: 65vh;
+            padding: 12px;
+        }
+
+        .modal-scrollable {
+            max-height: calc(65vh - 90px);
+        }
+
+        .modal-title {
+            font-size: 1em;
+        }
+
+        .modal-content {
+            font-size: 0.85em;
+        }
+    }
+</style>
+
+<div id="announcement-modal">
+    <div class="modal-overlay" id="announcement-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">🐾 🎂 猫猫葉子的19岁生日祝福！ 🐾</div>
+            </div>
+            
+            <div class="update-date">【2026-01-22】</div>
+            
+            <div class="modal-scrollable">
+                <div class="modal-content">
+                    <h2 id="秘密生日祝福已上线喵">秘密生日祝福已上线喵～</h2>
+<p>今天是我的好朋友<strong>猫猫葉子</strong>的19岁生日喵！</p>
+<p>🎁 窝准备了一个特别的生日祝福页面喵～</p>
+<p>🔐 密码提示：八位数字，就像六月廿四日是06241490那样的格式</p>
+<p>🔗 秘密链接：<a href="https://ylcs-mm.github.io/mmyz.html">点击这里进入生日祝福页面</a></p>
+<hr>
+<h3 id="给访问者的话">给访问者的话：</h3>
+<p>如果你看到了这个公告，说明已经是2026年1月22日或之后了喵～
+希望猫猫葉子能喜欢喵！</p>
+<p><em>成霜·喵喵 于 2025年制作</em></p>
+
+                </div>
+                <div class="footer-note">喵喵喵~ (A·ω·A)</div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button" onclick="closeModal()">明白惹喵~🐾</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var overlay = document.getElementById('announcement-overlay');
+        if (!overlay) return;
+        window.closeModal = function () {
+            overlay.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        };
+        function shouldShow() {
+            try {
+                var d = localStorage.getItem('nekoAnnouncementData');
+                if (!d) return true;
+                var data = JSON.parse(d);
+                var today = new Date().toDateString();
+                return data.date !== today || data.title !== "🎂 猫猫葉子的19岁生日祝福！";
+            } catch (e) { return true; }
+        }
+        function recordShown() {
+            try {
+                localStorage.setItem('nekoAnnouncementData', JSON.stringify({
+                    date: new Date().toDateString(),
+                    title: "🎂 猫猫葉子的19岁生日祝福！",
+                    timestamp: Date.now()
+                }));
+            } catch (e) { }
+        }
+        if (shouldShow()) {
+            setTimeout(function () {
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+                recordShown();
+            },  1000 );
+    }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+}) ();
+</script>
+
+
+
+    
+    <div class="tools-wrapper">
+        <a class="gotop" href="#" title="回到顶部">▲</a>
+    </div>
+
+    
+</body>
+
+</html>

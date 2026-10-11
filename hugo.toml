@@ -1,0 +1,51 @@
+baseURL = 'https://ylcs-mm.github.io/'
+languageCode = 'zh-CN'
+title = '成霜喵喵'
+
+[params]
+  subtitle = '成霜喵喵的小窝'
+  description = '成霜喵喵的小窝，然后就布吉岛喏喵'
+  keywords = '成霜喵喵, 甘城なつき, 猫羽雫, 喵星人'
+  author = '成霜·喵喵'
+  since = 2025
+  github = 'ylcs-mm'
+  email = '2992412549@qq.com'
+  location = '湖南，郴州'
+  avatar = 'https://avatars.githubusercontent.com/u/193340716?v=4'
+
+[params.busuanzi]
+  enabled = true
+  startDate = '2025-06-19'
+
+[params.share]
+  enabled = true
+  hidePlatforms = ['qq', 'facebook']
+
+[params.giscus]
+  repo = ''
+  repoId = ''
+  category = 'Announcements'
+  categoryId = ''
+
+[params.announcement]
+  popupEnabled = true
+  autoShowDelay = 1000
+  maxWidth = 400
+  theme = 'neko'
+
+[outputs]
+  home = ['HTML', 'RSS']
+  section = ['HTML']
+
+[markup]
+  [markup.highlight]
+    style = 'monokai'
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[pagination]
+  pagerSize = 10
+
+[taxonomies]
+  tag = 'tags'

@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>📢 公告历史 &mdash; 成霜喵喵</title>
+    
+    <meta name="description" content="甘城猫猫博客的更新公告和历史记录">
+    <meta name="keywords" content="成霜喵喵, 甘城なつき, 猫羽雫, 喵星人">
+    <meta name="author" content="成霜·喵喵">
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+
+    <style>
+        :root {
+            --neko-pink: #ff69b4;
+            --neko-light-pink: #ffb6c1;
+            --neko-pastel-pink: #ffe4ec;
+            --neko-blue: #87ceeb;
+            --neko-light-blue: #e0f0ff;
+            --neko-cream: #fff9e6;
+            --neko-dark: #4a4a4a;
+            --neko-gray: #999;
+            --neko-white: #fff;
+            --neko-orange: #ffa726;
+            --shadow-sm: 0 4px 20px rgba(255, 105, 180, 0.08);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 40px rgba(255, 105, 180, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #fef5f9 0%, #f0f8ff 50%, #fef5f9 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--neko-dark);
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background: var(--neko-light-pink);
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--neko-pastel-pink);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--neko-light-pink);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neko-pink);
+        }
+
+         
+        .site-nav {
+            text-align: center;
+            padding: 14px 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--neko-pastel-pink);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 10px rgba(255, 105, 180, 0.06);
+        }
+
+        .site-nav a {
+            display: inline-block;
+            color: var(--neko-gray);
+            text-decoration: none;
+            padding: 6px 18px;
+            margin: 0 3px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .site-nav a:hover {
+            color: var(--neko-pink);
+            background: var(--neko-pastel-pink);
+            transform: translateY(-2px);
+        }
+
+        .site-nav a.active {
+            color: var(--neko-pink);
+            font-weight: 600;
+            background: var(--neko-pastel-pink);
+        }
+
+        .site-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--neko-pink);
+            border-radius: 2px;
+        }
+
+         
+        .main-container {
+            max-width: 880px;
+            margin: 24px auto 0;
+            padding: 0 20px;
+        }
+
+         
+        .card {
+            background: var(--neko-white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--neko-pastel-pink);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+         
+        .bottom-decoration {
+            text-align: center;
+            padding: 36px 20px;
+            color: var(--neko-light-pink);
+            opacity: 0.45;
+            font-size: 0.95em;
+        }
+
+        .bottom-decoration span {
+            display: inline-block;
+            animation: pawBounce 2s infinite ease-in-out;
+        }
+
+        .bottom-decoration span:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .bottom-decoration span:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes pawBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+         
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--neko-gray);
+            font-size: 0.85em;
+            background: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid var(--neko-pastel-pink);
+            margin-top: 10px;
+        }
+
+        .site-footer a {
+            color: var(--neko-pink);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .site-footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            list-style: none;
+            padding: 8px 0;
+        }
+
+        .site-footer-links a {
+            color: var(--neko-gray);
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        .site-footer-links a:hover {
+            color: var(--neko-pink);
+        }
+
+        .tools-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+        }
+
+        .gotop {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: var(--neko-white);
+            border-radius: 50%;
+            box-shadow: 0 2px 12px rgba(255, 105, 180, 0.2);
+            text-decoration: none;
+            color: var(--neko-pink);
+            font-size: 1.2em;
+            transition: all 0.3s;
+            border: 1px solid var(--neko-pastel-pink);
+        }
+
+        .gotop:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+            background: var(--neko-pastel-pink);
+        }
+
+         
+        @media (max-width: 768px) {
+            .site-nav a {
+                padding: 5px 12px;
+                font-size: 0.85em;
+                margin: 0 1px;
+            }
+
+            .main-container {
+                padding: 0 10px;
+                margin: 14px auto 0;
+            }
+
+            .tools-wrapper {
+                bottom: 20px;
+                right: 16px;
+            }
+
+            .gotop {
+                width: 38px;
+                height: 38px;
+            }
+        }
+    </style>
+
+    
+<style>
+    .announcements-page {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .ann-page-header {
+        text-align: center;
+        margin-bottom: 22px;
+        padding-bottom: 16px;
+        border-bottom: 2px dashed var(--neko-light-pink);
+    }
+
+    .ann-page-header h1 {
+        color: var(--neko-pink);
+        font-size: 1.9em;
+        margin-bottom: 6px;
+    }
+
+    .ann-page-desc {
+        color: var(--neko-blue);
+        font-size: 1em;
+    }
+
+    .ann-stats {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin: 18px 0;
+        padding: 16px;
+        background: linear-gradient(135deg, #fff0f5, #fff9fd);
+        border-radius: 14px;
+        border: 1px solid var(--neko-light-pink);
+        flex-wrap: wrap;
+    }
+
+    .ann-stat-item {
+        text-align: center;
+        min-width: 75px;
+    }
+
+    .ann-stat-num {
+        display: block;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: var(--neko-pink);
+        word-break: break-all;
+    }
+
+    .ann-stat-label {
+        font-size: 0.82em;
+        color: var(--neko-blue);
+    }
+
+    .ann-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .ann-item {
+        background: linear-gradient(135deg, #fff9e6, #fff0f5);
+        border: 2px dashed var(--neko-light-pink);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .ann-item.latest {
+        border: 2px solid var(--neko-pink);
+        box-shadow: 0 4px 20px rgba(255, 105, 180, 0.12);
+    }
+
+    .ann-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(255, 182, 193, 0.2);
+    }
+
+    .ann-item-header {
+        padding: 16px 20px 10px;
+        border-bottom: 1px solid var(--neko-light-pink);
+    }
+
+    .ann-item-title {
+        color: var(--neko-pink);
+        font-size: 1.15em;
+        margin: 0 0 6px 0;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .ann-item-icon {
+        font-size: 1em;
+        flex-shrink: 0;
+    }
+
+    .ann-item-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .ann-item-date {
+        color: var(--neko-blue);
+        font-size: 0.85em;
+    }
+
+    .ann-item-badges {
+        display: flex;
+        gap: 5px;
+    }
+
+    .badge-latest {
+        background: var(--neko-pink);
+        color: white;
+        padding: 2px 9px;
+        border-radius: 10px;
+        font-size: 0.75em;
+        font-weight: bold;
+    }
+
+    .badge-today {
+        background: #4cd964;
+        color: white;
+        padding: 2px 9px;
+        border-radius: 10px;
+        font-size: 0.75em;
+        font-weight: bold;
+    }
+
+    .ann-item-content {
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        line-height: 1.7;
+        color: var(--neko-dark);
+    }
+
+    .ann-item-content.expanded {
+        padding: 16px 20px;
+        max-height: 2000px;
+    }
+
+    .ann-item-content h2 {
+        color: var(--neko-pink);
+        font-size: 1.1em;
+        margin: 6px 0 4px;
+    }
+
+    .ann-item-content h3 {
+        color: var(--neko-blue);
+        font-size: 1em;
+        margin: 4px 0 3px;
+    }
+
+    .ann-item-content ul,
+    .ann-item-content ol {
+        padding-left: 1.5em;
+        margin: 3px 0;
+    }
+
+    .ann-item-content li {
+        margin-bottom: 2px;
+    }
+
+    .ann-item-content a {
+        color: var(--neko-pink);
+        text-decoration: underline;
+    }
+
+    .ann-item-content a:hover {
+        color: var(--neko-blue);
+    }
+
+    .ann-item-content hr {
+        border: none;
+        border-top: 1px dashed var(--neko-light-pink);
+        margin: 10px 0;
+    }
+
+    .ann-item-content p {
+        margin-bottom: 5px;
+    }
+
+    .ann-item-footer {
+        padding: 0 20px 14px;
+        text-align: center;
+    }
+
+    .ann-read-more {
+        background: linear-gradient(135deg, #ffa726, #fb8c00);
+        color: white;
+        border: none;
+        padding: 7px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.88em;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .ann-read-more:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 14px rgba(255, 167, 38, 0.3);
+    }
+
+    .btn-icon {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        font-size: 0.7em;
+    }
+
+    .btn-icon.rotated {
+        transform: rotate(180deg);
+    }
+
+    .ann-empty {
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .ann-empty-icon {
+        font-size: 3em;
+        display: block;
+        margin-bottom: 12px;
+        color: var(--neko-blue);
+    }
+
+    .ann-empty h3 {
+        color: var(--neko-pink);
+        margin-bottom: 6px;
+        font-size: 1.05em;
+    }
+
+    .ann-future-info {
+        margin-top: 16px;
+        padding: 10px 14px;
+        background: linear-gradient(135deg, #e6f7ff, #f0f9ff);
+        border: 1px solid var(--neko-blue);
+        border-radius: 10px;
+        text-align: center;
+        color: #1e90ff;
+        font-size: 0.88em;
+    }
+
+    .ann-future-info strong {
+        color: var(--neko-pink);
+    }
+
+    @media (max-width: 768px) {
+        .ann-page-header h1 {
+            font-size: 1.5em;
+        }
+
+        .ann-stats {
+            gap: 14px;
+            padding: 12px 8px;
+        }
+
+        .ann-stat-num {
+            font-size: 1.2em;
+        }
+
+        .ann-item-header {
+            padding: 14px 14px 8px;
+        }
+
+        .ann-item-title {
+            font-size: 1em;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 3px;
+        }
+
+        .ann-item-meta {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 3px;
+        }
+
+        .ann-item-content {
+            padding: 0 14px;
+        }
+
+        .ann-item-content.expanded {
+            padding: 14px;
+        }
+
+        .ann-item-footer {
+            padding: 0 14px 12px;
+        }
+    }
+</style>
+<script>
+    (function () {
+        window.toggleAnn = function (btn) {
+            var item = btn.closest('.ann-item');
+            var content = item.querySelector('.ann-item-content');
+            var icon = btn.querySelector('.btn-icon');
+            var text = btn.querySelector('.btn-text');
+            var isExpanded = content.classList.contains('expanded');
+            if (isExpanded) {
+                content.classList.remove('expanded');
+                icon.classList.remove('rotated');
+                text.textContent = '📖 展开详情';
+                btn.setAttribute('data-expanded', 'false');
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('rotated');
+                text.textContent = '📕 收起详情';
+                btn.setAttribute('data-expanded', 'true');
+            }
+        };
+    })();
+</script>
+
+</head>
+
+<body>
+    
+    <nav class="site-nav">
+        <a href="/" class="">🏠 首页</a>
+        <a href="/announcements/" class="">📢 公告</a>
+        <a href="/about/" class="">🐱 关于</a>
+    </nav>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="main-container">
+    <section class="announcements-page">
+        <header class="ann-page-header">
+            <h1>📢 公告历史</h1>
+            <p class="ann-page-desc">记录博客的每一次成长和更新喵～</p>
+        </header>
+
+        
+        <div class="ann-stats">
+            <div class="ann-stat-item">
+                <span class="ann-stat-num">5</span>
+                <span class="ann-stat-label">总公告数</span>
+            </div>
+            <div class="ann-stat-item">
+                <span class="ann-stat-num">5</span>
+                <span class="ann-stat-label">已发布公告</span>
+            </div>
+            
+            
+            <div class="ann-stat-item">
+                <span class="ann-stat-num">2026-01-22</span>
+                <span class="ann-stat-label">最新公告</span>
+            </div>
+            
+        </div>
+
+        
+        
+        <div class="ann-list">
+            
+            <article class="ann-item latest">
+                <header class="ann-item-header">
+                    <h2 class="ann-item-title">
+                        <span class="ann-item-icon">🎉</span>
+                        🎂 猫猫葉子的19岁生日祝福！
+                    </h2>
+                    <div class="ann-item-meta">
+                        <span class="ann-item-date">📅 2026-01-22</span>
+                        <span class="ann-item-badges">
+                            
+                            <span class="badge-latest">最新</span>
+                        </span>
+                    </div>
+                </header>
+
+                <div class="ann-item-content expanded">
+                    <h2 id="秘密生日祝福已上线喵">秘密生日祝福已上线喵～</h2>
+<p>今天是我的好朋友<strong>猫猫葉子</strong>的19岁生日喵！</p>
+<p>🎁 窝准备了一个特别的生日祝福页面喵～</p>
+<p>🔐 密码提示：八位数字，就像六月廿四日是06241490那样的格式</p>
+<p>🔗 秘密链接：<a href="https://ylcs-mm.github.io/mmyz.html">点击这里进入生日祝福页面</a></p>
+<hr>
+<h3 id="给访问者的话">给访问者的话：</h3>
+<p>如果你看到了这个公告，说明已经是2026年1月22日或之后了喵～
+希望猫猫葉子能喜欢喵！</p>
+<p><em>成霜·喵喵 于 2025年制作</em></p>
+
+                </div>
+
+                <footer class="ann-item-footer">
+                    <button class="ann-read-more" onclick="toggleAnn(this)"
+                        data-expanded="true">
+                        <span class="btn-text">📕 收起详情</span>
+                        <span class="btn-icon rotated">▼</span>
+                    </button>
+                </footer>
+            </article>
+            
+            <article class="ann-item">
+                <header class="ann-item-header">
+                    <h2 class="ann-item-title">
+                        <span class="ann-item-icon">📌</span>
+                        修复
+                    </h2>
+                    <div class="ann-item-meta">
+                        <span class="ann-item-date">📅 2026-01-04</span>
+                        <span class="ann-item-badges">
+                            
+                            
+                        </span>
+                    </div>
+                </header>
+
+                <div class="ann-item-content">
+                    <h2 id="修复了已知问题喵">🐾修复了已知问题喵～🐾</h2>
+<h2 id="添加惹不蒜子访问统计">🐾添加惹不蒜子访问统计🐾</h2>
+
+                </div>
+
+                <footer class="ann-item-footer">
+                    <button class="ann-read-more" onclick="toggleAnn(this)"
+                        data-expanded="false">
+                        <span class="btn-text">📖 展开详情</span>
+                        <span class="btn-icon">▼</span>
+                    </button>
+                </footer>
+            </article>
+            
+            <article class="ann-item">
+                <header class="ann-item-header">
+                    <h2 class="ann-item-title">
+                        <span class="ann-item-icon">📌</span>
+                        🎉 博客大更新完成喵！
+                    </h2>
+                    <div class="ann-item-meta">
+                        <span class="ann-item-date">📅 2025-11-04</span>
+                        <span class="ann-item-badges">
+                            
+                            
+                        </span>
+                    </div>
+                </header>
+
+                <div class="ann-item-content">
+                    <h2 id="-重大更新内容喵喵喵-">🐾 重大更新内容喵喵喵 🐾</h2>
+<ul>
+<li>自博客上线以来第二次重大更新完成喏喵~</li>
+</ul>
+<h3 id="更改内容">更改内容</h3>
+<p>-【音乐猫窝】移动到最上层 - 更方便<strong>蠢朱没情商</strong>下歌</p>
+<ul>
+<li>添加惹许多新功能喵~🐾</li>
+</ul>
+<h3 id="-新功能亮点">✨ 新功能亮点</h3>
+<ul>
+<li><strong>全新公告系统</strong> - 带弹窗的猫娘风格公告，萌萌哒~</li>
+<li><strong>响应式设计</strong> - 手机和电脑都能完美适配喵！</li>
+<li><strong>目录导航</strong> - 文章侧边栏目录功能，找内容更方便了喵</li>
+<li><strong>新增三角洲行动专栏</strong> - 各种网站导航和车组成员介绍</li>
+<li><strong>新增主题功能</strong> - 文章界面变得更漂亮了喵~</li>
+</ul>
+<h3 id="-界面优化">🎨 界面优化</h3>
+<ul>
+<li>可爱猫猫主题全面升级，粉色系更治愈了喵</li>
+<li>粉蓝色系配色方案，像棉花糖一样柔软</li>
+<li>猫爪图标和动画效果，互动感满满</li>
+<li>移动端触摸优化，手指点点更顺畅喵</li>
+</ul>
+<h3 id="-技术改进">🔧 技术改进</h3>
+<ul>
+<li>Jekyll配置优化，加载速度更快了</li>
+<li>页面加载速度提升，等待时间变短了喵</li>
+<li>主页代码重写，运行更稳定了</li>
+</ul>
+<h3 id="-后续优化">⚠️ 后续优化</h3>
+<ul>
+<li>代码结构还有优化空间，后续会继续改进喵~</li>
+</ul>
+                </div>
+
+                <footer class="ann-item-footer">
+                    <button class="ann-read-more" onclick="toggleAnn(this)"
+                        data-expanded="false">
+                        <span class="btn-text">📖 展开详情</span>
+                        <span class="btn-icon">▼</span>
+                    </button>
+                </footer>
+            </article>
+            
+            <article class="ann-item">
+                <header class="ann-item-header">
+                    <h2 class="ann-item-title">
+                        <span class="ann-item-icon">📌</span>
+                        🎀 公告系统初始化完成喵！
+                    </h2>
+                    <div class="ann-item-meta">
+                        <span class="ann-item-date">📅 2025-11-02</span>
+                        <span class="ann-item-badges">
+                            
+                            
+                        </span>
+                    </div>
+                </header>
+
+                <div class="ann-item-content">
+                    <h2 id="可爱猫猫公告系统正式上线喵">可爱猫猫公告系统正式上线喵！</h2>
+<h3 id="-开发日志">📅 开发日志</h3>
+<ul>
+<li><strong>2025-10-15</strong>：公告系统基础框架搭建完成</li>
+<li><strong>2025-11-04</strong>：正式上线运营喵~</li>
+</ul>
+<h3 id="-功能特点">🎯 功能特点</h3>
+<ul>
+<li>猫娘风格设计，萌萌哒界面</li>
+<li>响应式布局，各种设备都能完美显示</li>
+<li>平滑动画效果，像猫猫一样优雅</li>
+<li>智能弹窗提醒，重要消息不会错过喵</li>
+<li>公告历史记录，随时回顾过往内容</li>
+</ul>
+<h3 id="-注意事项">⚠️ 注意事项</h3>
+<ul>
+<li>目前公告修改还需要手动编辑代码，后续会优化喵~</li>
+<li>如果有任何建议，欢迎告诉猫猫哦！</li>
+</ul>
+<blockquote>
+<p>欢迎提出宝贵建议喵！让博客变得更好～ 🐾</p></blockquote>
+                </div>
+
+                <footer class="ann-item-footer">
+                    <button class="ann-read-more" onclick="toggleAnn(this)"
+                        data-expanded="false">
+                        <span class="btn-text">📖 展开详情</span>
+                        <span class="btn-icon">▼</span>
+                    </button>
+                </footer>
+            </article>
+            
+            <article class="ann-item">
+                <header class="ann-item-header">
+                    <h2 class="ann-item-title">
+                        <span class="ann-item-icon">📌</span>
+                        🚧 网站施工公告喵
+                    </h2>
+                    <div class="ann-item-meta">
+                        <span class="ann-item-date">📅 2025-11-01</span>
+                        <span class="ann-item-badges">
+                            
+                            
+                        </span>
+                    </div>
+                </header>
+
+                <div class="ann-item-content">
+                    <h2 id="-施工通知喵">🛠️ 施工通知喵</h2>
+<p>亲爱的访客们喵~</p>
+<p>博客正在进行技术升级和界面优化，施工期间可能会出现：</p>
+<ul>
+<li>页面偶尔闪烁（像猫猫眨眼一样）</li>
+<li>样式加载延迟（稍等片刻喵~）</li>
+<li>部分功能暂时不可用（很快就会恢复的！）</li>
+</ul>
+<h3 id="-预计施工时间">⏰ 预计施工时间</h3>
+<ul>
+<li>开始：2025年11月1日</li>
+<li>结束：2025年11月4日</li>
+<li>状态：<strong>已结束</strong> 🎉 施工顺利完成喵！</li>
+</ul>
+<blockquote>
+<p>给您带来的不便敬请谅解喵～施工完成后将带来更好的浏览体验！(≧∇≦)ﾉ</p></blockquote>
+
+                </div>
+
+                <footer class="ann-item-footer">
+                    <button class="ann-read-more" onclick="toggleAnn(this)"
+                        data-expanded="false">
+                        <span class="btn-text">📖 展开详情</span>
+                        <span class="btn-icon">▼</span>
+                    </button>
+                </footer>
+            </article>
+            
+        </div>
+        
+
+        
+
+        
+    </section>
+</div>
+
+
+    
+    <div class="bottom-decoration">
+        <span>🐾</span> <span>ฅ</span><span>(^</span>&bull;<span>ω</span>&bull;<span>^)ฅ</span> <span>🐾</span>
+    </div>
+
+    
+    <footer class="site-footer">
+    <div class="copyright">
+        © 2025 <span title="成霜·喵喵">成霜·喵喵</span>
+    </div>
+
+    <ul class="site-footer-links">
+        <li><a href="/">首页</a></li>
+        <li><a href="/announcements/">公告</a></li>
+        <li><a href="/about/">关于</a></li>
+    </ul>
+
+    <p style="margin-top:4px;">
+        <a href="https://github.com/ylcs-mm" target="_blank" rel="noopener">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:2992412549@qq.com">Email</a>
+    </p>
+
+    
+<div style="text-align:center; padding: 10px 0; font-size: 0.8em; color: var(--neko-gray);">
+    <span id="busuanzi_container_site_pv">
+        👀 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    &nbsp;|&nbsp;
+    <span id="busuanzi_container_site_uv">
+        🐱 访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+</div>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</footer>
+
+
+<script src="/assets/vendor/share.js/dist/js/share.min.js"></script>
+
+
+
+<script>
+    window.live2d_widgets = {
+        modelPath: "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/models/neko/",
+        display: {
+            position: "fixed",
+            right: 15,
+            bottom: 25,
+            left: "auto",
+            width: 160,
+            height: 320,
+            zIndex: 999999,
+            transform: "none",
+        },
+        mobile: {
+            show: true,
+            scale: 0.75,
+            position: "fixed",
+            right: 10,
+            bottom: 15,
+        },
+    };
+</script>
+<script src="https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/autoload.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 240, 245, 0.8);
+        z-index: 2147483647;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .modal-overlay.show {
+        display: flex;
+    }
+
+    .modal-container {
+        position: relative;
+        width: 90%;
+        max-width: 400px;
+        max-height: 70vh;
+        background: #fff9e6;
+        border: 2px dashed #ffb6c1;
+        border-radius: 15px;
+        padding: 15px;
+        box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+        animation: nekoSlideIn 0.5s ease-out forwards;
+    }
+
+    @keyframes nekoSlideIn {
+        0% {
+            transform: scale(0.8) translateY(-20px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .modal-overlay.show {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    .modal-header {
+        text-align: center;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+
+    .modal-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #ff69b4;
+        display: inline-block;
+        padding: 6px 12px;
+        background: rgba(255, 182, 193, 0.1);
+        border-radius: 20px;
+        margin: 0 auto;
+        max-width: 90%;
+        word-wrap: break-word;
+        line-height: 1.3;
+    }
+
+    .update-date {
+        font-size: 0.8em;
+        color: #ff69b4;
+        margin: 3px 0 8px;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .modal-scrollable {
+        flex: 1;
+        overflow-y: auto;
+        width: 100%;
+        max-height: calc(70vh - 100px);
+        padding: 0 5px;
+        margin-bottom: 5px;
+    }
+
+    .modal-scrollable::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .modal-scrollable::-webkit-scrollbar-track {
+        background: rgba(255, 182, 193, 0.1);
+        border-radius: 3px;
+    }
+
+    .modal-scrollable::-webkit-scrollbar-thumb {
+        background: #ffb6c1;
+        border-radius: 3px;
+    }
+
+    .modal-content {
+        line-height: 1.5;
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .modal-content ul {
+        margin: 8px auto;
+        padding-left: 0;
+        list-style-position: inside;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .modal-content li {
+        margin: 4px 0;
+        font-size: 0.85em;
+        line-height: 1.4;
+    }
+
+    .footer-note {
+        font-size: 0.8em;
+        color: #999;
+        text-align: center;
+        margin: 8px 0 10px;
+        line-height: 1.3;
+    }
+
+    .modal-footer {
+        width: 100%;
+        padding-top: 8px;
+        border-top: 1px dashed #ffb6c1;
+    }
+
+    .modal-button {
+        display: block;
+        margin: 0 auto;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 20px;
+        background: #ffa500;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 0.9em;
+        min-width: 100px;
+    }
+
+    @media (max-width: 768px) {
+        .modal-overlay {
+            padding: 15px;
+        }
+
+        .modal-container {
+            width: 95%;
+            max-width: 350px;
+            max-height: 65vh;
+            padding: 12px;
+        }
+
+        .modal-scrollable {
+            max-height: calc(65vh - 90px);
+        }
+
+        .modal-title {
+            font-size: 1em;
+        }
+
+        .modal-content {
+            font-size: 0.85em;
+        }
+    }
+</style>
+
+<div id="announcement-modal">
+    <div class="modal-overlay" id="announcement-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">🐾 🎂 猫猫葉子的19岁生日祝福！ 🐾</div>
+            </div>
+            
+            <div class="update-date">【2026-01-22】</div>
+            
+            <div class="modal-scrollable">
+                <div class="modal-content">
+                    <h2 id="秘密生日祝福已上线喵">秘密生日祝福已上线喵～</h2>
+<p>今天是我的好朋友<strong>猫猫葉子</strong>的19岁生日喵！</p>
+<p>🎁 窝准备了一个特别的生日祝福页面喵～</p>
+<p>🔐 密码提示：八位数字，就像六月廿四日是06241490那样的格式</p>
+<p>🔗 秘密链接：<a href="https://ylcs-mm.github.io/mmyz.html">点击这里进入生日祝福页面</a></p>
+<hr>
+<h3 id="给访问者的话">给访问者的话：</h3>
+<p>如果你看到了这个公告，说明已经是2026年1月22日或之后了喵～
+希望猫猫葉子能喜欢喵！</p>
+<p><em>成霜·喵喵 于 2025年制作</em></p>
+
+                </div>
+                <div class="footer-note">喵喵喵~ (A·ω·A)</div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button" onclick="closeModal()">明白惹喵~🐾</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var overlay = document.getElementById('announcement-overlay');
+        if (!overlay) return;
+        window.closeModal = function () {
+            overlay.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        };
+        function shouldShow() {
+            try {
+                var d = localStorage.getItem('nekoAnnouncementData');
+                if (!d) return true;
+                var data = JSON.parse(d);
+                var today = new Date().toDateString();
+                return data.date !== today || data.title !== "🎂 猫猫葉子的19岁生日祝福！";
+            } catch (e) { return true; }
+        }
+        function recordShown() {
+            try {
+                localStorage.setItem('nekoAnnouncementData', JSON.stringify({
+                    date: new Date().toDateString(),
+                    title: "🎂 猫猫葉子的19岁生日祝福！",
+                    timestamp: Date.now()
+                }));
+            } catch (e) { }
+        }
+        if (shouldShow()) {
+            setTimeout(function () {
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+                recordShown();
+            },  1000 );
+    }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+}) ();
+</script>
+
+
+
+    
+    <div class="tools-wrapper">
+        <a class="gotop" href="#" title="回到顶部">▲</a>
+    </div>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,426 @@
+{{ define "main" }}
+{{ $announcementData := .Site.Data.announcement_history }}
+{{ $now := now.Format "2006-01-02" }}
+
+{{ $pastList := slice }}
+{{ $futureCount := 0 }}
+{{ range $announcementData }}
+{{ if le .date $now }}
+{{ $pastList = $pastList | append . }}
+{{ else }}
+{{ $futureCount = add $futureCount 1 }}
+{{ end }}
+{{ end }}
+
+<div class="main-container">
+    <section class="announcements-page">
+        <header class="ann-page-header">
+            <h1>📢 公告历史</h1>
+            <p class="ann-page-desc">记录博客的每一次成长和更新喵～</p>
+        </header>
+
+        {{ if $announcementData }}
+        <div class="ann-stats">
+            <div class="ann-stat-item">
+                <span class="ann-stat-num">{{ len $announcementData }}</span>
+                <span class="ann-stat-label">总公告数</span>
+            </div>
+            <div class="ann-stat-item">
+                <span class="ann-stat-num">{{ len $pastList }}</span>
+                <span class="ann-stat-label">已发布公告</span>
+            </div>
+            {{ if gt (len $pastList) 0 }}
+            {{ $sorted := sort $pastList "date" "desc" }}
+            <div class="ann-stat-item">
+                <span class="ann-stat-num">{{ (index $sorted 0).date }}</span>
+                <span class="ann-stat-label">最新公告</span>
+            </div>
+            {{ else }}
+            <div class="ann-stat-item">
+                <span class="ann-stat-num">—</span>
+                <span class="ann-stat-label">最新公告</span>
+            </div>
+            {{ end }}
+        </div>
+
+        {{ if gt (len $pastList) 0 }}
+        {{ $sorted := sort $pastList "date" "desc" }}
+        <div class="ann-list">
+            {{ range $index, $ann := $sorted }}
+            <article class="ann-item{{ if eq $index 0 }} latest{{ end }}">
+                <header class="ann-item-header">
+                    <h2 class="ann-item-title">
+                        <span class="ann-item-icon">{{ if eq $index 0 }}🎉{{ else }}📌{{ end }}</span>
+                        {{ $ann.title }}
+                    </h2>
+                    <div class="ann-item-meta">
+                        <span class="ann-item-date">📅 {{ $ann.date }}</span>
+                        <span class="ann-item-badges">
+                            {{ if eq $ann.date $now }}<span class="badge-today">今天</span>{{ end }}
+                            {{ if eq $index 0 }}<span class="badge-latest">最新</span>{{ end }}
+                        </span>
+                    </div>
+                </header>
+
+                <div class="ann-item-content{{ if eq $index 0 }} expanded{{ end }}">
+                    {{ $ann.content | markdownify }}
+                </div>
+
+                <footer class="ann-item-footer">
+                    <button class="ann-read-more" onclick="toggleAnn(this)"
+                        data-expanded="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
+                        <span class="btn-text">{{ if eq $index 0 }}📕 收起详情{{ else }}📖 展开详情{{ end }}</span>
+                        <span class="btn-icon{{ if eq $index 0 }} rotated{{ end }}">▼</span>
+                    </button>
+                </footer>
+            </article>
+            {{ end }}
+        </div>
+        {{ else }}
+        <div class="ann-empty">
+            <span class="ann-empty-icon">📅</span>
+            <h3>当前没有已发布的公告喵～</h3>
+            <p>所有公告都在等待未来的日期发布，请耐心等待喵！</p>
+        </div>
+        {{ end }}
+
+        {{ if gt $futureCount 0 }}
+        <div class="ann-future-info">
+            <p>🎯 还有 <strong>{{ $futureCount }}</strong> 个公告将在未来发布喵～</p>
+        </div>
+        {{ end }}
+
+        {{ else }}
+        <div class="ann-empty">
+            <span class="ann-empty-icon">😴</span>
+            <h3>还没有公告喵～</h3>
+            <p>博客正在努力建设中，敬请期待！</p>
+        </div>
+        {{ end }}
+    </section>
+</div>
+{{ end }}
+
+{{ define "extra_head" }}
+<style>
+    .announcements-page {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .ann-page-header {
+        text-align: center;
+        margin-bottom: 22px;
+        padding-bottom: 16px;
+        border-bottom: 2px dashed var(--neko-light-pink);
+    }
+
+    .ann-page-header h1 {
+        color: var(--neko-pink);
+        font-size: 1.9em;
+        margin-bottom: 6px;
+    }
+
+    .ann-page-desc {
+        color: var(--neko-blue);
+        font-size: 1em;
+    }
+
+    .ann-stats {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin: 18px 0;
+        padding: 16px;
+        background: linear-gradient(135deg, #fff0f5, #fff9fd);
+        border-radius: 14px;
+        border: 1px solid var(--neko-light-pink);
+        flex-wrap: wrap;
+    }
+
+    .ann-stat-item {
+        text-align: center;
+        min-width: 75px;
+    }
+
+    .ann-stat-num {
+        display: block;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: var(--neko-pink);
+        word-break: break-all;
+    }
+
+    .ann-stat-label {
+        font-size: 0.82em;
+        color: var(--neko-blue);
+    }
+
+    .ann-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .ann-item {
+        background: linear-gradient(135deg, #fff9e6, #fff0f5);
+        border: 2px dashed var(--neko-light-pink);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .ann-item.latest {
+        border: 2px solid var(--neko-pink);
+        box-shadow: 0 4px 20px rgba(255, 105, 180, 0.12);
+    }
+
+    .ann-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(255, 182, 193, 0.2);
+    }
+
+    .ann-item-header {
+        padding: 16px 20px 10px;
+        border-bottom: 1px solid var(--neko-light-pink);
+    }
+
+    .ann-item-title {
+        color: var(--neko-pink);
+        font-size: 1.15em;
+        margin: 0 0 6px 0;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .ann-item-icon {
+        font-size: 1em;
+        flex-shrink: 0;
+    }
+
+    .ann-item-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .ann-item-date {
+        color: var(--neko-blue);
+        font-size: 0.85em;
+    }
+
+    .ann-item-badges {
+        display: flex;
+        gap: 5px;
+    }
+
+    .badge-latest {
+        background: var(--neko-pink);
+        color: white;
+        padding: 2px 9px;
+        border-radius: 10px;
+        font-size: 0.75em;
+        font-weight: bold;
+    }
+
+    .badge-today {
+        background: #4cd964;
+        color: white;
+        padding: 2px 9px;
+        border-radius: 10px;
+        font-size: 0.75em;
+        font-weight: bold;
+    }
+
+    .ann-item-content {
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        line-height: 1.7;
+        color: var(--neko-dark);
+    }
+
+    .ann-item-content.expanded {
+        padding: 16px 20px;
+        max-height: 2000px;
+    }
+
+    .ann-item-content h2 {
+        color: var(--neko-pink);
+        font-size: 1.1em;
+        margin: 6px 0 4px;
+    }
+
+    .ann-item-content h3 {
+        color: var(--neko-blue);
+        font-size: 1em;
+        margin: 4px 0 3px;
+    }
+
+    .ann-item-content ul,
+    .ann-item-content ol {
+        padding-left: 1.5em;
+        margin: 3px 0;
+    }
+
+    .ann-item-content li {
+        margin-bottom: 2px;
+    }
+
+    .ann-item-content a {
+        color: var(--neko-pink);
+        text-decoration: underline;
+    }
+
+    .ann-item-content a:hover {
+        color: var(--neko-blue);
+    }
+
+    .ann-item-content hr {
+        border: none;
+        border-top: 1px dashed var(--neko-light-pink);
+        margin: 10px 0;
+    }
+
+    .ann-item-content p {
+        margin-bottom: 5px;
+    }
+
+    .ann-item-footer {
+        padding: 0 20px 14px;
+        text-align: center;
+    }
+
+    .ann-read-more {
+        background: linear-gradient(135deg, #ffa726, #fb8c00);
+        color: white;
+        border: none;
+        padding: 7px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.88em;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .ann-read-more:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 14px rgba(255, 167, 38, 0.3);
+    }
+
+    .btn-icon {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        font-size: 0.7em;
+    }
+
+    .btn-icon.rotated {
+        transform: rotate(180deg);
+    }
+
+    .ann-empty {
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .ann-empty-icon {
+        font-size: 3em;
+        display: block;
+        margin-bottom: 12px;
+        color: var(--neko-blue);
+    }
+
+    .ann-empty h3 {
+        color: var(--neko-pink);
+        margin-bottom: 6px;
+        font-size: 1.05em;
+    }
+
+    .ann-future-info {
+        margin-top: 16px;
+        padding: 10px 14px;
+        background: linear-gradient(135deg, #e6f7ff, #f0f9ff);
+        border: 1px solid var(--neko-blue);
+        border-radius: 10px;
+        text-align: center;
+        color: #1e90ff;
+        font-size: 0.88em;
+    }
+
+    .ann-future-info strong {
+        color: var(--neko-pink);
+    }
+
+    @media (max-width: 768px) {
+        .ann-page-header h1 {
+            font-size: 1.5em;
+        }
+
+        .ann-stats {
+            gap: 14px;
+            padding: 12px 8px;
+        }
+
+        .ann-stat-num {
+            font-size: 1.2em;
+        }
+
+        .ann-item-header {
+            padding: 14px 14px 8px;
+        }
+
+        .ann-item-title {
+            font-size: 1em;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 3px;
+        }
+
+        .ann-item-meta {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 3px;
+        }
+
+        .ann-item-content {
+            padding: 0 14px;
+        }
+
+        .ann-item-content.expanded {
+            padding: 14px;
+        }
+
+        .ann-item-footer {
+            padding: 0 14px 12px;
+        }
+    }
+</style>
+<script>
+    (function () {
+        window.toggleAnn = function (btn) {
+            var item = btn.closest('.ann-item');
+            var content = item.querySelector('.ann-item-content');
+            var icon = btn.querySelector('.btn-icon');
+            var text = btn.querySelector('.btn-text');
+            var isExpanded = content.classList.contains('expanded');
+            if (isExpanded) {
+                content.classList.remove('expanded');
+                icon.classList.remove('rotated');
+                text.textContent = '📖 展开详情';
+                btn.setAttribute('data-expanded', 'false');
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('rotated');
+                text.textContent = '📕 收起详情';
+                btn.setAttribute('data-expanded', 'true');
+            }
+        };
+    })();
+</script>
+{{ end }}

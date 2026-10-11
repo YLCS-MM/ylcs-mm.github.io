@@ -1,0 +1,129 @@
+{{ define "main" }}
+<div class="main-container">
+    <header class="list-header">
+        <h1 class="list-title">{{ .Title }}</h1>
+        {{ with .Description }}
+        <p class="list-desc">{{ . }}</p>
+        {{ end }}
+    </header>
+
+    {{ if .Pages }}
+    <div class="list-cards">
+        {{ range .Pages }}
+        <article class="list-card card">
+            <h2 class="list-card-title">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+            <div class="list-card-meta">
+                <span class="meta-item">📅 {{ .Date.Format "2006年01月02日" }}</span>
+                {{ if .Params.author }}<span class="meta-item">✍️ {{ .Params.author }}</span>{{ end }}
+                {{ with .ReadingTime }}<span class="meta-item">☕ {{ . }} 分钟</span>{{ end }}
+            </div>
+            <p class="list-card-summary">{{ .Summary | truncate 180 }}</p>
+            <a href="{{ .RelPermalink }}" class="list-card-link">继续阅读 →</a>
+        </article>
+        {{ end }}
+    </div>
+    {{ else }}
+    <div class="list-empty">
+        <p>暂无内容喵～🐱</p>
+    </div>
+    {{ end }}
+</div>
+{{ end }}
+
+{{ define "extra_head" }}
+<style>
+    .list-header {
+        text-align: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px dashed var(--neko-light-pink);
+    }
+
+    .list-title {
+        color: var(--neko-pink);
+        font-size: 1.7em;
+        margin-bottom: 4px;
+    }
+
+    .list-desc {
+        color: var(--neko-gray);
+        font-size: 0.95em;
+    }
+
+    .list-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .list-card {
+        padding: 24px 28px;
+    }
+
+    .list-card-title {
+        margin-bottom: 8px;
+        font-size: 1.2em;
+    }
+
+    .list-card-title a {
+        color: var(--neko-pink);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .list-card-title a:hover {
+        color: var(--neko-blue);
+    }
+
+    .list-card-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.82em;
+        color: var(--neko-gray);
+        margin-bottom: 10px;
+    }
+
+    .list-card-summary {
+        color: var(--neko-dark);
+        font-size: 0.92em;
+        line-height: 1.65;
+        margin-bottom: 10px;
+    }
+
+    .list-card-link {
+        color: var(--neko-blue);
+        font-size: 0.88em;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .list-card-link:hover {
+        color: var(--neko-pink);
+    }
+
+    .list-empty {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--neko-gray);
+        font-size: 1.1em;
+    }
+
+    @media (max-width: 768px) {
+        .list-card {
+            padding: 18px 16px;
+        }
+
+        .list-title {
+            font-size: 1.4em;
+        }
+
+        .list-card-title {
+            font-size: 1.05em;
+        }
+    }
+</style>
+{{ end }}

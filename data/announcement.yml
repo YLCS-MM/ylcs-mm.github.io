@@ -1,0 +1,6 @@
+# 公告系统配置
+popup_enabled: true
+auto_show_delay: 1000  # 弹窗自动显示延迟（毫秒）
+show_on_refresh: true  # 每次刷新都显示
+max_width: 400         # 弹窗最大宽度
+theme: "neko"          # 猫娘主题

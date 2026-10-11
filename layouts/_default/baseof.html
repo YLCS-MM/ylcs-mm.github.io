@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ if .Title }}{{ .Title }} &mdash; {{ end }}{{ .Site.Title }}</title>
+    {{ if .Params.description }}
+    <meta name="description" content="{{ .Params.description }}">{{ else }}
+    <meta name="description" content="{{ .Site.Params.description }}">{{ end }}
+    <meta name="keywords" content="{{ .Site.Params.keywords }}">
+    <meta name="author" content="{{ .Site.Params.author }}">
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/assets/vendor/primer-css/css/primer.css">
+
+    <style>
+        :root {
+            --neko-pink: #ff69b4;
+            --neko-light-pink: #ffb6c1;
+            --neko-pastel-pink: #ffe4ec;
+            --neko-blue: #87ceeb;
+            --neko-light-blue: #e0f0ff;
+            --neko-cream: #fff9e6;
+            --neko-dark: #4a4a4a;
+            --neko-gray: #999;
+            --neko-white: #fff;
+            --neko-orange: #ffa726;
+            --shadow-sm: 0 4px 20px rgba(255, 105, 180, 0.08);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 40px rgba(255, 105, 180, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #fef5f9 0%, #f0f8ff 50%, #fef5f9 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--neko-dark);
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background: var(--neko-light-pink);
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--neko-pastel-pink);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--neko-light-pink);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neko-pink);
+        }
+
+        /* 导航栏 */
+        .site-nav {
+            text-align: center;
+            padding: 14px 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--neko-pastel-pink);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 10px rgba(255, 105, 180, 0.06);
+        }
+
+        .site-nav a {
+            display: inline-block;
+            color: var(--neko-gray);
+            text-decoration: none;
+            padding: 6px 18px;
+            margin: 0 3px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .site-nav a:hover {
+            color: var(--neko-pink);
+            background: var(--neko-pastel-pink);
+            transform: translateY(-2px);
+        }
+
+        .site-nav a.active {
+            color: var(--neko-pink);
+            font-weight: 600;
+            background: var(--neko-pastel-pink);
+        }
+
+        .site-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--neko-pink);
+            border-radius: 2px;
+        }
+
+        /* 主容器 */
+        .main-container {
+            max-width: 880px;
+            margin: 24px auto 0;
+            padding: 0 20px;
+        }
+
+        /* 卡片的通用外观 */
+        .card {
+            background: var(--neko-white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--neko-pastel-pink);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* 底部装饰 */
+        .bottom-decoration {
+            text-align: center;
+            padding: 36px 20px;
+            color: var(--neko-light-pink);
+            opacity: 0.45;
+            font-size: 0.95em;
+        }
+
+        .bottom-decoration span {
+            display: inline-block;
+            animation: pawBounce 2s infinite ease-in-out;
+        }
+
+        .bottom-decoration span:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .bottom-decoration span:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes pawBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* 页脚 */
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--neko-gray);
+            font-size: 0.85em;
+            background: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid var(--neko-pastel-pink);
+            margin-top: 10px;
+        }
+
+        .site-footer a {
+            color: var(--neko-pink);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .site-footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            list-style: none;
+            padding: 8px 0;
+        }
+
+        .site-footer-links a {
+            color: var(--neko-gray);
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        .site-footer-links a:hover {
+            color: var(--neko-pink);
+        }
+
+        .tools-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+        }
+
+        .gotop {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: var(--neko-white);
+            border-radius: 50%;
+            box-shadow: 0 2px 12px rgba(255, 105, 180, 0.2);
+            text-decoration: none;
+            color: var(--neko-pink);
+            font-size: 1.2em;
+            transition: all 0.3s;
+            border: 1px solid var(--neko-pastel-pink);
+        }
+
+        .gotop:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+            background: var(--neko-pastel-pink);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .site-nav a {
+                padding: 5px 12px;
+                font-size: 0.85em;
+                margin: 0 1px;
+            }
+
+            .main-container {
+                padding: 0 10px;
+                margin: 14px auto 0;
+            }
+
+            .tools-wrapper {
+                bottom: 20px;
+                right: 16px;
+            }
+
+            .gotop {
+                width: 38px;
+                height: 38px;
+            }
+        }
+    </style>
+
+    {{ block "extra_head" . }}{{ end }}
+</head>
+
+<body>
+    <!-- 🎀 导航栏 -->
+    <nav class="site-nav">
+        <a href="/" class="{{ if .IsHome }}active{{ end }}">🏠 首页</a>
+        <a href="/announcements/" class="{{ if hasPrefix .RelPermalink " /announcements/" }}active{{ end }}">📢 公告</a>
+        <a href="/about/" class="{{ if hasPrefix .RelPermalink " /about/" }}active{{ end }}">🐱 关于</a>
+    </nav>
+
+    {{ block "main" . }}{{ end }}
+
+    <!-- 🐾 底部装饰 -->
+    <div class="bottom-decoration">
+        <span>🐾</span> <span>ฅ</span><span>(^</span>&bull;<span>ω</span>&bull;<span>^)ฅ</span> <span>🐾</span>
+    </div>
+
+    <!-- 📋 页脚 -->
+    {{ partial "footer.html" . }}
+
+    <!-- 🔝 回到顶部 -->
+    <div class="tools-wrapper">
+        <a class="gotop" href="#" title="回到顶部">▲</a>
+    </div>
+
+    {{ block "extra_scripts" . }}{{ end }}
+</body>
+
+</html>
